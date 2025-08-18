@@ -23,8 +23,10 @@ func update_ui_visibility(fade_in:Array, fade_out:Array):
     for element in fade_out:
         _fade_tween.tween_property(element, "modulate", Color.TRANSPARENT, 0.5)
 
-func _on_walked_distance_updated(new_total: float) -> void:
-    distance_value.text = "%.2fm" % new_total
+var _total_distance : float = 0
+func _on_walked_distance_updated(delta: float) -> void:
+    _total_distance += delta
+    distance_value.text = "%.0fm" % _total_distance
 
 func _on_step_count_updated(new_total: int) -> void:
     steps_value.text = "%d" % new_total
