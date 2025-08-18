@@ -12,7 +12,8 @@ CMD="rsync --dry-run \
   --exclude=android/ \
   --exclude=textures/ \
   --exclude=icons/  \
-  --exclude=fonts/ \
+  --exclude=fonts/*.ttf \
+  --include=fonts/*.html \
   --exclude=.jj/ \
   $GODOT_PROJECT_FOLDER
   ."
