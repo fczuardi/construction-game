@@ -1,0 +1,122 @@
+[gd_scene load_steps=11 format=3 uid="uid://tcvg1a1muo2a"]
+
+[ext_resource type="PackedScene" uid="uid://dpkfcip1wqxem" path="res://characters/pete_model.fbx" id="1_6dhom"]
+[ext_resource type="AnimationLibrary" uid="uid://gfomfkyva2t1" path="res://animations/Walk.res" id="2_oguga"]
+[ext_resource type="Script" uid="uid://o10qpbd1cs4g" path="res://characters/animation_signal_emitter.gd" id="3_2tkln"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2tkln"]
+animation = &"Walk/Texting"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hhid5"]
+animation = &"Walk/Regular"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rkrpn"]
+animation = &"Walk/modifiedrun"
+use_custom_timeline = true
+timeline_length = 1.4
+stretch_time_scale = true
+start_offset = 0.0
+loop_mode = 1
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_oew6v"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_hhid5")
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_rkrpn")
+blend_point_1/pos = 1.0
+min_space = 0.0
+sync = true
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_rlfe6"]
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_kae75"]
+filter_enabled = true
+filters = ["Skeleton3D:mixamorig1_Head", "Skeleton3D:mixamorig1_LeftArm", "Skeleton3D:mixamorig1_LeftForeArm", "Skeleton3D:mixamorig1_LeftHand", "Skeleton3D:mixamorig1_LeftHandIndex1", "Skeleton3D:mixamorig1_LeftHandIndex2", "Skeleton3D:mixamorig1_LeftHandIndex3", "Skeleton3D:mixamorig1_LeftHandMiddle1", "Skeleton3D:mixamorig1_LeftHandMiddle2", "Skeleton3D:mixamorig1_LeftHandMiddle3", "Skeleton3D:mixamorig1_LeftHandPinky1", "Skeleton3D:mixamorig1_LeftHandPinky2", "Skeleton3D:mixamorig1_LeftHandPinky3", "Skeleton3D:mixamorig1_LeftHandRing1", "Skeleton3D:mixamorig1_LeftHandRing2", "Skeleton3D:mixamorig1_LeftHandRing3", "Skeleton3D:mixamorig1_LeftHandThumb1", "Skeleton3D:mixamorig1_LeftHandThumb2", "Skeleton3D:mixamorig1_LeftHandThumb3", "Skeleton3D:mixamorig1_LeftShoulder", "Skeleton3D:mixamorig1_Neck", "Skeleton3D:mixamorig1_RightArm", "Skeleton3D:mixamorig1_RightForeArm", "Skeleton3D:mixamorig1_RightHand", "Skeleton3D:mixamorig1_RightHandIndex1", "Skeleton3D:mixamorig1_RightHandIndex2", "Skeleton3D:mixamorig1_RightHandIndex3", "Skeleton3D:mixamorig1_RightHandMiddle1", "Skeleton3D:mixamorig1_RightHandMiddle2", "Skeleton3D:mixamorig1_RightHandMiddle3", "Skeleton3D:mixamorig1_RightHandPinky1", "Skeleton3D:mixamorig1_RightHandPinky2", "Skeleton3D:mixamorig1_RightHandPinky3", "Skeleton3D:mixamorig1_RightHandRing1", "Skeleton3D:mixamorig1_RightHandRing2", "Skeleton3D:mixamorig1_RightHandRing3", "Skeleton3D:mixamorig1_RightHandThumb1", "Skeleton3D:mixamorig1_RightHandThumb2", "Skeleton3D:mixamorig1_RightHandThumb3", "Skeleton3D:mixamorig1_RightShoulder"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_oew6v"]
+graph_offset = Vector2(-631.72, 202.859)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_2tkln")
+"nodes/Animation 2/position" = Vector2(-340, 700)
+nodes/SpeedBlend/node = SubResource("AnimationNodeBlendSpace1D_oew6v")
+nodes/SpeedBlend/position = Vector2(-540, 440)
+nodes/SpeedScale/node = SubResource("AnimationNodeTimeScale_rlfe6")
+nodes/SpeedScale/position = Vector2(-340, 440)
+nodes/TextingBlend/node = SubResource("AnimationNodeBlend2_kae75")
+nodes/TextingBlend/position = Vector2(-60, 540)
+nodes/output/position = Vector2(120, 500)
+node_connections = [&"SpeedScale", 0, &"SpeedBlend", &"TextingBlend", 0, &"SpeedScale", &"TextingBlend", 1, &"Animation 2", &"output", 0, &"TextingBlend"]
+
+[node name="Protagonist" instance=ExtResource("1_6dhom")]
+
+[node name="Skeleton3D" parent="." index="0"]
+bones/0/position = Vector3(-0.00121878, 0.874695, 0.0125207)
+bones/0/rotation = Quaternion(0.0547875, 0.0222095, -0.02897, 0.997831)
+bones/1/rotation = Quaternion(0.00669971, -0.0140463, 0.016331, 0.999746)
+bones/2/rotation = Quaternion(0.0906206, -0.0365818, 0.0311056, 0.994727)
+bones/3/rotation = Quaternion(0.0906205, -0.0365818, 0.0311056, 0.994727)
+bones/4/rotation = Quaternion(0.0119001, 0.00570408, -0.00804684, 0.999881)
+bones/5/rotation = Quaternion(-0.0268526, 0.00538785, -0.00826242, 0.999591)
+bones/7/rotation = Quaternion(-0.611803, -0.380369, 0.576452, -0.385642)
+bones/8/rotation = Quaternion(0.395612, 0.0120453, -0.171348, 0.902212)
+bones/9/rotation = Quaternion(0.13826, 0.0140957, 0.828879, 0.54189)
+bones/10/rotation = Quaternion(0.00168877, 0.0896539, 0.154205, 0.983962)
+bones/11/rotation = Quaternion(0.246889, 0.0678172, 0.270987, 0.927908)
+bones/12/rotation = Quaternion(-0.00512668, -0.00548237, -0.0304338, 0.999509)
+bones/13/rotation = Quaternion(-0.0758269, 0.000530528, 0.0018946, 0.997119)
+bones/15/rotation = Quaternion(0.61428, 0.0308733, 0.0944603, 0.782805)
+bones/16/rotation = Quaternion(0.686617, -0.014449, 0.0469526, 0.725357)
+bones/17/rotation = Quaternion(0.0366617, 4.57275e-05, -0.00129662, 0.999327)
+bones/19/rotation = Quaternion(0.640231, 0.0219903, 0.082236, 0.763451)
+bones/20/rotation = Quaternion(0.647289, -0.00331373, 0.0488506, 0.76067)
+bones/21/rotation = Quaternion(0.000579502, 2.66048e-05, -0.00122557, 0.999999)
+bones/23/rotation = Quaternion(0.670193, -0.0193667, 0.0176988, 0.741723)
+bones/24/rotation = Quaternion(0.666191, 0.00672216, 0.0263835, 0.745284)
+bones/25/rotation = Quaternion(-0.0476546, -3.73602e-06, -0.00135844, 0.998863)
+bones/27/rotation = Quaternion(0.705656, -0.0556696, -0.0186691, 0.706118)
+bones/28/rotation = Quaternion(0.723325, 0.0295347, 0.0279665, 0.689308)
+bones/29/rotation = Quaternion(-0.0272933, 3.05988e-05, -0.00114353, 0.999627)
+bones/31/rotation = Quaternion(0.588145, -0.398637, 0.589236, 0.384675)
+bones/32/rotation = Quaternion(0.308592, -0.0433958, 0.235998, 0.920431)
+bones/33/rotation = Quaternion(0.11877, -0.041853, -0.677452, 0.724708)
+bones/34/rotation = Quaternion(0.092176, -0.0294397, -0.0300742, 0.994853)
+bones/35/rotation = Quaternion(0.258997, -0.0944677, -0.217608, 0.936292)
+bones/36/rotation = Quaternion(-0.00459697, 0.00740692, 0.0240972, 0.999672)
+bones/37/rotation = Quaternion(-0.0810802, 0.000156927, -5.5072e-05, 0.996708)
+bones/39/rotation = Quaternion(0.549507, -0.0656294, -0.0411195, 0.831892)
+bones/40/rotation = Quaternion(0.700599, 0.0153117, -0.0418812, 0.712161)
+bones/41/rotation = Quaternion(0.072684, -2.99754e-05, 0.000877748, 0.997355)
+bones/43/rotation = Quaternion(0.590473, -0.0263386, -0.0615894, 0.804273)
+bones/44/rotation = Quaternion(0.662559, 0.00311986, -0.0437106, 0.747727)
+bones/45/rotation = Quaternion(-0.0188656, -1.77032e-05, 0.00113001, 0.999821)
+bones/47/rotation = Quaternion(0.643677, 0.00799413, -0.0301502, 0.764661)
+bones/48/rotation = Quaternion(0.679134, -0.00801097, -0.0492878, 0.732314)
+bones/49/rotation = Quaternion(-0.158651, 2.68899e-05, 0.0010504, 0.987334)
+bones/51/rotation = Quaternion(0.723951, 0.0373645, -0.0123132, 0.688728)
+bones/52/rotation = Quaternion(0.732648, -0.0289957, -0.076589, 0.675663)
+bones/53/rotation = Quaternion(0.0502054, -4.30133e-05, 0.000924805, 0.998738)
+bones/55/rotation = Quaternion(0.0576065, 0.11795, 0.991347, 0.000626065)
+bones/56/rotation = Quaternion(-0.780007, -0.0400122, 0.111686, 0.614422)
+bones/57/rotation = Quaternion(0.583192, 0.00507729, 0.0291425, 0.811795)
+bones/58/rotation = Quaternion(0.313163, -0.126499, -0.0327895, 0.940665)
+bones/60/rotation = Quaternion(-0.0368468, 0.325337, 0.944455, -0.0283547)
+bones/61/rotation = Quaternion(-0.390838, 0.00106099, 0.0216923, 0.920203)
+bones/62/rotation = Quaternion(0.575124, -0.0248763, -0.0629614, 0.81526)
+bones/63/rotation = Quaternion(0.344567, 0.0230662, 0.0692762, 0.935918)
+
+[node name="AnimationPlayer" parent="." index="1"]
+unique_name_in_owner = true
+libraries = {
+&"Walk": ExtResource("2_oguga")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="2"]
+unique_name_in_owner = true
+root_node = NodePath("%AnimationTree/..")
+tree_root = SubResource("AnimationNodeBlendTree_oew6v")
+anim_player = NodePath("../AnimationPlayer")
+parameters/SpeedBlend/blend_position = 1.26777
+parameters/SpeedScale/scale = 1.4
+parameters/TextingBlend/blend_amount = false
+
+[node name="SignalEmitter" type="Node" parent="." index="3"]
+unique_name_in_owner = true
+script = ExtResource("3_2tkln")
