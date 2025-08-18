@@ -105,6 +105,7 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.615
 script = ExtResource("2_wkp8b")
 
 [connection signal="game_ended" from="." to="UI" method="_on_game_ended"]
+[connection signal="game_resetted" from="." to="World/Player/PlayerBody/PlayerVisuals" method="_on_game_resetted"]
 [connection signal="game_resetted" from="." to="UI" method="_on_game_resetted"]
 [connection signal="game_started" from="." to="UI" method="_on_game_started"]
 [connection signal="step_count_updated" from="." to="UI" method="_on_step_count_updated"]

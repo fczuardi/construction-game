@@ -1,13 +1,14 @@
 ## Ongoing
+    - [ ] direction change on left/right buttons press
+## Planned
+- Documentation
+    - [ ] include credits for the construction pack assets
 - Validate
-   - [x] test walk-run + text while walk-run behaviors and performance
    - [ ] simplify blend tree for 3 speeds only: walk, jog, run
 - Left/Right
     - [ ] rotate body / change direction on turn commands
 - User Interface
     - [ ] make left-right touch button work
-
-## Planned
 - Development quality of life
 - User Interface
     - MAP! Pete should hold a map in hands + 1st person view while the HUD displays a 
@@ -25,6 +26,8 @@
 - Itch buttler CI (when project is on github)
 
 ## Done
+- Validate
+   - [x] test walk-run + text while walk-run behaviors and performance
 - Animations
     - [x] build animation blend space1D with walk > run
 - User Interface
