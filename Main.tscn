@@ -1,15 +1,16 @@
-[gd_scene load_steps=18 format=3 uid="uid://brx6qaf3kufgd"]
+[gd_scene load_steps=19 format=3 uid="uid://brx6qaf3kufgd"]
 
 [ext_resource type="Script" uid="uid://ceq1561lc0q5a" path="res://src/main.gd" id="1_trn2v"]
 [ext_resource type="Texture2D" uid="uid://7drsfx7edi0j" path="res://textures/rocky_trail_02_nor_gl_4k.png" id="2_cm0pq"]
 [ext_resource type="Texture2D" uid="uid://ss48rv6lbdfj" path="res://textures/rocky_trail_02_diff_4k.png" id="2_r0du0"]
 [ext_resource type="Script" uid="uid://cynrksxjcdhsa" path="res://src/ui_controller.gd" id="2_wkp8b"]
 [ext_resource type="Texture2D" uid="uid://cergbg8q7mep3" path="res://textures/rocky_trail_02_rough_4k.png" id="3_fos0i"]
-[ext_resource type="Script" uid="uid://cdb0i8smux64j" path="res://src/player.gd" id="4_3dxm6"]
+[ext_resource type="Script" uid="uid://cdb0i8smux64j" path="res://src/PlayerBody.gd" id="4_3dxm6"]
 [ext_resource type="Script" uid="uid://4gksn70toaim" path="res://src/PlayerVisuals.gd" id="4_03owx"]
 [ext_resource type="PackedScene" uid="uid://tcvg1a1muo2a" path="res://characters/Protagonist.tscn" id="5_lgr22"]
 [ext_resource type="PackedScene" uid="uid://c06n8t6vi0fuj" path="res://ui/MainUserInterface.tscn" id="6_lgr22"]
-[ext_resource type="PackedScene" uid="uid://c64bbkmqdec7d" path="res://construction_pack/Plank Holder.fbx" id="6_trn2v"]
+[ext_resource type="PackedScene" uid="uid://bybard4idr6i1" path="res://obstacles/PlankHolder.tscn" id="10_20pc6"]
+[ext_resource type="PackedScene" uid="uid://c4imgjpy8mxxi" path="res://obstacles/PipeHolderA.tscn" id="11_5vvyt"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lgr22"]
 radius = 0.13
@@ -94,21 +95,37 @@ transform = Transform3D(0.585661, 0.701964, -0.405275, -3.7275e-08, 0.499996, 0.
 light_energy = 0.331
 shadow_enabled = true
 
-[node name="Plank Holder" parent="World" instance=ExtResource("6_trn2v")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2, 0.754043, 3.81124)
-
-[node name="Plank Holder2" parent="World" instance=ExtResource("6_trn2v")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.60209, 0.754043, 3.81124)
-
-[node name="Plank Holder3" parent="World" instance=ExtResource("6_trn2v")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.61595, 2.37476, 3.81124)
-
 [node name="UI" parent="." instance=ExtResource("6_lgr22")]
 script = ExtResource("2_wkp8b")
 
+[node name="Plank Holder" parent="." instance=ExtResource("10_20pc6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.41322, 0.75, 3.97943)
+
+[node name="Plank Holder2" parent="." instance=ExtResource("10_20pc6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.41322, 0.75, 3.97943)
+
+[node name="Plank Holder3" parent="." instance=ExtResource("10_20pc6")]
+transform = Transform3D(0.540475, 0, 0.84136, 0, 1, 0, -0.84136, 0, 0.540475, 2.52647, 0.75, 14.1556)
+
+[node name="Plank Holder7" parent="." instance=ExtResource("10_20pc6")]
+transform = Transform3D(0.540475, 0, 0.84136, 0, 1, 0, -0.84136, 0, 0.540475, 2.52647, 2.20829, 14.1556)
+
+[node name="Plank Holder4" parent="." instance=ExtResource("10_20pc6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.41322, 0.75, 24.4218)
+
+[node name="Pipe Holder A" parent="." instance=ExtResource("11_5vvyt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.86876, 0.623902, 7)
+
+[node name="Plank Holder5" parent="." instance=ExtResource("10_20pc6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.41322, 0.75, 11.3882)
+
+[node name="Plank Holder6" parent="." instance=ExtResource("10_20pc6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.1893, 0.75, 3.97943)
+
 [connection signal="game_ended" from="." to="UI" method="_on_game_ended"]
+[connection signal="game_resetted" from="." to="World/Player/PlayerBody" method="_on_game_resetted"]
 [connection signal="game_resetted" from="." to="World/Player/PlayerBody/PlayerVisuals" method="_on_game_resetted"]
 [connection signal="game_resetted" from="." to="UI" method="_on_game_resetted"]
 [connection signal="game_started" from="." to="UI" method="_on_game_started"]
 [connection signal="step_count_updated" from="." to="UI" method="_on_step_count_updated"]
-[connection signal="walked_distance_updated" from="." to="UI" method="_on_walked_distance_updated"]
+[connection signal="walked_distance_updated" from="World/Player/PlayerBody" to="UI" method="_on_walked_distance_updated"]
