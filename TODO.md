@@ -1,12 +1,9 @@
 ## Ongoing
-    - [ ] direction change on left/right buttons press
 ## Planned
 - Documentation
     - [ ] include credits for the construction pack assets
 - Validate
    - [ ] simplify blend tree for 3 speeds only: walk, jog, run
-- Left/Right
-    - [ ] rotate body / change direction on turn commands
 - User Interface
     - [ ] make left-right touch button work
 - Development quality of life
@@ -26,6 +23,9 @@
 - Itch buttler CI (when project is on github)
 
 ## Done
+- Left/Right
+    - [x] direction change on left/right commands
+    - [x] rotate body / change direction on turn commands
 - Validate
    - [x] test walk-run + text while walk-run behaviors and performance
 - Animations

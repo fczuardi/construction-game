@@ -1,9 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://brx6qaf3kufgd"]
+[gd_scene load_steps=18 format=3 uid="uid://brx6qaf3kufgd"]
 
 [ext_resource type="Script" uid="uid://ceq1561lc0q5a" path="res://src/main.gd" id="1_trn2v"]
 [ext_resource type="Texture2D" uid="uid://7drsfx7edi0j" path="res://textures/rocky_trail_02_nor_gl_4k.png" id="2_cm0pq"]
 [ext_resource type="Texture2D" uid="uid://ss48rv6lbdfj" path="res://textures/rocky_trail_02_diff_4k.png" id="2_r0du0"]
-[ext_resource type="Script" uid="uid://cynrksxjcdhsa" path="res://src/ui_controller.gd" id="2_wkp8b"]
 [ext_resource type="Texture2D" uid="uid://cergbg8q7mep3" path="res://textures/rocky_trail_02_rough_4k.png" id="3_fos0i"]
 [ext_resource type="Script" uid="uid://cdb0i8smux64j" path="res://src/PlayerBody.gd" id="4_3dxm6"]
 [ext_resource type="Script" uid="uid://4gksn70toaim" path="res://src/PlayerVisuals.gd" id="4_03owx"]
@@ -44,6 +43,7 @@ tonemap_mode = 2
 
 [node name="Main" type="Node"]
 script = ExtResource("1_trn2v")
+steps_per_game = 100
 
 [node name="World" type="Node3D" parent="."]
 
@@ -69,13 +69,16 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.691)
 
 [node name="SholderCam" type="Camera3D" parent="World/Player/PlayerBody/Cameras"]
+unique_name_in_owner = true
 transform = Transform3D(-1, -4.37114e-08, 7.57104e-08, 0, 0.866025, 0.5, -8.74228e-08, 0.5, -0.866025, 0, 2.5, -3)
 
 [node name="FaceCam" type="Camera3D" parent="World/Player/PlayerBody/Cameras"]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 2.5, 3)
 
 [node name="FirstPersonCam" type="Camera3D" parent="World/Player/PlayerBody/Cameras"]
-transform = Transform3D(-0.999048, 0.0429566, -0.00757441, 0, 0.173648, 0.984808, 0.0436193, 0.983871, -0.173483, 0.037, 1.537, 0.215)
+unique_name_in_owner = true
+transform = Transform3D(-0.999048, 0.0429566, -0.00757441, 0, 0.173648, 0.984808, 0.0436193, 0.983871, -0.173483, 0.037, 1.537, 0.25)
 
 [node name="Floor" type="StaticBody3D" parent="World"]
 
@@ -95,8 +98,7 @@ transform = Transform3D(0.585661, 0.701964, -0.405275, -3.7275e-08, 0.499996, 0.
 light_energy = 0.331
 shadow_enabled = true
 
-[node name="UI" parent="." instance=ExtResource("6_lgr22")]
-script = ExtResource("2_wkp8b")
+[node name="HUD" parent="." instance=ExtResource("6_lgr22")]
 
 [node name="Plank Holder" parent="." instance=ExtResource("10_20pc6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.41322, 0.75, 3.97943)
@@ -122,10 +124,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.41322, 0.75, 11.3882)
 [node name="Plank Holder6" parent="." instance=ExtResource("10_20pc6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.1893, 0.75, 3.97943)
 
-[connection signal="game_ended" from="." to="UI" method="_on_game_ended"]
+[connection signal="game_ended" from="." to="HUD" method="_on_game_ended"]
 [connection signal="game_resetted" from="." to="World/Player/PlayerBody" method="_on_game_resetted"]
 [connection signal="game_resetted" from="." to="World/Player/PlayerBody/PlayerVisuals" method="_on_game_resetted"]
-[connection signal="game_resetted" from="." to="UI" method="_on_game_resetted"]
-[connection signal="game_started" from="." to="UI" method="_on_game_started"]
-[connection signal="step_count_updated" from="." to="UI" method="_on_step_count_updated"]
-[connection signal="walked_distance_updated" from="World/Player/PlayerBody" to="UI" method="_on_walked_distance_updated"]
+[connection signal="game_resetted" from="." to="HUD" method="_on_game_resetted"]
+[connection signal="game_started" from="." to="HUD" method="_on_game_started"]
+[connection signal="step_count_updated" from="." to="HUD" method="_on_step_count_updated"]
+[connection signal="walked_distance_updated" from="World/Player/PlayerBody" to="HUD" method="_on_walked_distance_updated"]
+[connection signal="map_toggled" from="HUD" to="World/Player/PlayerBody/PlayerVisuals" method="_on_hud_map_toggled"]
+[connection signal="turn_left_clicked" from="HUD" to="World/Player/PlayerBody" method="_on_hud_turn_left_clicked"]
+[connection signal="turn_right_clicked" from="HUD" to="World/Player/PlayerBody" method="_on_hud_turn_right_clicked"]

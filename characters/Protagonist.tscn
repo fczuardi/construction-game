@@ -1,8 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://tcvg1a1muo2a"]
+[gd_scene load_steps=9 format=3 uid="uid://tcvg1a1muo2a"]
 
 [ext_resource type="PackedScene" uid="uid://dpkfcip1wqxem" path="res://characters/pete_model.fbx" id="1_6dhom"]
 [ext_resource type="AnimationLibrary" uid="uid://ciq4jjvc2ow5h" path="res://animations/LibraryWalkWithSignals.res" id="2_2tkln"]
 [ext_resource type="Script" uid="uid://o10qpbd1cs4g" path="res://characters/animation_signal_emitter.gd" id="3_2tkln"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rkrpn"]
+animation = &"WalkWithSignals/CheckMap2"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hhid5"]
 animation = &"WalkWithSignals/TPose"
@@ -16,20 +19,26 @@ input_1/name = "Walk"
 input_1/auto_advance = false
 input_1/break_loop_at_end = false
 input_1/reset = true
+input_2/name = "CheckMap"
+input_2/auto_advance = false
+input_2/break_loop_at_end = false
+input_2/reset = true
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2tkln"]
 animation = &"WalkWithSignals/Walk"
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_oew6v"]
-graph_offset = Vector2(-837.421, 300.714)
+graph_offset = Vector2(-610.953, 147.315)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_hhid5")
 nodes/Animation/position = Vector2(-540, 380)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_rkrpn")
+"nodes/Animation 2/position" = Vector2(-580, 780)
 nodes/LastTransition/node = SubResource("AnimationNodeTransition_hhid5")
 nodes/LastTransition/position = Vector2(-160, 340)
 nodes/WalkAnimation/node = SubResource("AnimationNodeAnimation_2tkln")
 nodes/WalkAnimation/position = Vector2(-540, 560)
 nodes/output/position = Vector2(160, 420)
-node_connections = [&"LastTransition", 0, &"Animation", &"LastTransition", 1, &"WalkAnimation", &"output", 0, &"LastTransition"]
+node_connections = [&"LastTransition", 0, &"Animation", &"LastTransition", 1, &"WalkAnimation", &"LastTransition", 2, &"Animation 2", &"output", 0, &"LastTransition"]
 
 [node name="Protagonist" instance=ExtResource("1_6dhom")]
 

@@ -5,6 +5,8 @@ extends CharacterBody3D
 @export var walk_speed = 1.11
 ## max turn speed in degrees/second
 @export var turn_rate_deg: float = 180.0
+
+
 ## lag between player turn and follow cameras catchup
 @export var cam_lag_seconds := 0.35  # feel knob
 
@@ -16,7 +18,6 @@ signal walked_distance_updated(delta: float)
 var _last_player_position :Vector3
 ## how much to turn (left or right) in degrees
 var _next_direction: float
-
 # TODO: this variable deserves a better name
 ## persistent movement direction
 var move_dir: Vector3
@@ -99,3 +100,13 @@ func _unhandled_input(event: InputEvent) -> void:
             KEY_5:
                 print("debug 5")
         _next_direction = wrapf(_next_direction, -180.0, 180.0) # keep it between 180 and -180
+
+func set_next_direction(deg: float) -> void:
+    _next_direction = wrapf(deg, -180.0, 180.0)
+
+func _on_hud_turn_left_clicked() -> void:
+    set_next_direction(_next_direction + 45.0)
+
+
+func _on_hud_turn_right_clicked() -> void:
+    set_next_direction(_next_direction - 45.0)
