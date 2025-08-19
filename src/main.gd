@@ -10,7 +10,7 @@ extends Node
 ## number of steps before main game start
 @export var steps_until_start :int = 8
 ## how many steps the player can use before game over
-@export var steps_per_game :int = 20
+@export var steps_per_game :int = 300
 
 ## Signals
 signal game_resetted
@@ -31,6 +31,7 @@ var _game_ended : bool = false
 ## Init
 func _ready() -> void:
     # walk animations call a method that sends a signal on each new step
+    assert(player_visuals.signal_emitter, "couldnt reach animation signal emitter")
     player_visuals.signal_emitter.step_finished.connect(_on_player_step_finished)
     reset()
 

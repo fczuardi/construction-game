@@ -3,6 +3,9 @@ extends CharacterBody3D
 
 ## the base walking speed
 @export var walk_speed = 1.11
+## check map while walking speed
+@export var check_map_walk_speed = 0.80
+
 ## max turn speed in degrees/second
 @export var turn_rate_deg: float = 180.0
 
@@ -21,9 +24,15 @@ var _next_direction: float
 # TODO: this variable deserves a better name
 ## persistent movement direction
 var move_dir: Vector3
+## current walk speed
+var _next_z_speed: float
 
 func _ready() -> void:
     move_dir = transform.basis.z.normalized()
+    print(player_visuals.anim_tree)
+    for p in player_visuals.anim_tree.get_property_list():
+        print("a ", p.name)
+    print(player_visuals.anim_tree["parameters/LastTransition/current_state"])
 
 func _on_game_resetted() -> void:
     # send back player body to "origin"
@@ -33,11 +42,11 @@ func _on_game_resetted() -> void:
     player_visuals.rotation.y = 0    
     # initial direction = walking towards north
     _next_direction = -180
+    _next_z_speed = walk_speed
     # start walking north
-    velocity = Vector3(0.0, 0.0, walk_speed)
+    velocity = Vector3(0.0, 0.0, _next_z_speed)
 
 func _physics_process(delta: float) -> void:
-    apply_gravity(delta)
     update_velocity(delta)
     
     move_and_slide()
@@ -46,11 +55,12 @@ func _physics_process(delta: float) -> void:
     update_follow_cameras(delta)
     update_walked_distance()
 
-func apply_gravity(delta):
+func update_velocity(delta: float) -> void:
     if not is_on_floor():
         velocity += get_gravity() * delta
+        return
+        
 
-func update_velocity(delta: float) -> void:
     # build target direction from desired yaw (_next_direction in degrees)
     var target_dir: Vector3 = Vector3.FORWARD.rotated(Vector3.UP, deg_to_rad(_next_direction)).normalized()
     # compute max step this frame (radians)
@@ -61,7 +71,7 @@ func update_velocity(delta: float) -> void:
     var step :float = clamp(angle, -max_step, max_step)
     move_dir = move_dir.rotated(Vector3.UP, step).normalized()
     # apply velocity
-    velocity = move_dir * walk_speed
+    velocity = move_dir * _next_z_speed
 
 func update_visuals_rotation(_delta:float):
     # Make visuals face velocity (not the body itself)
@@ -107,6 +117,8 @@ func set_next_direction(deg: float) -> void:
 func _on_hud_turn_left_clicked() -> void:
     set_next_direction(_next_direction + 45.0)
 
-
 func _on_hud_turn_right_clicked() -> void:
     set_next_direction(_next_direction - 45.0)
+
+func _on_hud_map_toggled(toggled_on: bool) -> void:
+    _next_z_speed = walk_speed if not toggled_on else check_map_walk_speed

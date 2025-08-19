@@ -25,6 +25,16 @@ func _ready() -> void:
     turn_left_button.pressed.connect(func():  turn_left_clicked.emit())
     turn_right_button.pressed.connect(func(): turn_right_clicked.emit())
     map_button.toggled.connect(func(toggled_on: bool): map_toggled.emit(toggled_on))
+    # TODO: setup signal listeners in code and not editor
+    # for example main game start
+
+func _unhandled_input(event: InputEvent) -> void:
+    if event is InputEventKey and event.pressed and not event.echo:
+        match event.keycode:
+            KEY_LEFT:
+                turn_left_clicked.emit()
+            KEY_RIGHT:
+                turn_right_clicked.emit()
 
 func _on_game_resetted() -> void:
     _total_distance = 0.0
@@ -32,6 +42,7 @@ func _on_game_resetted() -> void:
     status_list.modulate = Color.TRANSPARENT
     game_buttons.modulate = Color.TRANSPARENT
     game_over_title.modulate = Color.TRANSPARENT
+    map_button.button_pressed = false
     update_ui_visibility([game_title], [])
     turn_left_button.disabled = true
     turn_right_button.disabled = true
@@ -62,7 +73,3 @@ func _on_game_ended() -> void:
     update_ui_visibility([game_over_title], [game_buttons, status_list])
     turn_left_button.disabled = true
     turn_right_button.disabled = true
-
-
-func _on_map_button_toggled(toggled_on: bool) -> void:
-    pass # Replace with function body.

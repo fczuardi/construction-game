@@ -1,0 +1,88 @@
+[gd_scene load_steps=6 format=3 uid="uid://dajofk7l5rg2m"]
+
+[ext_resource type="PackedScene" uid="uid://tcvg1a1muo2a" path="res://characters/Protagonist.tscn" id="1_rasnm"]
+[ext_resource type="AnimationLibrary" uid="uid://ciq4jjvc2ow5h" path="res://animations/LibraryWalkWithSignals.res" id="2_nadbt"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_fdpk0"]
+size = Vector2(0.2, 0.3)
+center_offset = Vector3(0.08, 0, -0.05)
+
+[sub_resource type="Animation" id="Animation_phmbw"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3pi10"]
+_data = {
+&"RESET": SubResource("Animation_phmbw")
+}
+
+[node name="PlayerVisuals" type="Node3D"]
+
+[node name="Protagonist" parent="." instance=ExtResource("1_rasnm")]
+
+[node name="Skeleton3D" parent="Protagonist" index="0"]
+bones/0/position = Vector3(0.0569632, 0.917734, 0.0326562)
+bones/0/rotation = Quaternion(-0.0791242, -0.133502, 0.02863, 0.98747)
+bones/1/rotation = Quaternion(0.112622, 0.0385508, -0.0402809, 0.992072)
+bones/2/rotation = Quaternion(0.00752086, 0.0125019, -0.00448357, 0.999884)
+bones/3/rotation = Quaternion(0.00729327, 0.012755, -0.00481983, 0.99988)
+bones/4/rotation = Quaternion(0.0476881, 0.00552347, -0.0043509, 0.998838)
+bones/5/rotation = Quaternion(0.00897562, 0.00533213, -0.00461539, 0.999935)
+bones/7/rotation = Quaternion(-0.589501, -0.382087, 0.62279, -0.344429)
+bones/8/rotation = Quaternion(0.366943, 0.177256, 0.126375, 0.904413)
+bones/9/rotation = Quaternion(0.0583262, -0.00106775, 0.806375, 0.588521)
+bones/10/rotation = Quaternion(-0.0431005, -0.135136, 0.0170316, 0.989743)
+bones/11/rotation = Quaternion(0.0376444, 0.0531204, 0.155777, 0.985644)
+bones/12/rotation = Quaternion(-0.0169432, 0.0195097, 0.0150533, 0.999553)
+bones/13/rotation = Quaternion(-0.138745, 0.0451888, 0.158695, 0.976486)
+bones/31/rotation = Quaternion(0.679082, -0.305874, 0.556011, 0.368973)
+bones/32/rotation = Quaternion(0.420398, -0.0878853, -0.0183711, 0.902887)
+bones/33/rotation = Quaternion(0.0620039, 0.000887327, -0.849424, 0.524056)
+bones/34/rotation = Quaternion(-6.30948e-05, 0.00121599, 0.12834, 0.991729)
+bones/35/rotation = Quaternion(0.0715549, 0.00637909, -0.15397, 0.985461)
+bones/36/rotation = Quaternion(-0.0223919, 0.0317178, 0.0816215, 0.995907)
+bones/37/rotation = Quaternion(-0.167144, 0.0140803, -0.00820487, 0.985798)
+bones/55/rotation = Quaternion(0.0468121, 0.109951, 0.992453, 0.027495)
+bones/56/rotation = Quaternion(-0.208133, -0.0386481, 0.00522006, 0.977323)
+bones/57/rotation = Quaternion(0.526386, 0.0108833, 0.0382853, 0.849314)
+bones/58/rotation = Quaternion(0.266543, -0.0750281, 0.0238625, 0.960602)
+bones/60/rotation = Quaternion(-0.105297, -0.0375159, 0.988446, 0.102368)
+bones/61/rotation = Quaternion(-0.400718, -0.106572, -0.0290491, 0.909518)
+bones/62/rotation = Quaternion(0.459739, -0.0597794, 0.0412194, 0.88508)
+bones/63/rotation = Quaternion(0.638091, 0.0485928, -0.0356566, 0.767599)
+
+[node name="MapGrip" type="BoneAttachment3D" parent="Protagonist/Skeleton3D" index="8"]
+transform = Transform3D(-0.0352414, -0.704255, 0.709071, -0.996015, -0.033409, -0.0826848, 0.0819206, -0.70916, -0.700272, 0.122616, 1.20608, 0.336683)
+bone_name = "mixamorig1_LeftHandIndex2"
+bone_idx = 16
+
+[node name="Map" type="Node3D" parent="Protagonist/Skeleton3D/MapGrip"]
+unique_name_in_owner = true
+transform = Transform3D(-0.0615164, -0.947846, 0.312737, 0.731713, 0.170275, 0.660002, -0.678831, 0.269435, 0.683077, -0.023, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Protagonist/Skeleton3D/MapGrip/Map"]
+mesh = SubResource("PlaneMesh_fdpk0")
+
+[node name="AnimationPlayer" parent="Protagonist" index="1"]
+libraries = {
+&"": SubResource("AnimationLibrary_3pi10"),
+&"WalkWithSignals": ExtResource("2_nadbt")
+}
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Protagonist"]
+visible = false
+offset_right = 512.0
+offset_bottom = 512.0
+
+[node name="SubViewport" type="SubViewport" parent="Protagonist/SubViewportContainer"]
+handle_input_locally = false
+render_target_update_mode = 0
+
+[node name="Label" type="Label" parent="Protagonist/SubViewportContainer/SubViewport"]
+offset_right = 45.0
+offset_bottom = 49.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 75
+text = "TESTE
+"
+
+[editable path="Protagonist"]
