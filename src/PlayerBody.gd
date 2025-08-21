@@ -119,23 +119,6 @@ func update_walked_distance():
         _last_player_position = pos
 
 ## Debug cheat/test mode
-func _unhandled_input(event: InputEvent) -> void:
-    if event is InputEventKey and event.pressed and not event.echo:
-        match event.keycode:
-            KEY_1:
-                print("debug 1: turn left")
-                _next_direction += 45.0
-            KEY_2:
-                print("debug 2: turn right")
-                _next_direction -= 45.0
-            KEY_3:
-                print("debug 3")
-            KEY_4:
-                print("debug 4")
-            KEY_5:
-                print("debug 5")
-        _next_direction = wrapf(_next_direction, -180.0, 180.0) # keep it between 180 and -180
-
 func set_next_direction(deg: float) -> void:    
     _next_direction = wrapf(deg, -180.0, 180.0)
     turn_count += 1

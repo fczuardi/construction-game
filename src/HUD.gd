@@ -51,6 +51,18 @@ func _unhandled_input(event: InputEvent) -> void:
                 map_toggled.emit(map_button.button_pressed)
             KEY_R:
                 reset_requested.emit()
+            KEY_1:
+                print("debug 1: pause")
+                get_tree().paused = true
+            KEY_2:
+                print("debug 2: unpause")
+                get_tree().paused = false
+            KEY_3:
+                print("debug 3")
+            KEY_4:
+                print("debug 4")
+            KEY_5:
+                print("debug 5")
 
 func _on_game_resetted() -> void:
     _total_distance = 0.0
@@ -93,15 +105,15 @@ func _on_game_ended() -> void:
     turn_left_button.disabled = true
     turn_right_button.disabled = true
 
-func _on_stage_1_stage_completed() -> void:
-    update_ui_visibility([victory_title], [game_buttons, status_list])
-    turn_left_button.disabled = true
-    turn_right_button.disabled = true
-
-
 func _on_player_body_obstacle_hit(new_total: int) -> void:
     hits_value.text = "%d" % new_total
 
 
 func _on_player_body_turn_queued(new_total: int) -> void:
     turns_value.text = "%d" % new_total
+
+
+func _on_main_stage_won() -> void:
+    update_ui_visibility([victory_title], [game_buttons, status_list])
+    turn_left_button.disabled = true
+    turn_right_button.disabled = true

@@ -20,6 +20,7 @@ extends Node
 signal game_resetted
 signal step_count_updated(new_total: int)
 signal game_ended
+signal stage_won
 signal game_started
 
 ## Components
@@ -34,7 +35,7 @@ var _total_player_hits: int
         
 var _reset_game_tween : Tween
 var _game_started : bool = false
-var _game_ended : bool = false
+var _is_game_ending : bool = false
 
 ## Init
 func _ready() -> void:
@@ -47,7 +48,7 @@ func _ready() -> void:
 ## restarts the game to it's initial state
 func reset() -> void:
     _game_started = false
-    _game_ended = false
+    _is_game_ending = false
     # reset step counter
     _total_player_steps = 0
     _total_player_hits = 0
@@ -71,7 +72,7 @@ func check_game_start():
 
 # game ends when a certain number of steps is reached
 func check_game_over():
-    if _game_ended:
+    if _is_game_ending:
         return
     var is_defeated: bool = (
         _total_player_steps >= steps_per_game or
@@ -80,7 +81,7 @@ func check_game_over():
     )
     if not is_defeated:
         return
-    _game_ended = true
+    _is_game_ending = true
     game_ended.emit()
     # wait some time and auto-restart
     if (_reset_game_tween):
@@ -89,8 +90,14 @@ func check_game_over():
     _reset_game_tween.tween_callback(reset).set_delay(7)        
 
 
-func _on_stage_1_stage_completed() -> void:
-    _game_ended = true
+func _on_stage_1_goal_reached() -> void:
+    if _is_game_ending:
+        # it's possible that the player is in a game over state
+        # in that case entering the goal wont trigger a win
+        # as the player defeat takes precedence
+        return
+    _is_game_ending = true
+    stage_won.emit()
     if (_reset_game_tween):
         _reset_game_tween.kill()
     _reset_game_tween = get_tree().create_tween()
