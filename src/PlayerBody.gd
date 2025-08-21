@@ -5,15 +5,16 @@ extends CharacterBody3D
 @export var walk_speed = 1.11
 ## check map while walking speed
 @export var check_map_walk_speed = 0.80
-
 ## max turn speed in degrees/second
 @export var turn_rate_deg: float = 180.0
-
-
 ## lag between player turn and follow cameras catchup
 @export var cam_lag_seconds := 0.35  # feel knob
+## time between hits on the same obstacle to count it again
+@export var hit_cooldown: float = 1.5   # seconds
 
 signal walked_distance_updated(delta: float)
+signal turn_queued(new_total: int)
+signal obstacle_hit(new_total: int)
 
 @onready var player_visuals: PlayerVisuals = %PlayerVisuals
 @onready var cameras: Node3D = %Cameras
@@ -26,13 +27,20 @@ var _next_direction: float
 var move_dir: Vector3
 ## current walk speed
 var _next_z_speed: float
+## current turn count (the player has a limited number to spend)
+var turn_count: int
+## hit on obstacles counter
+var obstacle_hits: int
+## helper dictionary to count same obstacle only after a cooldown time
+var _last_hit_time: Dictionary     # Dictionary: collider -> last time
+
 
 func _ready() -> void:
     move_dir = transform.basis.z.normalized()
     print(player_visuals.anim_tree)
-    for p in player_visuals.anim_tree.get_property_list():
-        print("a ", p.name)
-    print(player_visuals.anim_tree["parameters/LastTransition/current_state"])
+    #for p in player_visuals.anim_tree.get_property_list():
+        #print("a ", p.name)
+    #print(player_visuals.anim_tree["parameters/LastTransition/current_state"])
 
 func _on_game_resetted() -> void:
     # send back player body to "origin"
@@ -45,22 +53,39 @@ func _on_game_resetted() -> void:
     _next_z_speed = walk_speed
     # start walking north
     velocity = Vector3(0.0, 0.0, _next_z_speed)
+    _last_hit_time = {}
+    # counters
+    turn_count = 0
+    obstacle_hits = 0
 
 func _physics_process(delta: float) -> void:
     update_velocity(delta)
     
     move_and_slide()
-    
     update_visuals_rotation(delta)
     update_follow_cameras(delta)
     update_walked_distance()
+    _count_obstacle_hits()
 
+
+func _count_obstacle_hits() -> void:
+    var n := get_slide_collision_count()
+    for i in n:
+        var c := get_slide_collision(i)
+        if c == null: continue
+        var other :Node3D = c.get_collider()
+        if other and other.is_in_group("obstacles"):
+            var now := Time.get_ticks_msec() * 0.001
+            var last = _last_hit_time.get(other, -1e9)
+            if now - last >= hit_cooldown:
+                obstacle_hits += 1
+                _last_hit_time[other] = now
+                obstacle_hit.emit(obstacle_hits)
+                
 func update_velocity(delta: float) -> void:
     if not is_on_floor():
         velocity += get_gravity() * delta
         return
-        
-
     # build target direction from desired yaw (_next_direction in degrees)
     var target_dir: Vector3 = Vector3.FORWARD.rotated(Vector3.UP, deg_to_rad(_next_direction)).normalized()
     # compute max step this frame (radians)
@@ -111,8 +136,10 @@ func _unhandled_input(event: InputEvent) -> void:
                 print("debug 5")
         _next_direction = wrapf(_next_direction, -180.0, 180.0) # keep it between 180 and -180
 
-func set_next_direction(deg: float) -> void:
+func set_next_direction(deg: float) -> void:    
     _next_direction = wrapf(deg, -180.0, 180.0)
+    turn_count += 1
+    turn_queued.emit(turn_count)
 
 func _on_hud_turn_left_clicked() -> void:
     set_next_direction(_next_direction + 45.0)

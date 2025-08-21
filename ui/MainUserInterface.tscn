@@ -49,8 +49,8 @@ size_flags_vertical = 0
 theme_override_constants/line_spacing = -15
 theme_override_fonts/font = ExtResource("3_mqr7l")
 theme_override_font_sizes/font_size = 48
-text = "Construction
-Contractor"
+text = "Contractor
+Hero"
 horizontal_alignment = 1
 
 [node name="GameOverTitle" type="CenterContainer" parent="."]
@@ -66,8 +66,25 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_fonts/font = ExtResource("3_mqr7l")
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 44
 text = "YOU TRIED"
+horizontal_alignment = 1
+
+[node name="VictoryTitle" type="CenterContainer" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(360, 640)
+layout_mode = 0
+offset_top = -106.0
+offset_right = 360.0
+offset_bottom = 534.0
+
+[node name="Label" type="Label" parent="VictoryTitle"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("3_mqr7l")
+theme_override_font_sizes/font_size = 44
+text = "GREAT LOAD FELLED"
 horizontal_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -100,7 +117,35 @@ text = "Steps"
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_mqr7l")
-text = "0"
+text = "-"
+
+[node name="Turns" type="HBoxContainer" parent="MarginContainer/StatusList"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/StatusList/Turns"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_mqr7l")
+text = "Turns"
+
+[node name="TurnsValue" type="Label" parent="MarginContainer/StatusList/Turns"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_mqr7l")
+text = "-"
+
+[node name="Hits" type="HBoxContainer" parent="MarginContainer/StatusList"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/StatusList/Hits"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_mqr7l")
+text = "Hits"
+
+[node name="HitsValue" type="Label" parent="MarginContainer/StatusList/Hits"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_mqr7l")
+text = "-"
 
 [node name="Distance" type="HBoxContainer" parent="MarginContainer/StatusList"]
 layout_mode = 2
@@ -116,15 +161,16 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("3_mqr7l")
 text = "0m"
 
-[node name="Height" type="HBoxContainer" parent="MarginContainer/StatusList"]
+[node name="Height2" type="HBoxContainer" parent="MarginContainer/StatusList"]
+visible = false
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/StatusList/Height"]
+[node name="Label" type="Label" parent="MarginContainer/StatusList/Height2"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_mqr7l")
 text = "Height"
 
-[node name="HeightValue" type="Label" parent="MarginContainer/StatusList/Height"]
+[node name="HeightValue" type="Label" parent="MarginContainer/StatusList/Height2"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_mqr7l")
 text = "0m"

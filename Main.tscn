@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://brx6qaf3kufgd"]
+[gd_scene load_steps=20 format=3 uid="uid://brx6qaf3kufgd"]
 
 [ext_resource type="Script" uid="uid://ceq1561lc0q5a" path="res://src/main.gd" id="1_trn2v"]
 [ext_resource type="Texture2D" uid="uid://7drsfx7edi0j" path="res://textures/rocky_trail_02_nor_gl_4k.png" id="2_cm0pq"]
@@ -9,10 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dajofk7l5rg2m" path="res://characters/ProtagonistWrapper.tscn" id="5_c6i3y"]
 [ext_resource type="PackedScene" uid="uid://c06n8t6vi0fuj" path="res://ui/MainUserInterface.tscn" id="6_lgr22"]
 [ext_resource type="Script" uid="uid://cynrksxjcdhsa" path="res://src/HUD.gd" id="9_c6i3y"]
-[ext_resource type="PackedScene" uid="uid://bybard4idr6i1" path="res://obstacles/PlankHolder.tscn" id="10_20pc6"]
-[ext_resource type="PackedScene" uid="uid://c4imgjpy8mxxi" path="res://obstacles/PipeHolderA.tscn" id="11_5vvyt"]
-[ext_resource type="PackedScene" uid="uid://cm1us5gnxlohd" path="res://obstacles/ScaffoldingA.tscn" id="11_c6i3y"]
-[ext_resource type="PackedScene" uid="uid://u84j73vlkjll" path="res://obstacles/SteelHolder_.tscn" id="12_c2ibq"]
+[ext_resource type="PackedScene" uid="uid://u4117ijy8a7f" path="res://stages/Stage1.tscn" id="10_wkp8b"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lgr22"]
 radius = 0.13
@@ -32,27 +29,44 @@ size = Vector2(200, 200)
 [sub_resource type="BoxShape3D" id="BoxShape3D_3dxm6"]
 size = Vector3(200, 5, 200)
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_r0du0"]
-sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
-ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_20pc6"]
 
-[sub_resource type="Sky" id="Sky_cm0pq"]
-sky_material = SubResource("ProceduralSkyMaterial_r0du0")
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5vvyt"]
+seamless = true
+noise = SubResource("FastNoiseLite_20pc6")
 
-[sub_resource type="Environment" id="Environment_fos0i"]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_20pc6"]
+sky_cover = SubResource("NoiseTexture2D_5vvyt")
+sky_cover_modulate = Color(1, 1, 1, 0.454902)
+ground_bottom_color = Color(0.908859, 0.778152, 0.609974, 1)
+ground_horizon_color = Color(0.568627, 0.480571, 0.329412, 1)
+
+[sub_resource type="Sky" id="Sky_5vvyt"]
+sky_material = SubResource("ProceduralSkyMaterial_20pc6")
+radiance_size = 1
+
+[sub_resource type="Environment" id="Environment_c6i3y"]
 background_mode = 2
-sky = SubResource("Sky_cm0pq")
+sky = SubResource("Sky_5vvyt")
+ambient_light_source = 3
+ambient_light_sky_contribution = 0.5
+reflected_light_source = 2
 tonemap_mode = 2
+tonemap_exposure = 0.3
+tonemap_white = 0.7
+volumetric_fog_enabled = true
+adjustment_enabled = true
+adjustment_contrast = 0.8
 
 [node name="Main" type="Node"]
 script = ExtResource("1_trn2v")
 
 [node name="World" type="Node3D" parent="."]
 
-[node name="Player" type="Node3D" parent="World"]
+[node name="Player" type="Node3D" parent="World" groups=["player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
-[node name="PlayerBody" type="CharacterBody3D" parent="World/Player"]
+[node name="PlayerBody" type="CharacterBody3D" parent="World/Player" groups=["player"]]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0.690726)
 script = ExtResource("4_3dxm6")
@@ -72,7 +86,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.691)
 
 [node name="SholderCam" type="Camera3D" parent="World/Player/PlayerBody/Cameras"]
 unique_name_in_owner = true
-transform = Transform3D(-1, -4.37114e-08, 7.57104e-08, 0, 0.866025, 0.5, -8.74228e-08, 0.5, -0.866025, 0, 2.5, -3)
+transform = Transform3D(-1, 2.38035e-08, -8.41197e-08, 0, 0.962218, 0.27228, 8.74228e-08, 0.27228, -0.962218, 0, 2.5, -3)
 
 [node name="FaceCam" type="Camera3D" parent="World/Player/PlayerBody/Cameras"]
 unique_name_in_owner = true
@@ -80,7 +94,7 @@ transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 2.5, 3)
 
 [node name="FirstPersonCam" type="Camera3D" parent="World/Player/PlayerBody/Cameras"]
 unique_name_in_owner = true
-transform = Transform3D(-0.999048, 0.0429566, -0.0075744, 0, 0.173648, 0.984808, 0.0436193, 0.983871, -0.173483, 0.0384029, 1.537, 0.319638)
+transform = Transform3D(-0.999048, 0.0429566, -0.00757439, 0, 0.173648, 0.984808, 0.0436193, 0.983871, -0.173482, 0.0384029, 1.537, 0.319638)
 
 [node name="Floor" type="StaticBody3D" parent="World"]
 
@@ -93,105 +107,25 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 0)
 shape = SubResource("BoxShape3D_3dxm6")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
-environment = SubResource("Environment_fos0i")
+environment = SubResource("Environment_c6i3y")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="World"]
-transform = Transform3D(0.585661, 0.701964, -0.405275, -3.7275e-08, 0.499996, 0.866028, 0.810556, -0.507198, 0.292828, 0, 2.23851, 0)
-light_energy = 0.331
+transform = Transform3D(-0.743145, 0.579484, -0.334565, 0, 0.5, 0.866025, 0.669131, 0.643583, -0.371572, 0, 3.81319, -17.3712)
+light_energy = 1.828
+light_volumetric_fog_energy = 0.2
+light_angular_distance = 0.5
 shadow_enabled = true
-directional_shadow_max_distance = 11.0
+shadow_blur = 0.8
+directional_shadow_split_1 = 0.003
+directional_shadow_split_2 = 0.1
+directional_shadow_split_3 = 0.2
+directional_shadow_pancake_size = 105.0
 
 [node name="HUD" parent="." instance=ExtResource("6_lgr22")]
+unique_name_in_owner = true
 script = ExtResource("9_c6i3y")
 
-[node name="Obstacles" type="Node3D" parent="."]
-
-[node name="Plank Holder" parent="Obstacles" instance=ExtResource("10_20pc6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.41322, 0.75, 3.97943)
-
-[node name="Plank Holder2" parent="Obstacles" instance=ExtResource("10_20pc6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.41322, 0.75, 3.97943)
-
-[node name="Plank Holder3" parent="Obstacles" instance=ExtResource("10_20pc6")]
-transform = Transform3D(0.540475, 0, 0.84136, 0, 1, 0, -0.84136, 0, 0.540475, 2.52647, 0.75, 14.1556)
-
-[node name="Plank Holder7" parent="Obstacles" instance=ExtResource("10_20pc6")]
-transform = Transform3D(0.540475, 0, 0.84136, 0, 1, 0, -0.84136, 0, 0.540475, 2.52647, 2.20829, 14.1556)
-
-[node name="Plank Holder4" parent="Obstacles" instance=ExtResource("10_20pc6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.41322, 0.75, 24.4218)
-
-[node name="Pipe Holder A" parent="Obstacles" instance=ExtResource("11_5vvyt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.99921, 0.623902, 7)
-
-[node name="Plank Holder5" parent="Obstacles" instance=ExtResource("10_20pc6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.41322, 0.75, 11.3882)
-
-[node name="Plank Holder6" parent="Obstacles" instance=ExtResource("10_20pc6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.1893, 0.75, 3.97943)
-
-[node name="Scaffolding A" parent="Obstacles" instance=ExtResource("11_c6i3y")]
-transform = Transform3D(0.969158, 0, -0.246441, 0, 1, 0, 0.246441, 0, 0.969158, 13.0912, 1.8008, 21.3422)
-
-[node name="Scaffolding A2" parent="Obstacles" instance=ExtResource("11_c6i3y")]
-transform = Transform3D(0.814541, 0, 0.580106, 0, 1, 0, -0.580106, 0, 0.814541, 4.59098, 1.8008, 31.0471)
-
-[node name="Scaffolding A3" parent="Obstacles" instance=ExtResource("11_c6i3y")]
-transform = Transform3D(0.814541, 0, 0.580106, 0, 1, 0, -0.580106, 0, 0.814541, -25.2847, 1.8008, 5.42243)
-
-[node name="Scaffolding A4" parent="Obstacles" instance=ExtResource("11_c6i3y")]
-transform = Transform3D(0.999692, 0, 0.0248335, 0, 1, 0, -0.0248335, 0, 0.999692, -25.2847, 1.8008, 12.448)
-
-[node name="Scaffolding A5" parent="Obstacles" instance=ExtResource("11_c6i3y")]
-transform = Transform3D(0.999692, 0, 0.0248335, 0, 1, 0, -0.0248335, 0, 0.999692, -17.022, 1.8008, 23.6297)
-
-[node name="Steel Holder " parent="Obstacles" instance=ExtResource("12_c2ibq")]
-transform = Transform3D(0.999692, 0, 0.0248335, 0, 1, 0, -0.0248335, 0, 0.999692, 3.60438, 0.773889, 23.6297)
-
-[node name="Steel Holder 2" parent="Obstacles" instance=ExtResource("12_c2ibq")]
-transform = Transform3D(0.999692, 0, 0.0248335, 0, 1, 0, -0.0248335, 0, 0.999692, -10.2386, 0.773889, 29.2675)
-
-[node name="Steel Holder 3" parent="Obstacles" instance=ExtResource("12_c2ibq")]
-transform = Transform3D(0.999692, 0, 0.0248335, 0, 1, 0, -0.0248335, 0, 0.999692, -10.2386, 0.773889, 34.6001)
-
-[node name="Steel Holder 4" parent="Obstacles" instance=ExtResource("12_c2ibq")]
-transform = Transform3D(0.999692, 0, 0.0248335, 0, 1, 0, -0.0248335, 0, 0.999692, -10.2386, 0.773889, 38.1289)
-
-[node name="Steel Holder 5" parent="Obstacles" instance=ExtResource("12_c2ibq")]
-transform = Transform3D(0.999692, 0, 0.0248335, 0, 1, 0, -0.0248335, 0, 0.999692, -10.2386, 2.29082, 38.1289)
-
-[node name="Steel Holder 6" parent="Obstacles" instance=ExtResource("12_c2ibq")]
-transform = Transform3D(0.999692, 0, 0.0248335, 0, 1, 0, -0.0248335, 0, 0.999692, -10.2386, 3.83211, 38.1289)
-
-[node name="Pipe Holder A2" parent="Obstacles" instance=ExtResource("11_5vvyt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.3168, 0.623902, 33.1038)
-
-[node name="Pipe Holder A3" parent="Obstacles" instance=ExtResource("11_5vvyt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.2816, 0.621751, 35.8027)
-
-[node name="Pipe Holder A4" parent="Obstacles" instance=ExtResource("11_5vvyt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.1122, 0.619099, 39.1291)
-
-[node name="Pipe Holder A7" parent="Obstacles" instance=ExtResource("11_5vvyt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.1122, 1.8578, 39.1291)
-
-[node name="Pipe Holder A5" parent="Obstacles" instance=ExtResource("11_5vvyt")]
-transform = Transform3D(0.229268, 0, -0.973363, 0, 1, 0, 0.973363, 0, 0.229268, -26.7751, 0.619099, 39.1291)
-
-[node name="Pipe Holder A6" parent="Obstacles" instance=ExtResource("11_5vvyt")]
-transform = Transform3D(-0.56948, 0, -0.822005, 0, 1, 0, 0.822005, 0, -0.56948, -26.7751, 0.619099, 22.3945)
-
-[node name="Steel Holder 7" parent="Obstacles" instance=ExtResource("12_c2ibq")]
-transform = Transform3D(0.824818, 0, -0.565399, 0, 1, 0, 0.565399, 0, 0.824818, -10.2386, 0.773889, 41.4967)
-
-[node name="Plank Holder8" parent="Obstacles" instance=ExtResource("10_20pc6")]
-transform = Transform3D(0.824818, 0, -0.565399, 0, 1, 0, 0.565399, 0, 0.824818, 26.1965, 0.75, 44.212)
-
-[node name="Plank Holder9" parent="Obstacles" instance=ExtResource("10_20pc6")]
-transform = Transform3D(0.757348, 0, 0.653011, 0, 1, 0, -0.653011, 0, 0.757348, 3.87441, 0.75, 50.8545)
-
-[node name="Steel Holder 8" parent="Obstacles" instance=ExtResource("12_c2ibq")]
-transform = Transform3D(0.824818, 0, -0.565399, 0, 1, 0, 0.565399, 0, 0.824818, -10.2386, 0.773889, 44.212)
+[node name="Stage1" parent="." instance=ExtResource("10_wkp8b")]
 
 [connection signal="game_ended" from="." to="HUD" method="_on_game_ended"]
 [connection signal="game_resetted" from="." to="World/Player/PlayerBody" method="_on_game_resetted"]
@@ -199,8 +133,14 @@ transform = Transform3D(0.824818, 0, -0.565399, 0, 1, 0, 0.565399, 0, 0.824818, 
 [connection signal="game_resetted" from="." to="HUD" method="_on_game_resetted"]
 [connection signal="game_started" from="." to="HUD" method="_on_game_started"]
 [connection signal="step_count_updated" from="." to="HUD" method="_on_step_count_updated"]
+[connection signal="obstacle_hit" from="World/Player/PlayerBody" to="." method="_on_player_body_obstacle_hit"]
+[connection signal="obstacle_hit" from="World/Player/PlayerBody" to="HUD" method="_on_player_body_obstacle_hit"]
+[connection signal="turn_queued" from="World/Player/PlayerBody" to="." method="_on_player_body_turn_queued"]
+[connection signal="turn_queued" from="World/Player/PlayerBody" to="HUD" method="_on_player_body_turn_queued"]
 [connection signal="walked_distance_updated" from="World/Player/PlayerBody" to="HUD" method="_on_walked_distance_updated"]
 [connection signal="map_toggled" from="HUD" to="World/Player/PlayerBody" method="_on_hud_map_toggled"]
 [connection signal="map_toggled" from="HUD" to="World/Player/PlayerBody/PlayerVisuals" method="_on_hud_map_toggled"]
 [connection signal="turn_left_clicked" from="HUD" to="World/Player/PlayerBody" method="_on_hud_turn_left_clicked"]
 [connection signal="turn_right_clicked" from="HUD" to="World/Player/PlayerBody" method="_on_hud_turn_right_clicked"]
+[connection signal="stage_completed" from="Stage1" to="." method="_on_stage_1_stage_completed"]
+[connection signal="stage_completed" from="Stage1" to="HUD" method="_on_stage_1_stage_completed"]

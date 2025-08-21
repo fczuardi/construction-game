@@ -1,11 +1,9 @@
 ## Ongoing
-
-- [ ] directional keys support
-- [ ] map UI showing trail
+- [ ] test crane on scene
 
 ## Planned
 
-- [ ] use one of each obstacle in the pack
+- [ ] map UI showing trail
 - [ ] data based level generation
 - SFX
     - steps
@@ -30,6 +28,7 @@
    - [ ] simplify blend tree for 3 speeds only: walk, jog, run
 
 ## Done
+- [x] directional keys support
 - [x] gravity bug
 - [x] display an empty map
 - [x] fix walk with map speed

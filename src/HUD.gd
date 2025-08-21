@@ -6,14 +6,21 @@ extends Control
 @onready var turn_left_button: Button = %TurnLeftButton
 @onready var turn_right_button: Button = %TurnRightButton
 @onready var map_button: Button = %MapButton
+
 @onready var status_list: VBoxContainer = %StatusList
 @onready var distance_value: Label = %DistanceValue
 @onready var steps_value: Label = %StepsValue
+@onready var turns_value: Label = %TurnsValue
+@onready var hits_value: Label = %HitsValue
+
+
 @onready var game_over_title: CenterContainer = %GameOverTitle
+@onready var victory_title: CenterContainer = %VictoryTitle
 
 signal turn_left_clicked
 signal turn_right_clicked
 signal map_toggled(toggled_on: bool)
+signal reset_requested
 
 var _total_distance : float = 0.0
 var _fade_tween : Tween
@@ -25,6 +32,10 @@ func _ready() -> void:
     turn_left_button.pressed.connect(func():  turn_left_clicked.emit())
     turn_right_button.pressed.connect(func(): turn_right_clicked.emit())
     map_button.toggled.connect(func(toggled_on: bool): map_toggled.emit(toggled_on))
+    # prevent buttons from grabbing keyboard focus
+    for b in [turn_left_button, turn_right_button]:
+        b.focus_mode = Control.FOCUS_NONE
+        b.mouse_filter = Control.MOUSE_FILTER_STOP  # still capture clicks/taps
     # TODO: setup signal listeners in code and not editor
     # for example main game start
 
@@ -35,6 +46,11 @@ func _unhandled_input(event: InputEvent) -> void:
                 turn_left_clicked.emit()
             KEY_RIGHT:
                 turn_right_clicked.emit()
+            KEY_SPACE:
+                map_button.button_pressed = !map_button.button_pressed
+                map_toggled.emit(map_button.button_pressed)
+            KEY_R:
+                reset_requested.emit()
 
 func _on_game_resetted() -> void:
     _total_distance = 0.0
@@ -42,10 +58,13 @@ func _on_game_resetted() -> void:
     status_list.modulate = Color.TRANSPARENT
     game_buttons.modulate = Color.TRANSPARENT
     game_over_title.modulate = Color.TRANSPARENT
+    victory_title.modulate = Color.TRANSPARENT
     map_button.button_pressed = false
     update_ui_visibility([game_title], [])
     turn_left_button.disabled = true
     turn_right_button.disabled = true
+    turns_value.text = "-"
+    hits_value.text = "-"
 
 func update_ui_visibility(fade_in:Array, fade_out:Array):
     if (_fade_tween):
@@ -73,3 +92,16 @@ func _on_game_ended() -> void:
     update_ui_visibility([game_over_title], [game_buttons, status_list])
     turn_left_button.disabled = true
     turn_right_button.disabled = true
+
+func _on_stage_1_stage_completed() -> void:
+    update_ui_visibility([victory_title], [game_buttons, status_list])
+    turn_left_button.disabled = true
+    turn_right_button.disabled = true
+
+
+func _on_player_body_obstacle_hit(new_total: int) -> void:
+    hits_value.text = "%d" % new_total
+
+
+func _on_player_body_turn_queued(new_total: int) -> void:
+    turns_value.text = "%d" % new_total
