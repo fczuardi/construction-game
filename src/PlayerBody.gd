@@ -34,10 +34,10 @@ var obstacle_hits: int
 ## helper dictionary to count same obstacle only after a cooldown time
 var _last_hit_time: Dictionary     # Dictionary: collider -> last time
 
-
+var initial_transform : Transform3D
 func _ready() -> void:
+    initial_transform = transform
     move_dir = transform.basis.z.normalized()
-    print(player_visuals.anim_tree)
     #for p in player_visuals.anim_tree.get_property_list():
         #print("a ", p.name)
     #print(player_visuals.anim_tree["parameters/LastTransition/current_state"])
@@ -45,11 +45,13 @@ func _ready() -> void:
 func _on_game_resetted() -> void:
     # send back player body to "origin"
     position = Vector3(0.0, -1.0, 0.0)
+    global_transform = initial_transform
+
     _last_player_position = position
     # face north
     player_visuals.rotation.y = 0    
     # initial direction = walking towards north
-    _next_direction = -180
+    _next_direction = -179
     _next_z_speed = walk_speed
     # start walking north
     velocity = Vector3(0.0, 0.0, _next_z_speed)
@@ -132,3 +134,22 @@ func _on_hud_turn_right_clicked() -> void:
 
 func _on_hud_map_toggled(toggled_on: bool) -> void:
     _next_z_speed = walk_speed if not toggled_on else check_map_walk_speed
+
+func _on_stage_1_goal_reached(goal_pos: Vector3, goal_yaw_deg: float) -> void:
+    global_position = goal_pos
+    velocity = Vector3.ZERO
+
+    rotation.y = deg_to_rad(goal_yaw_deg)
+
+    var dir := Vector3.FORWARD.rotated(Vector3.UP, deg_to_rad(goal_yaw_deg))
+    move_dir = dir.normalized()
+    _next_direction = goal_yaw_deg
+    _next_z_speed = 0
+    %PlayerVisuals.rotation.y = deg_to_rad(goal_yaw_deg)  # if visuals rotate separately
+
+    
+
+
+func _on_main_game_ended() -> void:
+    velocity = Vector3.ZERO
+    _next_z_speed = 0

@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://u4117ijy8a7f" path="res://stages/Stage1.tscn" id="10_wkp8b"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lgr22"]
-radius = 0.13
+radius = 0.2
 height = 1.78
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_glv2v"]
@@ -76,9 +76,16 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.691219)
 script = ExtResource("4_03owx")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Player/PlayerBody"]
+[node name="CollisionCapsuleWalk" type="CollisionShape3D" parent="World/Player/PlayerBody"]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.89, -0.690726)
 shape = SubResource("CapsuleShape3D_lgr22")
+
+[node name="CollisionCapsuleMap" type="CollisionShape3D" parent="World/Player/PlayerBody"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.89, -0.690726)
+shape = SubResource("CapsuleShape3D_lgr22")
+disabled = true
 
 [node name="Cameras" type="Node3D" parent="World/Player/PlayerBody"]
 unique_name_in_owner = true
@@ -127,6 +134,8 @@ script = ExtResource("9_c6i3y")
 
 [node name="Stage1" parent="." instance=ExtResource("10_wkp8b")]
 
+[connection signal="game_ended" from="." to="World/Player/PlayerBody" method="_on_main_game_ended"]
+[connection signal="game_ended" from="." to="World/Player/PlayerBody/PlayerVisuals" method="_on_main_game_ended"]
 [connection signal="game_ended" from="." to="HUD" method="_on_game_ended"]
 [connection signal="game_resetted" from="." to="World/Player/PlayerBody" method="_on_game_resetted"]
 [connection signal="game_resetted" from="." to="World/Player/PlayerBody/PlayerVisuals" method="_on_main_game_resetted"]
@@ -144,3 +153,5 @@ script = ExtResource("9_c6i3y")
 [connection signal="turn_left_clicked" from="HUD" to="World/Player/PlayerBody" method="_on_hud_turn_left_clicked"]
 [connection signal="turn_right_clicked" from="HUD" to="World/Player/PlayerBody" method="_on_hud_turn_right_clicked"]
 [connection signal="goal_reached" from="Stage1" to="." method="_on_stage_1_goal_reached"]
+[connection signal="goal_reached" from="Stage1" to="World/Player/PlayerBody" method="_on_stage_1_goal_reached"]
+[connection signal="goal_reached" from="Stage1" to="World/Player/PlayerBody/PlayerVisuals" method="_on_stage_1_goal_reached"]

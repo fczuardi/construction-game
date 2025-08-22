@@ -78,13 +78,13 @@ func _on_game_resetted() -> void:
     turns_value.text = "-"
     hits_value.text = "-"
 
-func update_ui_visibility(fade_in:Array, fade_out:Array):
+func update_ui_visibility(fade_in:Array, fade_out:Array, delay: float = 0.0):
     if (_fade_tween):
         _fade_tween.kill()
     _fade_tween = get_tree().create_tween()
     _fade_tween.set_parallel()
     for element in fade_in:
-        _fade_tween.tween_property(element, "modulate", Color.WHITE, 1.5).set_trans(Tween.TRANS_SINE)
+        _fade_tween.tween_property(element, "modulate", Color.WHITE, 2).set_trans(Tween.TRANS_LINEAR).set_delay(delay)
     for element in fade_out:
         _fade_tween.tween_property(element, "modulate", Color.TRANSPARENT, 0.5)
 
@@ -96,7 +96,7 @@ func _on_step_count_updated(new_total: int) -> void:
     steps_value.text = "%d" % new_total
 
 func _on_game_started() -> void:
-    update_ui_visibility([status_list, game_buttons], [game_title])
+    update_ui_visibility([status_list, game_buttons], [game_title], 0.5)
     turn_left_button.disabled = false
     turn_right_button.disabled = false
 
@@ -114,6 +114,6 @@ func _on_player_body_turn_queued(new_total: int) -> void:
 
 
 func _on_main_stage_won() -> void:
-    update_ui_visibility([victory_title], [game_buttons, status_list])
+    update_ui_visibility([victory_title, status_list], [game_title, game_buttons], 2)
     turn_left_button.disabled = true
     turn_right_button.disabled = true

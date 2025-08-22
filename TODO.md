@@ -1,7 +1,7 @@
 ## Ongoing
 
-- [ ] replace white plan with clipoard prop for map view
 - [ ] goal achieved animation
+    - [ ] stop walk, turn 180, close door
 - [ ] defeat animation
 
 ## Planned
@@ -31,6 +31,8 @@
    - simplify blend tree for 3 speeds only: walk, jog, run
 
 ## Done
+- [x] replace white plan with clipoard prop for map view
+- [x] update collision capsule radius when chacking map
 - [x] BUG it's possible to win while loosing
 - [x] MAP! Pete should hold a map in hands + 1st person view while the HUD displays a 
 - [x] test crane on scene

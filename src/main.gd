@@ -12,10 +12,9 @@ extends Node
 ## how many steps the player can use before game over
 @export var steps_per_game :int = 100
 ## how many turns the player can use before game over
-@export var turns_per_game :int = 20
+@export var turns_per_game :int = 15
 ## how many hits the player can use before game over
-@export var hits_per_game :int = 5
-
+@export var hits_per_game :int = 3
 ## Signals
 signal game_resetted
 signal step_count_updated(new_total: int)
@@ -90,7 +89,7 @@ func check_game_over():
     _reset_game_tween.tween_callback(reset).set_delay(7)        
 
 
-func _on_stage_1_goal_reached() -> void:
+func _on_stage_1_goal_reached(goal_pos: Vector3, goal_yaw_deg: float) -> void:
     if _is_game_ending:
         # it's possible that the player is in a game over state
         # in that case entering the goal wont trigger a win
@@ -101,7 +100,7 @@ func _on_stage_1_goal_reached() -> void:
     if (_reset_game_tween):
         _reset_game_tween.kill()
     _reset_game_tween = get_tree().create_tween()
-    _reset_game_tween.tween_callback(reset).set_delay(7)
+    _reset_game_tween.tween_callback(reset).set_delay(8)
 
 
 func _on_player_body_obstacle_hit(new_total: int) -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://u4117ijy8a7f"]
+[gd_scene load_steps=9 format=3 uid="uid://u4117ijy8a7f"]
 
 [ext_resource type="Script" uid="uid://c7dttwbna4aq7" path="res://src/Stage.gd" id="1_5r2em"]
 [ext_resource type="PackedScene" uid="uid://ul5x7oyof3yv" path="res://obstacles/Crane.tscn" id="1_6lvjl"]
@@ -6,15 +6,16 @@
 [ext_resource type="PackedScene" uid="uid://c4imgjpy8mxxi" path="res://obstacles/PipeHolderA.tscn" id="3_r5pt5"]
 [ext_resource type="PackedScene" uid="uid://bybard4idr6i1" path="res://obstacles/PlankHolder.tscn" id="4_hhyax"]
 [ext_resource type="PackedScene" uid="uid://iioettm62u6s" path="res://obstacles/barrier_b.tscn" id="5_o56kq"]
-[ext_resource type="PackedScene" uid="uid://cspsr0vq4va0y" path="res://obstacles/toilet_b.tscn" id="6_yk1li"]
+[ext_resource type="PackedScene" uid="uid://33tiur8t6ppj" path="res://stages/GoalToilet.tscn" id="8_r5pt5"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_20pc6"]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_6lvjl"]
-radius = 0.2
-
 [node name="Stage1" type="Node3D"]
 script = ExtResource("1_5r2em")
+
+[node name="GoalToilet0" parent="." groups=["obstacles"] instance=ExtResource("8_r5pt5")]
+unique_name_in_owner = true
+transform = Transform3D(0.0831388, 0, 0.996538, 0, 1, 0, -0.996538, 0, 0.0831388, -0.384445, 0.846831, 19.5329)
 
 [node name="CraneGroup" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.45003, 0, 21.8228)
@@ -140,25 +141,9 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -6.450
 [node name="Steel Holder 4" parent="." instance=ExtResource("2_5r2em")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -6.45003, 3.37429, 17.016)
 
-[node name="GoalArea" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.17257, 0.846831, 2.46953)
+[node name="GoalToilet2" parent="." groups=["obstacles"] instance=ExtResource("8_r5pt5")]
+unique_name_in_owner = true
+transform = Transform3D(-0.418184, 0, 0.908362, 0, 1, 0, -0.908362, 0, -0.418184, 4.25196, 1, 2.09175)
 
-[node name="Toilet B2" parent="GoalArea" groups=["obstacles"] instance=ExtResource("6_yk1li")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.123468, 0, -0.0781193)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="GoalArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.530089, 0, 0)
-shape = SubResource("CylinderShape3D_6lvjl")
-
-[node name="GoalArea2" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.17257, 0.846831, 2.45542)
-
-[node name="Toilet B2" parent="GoalArea2" groups=["obstacles"] instance=ExtResource("6_yk1li")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4.17257, 0, 19.4013)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="GoalArea2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.14781, 0, 18.8919)
-shape = SubResource("CylinderShape3D_6lvjl")
-
-[connection signal="body_entered" from="GoalArea" to="." method="_on_goal_area_body_entered"]
-[connection signal="body_entered" from="GoalArea2" to="." method="_on_goal_area_body_entered"]
+[connection signal="align_request" from="GoalToilet0" to="." method="_on_goal_toilet_0_align_request"]
+[connection signal="align_request" from="GoalToilet2" to="." method="_on_goal_toilet_0_align_request"]
