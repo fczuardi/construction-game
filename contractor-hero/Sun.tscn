@@ -1,0 +1,55 @@
+[gd_scene load_steps=2 format=3 uid="uid://djh1eegrkitdq"]
+
+[sub_resource type="GDScript" id="GDScript_kpfv7"]
+script/source = "@tool
+## Sun
+##
+## A directional light with shortcuts to handle it as the sun
+extends DirectionalLight3D
+class_name Sun
+
+## The time of the day representing the light rotation
+@export_range(0, 24) var hours: float = 17: #6.0:
+    get:
+        if not self:
+            return 6.0
+        return deg_to_hour(rotation_degrees.x)
+    set(new_t):
+        if not self:
+            return
+        rotation_degrees.x = hour_to_deg(new_t)
+# converts an angle between -180..180 into a float between 0..24
+# examples: (+ or -) 180° is 6h, -90° is noon, 0° is 18:00, 90° is midnight,        
+func deg_to_hour(d: float):
+    return (d + 270) / 360 * 24
+# the conversion from hours back to angle
+func hour_to_deg(h: float):
+    return h / 24 * 360 - 270
+
+## the direction of sun rise and sunset
+## -90° default value is East-West axis being aligned with the X axis
+@export_range(-180, 180) var east_direction: float = 67: #-90:
+    get:
+        return rotation_degrees.y
+    set(new_y):
+        rotation_degrees.y = new_y
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+    # await self.ready
+    # rotation_degrees = Vector3(hours, east_direction, 0.0)
+    pass
+"
+
+[node name="Sun" type="DirectionalLight3D"]
+transform = Transform3D(0.390731, -0.238244, 0.88914, 0, 0.965926, 0.258819, -0.920505, -0.101129, 0.377417, 0, 0, 0)
+light_energy = 1.828
+light_volumetric_fog_energy = 0.2
+light_angular_distance = 0.5
+shadow_enabled = true
+shadow_blur = 0.8
+directional_shadow_split_1 = 0.003
+directional_shadow_split_2 = 0.1
+directional_shadow_split_3 = 0.2
+directional_shadow_pancake_size = 105.0
+script = SubResource("GDScript_kpfv7")

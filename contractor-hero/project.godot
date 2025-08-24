@@ -24,6 +24,10 @@ window/stretch/mode="viewport"
 window/stretch/aspect="keep_width"
 window/handheld/orientation=1
 
+[editor]
+
+movie_writer/movie_file="/var/home/fcz/gamedev/portraitgame01/filme.avi"
+
 [global_group]
 
 obstacles=""
@@ -36,5 +40,6 @@ player=""
 
 [rendering]
 
-renderer/rendering_method="mobile"
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
 textures/vram_compression/import_etc2_astc=true

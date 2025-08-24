@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://c06n8t6vi0fuj"]
 
-[ext_resource type="Texture2D" uid="uid://buvdvm0v1gqb7" path="res://icons/treasure-map-line_240px.png" id="2_1y2ac"]
+[ext_resource type="Texture2D" uid="uid://buvdvm0v1gqb7" path="res://obstacles/icons/treasure-map-line_240px.png" id="2_1y2ac"]
 [ext_resource type="FontFile" uid="uid://bgn10o8bm34q6" path="res://fonts/Arugula20250312-Regular.ttf" id="3_mqr7l"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lee5d"]
@@ -272,6 +272,7 @@ size_flags_horizontal = 3
 color = Color(1, 0.952941, 0.690196, 1)
 
 [node name="ColorRect3" type="ColorRect" parent="."]
+visible = false
 layout_mode = 2
 offset_left = 117.0
 offset_top = 650.0

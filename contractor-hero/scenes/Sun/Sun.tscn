@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://bd5aj5us85j5a"]
+
+[ext_resource type="Script" uid="uid://bfouodcrwdmxn" path="res://scenes/Sun/sun.gd" id="1_1y2s6"]
+
+[node name="Sun" type="DirectionalLight3D"]
+transform = Transform3D(0.390731, -0.238244, 0.88914, 0, 0.965926, 0.258819, -0.920505, -0.101129, 0.377417, 0, 0, 0)
+light_energy = 1.828
+light_volumetric_fog_energy = 0.2
+light_angular_distance = 0.5
+shadow_enabled = true
+shadow_blur = 0.8
+directional_shadow_split_1 = 0.003
+directional_shadow_split_2 = 0.1
+directional_shadow_split_3 = 0.2
+directional_shadow_pancake_size = 105.0
+script = ExtResource("1_1y2s6")
+hours = 17.0
+east_direction = 67.0

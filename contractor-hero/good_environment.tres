@@ -1,0 +1,20 @@
+[gd_resource type="Environment" load_steps=2 format=3 uid="uid://b81ar15fls18u"]
+
+[ext_resource type="Sky" uid="uid://ccalukbxcom0l" path="res://good_sky.tres" id="1_q4kt2"]
+
+[resource]
+background_mode = 2
+sky = ExtResource("1_q4kt2")
+ambient_light_source = 3
+reflected_light_source = 2
+volumetric_fog_albedo = Color(0.57, 0.394345, 0.3249, 1)
+volumetric_fog_emission = Color(0.38, 0.19, 0, 1)
+volumetric_fog_gi_inject = 0.08
+volumetric_fog_anisotropy = 0.0
+volumetric_fog_length = 43.83
+volumetric_fog_detail_spread = 2.47532
+volumetric_fog_ambient_inject = 2.91
+adjustment_enabled = true
+adjustment_brightness = 1.1
+adjustment_contrast = 0.65
+adjustment_saturation = 1.1

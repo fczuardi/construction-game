@@ -14,7 +14,7 @@ extends Node
 ## how many turns the player can use before game over
 @export var turns_per_game :int = 15
 ## how many hits the player can use before game over
-@export var hits_per_game :int = 3
+@export var hits_per_game :int = 5
 ## Signals
 signal game_resetted
 signal step_count_updated(new_total: int)
