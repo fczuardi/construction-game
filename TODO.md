@@ -1,13 +1,22 @@
 ## Ongoing
 
-- [ ] goal achieved animation
-    - [ ] stop walk, turn 180, close door
-- [ ] defeat animation
+- [ ] FlatTerrain component
+    - large disk to use as ground
+    - texture (use the Rocky one
 
 ## Planned
 
-- [ ] goal achieved toilet screen
-- [ ] map UI showing trail
+- Components
+    - Terrain
+    - Environment
+    - Left/Right Inoput buttons
+    - Fade in/out titles
+
+- map UI showing trail
+- goal achieved animation
+    - stop walk, turn 180, close door
+- defeat animation
+- goal achieved toilet screen
 - SFX
     - [ ] steps
 - Features
@@ -31,6 +40,7 @@
    - simplify blend tree for 3 speeds only: walk, jog, run
 
 ## Done
+- [x] finish Sun component
 - [x] replace white plan with clipoard prop for map view
 - [x] update collision capsule radius when chacking map
 - [x] BUG it's possible to win while loosing
