@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cn00ochwfr21u"]
+
+[ext_resource type="PackedScene" uid="uid://ccpgokrw2duk5" path="res://imports/HouseAndProps_AssetPack_Godot/fbx/Dummy_Base.fbx" id="1_0o31p"]
+
+[node name="Dummy" type="Node3D"]
+
+[node name="Dummy_Base" parent="." instance=ExtResource("1_0o31p")]

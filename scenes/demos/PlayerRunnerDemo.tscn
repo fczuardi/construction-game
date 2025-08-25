@@ -1,0 +1,214 @@
+[gd_scene load_steps=15 format=3 uid="uid://dkb5uhyt7ffpi"]
+
+[ext_resource type="PackedScene" uid="uid://br08vaqh6iywm" path="res://lib/PlayerRunner/PlayerRunner.tscn" id="1_pvld0"]
+[ext_resource type="PackedScene" uid="uid://cn00ochwfr21u" path="res://demos/Dummy.tscn" id="2_0wp50"]
+[ext_resource type="Material" uid="uid://cfkkgoymb53aj" path="res://materials/kenney_prototype_orange_10.tres" id="3_c7jmv"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_c7jmv"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_2q8a8"]
+material = ExtResource("3_c7jmv")
+size = Vector2(100, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2q8a8"]
+size = Vector3(2, 1, 2)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_50iqg"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_pvld0"]
+sky_top_color = Color(0.506928, 0.646726, 0.989114, 1)
+sky_horizon_color = Color(0.244545, 0.27085, 0.394768, 1)
+ground_bottom_color = Color(0.055293, 0.0637129, 0.0753874, 1)
+ground_horizon_color = Color(0.244545, 0.27085, 0.394768, 1)
+energy_multiplier = 0.7
+
+[sub_resource type="Sky" id="Sky_0wp50"]
+sky_material = SubResource("ProceduralSkyMaterial_pvld0")
+
+[sub_resource type="Environment" id="Environment_c7jmv"]
+background_mode = 2
+background_energy_multiplier = 0.8
+sky = SubResource("Sky_0wp50")
+tonemap_mode = 2
+
+[sub_resource type="GDScript" id="GDScript_c7jmv"]
+resource_name = "turnleft"
+script/source = "extends Button
+
+@onready var player_runner: PlayerRunner = %PlayerRunner
+
+func _ready() -> void:
+    pressed.connect(_on_pressed)
+    
+func _on_pressed():
+    player_runner.queue_turn(-45)
+"
+
+[sub_resource type="GDScript" id="GDScript_2q8a8"]
+resource_name = "turn_right"
+script/source = "extends Button
+
+@onready var player_runner: PlayerRunner = %PlayerRunner
+
+func _ready() -> void:
+    pressed.connect(_on_pressed)
+    
+func _on_pressed():
+    player_runner.queue_turn(45)
+"
+
+[sub_resource type="GDScript" id="GDScript_50iqg"]
+resource_name = "open_map"
+script/source = "extends Button
+
+@onready var player_runner: PlayerRunner = %PlayerRunner
+@onready var map_button: Button = %MapButton
+
+func _ready() -> void:
+    toggled.connect(_on_toggled)
+    
+func _on_toggled(toggled_on):
+    player_runner.set_map_mode(toggled_on)
+    map_button.text = \"set_map_mode(%s)\" % not toggled_on
+"
+
+[sub_resource type="GDScript" id="GDScript_11ppr"]
+resource_name = "reset_button"
+script/source = "extends Button
+
+@onready var player_runner: PlayerRunner = %PlayerRunner
+
+func _ready() -> void:
+    pressed.connect(_on_pressed)
+    
+func _on_pressed():
+    player_runner.reset_to_start()
+"
+
+[node name="PlayerRunnerDemo" type="Node3D"]
+
+[node name="PlayerRunner" parent="." instance=ExtResource("1_pvld0")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.33304, 0)
+velocity = Vector3(0, 0, 1.11)
+visuals_scene = ExtResource("2_0wp50")
+
+[node name="Other" type="Node3D" parent="."]
+
+[node name="Floor1" type="StaticBody3D" parent="Other"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Other/Floor1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_c7jmv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Other/Floor1"]
+mesh = SubResource("PlaneMesh_2q8a8")
+
+[node name="Step1" type="StaticBody3D" parent="Other"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.00972, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Other/Step1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_2q8a8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Other/Step1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("PlaneMesh_50iqg")
+
+[node name="Step2" type="StaticBody3D" parent="Other"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00519, 2.11975)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Other/Step2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_2q8a8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Other/Step2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("PlaneMesh_50iqg")
+
+[node name="Step3" type="StaticBody3D" parent="Other"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.1431)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Other/Step3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_2q8a8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Other/Step3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("PlaneMesh_50iqg")
+
+[node name="Camera3D" type="Camera3D" parent="Other"]
+transform = Transform3D(1, 0, 0, 0, 0.816077, 0.577943, 0, -0.577943, 0.816077, 0, 5.89747, 10.3847)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Other"]
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Other"]
+environment = SubResource("Environment_c7jmv")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="UI"]
+layout_mode = 0
+offset_right = 359.0
+offset_bottom = 637.0
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 18
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="title" type="Label" parent="UI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 31
+text = "PlayerRunner demo"
+horizontal_alignment = 1
+
+[node name="Spacer" type="BoxContainer" parent="UI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 9
+
+[node name="TurnLeftButton" type="Button" parent="UI/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "queue_turn(-45)"
+script = SubResource("GDScript_c7jmv")
+
+[node name="Spacer2" type="MarginContainer" parent="UI/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 35
+theme_override_constants/margin_bottom = 35
+
+[node name="TurnRightButton" type="Button" parent="UI/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "queue_turn(45)"
+script = SubResource("GDScript_2q8a8")
+
+[node name="MapButton" type="Button" parent="UI/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 8
+toggle_mode = true
+text = "set_map_mode(true)"
+script = SubResource("GDScript_50iqg")
+
+[node name="ResetButton" type="Button" parent="UI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "reset_to_start()"
+script = SubResource("GDScript_11ppr")

@@ -1,12 +1,13 @@
 ## Ongoing
 
+- [ ] CameraRig
+
+## Done
+- [x] PlayerCapsule (PlayerRunner)
 - [x] new README with work manifesto
 - [x] strategy to concile game advance with lib advance
     - folder reorg simplification:
         - /lib + /demos + /slice
-
-
-## Done
 - [x] FlatTerrain component
     - large square to use as 
     - field for material assign
