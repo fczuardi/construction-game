@@ -1,6 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://c5nco38jyekbt"]
+[gd_scene load_steps=13 format=3 uid="uid://c5nco38jyekbt"]
 
 [ext_resource type="PackedScene" uid="uid://bd5aj5us85j5a" path="res://Sun/Sun.tscn" id="1_dig1h"]
+[ext_resource type="PackedScene" uid="uid://jdvf8pm0rn4r" path="res://FlatTerrain/FlatTerrain.tscn" id="2_tkrq4"]
+[ext_resource type="Material" uid="uid://c237rtawmxp6j" path="res://assets/SBS - Photorealistic Texture Pack 3/PTP-Ground_08_material_3d.tres" id="3_ihq6j"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dig1h"]
 roughness = 0.5
@@ -15,7 +17,6 @@ roughness = 0.4
 material = SubResource("StandardMaterial3D_ihq6j")
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_dig1h"]
-energy_multiplier = 2.0
 
 [sub_resource type="Sky" id="Sky_tkrq4"]
 sky_material = SubResource("PhysicalSkyMaterial_dig1h")
@@ -37,45 +38,52 @@ height = 1.0
 [node name="Workbench" type="Node3D"]
 
 [node name="SunPivot" parent="." instance=ExtResource("1_dig1h")]
+auto_intensity = true
+hour = 7.77
 
-[node name="Node3D" type="Node3D" parent="."]
+[node name="FlatTerrain" parent="." instance=ExtResource("2_tkrq4")]
+tile = 2.0
+material = ExtResource("3_ihq6j")
 
-[node name="Camera3D" type="Camera3D" parent="Node3D"]
+[node name="TempObjects" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="TempObjects"]
 transform = Transform3D(-1, 0, -8.74228e-08, -1.6732e-08, 0.981514, 0.191391, 8.58067e-08, 0.191391, -0.981514, 0, 2.20148, -3.69385)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.679387, 0.5, 0)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TempObjects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.02877, 0.5, 0)
 mesh = SubResource("SphereMesh_tkrq4")
 skeleton = NodePath("../..")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.689, 0.5, 0)
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="TempObjects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 mesh = SubResource("BoxMesh_tkrq4")
 skeleton = NodePath("../..")
 
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="Node3D"]
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="TempObjects"]
 transform = Transform3D(0.814186, 0, 0.580603, 0, 1, 0, -0.580603, 0, 0.814186, -2.66135, 1.5, 3.79159)
 mesh = SubResource("BoxMesh_tkrq4")
 skeleton = NodePath("../..")
 
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="Node3D"]
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="TempObjects"]
 transform = Transform3D(0.814186, 0, 0.580603, 0, 1, 0, -0.580603, 0, 0.814186, -2.10038, 0.5, 3.39156)
 mesh = SubResource("BoxMesh_tkrq4")
 skeleton = NodePath("../..")
 
-[node name="MeshInstance3D6" type="MeshInstance3D" parent="Node3D"]
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="TempObjects"]
 transform = Transform3D(0.845989, 0, -0.533201, 0, 1, 0, 0.533201, 0, 0.845989, 1.64397, 1.5, -2.74471)
 mesh = SubResource("BoxMesh_tkrq4")
 skeleton = NodePath("../..")
 
-[node name="MeshInstance3D7" type="MeshInstance3D" parent="Node3D"]
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="TempObjects"]
 transform = Transform3D(0.845989, 0, -0.533201, 0, 1, 0, 0.533201, 0, 0.845989, 2.22685, 0.5, -2.37733)
 mesh = SubResource("BoxMesh_tkrq4")
 skeleton = NodePath("../..")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Node3D"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="TempObjects"]
 environment = SubResource("Environment_ihq6j")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Node3D"]
+[node name="TempTerrain" type="MeshInstance3D" parent="TempObjects"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+visible = false
 mesh = SubResource("CylinderMesh_dig1h")

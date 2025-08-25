@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://jdvf8pm0rn4r"]
+
+[ext_resource type="Script" uid="uid://bvvuvtc1lkp8" path="res://FlatTerrain/flat_terrain.gd" id="1_j6y1a"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_j0qar"]
+size = Vector2(100, 100)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j6y1a"]
+uv1_scale = Vector3(100, 100, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j6y1a"]
+size = Vector3(100, 2, 100)
+
+[node name="FlatTerrain" type="StaticBody3D" node_paths=PackedStringArray("plane", "collider")]
+script = ExtResource("1_j6y1a")
+plane = NodePath("Visuals")
+collider = NodePath("CollisionShape")
+
+[node name="Visuals" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_j0qar")
+surface_material_override/0 = SubResource("StandardMaterial3D_j6y1a")
+
+[node name="CollisionShape" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+shape = SubResource("BoxShape3D_j6y1a")
