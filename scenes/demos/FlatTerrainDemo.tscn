@@ -1,0 +1,166 @@
+[gd_scene load_steps=9 format=3 uid="uid://bxyr8dysao5ct"]
+
+[ext_resource type="PackedScene" uid="uid://jdvf8pm0rn4r" path="res://lib/FlatTerrain/FlatTerrain.tscn" id="1_op3y1"]
+[ext_resource type="Material" uid="uid://db8idpthygrsm" path="res://materials/kenney_prototype_dark_09.tres" id="2_v8qbj"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_op3y1"]
+ground_bottom_color = Color(0.055293, 0.0637129, 0.0753874, 1)
+ground_horizon_color = Color(0.244545, 0.27085, 0.394768, 1)
+
+[sub_resource type="Sky" id="Sky_v8qbj"]
+sky_material = SubResource("ProceduralSkyMaterial_op3y1")
+
+[sub_resource type="Environment" id="Environment_k7wyg"]
+background_mode = 2
+sky = SubResource("Sky_v8qbj")
+tonemap_mode = 2
+
+[sub_resource type="GDScript" id="GDScript_v8qbj"]
+resource_name = "size_slider"
+script/source = "extends HSlider
+@onready var flat_terrain: FlatTerrain = %FlatTerrain
+@onready var size_label: Label = %SizeLabel
+
+var _is_dragging = false
+
+func _ready() -> void:
+    drag_started.connect(func (): _is_dragging = true)    
+    drag_ended.connect(func (): _is_dragging = false)
+    update()
+
+func update():
+    if not flat_terrain or not size_label or not _is_dragging:
+        return
+    flat_terrain.size = value  
+    size_label.text = \"size: %.1f m\" % flat_terrain.size
+    
+func _process(delta: float) -> void:
+    update()
+"
+
+[sub_resource type="GDScript" id="GDScript_k7wyg"]
+resource_name = "tile_slider"
+script/source = "extends HSlider
+@onready var flat_terrain: FlatTerrain = %FlatTerrain
+@onready var tile_label: Label = %TileLabel
+
+var _is_dragging = false
+
+func _ready() -> void:
+    drag_started.connect(func (): _is_dragging = true)    
+    drag_ended.connect(func (): _is_dragging = false)
+    update()
+
+func update():
+    if not flat_terrain or not tile_label or not _is_dragging:
+        return
+    flat_terrain.tile = value  
+    tile_label.text = \"tile: %.1f m\" % flat_terrain.tile
+    
+func _process(delta: float) -> void:
+    update()
+"
+
+[sub_resource type="GDScript" id="GDScript_op3y1"]
+resource_name = "material_select"
+script/source = "extends OptionButton
+
+@onready var flat_terrain: FlatTerrain = %FlatTerrain
+
+func _ready() -> void:
+    item_selected.connect(_on_item_selected)
+
+func _on_item_selected(index: int):
+    var res_path = get_item_text(index)
+    var selected_material: StandardMaterial3D = load(res_path)
+    flat_terrain.material = selected_material
+"
+
+[node name="FlatTerrainDemo" type="Node3D"]
+
+[node name="FlatTerrain" parent="." instance=ExtResource("1_op3y1")]
+unique_name_in_owner = true
+size = 10.0
+tile = 0.5
+material = ExtResource("2_v8qbj")
+
+[node name="Other" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="Other"]
+transform = Transform3D(1, 0, 0, 0, 0.976552, 0.215281, 0, -0.215281, 0.976552, 0, 0.435772, 0.855956)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Other"]
+transform = Transform3D(-0.990748, 0.00568318, 0.135597, 0, -0.999123, 0.0418757, 0.135716, 0.0414882, 0.989879, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Other"]
+environment = SubResource("Environment_k7wyg")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="UI"]
+layout_mode = 0
+offset_right = 355.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 18
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer"]
+layout_mode = 2
+
+[node name="title" type="Label" parent="UI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "FlatTerrain demo"
+horizontal_alignment = 1
+
+[node name="SizeLabel" type="Label" parent="UI/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "size"
+
+[node name="SizeSlider" type="HSlider" parent="UI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+min_value = 1.0
+value = 10.0
+script = SubResource("GDScript_v8qbj")
+
+[node name="TileLabel" type="Label" parent="UI/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "tile"
+
+[node name="TileSlider" type="HSlider" parent="UI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+min_value = 0.1
+max_value = 20.0
+step = 0.1
+value = 0.5
+script = SubResource("GDScript_k7wyg")
+
+[node name="MaterialLabel" type="Label" parent="UI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "material"
+
+[node name="MaterialOptionButton" type="OptionButton" parent="UI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+selected = 0
+item_count = 5
+popup/item_0/text = "res://materials/kenney_prototype_dark_09.tres"
+popup/item_0/id = 1
+popup/item_1/text = "res://materials/kenney_prototype_orange_10.tres"
+popup/item_1/id = 2
+popup/item_2/text = "res://materials/rocky_trail_02.tres"
+popup/item_2/id = 3
+popup/item_3/text = "res://materials/sbs_ptp3_ground_08.tres"
+popup/item_3/id = 4
+popup/item_4/text = "res://materials/sbs_ttp3_terrain_21.tres"
+popup/item_4/id = 5
+script = SubResource("GDScript_op3y1")
