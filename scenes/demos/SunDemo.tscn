@@ -1,0 +1,212 @@
+[gd_scene load_steps=15 format=3 uid="uid://ccjlcg6tf5mev"]
+
+[ext_resource type="PackedScene" uid="uid://bd5aj5us85j5a" path="res://lib/Sun/Sun.tscn" id="1_sntw0"]
+[ext_resource type="Material" uid="uid://db8idpthygrsm" path="res://materials/kenney_prototype_dark_09.tres" id="2_3b8g0"]
+[ext_resource type="Material" uid="uid://cfkkgoymb53aj" path="res://materials/kenney_prototype_orange_10.tres" id="3_3b8g0"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_sntw0"]
+offset = Vector3(-39.74, 0, 0)
+fractal_octaves = 9
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3b8g0"]
+seamless = true
+noise = SubResource("FastNoiseLite_sntw0")
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sntw0"]
+sky_top_color = Color(0.353985, 0.52161, 0.979093, 1)
+sky_horizon_color = Color(0.148581, 0.16684, 0.253525, 1)
+sky_cover = SubResource("NoiseTexture2D_3b8g0")
+ground_bottom_color = Color(0.055293, 0.0637129, 0.0753874, 1)
+ground_horizon_color = Color(0.244544, 0.270849, 0.394768, 1)
+energy_multiplier = 2.8
+
+[sub_resource type="Sky" id="Sky_3b8g0"]
+sky_material = SubResource("ProceduralSkyMaterial_sntw0")
+
+[sub_resource type="Environment" id="Environment_p2ln0"]
+background_mode = 2
+background_energy_multiplier = 0.2
+sky = SubResource("Sky_3b8g0")
+tonemap_mode = 2
+
+[sub_resource type="SphereMesh" id="SphereMesh_p2ln0"]
+material = ExtResource("3_3b8g0")
+
+[sub_resource type="BoxMesh" id="BoxMesh_p2ln0"]
+material = ExtResource("2_3b8g0")
+size = Vector3(800, 1, 800)
+
+[sub_resource type="GDScript" id="GDScript_3b8g0"]
+resource_name = "azimuth"
+script/source = "extends HSlider
+
+@onready var sun_pivot: SunOrbit = %SunPivot
+@onready var east: Label = %east
+
+var _is_dragging = false
+
+func _ready() -> void:
+    drag_started.connect(func (): _is_dragging = true)    
+    drag_ended.connect(func (): _is_dragging = false)
+    update()
+
+func update():
+    if not sun_pivot or not east or not _is_dragging:
+        return
+    sun_pivot.east = -value    
+    east.text = \"east: %d °\" % sun_pivot.east
+    
+func _process(delta: float) -> void:
+    update()
+"
+
+[sub_resource type="GDScript" id="GDScript_p2ln0"]
+resource_name = "time_of_day"
+script/source = "extends HSlider
+
+@onready var sun_pivot: SunOrbit = %SunPivot
+@onready var hour: Label = %hour
+
+var _is_dragging = false
+
+func _ready() -> void:
+    drag_started.connect(func (): _is_dragging = true)    
+    drag_ended.connect(func (): _is_dragging = false)
+    update()
+
+func update():
+    if not sun_pivot or not hour or not _is_dragging:
+        return
+    sun_pivot.hour = value    
+    hour.text = \"hour: %d\" % sun_pivot.hour
+    
+func _process(delta: float) -> void:
+    update()
+"
+
+[sub_resource type="GDScript" id="GDScript_2sq6d"]
+resource_name = "tilt"
+script/source = "extends HSlider
+
+@onready var sun_pivot: SunOrbit = %SunPivot
+@onready var season: Label = %season
+
+var _is_dragging = false
+
+func _ready() -> void:
+    drag_started.connect(func (): _is_dragging = true)    
+    drag_ended.connect(func (): _is_dragging = false)
+    update()
+
+func update():
+    if not sun_pivot or not season or not _is_dragging:
+        return
+    sun_pivot.season = value    
+    season.text = \"season: %d°\" % sun_pivot.season
+    
+func _process(delta: float) -> void:
+    update()
+"
+
+[sub_resource type="GDScript" id="GDScript_0vy22"]
+resource_name = "auto_intensity"
+script/source = "extends CheckButton
+
+@onready var sun_pivot: SunOrbit = %SunPivot
+
+func _ready() -> void:
+    toggled.connect(_on_toggled)
+    
+func _on_toggled(toggled_on):
+    sun_pivot.auto_intensity = toggled_on
+"
+
+[node name="SunDemo" type="Node3D"]
+
+[node name="SunPivot" parent="." instance=ExtResource("1_sntw0")]
+unique_name_in_owner = true
+transform = Transform3D(1, -6.20065e-17, -7.88861e-31, 6.20065e-17, 1, -1.08273e-07, 6.71363e-24, 1.08273e-07, 1, 0, 5, 0)
+hour = 7.0
+
+[node name="Other" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Other"]
+environment = SubResource("Environment_p2ln0")
+
+[node name="Camera3D" type="Camera3D" parent="Other"]
+transform = Transform3D(1, 0, 0, 0, 0.983258, 0.182218, 0, -0.182218, 0.983258, -0.0831003, 1.25103, 1.95324)
+
+[node name="Sphere" type="MeshInstance3D" parent="Other"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("SphereMesh_p2ln0")
+
+[node name="Floor" type="MeshInstance3D" parent="Other"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("BoxMesh_p2ln0")
+skeleton = NodePath("../..")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="UI"]
+layout_mode = 0
+offset_right = 357.0
+offset_bottom = 43.0
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 18
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="title" type="Label" parent="UI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 39
+text = "SunOrbit demo"
+horizontal_alignment = 1
+
+[node name="east" type="Label" parent="UI/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "east"
+
+[node name="eastSlider" type="HSlider" parent="UI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+min_value = -180.0
+max_value = 180.0
+script = SubResource("GDScript_3b8g0")
+
+[node name="hour" type="Label" parent="UI/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "hour"
+
+[node name="hourSlider" type="HSlider" parent="UI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+max_value = 24.0
+step = 0.1
+value = 7.0
+script = SubResource("GDScript_p2ln0")
+
+[node name="season" type="Label" parent="UI/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "season"
+
+[node name="seasonSlider" type="HSlider" parent="UI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+min_value = -23.4
+max_value = 23.4
+step = 0.1
+value = -0.4
+script = SubResource("GDScript_2sq6d")
+
+[node name="CheckButton" type="CheckButton" parent="UI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "auto_intensity"
+script = SubResource("GDScript_0vy22")

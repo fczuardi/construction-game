@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cfkkgoymb53aj"]
+
+[ext_resource type="Texture2D" uid="uid://c0snq20262l8e" path="res://imports/kenney_prototypeTextures/Orange/texture_10.png" id="1_4g0v7"]
+
+[resource]
+albedo_texture = ExtResource("1_4g0v7")
+uv1_scale = Vector3(4, 4, 4)

@@ -1,45 +1,15 @@
 ## Ongoing
 
-- [ ] FlatTerrain component
-    - large disk to use as ground
-    - texture (use the Rocky one
+- [x] new README with work manifesto
+- [x] strategy to concile game advance with lib advance
+    - folder reorg simplification:
+        - /lib + /demos + /slice
 
-## Planned
-
-- Components
-    - Terrain
-    - Environment
-    - Left/Right Inoput buttons
-    - Fade in/out titles
-
-- map UI showing trail
-- goal achieved animation
-    - stop walk, turn 180, close door
-- defeat animation
-- goal achieved toilet screen
-- SFX
-    - [ ] steps
-- Features
-    - data based level generation
-    - Climb stairs (or slopes)
-    - Fall from small heights
-- User Interface
-    - map with dots of the path so far
-- Animations
-  - build animation blend space2D with walk > run and turn-left > turn-right
-- Product
-    - test a Windows build (for steam users)
-
-## Backlog / Unfiled / Unfiltered / Wontfix
-- Ragdoll death?
-- Jump
-- Itch buttler CI (when project is on github)
-- User Interface
-    - support swipe left-right in adition to buttons
-- Validate
-   - simplify blend tree for 3 speeds only: walk, jog, run
 
 ## Done
+- [x] FlatTerrain component
+    - large square to use as 
+    - field for material assign
 - [x] finish Sun component
 - [x] replace white plan with clipoard prop for map view
 - [x] update collision capsule radius when chacking map
