@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://bxyr8dysao5ct"]
+[gd_scene load_steps=10 format=3 uid="uid://bxyr8dysao5ct"]
 
 [ext_resource type="PackedScene" uid="uid://jdvf8pm0rn4r" path="res://lib/FlatTerrain/FlatTerrain.tscn" id="1_op3y1"]
 [ext_resource type="Material" uid="uid://db8idpthygrsm" path="res://materials/kenney_prototype_dark_09.tres" id="2_v8qbj"]
+[ext_resource type="Script" uid="uid://b03qu5uc3bmit" path="res://lib/DemoExitOverlay/demo_exit_overlay.gd" id="3_45kss"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_op3y1"]
 ground_bottom_color = Color(0.055293, 0.0637129, 0.0753874, 1)
@@ -164,3 +165,7 @@ popup/item_3/id = 4
 popup/item_4/text = "res://materials/sbs_ttp3_terrain_21.tres"
 popup/item_4/id = 5
 script = SubResource("GDScript_op3y1")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("3_45kss")
+corner = 2

@@ -1,0 +1,91 @@
+[gd_scene load_steps=7 format=3 uid="uid://ckdfysx2pcv7m"]
+
+[ext_resource type="PackedScene" uid="uid://bxyr8dysao5ct" path="res://demos/FlatTerrainDemo.tscn" id="1_0j7yx"]
+[ext_resource type="FontFile" uid="uid://bgn10o8bm34q6" path="res://imports/fonts/ArgulaRegular/Arugula20250312-Regular.ttf" id="1_rxmpw"]
+[ext_resource type="PackedScene" uid="uid://ccjlcg6tf5mev" path="res://demos/SunDemo.tscn" id="2_e7k5x"]
+[ext_resource type="PackedScene" uid="uid://dkb5uhyt7ffpi" path="res://demos/PlayerRunnerDemo.tscn" id="3_2lln2"]
+[ext_resource type="PackedScene" uid="uid://c0t83sxr2dme0" path="res://demos/FollowCameraDemo.tscn" id="4_o6pdu"]
+
+[sub_resource type="GDScript" id="GDScript_rxmpw"]
+resource_name = "demo_index"
+script/source = "class_name DemoIndex
+extends Control
+## Minimal demo hub: choose a demo and run it.
+
+const VERSION := \"0.1.0\"
+
+@export var demos: Array[PackedScene] = []      # drag your *Demo.tscn files here
+@export var demo_names: Array[StringName] = []  # optional pretty names (same length as demos)
+
+@onready var _list: OptionButton = %DemoList
+@onready var _play: Button = %PlayBtn
+
+func _ready() -> void:
+    if _list:
+        _populate()
+    else:
+        push_warning(\"DemoIndex: OptionButton 'DemoList' not found.\")
+    if _play:
+        _play.pressed.connect(_on_play)
+    else:
+        push_warning(\"DemoIndex: Button 'PlayBtn' not found.\")    
+
+func _populate() -> void:
+    _list.clear()
+    for i in demos.size():
+        var label := String(demo_names[i]) \\
+            if (i < demo_names.size() and String(demo_names[i]) != \"\") \\
+            else demos[i].resource_path.get_file()
+        _list.add_item(label, i)
+    _list.select(0)
+
+func _on_play() -> void:
+    if _list.item_count == 0:
+        return
+    var idx := _list.get_selected_id()
+    if idx < 0 or idx >= demos.size():
+        return
+    var ps := demos[idx]
+    get_tree().root.set_meta(\"launched_from_index\", true)
+    get_tree().change_scene_to_packed(ps)
+"
+
+[node name="Index" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_rxmpw")
+demos = Array[PackedScene]([ExtResource("1_0j7yx"), ExtResource("4_o6pdu"), ExtResource("3_2lln2"), ExtResource("2_e7k5x")])
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 0
+offset_right = 360.0
+offset_bottom = 640.0
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 192
+
+[node name="Title" type="Label" parent="CenterContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_rxmpw")
+theme_override_font_sizes/font_size = 28
+text = "Contractor Hero Library"
+
+[node name="DemoList" type="OptionButton" parent="CenterContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+
+[node name="PlayBtn" type="Button" parent="CenterContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_rxmpw")
+theme_override_font_sizes/font_size = 40
+text = "Play"

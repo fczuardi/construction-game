@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://ccjlcg6tf5mev"]
+[gd_scene load_steps=16 format=3 uid="uid://ccjlcg6tf5mev"]
 
 [ext_resource type="PackedScene" uid="uid://bd5aj5us85j5a" path="res://lib/Sun/Sun.tscn" id="1_sntw0"]
 [ext_resource type="Material" uid="uid://db8idpthygrsm" path="res://materials/kenney_prototype_dark_09.tres" id="2_3b8g0"]
 [ext_resource type="Material" uid="uid://cfkkgoymb53aj" path="res://materials/kenney_prototype_orange_10.tres" id="3_3b8g0"]
+[ext_resource type="Script" uid="uid://b03qu5uc3bmit" path="res://lib/DemoExitOverlay/demo_exit_overlay.gd" id="4_p2ln0"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_sntw0"]
 offset = Vector3(-39.74, 0, 0)
@@ -210,3 +211,7 @@ script = SubResource("GDScript_2sq6d")
 layout_mode = 2
 text = "auto_intensity"
 script = SubResource("GDScript_0vy22")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("4_p2ln0")
+corner = 2

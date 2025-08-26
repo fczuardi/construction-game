@@ -1,9 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://c0t83sxr2dme0"]
+[gd_scene load_steps=20 format=3 uid="uid://c0t83sxr2dme0"]
 
 [ext_resource type="PackedScene" uid="uid://cyixvmqy4mxoc" path="res://lib/FollowCamera/FollowCamera.tscn" id="1_xgr1u"]
 [ext_resource type="Texture2D" uid="uid://qonmfuetwwf0" path="res://imports/kenney_prototypeTextures/Dark/texture_09.png" id="2_pddfp"]
 [ext_resource type="PackedScene" uid="uid://cn00ochwfr21u" path="res://demos/Dummy.tscn" id="2_va0ek"]
 [ext_resource type="Texture2D" uid="uid://c0snq20262l8e" path="res://imports/kenney_prototypeTextures/Orange/texture_10.png" id="3_j66kt"]
+[ext_resource type="Script" uid="uid://b03qu5uc3bmit" path="res://lib/DemoExitOverlay/demo_exit_overlay.gd" id="5_j66kt"]
 
 [sub_resource type="GDScript" id="GDScript_y3wlu"]
 resource_name = "property_slider"
@@ -140,7 +141,7 @@ background_energy_multiplier = 0.9
 sky = SubResource("Sky_va0ek")
 tonemap_mode = 2
 
-[node name="FolloCameraDemo" type="Node3D"]
+[node name="FollowCameraDemo" type="Node3D"]
 
 [node name="FollowCamera" parent="." instance=ExtResource("1_xgr1u")]
 unique_name_in_owner = true
@@ -153,7 +154,7 @@ fp_eye_height = 2.0
 smoothing = 0.15
 
 [node name="Camera3D" parent="FollowCamera" index="0"]
-transform = Transform3D(-1, 0, 0, 0, 0.943858, 0.33035, 0, 0.33035, -0.943859, -1.44651, 10, -2.8297)
+transform = Transform3D(-1, 0, 0, 0, 0.943858, 0.33035, 0, 0.33035, -0.943858, -1.44651, 10, -2.8297)
 
 [node name="HUD" type="Control" parent="."]
 layout_mode = 3
@@ -222,7 +223,7 @@ size_flags_horizontal = 3
 min_value = 0.1
 max_value = 20.0
 step = 0.5
-value = 4.0
+value = 4.1
 script = SubResource("GDScript_y3wlu")
 
 [node name="MapButton" type="Button" parent="HUD/MarginContainer/VBoxContainer"]
@@ -301,5 +302,9 @@ shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Other"]
 environment = SubResource("Environment_vwngl")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("5_j66kt")
+corner = 1
 
 [editable path="FollowCamera"]
