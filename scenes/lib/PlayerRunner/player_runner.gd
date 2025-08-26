@@ -3,26 +3,29 @@ extends CharacterBody3D
 ## Prototype runner: always falls, queues yaw turns, walks forward.
 
 
+const VERSION := "0.2.0"
+
+
 signal distance_moved(delta_m: float)
 signal obstacle_bumped(collider: Node, surface_normal: Vector3)
 signal turn_buffer_changed(remaining_deg: float)
 
 
-# --- Constants -----------------------
+# --- Defaults ------------------------
 
-const VERSION := "0.2.0"
 const DEFAULT_SPEED_READING: float = 0.80
 const DEFAULT_SPEED_WALKING: float = 1.11
+const DEFAULT_TURN_RATE: float = 180.0
 
 
 # --- Exports (tiny surface) -----------
 
 ## regular walk speed
-@export var move_speed: float = DEFAULT_SPEED_WALKING
+@export var move_speed:= DEFAULT_SPEED_WALKING
 ## a slowed-down speed, used for reading/look at a map or phone while walking
-@export var map_walk_speed: float = DEFAULT_SPEED_READING
+@export var map_walk_speed:= DEFAULT_SPEED_READING
 ## max rotate speed (deg/sec). high values = snappy turns, lower values = laggy
-@export var turn_rate_deg: float = 180.0
+@export var turn_rate_deg:= DEFAULT_TURN_RATE
 ## a packed scene to use as the player visuals to follow the runner capsule
 @export var visuals_scene: PackedScene:
     set(value):
