@@ -37,6 +37,8 @@ Directories are organized as follows:
 - demos double as smoke tests
     - open → tweak a couple of exports → hit Play
     - Keep a “Test Checklist” per component (5–8 bullets) at the top of the script (comment)
+- signal vs public methods
+    - try to follow the rule of thumb: "commands in, events out"
 
 ### TL;DR
 

@@ -1,0 +1,168 @@
+[gd_scene load_steps=12 format=3 uid="uid://rnjcf0y4dsgm"]
+
+[ext_resource type="Script" uid="uid://0pf84kqbgh2v" path="res://lib/PlayerControls/player_controls.gd" id="1_3mnar"]
+[ext_resource type="FontFile" uid="uid://bgn10o8bm34q6" path="res://imports/fonts/ArgulaRegular/Arugula20250312-Regular.ttf" id="2_76wlr"]
+[ext_resource type="Script" uid="uid://dtox1eect8j31" path="res://lib/PlayerControls/player_controls_skin.gd" id="2_w4hr5"]
+[ext_resource type="Texture2D" uid="uid://buvdvm0v1gqb7" path="res://imports/icons/treasure-map-line_240px.png" id="3_vcta7"]
+[ext_resource type="ColorPalette" uid="uid://c25vynta3epcj" path="res://lib/Colors/all_gray.tres" id="3_x4854"]
+[ext_resource type="Texture2D" uid="uid://3fiaiv5vq0s1" path="res://imports/icons/run-line_240px.png" id="3_y3xte"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x4854"]
+bg_color = Color(0.2, 0.2, 0.2, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d6lbv"]
+bg_color = Color(0.2, 0.2, 0.2, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ou1op"]
+bg_color = Color(0.2, 0.2, 0.2, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ncw1t"]
+bg_color = Color(0.2, 0.2, 0.2, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="GDScript" id="GDScript_3mnar"]
+resource_name = "debug"
+script/source = "extends Node
+
+
+func _on_player_controls_action_east() -> void:
+    print(\"E\")
+
+
+func _on_player_controls_action_north() -> void:
+    print(\"N\")
+
+
+func _on_player_controls_action_south() -> void:
+    print(\"S\")
+
+
+func _on_player_controls_action_west() -> void:
+    print(\"W\")
+"
+
+[node name="PlayerControls" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_3mnar")
+
+[node name="PlayerControlsSkin" type="Control" parent="." node_paths=PackedStringArray("button_palette_order")]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_w4hr5")
+palette = ExtResource("3_x4854")
+button_palette_order = [NodePath("../Control/BtnNorth"), NodePath("../Control/BtnEast"), NodePath("../Control/BtnWest"), NodePath("../Control/BtnSouth")]
+
+[node name="Control" type="Control" parent="."]
+anchors_preset = 0
+
+[node name="BtnNorth" type="Button" parent="Control"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 0
+offset_right = 80.0
+offset_bottom = 80.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_x4854")
+
+[node name="TextureRect" type="TextureRect" parent="Control/BtnNorth"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 70.0
+offset_bottom = 70.0
+rotation = -0.785398
+pivot_offset = Vector2(30, 30)
+texture = ExtResource("3_y3xte")
+expand_mode = 1
+
+[node name="BtnSouth" type="Button" parent="Control"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 0
+offset_left = 88.0
+offset_top = 88.0
+offset_right = 168.0
+offset_bottom = 168.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_d6lbv")
+
+[node name="TextureRect" type="TextureRect" parent="Control/BtnSouth"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 70.0
+offset_bottom = 70.0
+rotation = -0.785398
+pivot_offset = Vector2(30, 30)
+texture = ExtResource("3_vcta7")
+expand_mode = 1
+
+[node name="BtnEast" type="Button" parent="Control"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 0
+offset_left = 88.0
+offset_right = 168.0
+offset_bottom = 80.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_ou1op")
+
+[node name="Label" type="Label" parent="Control/BtnEast"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -25.0
+offset_right = 25.0
+offset_bottom = 79.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_76wlr")
+theme_override_font_sizes/font_size = 62
+text = "↗"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BtnWest" type="Button" parent="Control"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 0
+offset_top = 88.0
+offset_right = 80.0
+offset_bottom = 168.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_ncw1t")
+
+[node name="Label" type="Label" parent="Control/BtnWest"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -25.0
+offset_right = 25.0
+offset_bottom = 79.0
+grow_horizontal = 2
+rotation = 3.14159
+pivot_offset = Vector2(25, 40)
+theme_override_fonts/font = ExtResource("2_76wlr")
+theme_override_font_sizes/font_size = 62
+text = "↗"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="debug" type="Node" parent="."]
+script = SubResource("GDScript_3mnar")

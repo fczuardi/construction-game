@@ -153,7 +153,7 @@ fp_eye_height = 2.0
 smoothing = 0.15
 
 [node name="Camera3D" parent="FollowCamera" index="0"]
-transform = Transform3D(-1, 0, 0, 0, 0.943858, 0.33035, 0, 0.33035, -0.943858, -1.44651, 10, -2.8297)
+transform = Transform3D(-1, 0, 0, 0, 0.943859, 0.33035, 0, 0.33035, -0.943859, -1.44651, 10, -2.8297)
 
 [node name="HUD" type="Control" parent="."]
 layout_mode = 3

@@ -1,0 +1,142 @@
+[gd_scene load_steps=8 format=3 uid="uid://3l7fe0kmxuqf"]
+
+[ext_resource type="PackedScene" uid="uid://rnjcf0y4dsgm" path="res://lib/PlayerControls/PlayerControls.tscn" id="1_djto3"]
+[ext_resource type="Script" uid="uid://b03qu5uc3bmit" path="res://lib/DemoExitOverlay/demo_exit_overlay.gd" id="3_mrmv4"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_mrmv4"]
+sky_top_color = Color(0.33, 0.385, 0.66, 1)
+sky_horizon_color = Color(0.244545, 0.27085, 0.394768, 1)
+ground_bottom_color = Color(0.055293, 0.0637129, 0.0753874, 1)
+ground_horizon_color = Color(0.244545, 0.27085, 0.394768, 1)
+energy_multiplier = 0.8
+
+[sub_resource type="Sky" id="Sky_52kx0"]
+sky_material = SubResource("ProceduralSkyMaterial_mrmv4")
+
+[sub_resource type="Environment" id="Environment_2y0qy"]
+background_mode = 2
+background_energy_multiplier = 0.8
+sky = SubResource("Sky_52kx0")
+tonemap_mode = 2
+
+[sub_resource type="GDScript" id="GDScript_djto3"]
+resource_name = "hud"
+script/source = "extends Control
+
+@onready var debugtext: Label = %debugtext
+@onready var option_button: OptionButton = %OptionButton
+@onready var player_controls: PlayerControls = %PlayerControls
+
+
+func _on_player_controls_action_east() -> void:
+    debugtext.text += \"E, \"
+
+func _on_player_controls_action_north() -> void:
+    debugtext.text += \"N, \"
+
+func _on_player_controls_action_south() -> void:
+    debugtext.text += \"S, \"
+
+func _on_player_controls_action_west() -> void:
+    debugtext.text += \"W, \"
+
+
+func _on_option_button_item_selected(index: int) -> void:
+    var palette_path = option_button.get_item_text(index)
+    var palette: ColorPalette = load(palette_path)
+    var skin: PlayerControlsSkin = player_controls.get_node(\"PlayerControlsSkin\")
+    skin.palette = palette
+"
+
+[sub_resource type="BoxMesh" id="BoxMesh_uexh8"]
+
+[node name="PlayerControlsDemo" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_2y0qy")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="HUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = SubResource("GDScript_djto3")
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 18
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="HUD/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "PlayerControls demo"
+horizontal_alignment = 1
+
+[node name="spacer" type="Control" parent="HUD/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="PaletteLabel" type="Label" parent="HUD/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Skin (color palette)"
+
+[node name="OptionButton" type="OptionButton" parent="HUD/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+selected = 0
+item_count = 6
+popup/item_0/text = "res://lib/Colors/all_gray.tres"
+popup/item_0/id = 5
+popup/item_1/text = "res://lib/Colors/bright_bold_colors.tres"
+popup/item_1/id = 0
+popup/item_2/text = "res://lib/Colors/dusk_horizon.tres"
+popup/item_2/id = 1
+popup/item_3/text = "res://lib/Colors/ocean_breeze.tres"
+popup/item_3/id = 2
+popup/item_4/text = "res://lib/Colors/sunset_bliss1.tres"
+popup/item_4/id = 3
+popup/item_5/text = "res://lib/Colors/sunset_bliss2.tres"
+popup/item_5/id = 4
+
+[node name="debugtext" type="Label" parent="HUD/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 220)
+layout_mode = 2
+autowrap_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="PlayerControls" parent="HUD/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("1_djto3")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_uexh8")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.44212, 1.59809)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("3_mrmv4")
+corner = 2
+
+[connection signal="item_selected" from="HUD/MarginContainer/VBoxContainer/OptionButton" to="HUD" method="_on_option_button_item_selected"]
+[connection signal="action_east" from="HUD/MarginContainer/VBoxContainer/HBoxContainer/PlayerControls" to="HUD" method="_on_player_controls_action_east"]
+[connection signal="action_north" from="HUD/MarginContainer/VBoxContainer/HBoxContainer/PlayerControls" to="HUD" method="_on_player_controls_action_north"]
+[connection signal="action_south" from="HUD/MarginContainer/VBoxContainer/HBoxContainer/PlayerControls" to="HUD" method="_on_player_controls_action_south"]
+[connection signal="action_west" from="HUD/MarginContainer/VBoxContainer/HBoxContainer/PlayerControls" to="HUD" method="_on_player_controls_action_west"]
