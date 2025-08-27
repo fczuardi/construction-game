@@ -47,7 +47,6 @@ func _ready() -> void:
 resource_name = "set_map_button"
 script/source = "extends Button
 
-@onready var map_label: Label = %MapLabel
 @onready var follow_camera: FollowCamera = %FollowCamera
 
 func _on_toggled(toggled_on):

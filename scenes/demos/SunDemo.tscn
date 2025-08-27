@@ -48,7 +48,7 @@ var _is_dragging = false
 
 func _ready() -> void:
     drag_started.connect(func (): _is_dragging = true)    
-    drag_ended.connect(func (): _is_dragging = false)
+    drag_ended.connect(func (_value): _is_dragging = false)
     update()
 
 func update():
@@ -72,7 +72,7 @@ var _is_dragging = false
 
 func _ready() -> void:
     drag_started.connect(func (): _is_dragging = true)    
-    drag_ended.connect(func (): _is_dragging = false)
+    drag_ended.connect(func (_value): _is_dragging = false)
     update()
 
 func update():
@@ -96,7 +96,7 @@ var _is_dragging = false
 
 func _ready() -> void:
     drag_started.connect(func (): _is_dragging = true)    
-    drag_ended.connect(func (): _is_dragging = false)
+    drag_ended.connect(func (_value): _is_dragging = false)
     update()
 
 func update():

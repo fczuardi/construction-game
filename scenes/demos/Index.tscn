@@ -59,6 +59,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = SubResource("GDScript_rxmpw")
 demos = Array[PackedScene]([ExtResource("1_0j7yx"), ExtResource("4_o6pdu"), ExtResource("3_2lln2"), ExtResource("2_e7k5x")])
+demo_names = Array[StringName]([&"Flat Terrain", &"Follow Camera", &"Player Runner", &"Sun Orbit"])
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 0

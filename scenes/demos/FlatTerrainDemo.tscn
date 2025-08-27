@@ -1,8 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://bxyr8dysao5ct"]
+[gd_scene load_steps=19 format=3 uid="uid://bxyr8dysao5ct"]
 
 [ext_resource type="PackedScene" uid="uid://jdvf8pm0rn4r" path="res://lib/FlatTerrain/FlatTerrain.tscn" id="1_op3y1"]
 [ext_resource type="Material" uid="uid://db8idpthygrsm" path="res://materials/kenney_prototype_dark_09.tres" id="2_v8qbj"]
 [ext_resource type="Script" uid="uid://b03qu5uc3bmit" path="res://lib/DemoExitOverlay/demo_exit_overlay.gd" id="3_45kss"]
+[ext_resource type="Material" uid="uid://cccdrw8n7ps4" path="res://materials/rocky_trail_02.tres" id="3_dxoy4"]
+[ext_resource type="Material" uid="uid://bp7iom0owobbk" path="res://materials/sbs_ttp3_terrain_21.tres" id="3_j1cua"]
+[ext_resource type="Material" uid="uid://c237rtawmxp6j" path="res://materials/sbs_ptp3_ground_08.tres" id="5_vjufd"]
+[ext_resource type="Material" uid="uid://cfkkgoymb53aj" path="res://materials/kenney_prototype_orange_10.tres" id="6_gekg7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_op3y1"]
 ground_bottom_color = Color(0.055293, 0.0637129, 0.0753874, 1)
@@ -16,6 +20,21 @@ background_mode = 2
 sky = SubResource("Sky_v8qbj")
 tonemap_mode = 2
 
+[sub_resource type="BoxMesh" id="BoxMesh_kdf6x"]
+material = ExtResource("3_dxoy4")
+
+[sub_resource type="BoxMesh" id="BoxMesh_vvueo"]
+material = ExtResource("3_j1cua")
+
+[sub_resource type="BoxMesh" id="BoxMesh_wr0cc"]
+material = ExtResource("5_vjufd")
+
+[sub_resource type="BoxMesh" id="BoxMesh_lspdi"]
+material = ExtResource("2_v8qbj")
+
+[sub_resource type="BoxMesh" id="BoxMesh_oel5h"]
+material = ExtResource("6_gekg7")
+
 [sub_resource type="GDScript" id="GDScript_v8qbj"]
 resource_name = "size_slider"
 script/source = "extends HSlider
@@ -26,7 +45,7 @@ var _is_dragging = false
 
 func _ready() -> void:
     drag_started.connect(func (): _is_dragging = true)    
-    drag_ended.connect(func (): _is_dragging = false)
+    drag_ended.connect(func (_value): _is_dragging = false)
     update()
 
 func update():
@@ -49,7 +68,7 @@ var _is_dragging = false
 
 func _ready() -> void:
     drag_started.connect(func (): _is_dragging = true)    
-    drag_ended.connect(func (): _is_dragging = false)
+    drag_ended.connect(func (_value): _is_dragging = false)
     update()
 
 func update():
@@ -96,6 +115,28 @@ shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Other"]
 environment = SubResource("Environment_k7wyg")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Other"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.07444, 3.41167)
+mesh = SubResource("BoxMesh_kdf6x")
+skeleton = NodePath("../MeshInstance3D")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Other"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.07444, 1.69164)
+mesh = SubResource("BoxMesh_vvueo")
+skeleton = NodePath("../MeshInstance3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Other"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.07444, 0)
+mesh = SubResource("BoxMesh_wr0cc")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Other"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.72242, 0)
+mesh = SubResource("BoxMesh_lspdi")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Other"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.72242, 1.73257)
+mesh = SubResource("BoxMesh_oel5h")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
