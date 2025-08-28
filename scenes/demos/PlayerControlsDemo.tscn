@@ -28,24 +28,33 @@ script/source = "extends Control
 @onready var player_controls: PlayerControls = %PlayerControls
 
 
-func _on_player_controls_action_east() -> void:
-    debugtext.text += \"E, \"
-
-func _on_player_controls_action_north() -> void:
-    debugtext.text += \"N, \"
-
-func _on_player_controls_action_south() -> void:
-    debugtext.text += \"S, \"
-
-func _on_player_controls_action_west() -> void:
-    debugtext.text += \"W, \"
-
-
 func _on_option_button_item_selected(index: int) -> void:
     var palette_path = option_button.get_item_text(index)
     var palette: ColorPalette = load(palette_path)
     var skin: PlayerControlsSkin = player_controls.get_node(\"PlayerControlsSkin\")
     skin.palette = palette
+
+
+func _on_player_controls_action(side: int, ev: int) -> void:
+    match side:
+        player_controls.Side.WEST:
+            if ev == player_controls.Event.PRESS:
+                debugtext.text += \"W, \"
+        player_controls.Side.EAST:
+            if ev == player_controls.Event.PRESS:
+                debugtext.text += \"E, \"
+        player_controls.Side.SOUTH:
+            if ev == player_controls.Event.TOGGLE_ON:
+                debugtext.text += \"S(on), \"
+            elif ev == player_controls.Event.TOGGLE_OFF:
+                debugtext.text += \"S(off), \"
+        player_controls.Side.NORTH:
+            if ev == player_controls.Event.TOGGLE_ON:
+                debugtext.text += \"N(on), \"
+            elif ev == player_controls.Event.TOGGLE_OFF:
+                debugtext.text += \"N(off), \"
+        _:
+            pass
 "
 
 [sub_resource type="BoxMesh" id="BoxMesh_uexh8"]
@@ -136,7 +145,4 @@ script = ExtResource("3_mrmv4")
 corner = 2
 
 [connection signal="item_selected" from="HUD/MarginContainer/VBoxContainer/OptionButton" to="HUD" method="_on_option_button_item_selected"]
-[connection signal="action_east" from="HUD/MarginContainer/VBoxContainer/HBoxContainer/PlayerControls" to="HUD" method="_on_player_controls_action_east"]
-[connection signal="action_north" from="HUD/MarginContainer/VBoxContainer/HBoxContainer/PlayerControls" to="HUD" method="_on_player_controls_action_north"]
-[connection signal="action_south" from="HUD/MarginContainer/VBoxContainer/HBoxContainer/PlayerControls" to="HUD" method="_on_player_controls_action_south"]
-[connection signal="action_west" from="HUD/MarginContainer/VBoxContainer/HBoxContainer/PlayerControls" to="HUD" method="_on_player_controls_action_west"]
+[connection signal="action" from="HUD/MarginContainer/VBoxContainer/HBoxContainer/PlayerControls" to="HUD" method="_on_player_controls_action"]

@@ -1,10 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://dvfq822dbh7an"]
+[gd_scene load_steps=4 format=3 uid="uid://dvfq822dbh7an"]
 
 [ext_resource type="Material" uid="uid://3jl7rx7scfno" path="res://terrain-matterial.tres" id="1_46jbc"]
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_uu6xs"]
-material = ExtResource("1_46jbc")
-size = Vector2(200, 200)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3dxm6"]
 size = Vector3(200, 5, 200)
@@ -15,11 +11,6 @@ top_radius = 100.0
 bottom_radius = 100.0
 
 [node name="Terrain" type="StaticBody3D"]
-
-[node name="Ground" type="MeshInstance3D" parent="."]
-visible = false
-mesh = SubResource("PlaneMesh_uu6xs")
-skeleton = NodePath("../../Game")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 0)

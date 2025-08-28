@@ -11,10 +11,9 @@ config_version=5
 [application]
 
 config/name="Mobile Contractor"
-run/main_scene="res://Main.tscn"
+run/main_scene="uid://brx6qaf3kufgd"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 run/low_processor_mode=true
-config/icon="uid://dtwx410l6c44p"
 
 [display]
 

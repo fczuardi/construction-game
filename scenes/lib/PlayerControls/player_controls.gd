@@ -1,23 +1,29 @@
 class_name PlayerControls
 extends Control
-## 4-button pad (north/south/west/east). Skin-agnostic: buttons are hit areas;
-## put any visuals (Label, TextureRect, icon font, SVG) as children of each button.
+## 4-button pad with per-button toggle option.
+## Single signal carries which side and event type.
 
-signal action_north()
-signal action_south()
-signal action_west()
-signal action_east()
+signal action(side: int, event: int)
 
-const VERSION := "0.2.1"
+enum Side  { NORTH, SOUTH, WEST, EAST }
+enum Event { PRESS, TOGGLE_ON, TOGGLE_OFF }
 
-# --- Optional keyboard/gamepad fallback (desktop/gamepad) ---------------------
+const VERSION := "0.5.0"
+
+# Optional keyboard/gamepad fallback
 @export var enable_input_actions: bool = true
 @export var input_north: StringName = &"ui_up"
 @export var input_south: StringName = &"ui_down"
 @export var input_west:  StringName = &"ui_left"
 @export var input_east:  StringName = &"ui_right"
 
-# --- Node references (buttons only; visuals are your children) ----------------
+# Per-button toggle config (Inspector-friendly)
+@export var toggle_north: bool = false
+@export var toggle_south: bool = false
+@export var toggle_west:  bool = false
+@export var toggle_east:  bool = false
+
+# Button nodes (hit areas; keep your visuals as children)
 @onready var _btn_north: Button = %BtnNorth
 @onready var _btn_south: Button = %BtnSouth
 @onready var _btn_west:  Button = %BtnWest
@@ -35,28 +41,62 @@ func _ready() -> void:
     for b in [_btn_north, _btn_south, _btn_west, _btn_east]:
         b.focus_mode = Control.FOCUS_NONE
 
-    # Snappy feel on mobile: fire on touch-down
-    _btn_north.button_down.connect(func(): if controls_enabled: action_north.emit())
-    _btn_south.button_down.connect(func(): if controls_enabled: action_south.emit())
-    _btn_west.button_down.connect(func():  if controls_enabled: action_west.emit())
-    _btn_east.button_down.connect(func():  if controls_enabled: action_east.emit())
+    # Apply toggle modes + wire
+    _btn_north.toggle_mode = toggle_north
+    _btn_south.toggle_mode = toggle_south
+    _btn_west.toggle_mode  = toggle_west
+    _btn_east.toggle_mode  = toggle_east
+
+    if toggle_north:
+        _btn_north.toggled.connect(func(on: bool):
+            if controls_enabled: action.emit(Side.NORTH, Event.TOGGLE_ON if on else Event.TOGGLE_OFF))
+    else:
+        _btn_north.button_down.connect(func():
+            if controls_enabled: action.emit(Side.NORTH, Event.PRESS))
+
+    if toggle_south:
+        _btn_south.toggled.connect(func(on: bool):
+            if controls_enabled: action.emit(Side.SOUTH, Event.TOGGLE_ON if on else Event.TOGGLE_OFF))
+    else:
+        _btn_south.button_down.connect(func():
+            if controls_enabled: action.emit(Side.SOUTH, Event.PRESS))
+
+    if toggle_west:
+        _btn_west.toggled.connect(func(on: bool):
+            if controls_enabled: action.emit(Side.WEST, Event.TOGGLE_ON if on else Event.TOGGLE_OFF))
+    else:
+        _btn_west.button_down.connect(func():
+            if controls_enabled: action.emit(Side.WEST, Event.PRESS))
+
+    if toggle_east:
+        _btn_east.toggled.connect(func(on: bool):
+            if controls_enabled: action.emit(Side.EAST, Event.TOGGLE_ON if on else Event.TOGGLE_OFF))
+    else:
+        _btn_east.button_down.connect(func():
+            if controls_enabled: action.emit(Side.EAST, Event.PRESS))
 
     set_process_unhandled_input(enable_input_actions)
 
 func _unhandled_input(event: InputEvent) -> void:
     if not enable_input_actions or not controls_enabled or not is_visible_in_tree() or get_tree().paused:
         return
+    if event.is_action_pressed(input_north):
+        _handle_kb(Side.NORTH, _btn_north, toggle_north)
+    if event.is_action_pressed(input_south):
+        _handle_kb(Side.SOUTH, _btn_south, toggle_south)
+    if event.is_action_pressed(input_west):
+        _handle_kb(Side.WEST, _btn_west, toggle_west)
+    if event.is_action_pressed(input_east):
+        _handle_kb(Side.EAST, _btn_east, toggle_east)
 
-    # Desktop/gamepad fallback
-    if event.is_action_pressed(input_north): action_north.emit()
-    if event.is_action_pressed(input_south): action_south.emit()
-    if event.is_action_pressed(input_west):  action_west.emit()
-    if event.is_action_pressed(input_east):  action_east.emit()
+func _handle_kb(side: int, btn: Button, is_toggle: bool) -> void:
+    if is_toggle:
+        btn.button_pressed = not btn.button_pressed  # fires toggled → unified signal
+    else:
+        action.emit(side, Event.PRESS)
 
-# --- Helpers ------------------------------------------------------------------
+# Helpers
 func set_enabled(on: bool) -> void:
     controls_enabled = on
-    _btn_north.disabled = not on
-    _btn_south.disabled = not on
-    _btn_west.disabled = not on
-    _btn_east.disabled = not on
+    for b in [_btn_north, _btn_south, _btn_west, _btn_east]:
+        b.disabled = not on
