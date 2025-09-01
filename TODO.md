@@ -1,12 +1,12 @@
 ## Ongoing
-- [ ] replace buttons with PlayerControls on portraitgame01
-- [ ] basic player visuals with walk + map + run
-- [ ] slice scene with: terrain, player, controls
+
+- [ ] alternative/better camera switcher
 
 ## Known Bugs
 - hover on input buttons make them squared
 
 ## Done
+- [x] refactor playerrunner
 - [x] player_controls_skin adjust after code review
 - [x] CameraRig
 - [x] PlayerCapsule (PlayerRunner)

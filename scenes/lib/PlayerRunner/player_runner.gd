@@ -1,8 +1,9 @@
 class_name PlayerRunner
 extends CharacterBody3D
-## A character for endless-runner games: falls, queues yaw turns, moves forward with switchable speeds.
+## Runner body: falls, queues yaw turns, moves forward with switchable speeds.
+## Controls direction of a visuals node (player's character).
 
-const VERSION := "0.3.0"
+const VERSION := "0.5.0"
 
 
 signal distance_moved(delta_m: float)
@@ -32,15 +33,12 @@ const DEFAULT_TURN_RATE: float = 180.0
 ## Max rotate speed (deg/sec). Higher = snappier.
 @export var turn_rate_deg := DEFAULT_TURN_RATE
 
-## Player visuals scene (optional); will be instanced as a child named "PlayerVisuals"
-@export var visuals_scene: PackedScene:
-    set(value):
-        visuals_scene = value
-        _rebuild_visuals()
+## Reference to an existing visuals node in the scene (must be a Node3D)
+@export var visuals_path: NodePath
 
 
 # --- Private --------------------------
-var _visuals: Node3D  # the instantiated visuals child
+var _visuals: Node3D
 var _move_dir: Vector3
 var _remaining_turn_deg: float  # +left / -right, consumed over time
 
@@ -53,11 +51,9 @@ var _start_xform: Transform3D
 
 # --- Lifecycle -----------------------
 func _ready() -> void:
-    # If no visuals were instanced via the export, allow a manual child named PlayerVisuals
+    _visuals = get_node_or_null(visuals_path) as Node3D
     if _visuals == null:
-        _visuals = get_node_or_null("PlayerVisuals")
-        if _visuals:
-            _visuals.visible = true 
+        push_warning("PlayerRunner: visuals_path not set or not a Node3D")
     _start_xform = global_transform
     reset_to_start()
 
@@ -94,28 +90,6 @@ func _physics_process(delta: float) -> void:
         var c := get_slide_collision(i)
         if c:
             obstacle_bumped.emit(c.get_collider(), c.get_normal())
-
-
-# --- Visuals instancing ---------------
-func _rebuild_visuals() -> void:
-    # Remove previous visuals instance if present
-    if is_instance_valid(_visuals):
-        _visuals.queue_free()
-        _visuals = null
-
-    # Instance the new visuals, if any
-    if visuals_scene:
-        var inst := visuals_scene.instantiate()
-        if inst is Node3D:
-            _visuals = inst
-            _visuals.name = "PlayerVisuals"
-            add_child(_visuals)
-            # make it editable/visible in the scene tree while in the editor
-            if Engine.is_editor_hint():
-                _visuals.owner = owner
-        else:
-            push_warning("PlayerRunner: visuals_scene root must be a Node3D (got %s)." % inst.get_class())
-            inst.queue_free()
 
 
 # --- Public API -----------------------

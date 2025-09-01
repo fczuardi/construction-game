@@ -1,7 +1,7 @@
 [gd_scene load_steps=21 format=3 uid="uid://dkb5uhyt7ffpi"]
 
 [ext_resource type="PackedScene" uid="uid://br08vaqh6iywm" path="res://lib/PlayerRunner/PlayerRunner.tscn" id="1_pvld0"]
-[ext_resource type="PackedScene" uid="uid://cn00ochwfr21u" path="res://demos/Dummy.tscn" id="2_0wp50"]
+[ext_resource type="PackedScene" uid="uid://ccpgokrw2duk5" path="res://imports/HouseAndProps_AssetPack_Godot/fbx/Dummy_Base.fbx" id="2_50iqg"]
 [ext_resource type="Material" uid="uid://cfkkgoymb53aj" path="res://materials/kenney_prototype_orange_10.tres" id="3_c7jmv"]
 [ext_resource type="Script" uid="uid://b03qu5uc3bmit" path="res://lib/DemoExitOverlay/demo_exit_overlay.gd" id="4_2q8a8"]
 [ext_resource type="Texture2D" uid="uid://qonmfuetwwf0" path="res://imports/kenney_prototypeTextures/Dark/texture_09.png" id="4_50iqg"]
@@ -140,7 +140,9 @@ func _on_pressed():
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.33304, 0)
 velocity = Vector3(0, 0, 1.11)
-visuals_scene = ExtResource("2_0wp50")
+visuals_path = NodePath("Dummy_Base")
+
+[node name="Dummy_Base" parent="PlayerRunner" instance=ExtResource("2_50iqg")]
 
 [node name="Other" type="Node3D" parent="."]
 
