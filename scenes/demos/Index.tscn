@@ -3,9 +3,9 @@
 [ext_resource type="FontFile" uid="uid://bgn10o8bm34q6" path="res://imports/fonts/ArgulaRegular/Arugula20250312-Regular.ttf" id="1_rxmpw"]
 [ext_resource type="PackedScene" uid="uid://3l7fe0kmxuqf" path="res://demos/PlayerControlsDemo.tscn" id="1_tqvmb"]
 [ext_resource type="PackedScene" uid="uid://bxyr8dysao5ct" path="res://demos/FlatTerrainDemo.tscn" id="2_qugmx"]
-[ext_resource type="PackedScene" uid="uid://c0t83sxr2dme0" path="res://demos/FollowCameraDemo.tscn" id="3_0j7yx"]
 [ext_resource type="Texture2D" uid="uid://dbn38v58mp2ko" path="res://imports/SBS - Photorealistic Texture Pack 3/PTP-Ground_08-128x128.png" id="3_ji7lb"]
 [ext_resource type="PackedScene" uid="uid://dkb5uhyt7ffpi" path="res://demos/PlayerRunnerDemo.tscn" id="4_2lln2"]
+[ext_resource type="PackedScene" uid="uid://cdsqtykisydyo" path="res://demos/PlayerCamerasDemo.tscn" id="5_2lln2"]
 [ext_resource type="PackedScene" uid="uid://ccjlcg6tf5mev" path="res://demos/SunDemo.tscn" id="5_o6pdu"]
 
 [sub_resource type="GDScript" id="GDScript_rxmpw"]
@@ -76,8 +76,8 @@ size = Vector3(100, 1, 200)
 
 [node name="Index" type="Node3D"]
 script = SubResource("GDScript_rxmpw")
-demos = Array[PackedScene]([ExtResource("4_2lln2"), ExtResource("1_tqvmb"), ExtResource("2_qugmx"), ExtResource("5_o6pdu"), ExtResource("3_0j7yx")])
-demo_names = Array[StringName]([&"Player Controls", &"Textured Flat Terrain", &"Camera", &"Player Body", &"Sun Orbit"])
+demos = Array[PackedScene]([ExtResource("4_2lln2"), ExtResource("5_2lln2"), ExtResource("1_tqvmb"), ExtResource("2_qugmx"), ExtResource("5_o6pdu")])
+demo_names = Array[StringName]([&"Player Body", &"Player Cameras", &"Player Controls", &"Textured Flat Terrain", &"Sun Orbit"])
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_u5qyn")

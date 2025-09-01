@@ -1,0 +1,100 @@
+[gd_scene load_steps=6 format=3 uid="uid://cdsqtykisydyo"]
+
+[ext_resource type="PackedScene" uid="uid://ccpgokrw2duk5" path="res://imports/HouseAndProps_AssetPack_Godot/fbx/Dummy_Base.fbx" id="1_b5ouj"]
+[ext_resource type="Script" uid="uid://cqsox5yy3agv1" path="res://lib/PlayerCameras/player_cameras.gd" id="2_jd471"]
+[ext_resource type="Script" uid="uid://b03qu5uc3bmit" path="res://lib/DemoExitOverlay/demo_exit_overlay.gd" id="3_dg82s"]
+
+[sub_resource type="GDScript" id="GDScript_b5ouj"]
+resource_name = "blendtimeslider"
+script/source = "extends HSlider
+
+@onready var blend_time_label: Label = %BlendTimeLabel
+@onready var player_cameras: PlayerCameras = %PlayerCameras
+
+func _ready() -> void:
+    value_changed.connect(_on_value_changed)
+
+func _on_value_changed(value:float):
+    player_cameras.blend_time = value
+    blend_time_label.text = \"Blend Time: %.2f\" % value
+"
+
+[sub_resource type="GDScript" id="GDScript_xyfyo"]
+resource_name = "nextcambutn"
+script/source = "extends Button
+
+@onready var player_cameras: PlayerCameras = %PlayerCameras
+
+func _ready() -> void:
+    button_down.connect(_on_button_down)
+    
+func _on_button_down():
+    player_cameras.next_rig()
+"
+
+[node name="PlayerCamerasDemo" type="Node3D"]
+
+[node name="Dummy_Base" parent="." instance=ExtResource("1_b5ouj")]
+
+[node name="PlayerCameras" type="Node3D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_jd471")
+output_camera_path = NodePath("OutputCam")
+
+[node name="CameraA" type="Camera3D" parent="PlayerCameras"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.72046, 3.82286)
+
+[node name="CameraB" type="Camera3D" parent="PlayerCameras"]
+transform = Transform3D(-0.999882, 0, 0.0153408, 0, 1, 0, -0.0153408, 0, -0.999882, 0, 0, -4.69838)
+
+[node name="CameraC" type="Camera3D" parent="PlayerCameras"]
+transform = Transform3D(-0.208599, 0.401834, -0.891637, 0.0311753, 0.913962, 0.404602, 0.977504, 0.0566023, -0.203178, 0, 1.64985, 0)
+
+[node name="OutputCam" type="Camera3D" parent="PlayerCameras"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.72046, 3.82286)
+current = true
+fov = 70.0
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+offset_right = 359.0
+offset_bottom = 637.0
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 18
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="title" type="Label" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 31
+text = "PlayerCameras demo"
+horizontal_alignment = 1
+
+[node name="BlendTimeLabel" type="Label" parent="Control/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Blend Time:"
+
+[node name="HSlider" type="HSlider" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+max_value = 5.0
+step = 0.05
+script = SubResource("GDScript_b5ouj")
+
+[node name="Button" type="Button" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Next Camera"
+script = SubResource("GDScript_xyfyo")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("3_dg82s")
+corner = 1
