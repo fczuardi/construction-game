@@ -1,32 +1,38 @@
 class_name PlayerRunner
 extends CharacterBody3D
-## Prototype runner: always falls, queues yaw turns, walks forward.
+## A character for endless-runner games: falls, queues yaw turns, moves forward with switchable speeds.
 
-
-const VERSION := "0.2.0"
+const VERSION := "0.3.0"
 
 
 signal distance_moved(delta_m: float)
 signal obstacle_bumped(collider: Node, surface_normal: Vector3)
 signal turn_buffer_changed(remaining_deg: float)
+signal speed_changed(new_speed: float, mode: String)
 
 
 # --- Defaults ------------------------
-
-const DEFAULT_SPEED_READING: float = 0.80
-const DEFAULT_SPEED_WALKING: float = 1.11
+const DEFAULT_SPEED_READ: float = 0.80
+const DEFAULT_SPEED_WALK: float = 1.11
+const DEFAULT_SPEED_RUN: float  = 2.50
 const DEFAULT_TURN_RATE: float = 180.0
 
 
-# --- Exports (tiny surface) -----------
+# --- Exports -------------------------
+## Named speed modes (mode -> meters/second)
+@export var speed_modes: Dictionary[String, float] = {
+    "walk": DEFAULT_SPEED_WALK,
+    "run":  DEFAULT_SPEED_RUN,
+    "read": DEFAULT_SPEED_READ,
+}
 
-## regular walk speed
-@export var move_speed:= DEFAULT_SPEED_WALKING
-## a slowed-down speed, used for reading/look at a map or phone while walking
-@export var map_walk_speed:= DEFAULT_SPEED_READING
-## max rotate speed (deg/sec). high values = snappy turns, lower values = laggy
-@export var turn_rate_deg:= DEFAULT_TURN_RATE
-## a packed scene to use as the player visuals to follow the runner capsule
+## Default mode to use on reset/startup (must exist in speed_modes)
+@export var default_speed_mode: String = "walk"
+
+## Max rotate speed (deg/sec). Higher = snappier.
+@export var turn_rate_deg := DEFAULT_TURN_RATE
+
+## Player visuals scene (optional); will be instanced as a child named "PlayerVisuals"
 @export var visuals_scene: PackedScene:
     set(value):
         visuals_scene = value
@@ -34,26 +40,26 @@ const DEFAULT_TURN_RATE: float = 180.0
 
 
 # --- Private --------------------------
-
 var _visuals: Node3D  # the instantiated visuals child
 var _move_dir: Vector3
 var _remaining_turn_deg: float  # +left / -right, consumed over time
+
 var _speed: float
+var _speed_mode: String = "custom"  # "walk" | "read" | "run" | "custom"
+
 var _last_pos: Vector3
 var _start_xform: Transform3D
 
 
+# --- Lifecycle -----------------------
 func _ready() -> void:
     # If no visuals were instanced via the export, allow a manual child named PlayerVisuals
     if _visuals == null:
         _visuals = get_node_or_null("PlayerVisuals")
         if _visuals:
             _visuals.visible = true 
-
-    # capture spawn first
     _start_xform = global_transform
     reset_to_start()
-
 
 func _physics_process(delta: float) -> void:
     # gravity / falling
@@ -71,7 +77,7 @@ func _physics_process(delta: float) -> void:
 
     move_and_slide()
 
-    # face visuals to velocity
+    # face visuals to velocity (yaw only)
     if _visuals and velocity.length() > 0.01:
         var d := velocity.normalized()
         _visuals.rotation.y = atan2(d.x, d.z)
@@ -90,6 +96,7 @@ func _physics_process(delta: float) -> void:
             obstacle_bumped.emit(c.get_collider(), c.get_normal())
 
 
+# --- Visuals instancing ---------------
 func _rebuild_visuals() -> void:
     # Remove previous visuals instance if present
     if is_instance_valid(_visuals):
@@ -112,18 +119,43 @@ func _rebuild_visuals() -> void:
 
 
 # --- Public API -----------------------
-
 func queue_turn(delta_deg: float) -> void:
     _remaining_turn_deg = clamp(_remaining_turn_deg + delta_deg, -360.0, 360.0)
     turn_buffer_changed.emit(_remaining_turn_deg)
 
-func set_map_mode(on: bool) -> void:
-    _speed = map_walk_speed if on else move_speed
+## Set by mode name (must exist in speed_modes)
+func set_speed_mode(mode: String) -> void:
+    var key := mode.to_lower()
+    if speed_modes.has(key):
+        var prev := _speed
+        _speed = max(float(speed_modes[key]), 0.0)
+        _speed_mode = key
+        if !is_equal_approx(prev, _speed):
+            speed_changed.emit(_speed, _speed_mode)
+    else:
+        push_warning("PlayerRunner: unknown speed mode '%s'." % mode)
+
+## Set any raw speed (m/s); marks mode as "custom"
+func set_speed_value(v: float) -> void:
+    var prev := _speed
+    _speed = max(v, 0.0)
+    _speed_mode = "custom"
+    if !is_equal_approx(prev, _speed):
+        speed_changed.emit(_speed, _speed_mode)
+
+func current_speed() -> float:
+    return _speed
+
+func current_speed_mode() -> String:
+    return _speed_mode
 
 func reset_to_start() -> void:
     global_transform = _start_xform
     velocity = Vector3.ZERO
     _move_dir = global_transform.basis.z.normalized()
     _remaining_turn_deg = 0.0
-    _speed = move_speed
+    if speed_modes.has(default_speed_mode):
+        set_speed_mode(default_speed_mode)
+    else:
+        set_speed_value(0.0)
     _last_pos = global_position

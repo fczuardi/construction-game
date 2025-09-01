@@ -11,6 +11,7 @@ enum Event { PRESS, TOGGLE_ON, TOGGLE_OFF }
 const VERSION := "0.5.0"
 
 # Optional keyboard/gamepad fallback
+@export_category("Keyboard")
 @export var enable_input_actions: bool = true
 @export var input_north: StringName = &"ui_up"
 @export var input_south: StringName = &"ui_down"
@@ -18,6 +19,7 @@ const VERSION := "0.5.0"
 @export var input_east:  StringName = &"ui_right"
 
 # Per-button toggle config (Inspector-friendly)
+@export_category("Toggle Behavior")
 @export var toggle_north: bool = false
 @export var toggle_south: bool = false
 @export var toggle_west:  bool = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dkb5uhyt7ffpi"]
+[gd_scene load_steps=21 format=3 uid="uid://dkb5uhyt7ffpi"]
 
 [ext_resource type="PackedScene" uid="uid://br08vaqh6iywm" path="res://lib/PlayerRunner/PlayerRunner.tscn" id="1_pvld0"]
 [ext_resource type="PackedScene" uid="uid://cn00ochwfr21u" path="res://demos/Dummy.tscn" id="2_0wp50"]
@@ -70,14 +70,55 @@ resource_name = "open_map"
 script/source = "extends Button
 
 @onready var player_runner: PlayerRunner = %PlayerRunner
-@onready var map_button: Button = %MapButton
 
 func _ready() -> void:
-    toggled.connect(_on_toggled)
+    button_down.connect(_on_button_down)
     
-func _on_toggled(toggled_on):
-    player_runner.set_map_mode(toggled_on)
-    map_button.text = \"set_map_mode(%s)\" % not toggled_on
+func _on_button_down():
+    player_runner.set_speed_mode(\"read\")
+"
+
+[sub_resource type="GDScript" id="GDScript_8br2t"]
+resource_name = "speed_walk"
+script/source = "extends Button
+
+@onready var player_runner: PlayerRunner = %PlayerRunner
+
+func _ready() -> void:
+    button_down.connect(_on_button_down)
+    
+func _on_button_down():
+    player_runner.set_speed_mode(\"walk\")
+"
+
+[sub_resource type="GDScript" id="GDScript_i7pr6"]
+resource_name = "speed_run"
+script/source = "extends Button
+
+@onready var player_runner: PlayerRunner = %PlayerRunner
+
+func _ready() -> void:
+    button_down.connect(_on_button_down)
+    
+func _on_button_down():
+    player_runner.set_speed_mode(\"run\")
+"
+
+[sub_resource type="GDScript" id="GDScript_h1s3f"]
+resource_name = "custom_speed"
+script/source = "extends LineEdit
+
+@onready var player_runner: PlayerRunner = %PlayerRunner
+
+func _ready() -> void:
+    text_submitted.connect(_on_text_submitted)
+    player_runner.speed_changed.connect(_on_player_speed_changed)
+    
+func _on_text_submitted(text):
+    player_runner.set_speed_value(text as float)
+
+func _on_player_speed_changed(speed, _speed_mode):
+    text = \"%.2f\" % speed
 "
 
 [sub_resource type="GDScript" id="GDScript_11ppr"]
@@ -146,7 +187,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("PlaneMesh_50iqg")
 
 [node name="Camera3D" type="Camera3D" parent="Other"]
-transform = Transform3D(1, 0, 0, 0, 0.816077, 0.577943, 0, -0.577943, 0.816077, 0, 5.89747, 10.3847)
+transform = Transform3D(1, 0, 0, 0, 0.816077, 0.577943, 0, -0.577943, 0.816077, 0, 5.89747, 18.377)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Other"]
 transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 0, 0)
@@ -206,13 +247,41 @@ size_flags_horizontal = 3
 text = "queue_turn(45)"
 script = SubResource("GDScript_2q8a8")
 
-[node name="MapButton" type="Button" parent="UI/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
+[node name="HBoxContainer2" type="HBoxContainer" parent="UI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="PresetSpeedRead" type="Button" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_vertical = 8
 toggle_mode = true
-text = "set_map_mode(true)"
+text = "Read"
 script = SubResource("GDScript_50iqg")
+
+[node name="PresetSpeedWalk" type="Button" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 8
+toggle_mode = true
+text = "Walk"
+script = SubResource("GDScript_8br2t")
+
+[node name="PresetSpeedRun" type="Button" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 8
+toggle_mode = true
+text = "Run"
+script = SubResource("GDScript_i7pr6")
+
+[node name="spacer" type="Control" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(18, 0)
+layout_mode = 2
+
+[node name="CustomSpeedLabel" type="Label" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Custom"
+
+[node name="LineEdit" type="LineEdit" parent="UI/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+script = SubResource("GDScript_h1s3f")
 
 [node name="ResetButton" type="Button" parent="UI/MarginContainer/VBoxContainer"]
 layout_mode = 2

@@ -7,7 +7,7 @@ extends Control
 @export var palette: ColorPalette:
     set(value):
         if palette:
-            palette.changed.disconnect(_apply_if_ready) if palette.changed.is_connected(_apply_if_ready) else null
+            palette.changed.disconnect(_apply_if_ready)
         palette = value
         if palette:
             palette.changed.connect(_apply_if_ready)
@@ -74,4 +74,3 @@ func _set_round(sb: StyleBoxFlat) -> void:
 func _tint(c: Color, mul: float) -> Color:
     # simple perceptual-ish brighten/darken
     return Color(clamp(c.r * mul, 0.0, 1.0), clamp(c.g * mul, 0.0, 1.0), clamp(c.b * mul, 0.0, 1.0), c.a)
-
