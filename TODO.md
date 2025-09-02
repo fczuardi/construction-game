@@ -1,5 +1,6 @@
 ## Ongoing
-
+- [ ] PlayerVisuals
+    - an animation switcher
 
 ## Known Bugs
 - hover on input buttons make them squared

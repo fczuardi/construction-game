@@ -13,7 +13,6 @@ signal speed_changed(new_speed: float, mode: String)
 
 
 # --- Defaults ------------------------
-const DEFAULT_SPEED_READ: float = 0.80
 const DEFAULT_SPEED_WALK: float = 1.11
 const DEFAULT_SPEED_RUN: float  = 2.50
 const DEFAULT_TURN_RATE: float = 180.0
@@ -24,7 +23,6 @@ const DEFAULT_TURN_RATE: float = 180.0
 @export var speed_modes: Dictionary[String, float] = {
     "walk": DEFAULT_SPEED_WALK,
     "run":  DEFAULT_SPEED_RUN,
-    "read": DEFAULT_SPEED_READ,
 }
 
 ## Default mode to use on reset/startup (must exist in speed_modes)
@@ -43,7 +41,7 @@ var _move_dir: Vector3
 var _remaining_turn_deg: float  # +left / -right, consumed over time
 
 var _speed: float
-var _speed_mode: String = "custom"  # "walk" | "read" | "run" | "custom"
+var _speed_mode: String = "custom"  # "walk" | "run" | "custom"
 
 var _last_pos: Vector3
 var _start_xform: Transform3D
@@ -72,11 +70,6 @@ func _physics_process(delta: float) -> void:
         velocity = _move_dir * _speed
 
     move_and_slide()
-
-    # face visuals to velocity (yaw only)
-    if _visuals and velocity.length() > 0.01:
-        var d := velocity.normalized()
-        _visuals.rotation.y = atan2(d.x, d.z)
 
     # distance event
     var p := global_position

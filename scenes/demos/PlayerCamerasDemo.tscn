@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cdsqtykisydyo"]
 
-[ext_resource type="PackedScene" uid="uid://ccpgokrw2duk5" path="res://imports/HouseAndProps_AssetPack_Godot/fbx/Dummy_Base.fbx" id="1_b5ouj"]
+[ext_resource type="PackedScene" uid="uid://ccpgokrw2duk5" path="res://imports/models/HouseAndProps_AssetPack_Godot/fbx/Dummy_Base.fbx" id="1_b5ouj"]
 [ext_resource type="Script" uid="uid://cqsox5yy3agv1" path="res://lib/PlayerCameras/player_cameras.gd" id="2_jd471"]
 [ext_resource type="Script" uid="uid://b03qu5uc3bmit" path="res://lib/DemoExitOverlay/demo_exit_overlay.gd" id="3_dg82s"]
 

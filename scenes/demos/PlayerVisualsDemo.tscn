@@ -1,0 +1,243 @@
+[gd_scene load_steps=17 format=3 uid="uid://c26nq71crqott"]
+
+[ext_resource type="PackedScene" uid="uid://dbsb8ppq8g32i" path="res://lib/PlayerVisuals/PlayerVisuals.tscn" id="1_3g2fu"]
+[ext_resource type="PackedScene" uid="uid://br08vaqh6iywm" path="res://lib/PlayerRunner/PlayerRunner.tscn" id="2_4alkj"]
+[ext_resource type="Material" uid="uid://cfkkgoymb53aj" path="res://materials/kenney_prototype_orange_10.tres" id="3_4bbdj"]
+[ext_resource type="Script" uid="uid://b03qu5uc3bmit" path="res://lib/DemoExitOverlay/demo_exit_overlay.gd" id="4_j4uy0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j4uy0"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_3cian"]
+material = ExtResource("3_4bbdj")
+size = Vector2(100, 100)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4alkj"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_4bbdj"]
+sky_material = SubResource("ProceduralSkyMaterial_4alkj")
+
+[sub_resource type="Environment" id="Environment_j4uy0"]
+background_mode = 2
+sky = SubResource("Sky_4bbdj")
+tonemap_mode = 2
+
+[sub_resource type="GDScript" id="GDScript_3cian"]
+resource_name = "turnleft"
+script/source = "extends Button
+
+@onready var player_runner: PlayerRunner = %PlayerRunner
+
+func _ready() -> void:
+    pressed.connect(_on_pressed)
+    
+func _on_pressed():
+    player_runner.queue_turn(-45)
+"
+
+[sub_resource type="GDScript" id="GDScript_2iicp"]
+resource_name = "turn_right"
+script/source = "extends Button
+
+@onready var player_runner: PlayerRunner = %PlayerRunner
+
+func _ready() -> void:
+    pressed.connect(_on_pressed)
+    
+func _on_pressed():
+    player_runner.queue_turn(45)
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j4uy0"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.8392157, 0.8862745, 0.2901961, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="GDScript" id="GDScript_j4uy0"]
+resource_name = "readbtn"
+script/source = "extends Button
+
+@onready var player_runner: PlayerRunner = %PlayerRunner
+@onready var player_visuals_2: PlayerVisuals = %PlayerVisuals2
+
+func _ready() -> void:
+    toggled.connect(_on_toggle)
+    
+func _on_toggle(toggled_on):
+    player_visuals_2.set_map_enabled(toggled_on)
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3cian"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.8392157, 0.8862745, 0.2901961, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="GDScript" id="GDScript_0htaa"]
+resource_name = "runbtn"
+script/source = "extends Button
+
+@onready var player_runner: PlayerRunner = %PlayerRunner
+@onready var player_visuals_2: PlayerVisuals = %PlayerVisuals2
+
+func _ready() -> void:
+    toggled.connect(_on_toggle)
+    
+func _on_toggle(toggled_on):
+    player_visuals_2.set_run_enabled(toggled_on)
+    if toggled_on:
+        player_runner.set_speed_mode(\"run\")
+    else:
+        player_runner.set_speed_mode(\"walk\")
+        
+"
+
+[sub_resource type="GDScript" id="GDScript_eqxwo"]
+resource_name = "reset_button"
+script/source = "extends Button
+
+@onready var player_runner: PlayerRunner = %PlayerRunner
+@onready var player_visuals_2: PlayerVisuals = %PlayerVisuals2
+@onready var preset_speed_run: Button = %PresetSpeedRun
+
+func _ready() -> void:
+    pressed.connect(_on_pressed)
+    
+func _on_pressed():
+    player_runner.reset_to_start()
+    player_visuals_2.set_run_enabled(false)
+    preset_speed_run.set_pressed_no_signal(false)
+"
+
+[node name="PlayerVisualsDemo" type="Node3D"]
+
+[node name="PlayerRunner" parent="." instance=ExtResource("2_4alkj")]
+unique_name_in_owner = true
+speed_modes = Dictionary[String, float]({
+"read": 0.8,
+"run": 3.84,
+"walk": 1.11
+})
+visuals_path = NodePath("PlayerVisuals2")
+
+[node name="PlayerVisuals2" parent="PlayerRunner" instance=ExtResource("1_3g2fu")]
+unique_name_in_owner = true
+runner_path = NodePath("..")
+
+[node name="Camera3D" type="Camera3D" parent="PlayerRunner"]
+transform = Transform3D(1, 0, 0, 0, 0.76944417, 0.63871413, 0, -0.63871413, 0.76944417, 0, 4.0614953, 2.888815)
+fov = 70.8
+
+[node name="Other" type="Node3D" parent="."]
+
+[node name="Floor1" type="StaticBody3D" parent="Other"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Other/Floor1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_j4uy0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Other/Floor1"]
+mesh = SubResource("PlaneMesh_3cian")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Other"]
+transform = Transform3D(-0.86602354, -0.43301606, 0.25000072, 0, 0.49999818, 0.86602646, -0.5000033, 0.7499993, -0.4330102, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Other"]
+environment = SubResource("Environment_j4uy0")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+layout_mode = 0
+offset_right = 359.0
+offset_bottom = 637.0
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 18
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="title" type="Label" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 31
+text = "PlayerVisuals demo"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 9
+
+[node name="TurnLeftButton" type="Button" parent="Control/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Left"
+script = SubResource("GDScript_3cian")
+
+[node name="Spacer2" type="MarginContainer" parent="Control/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 35
+theme_override_constants/margin_bottom = 35
+
+[node name="TurnRightButton" type="Button" parent="Control/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Right"
+script = SubResource("GDScript_2iicp")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="PresetSpeedRead" type="Button" parent="Control/MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_styles/pressed = SubResource("StyleBoxFlat_j4uy0")
+toggle_mode = true
+text = "Read"
+script = SubResource("GDScript_j4uy0")
+
+[node name="PresetSpeedRun" type="Button" parent="Control/MarginContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_styles/pressed = SubResource("StyleBoxFlat_3cian")
+toggle_mode = true
+text = "Run"
+script = SubResource("GDScript_0htaa")
+
+[node name="ResetButton" type="Button" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "reset_to_start()"
+script = SubResource("GDScript_eqxwo")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("4_j4uy0")
+corner = 2

@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://c237rtawmxp6j"]
 
-[ext_resource type="Texture2D" uid="uid://dbn38v58mp2ko" path="res://imports/SBS - Photorealistic Texture Pack 3/PTP-Ground_08-128x128.png" id="1_wdf8s"]
+[ext_resource type="Texture2D" uid="uid://dbn38v58mp2ko" path="res://imports/textures/SBS - Photorealistic Texture Pack 3/PTP-Ground_08-128x128.png" id="1_wdf8s"]
 
 [resource]
 albedo_texture = ExtResource("1_wdf8s")

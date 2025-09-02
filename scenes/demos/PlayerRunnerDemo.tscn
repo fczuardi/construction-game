@@ -1,10 +1,10 @@
 [gd_scene load_steps=21 format=3 uid="uid://dkb5uhyt7ffpi"]
 
 [ext_resource type="PackedScene" uid="uid://br08vaqh6iywm" path="res://lib/PlayerRunner/PlayerRunner.tscn" id="1_pvld0"]
-[ext_resource type="PackedScene" uid="uid://ccpgokrw2duk5" path="res://imports/HouseAndProps_AssetPack_Godot/fbx/Dummy_Base.fbx" id="2_50iqg"]
+[ext_resource type="PackedScene" uid="uid://ccpgokrw2duk5" path="res://imports/models/HouseAndProps_AssetPack_Godot/fbx/Dummy_Base.fbx" id="2_50iqg"]
 [ext_resource type="Material" uid="uid://cfkkgoymb53aj" path="res://materials/kenney_prototype_orange_10.tres" id="3_c7jmv"]
 [ext_resource type="Script" uid="uid://b03qu5uc3bmit" path="res://lib/DemoExitOverlay/demo_exit_overlay.gd" id="4_2q8a8"]
-[ext_resource type="Texture2D" uid="uid://qonmfuetwwf0" path="res://imports/kenney_prototypeTextures/Dark/texture_09.png" id="4_50iqg"]
+[ext_resource type="Texture2D" uid="uid://qonmfuetwwf0" path="res://imports/textures/kenney_prototypeTextures/Dark/texture_09.png" id="4_50iqg"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_c7jmv"]
 size = Vector3(100, 1, 100)
