@@ -18,6 +18,8 @@ config/features=PackedStringArray("4.5", "GL Compatibility")
 
 window/size/viewport_width=360
 window/size/viewport_height=640
+window/size/initial_position_type=0
+window/size/initial_screen=1
 window/stretch/mode="viewport"
 window/stretch/aspect="keep_width"
 window/handheld/orientation=1

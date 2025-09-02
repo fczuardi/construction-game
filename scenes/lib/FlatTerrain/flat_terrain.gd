@@ -136,8 +136,8 @@ func _warn_if_embedded_textures(mat: BaseMaterial3D) -> void:
         "normal": mat.normal_texture,
         "roughness": mat.roughness_texture,
     }
-    for name in slots.keys():
+    for slot_name in slots.keys():
         # ImageTexture usually implies embedded pixels; CompressedTexture2D is the safe imported type.
-        if slots[name] is ImageTexture:
+        if slots[slot_name] is ImageTexture:
             push_warning("FlatTerrain: '%s' uses ImageTexture (likely embedded). Prefer imported files (CompressedTexture2D)." % name)
             continue

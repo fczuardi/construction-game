@@ -16,10 +16,6 @@ signal active_rig_changed(name: String, index: int)
 ## Transition time in seconds
 @export_range(0.0, 5.0, 0.01) var blend_time: float = 0.35
 
-@export_tool_button("Next Rig")
-var _next_btn: Callable = func():
-    next_rig()
-
 # --- Runtime state ---
 @onready var _out_cam: Camera3D = get_node_or_null(output_camera_path)
 
@@ -34,6 +30,7 @@ var _from_fov: float = 70.0
 var _to_fov: float = 70.0
 
 func _ready() -> void:
+    _next_rig = next_rig
     _collect_rigs()
     if _out_cam:
         _out_cam.current = true
@@ -46,20 +43,28 @@ func _process(delta: float) -> void:
     if _out_cam == null or _rig_nodes.is_empty():
         return
 
+    # Always fetch the live target pose/FOV from the active rig
+    var tgt_tf := _rig_nodes[_active].global_transform
+    var tgt_fov := _out_cam.fov
+    if _rig_cams[_active] != null:
+        tgt_fov = _rig_cams[_active].fov
+
     if _t < 1.0 and blend_time > 0.0:
         _t = min(1.0, _t + delta / blend_time)
         var t := _ease(_t)
 
-        var pos := _from_tf.origin.lerp(_to_tf.origin, t)
+        var pos := _from_tf.origin.lerp(tgt_tf.origin, t)
         var q0 := Quaternion(_from_tf.basis)
-        var q1 := Quaternion(_to_tf.basis)
+        var q1 := Quaternion(tgt_tf.basis)
         var q := q0.slerp(q1, t)
 
         _out_cam.global_transform = Transform3D(Basis(q), pos)
-        _out_cam.fov = lerpf(_from_fov, _to_fov, t)
-    elif _t >= 1.0:
-        _out_cam.global_transform = _to_tf
-        _out_cam.fov = _to_fov
+        _out_cam.fov = lerpf(_from_fov, tgt_fov, t)
+    else:
+        # Follow the active rig exactly once the blend is done
+        _out_cam.global_transform = tgt_tf
+        _out_cam.fov = tgt_fov
+
 
 # --- Public API ---
 func activate_index(i: int) -> void:
@@ -70,11 +75,14 @@ func activate_index(i: int) -> void:
         return
     _begin_blend_to(idx)
 
-func activate_name(name: String) -> void:
+func activate_name(rig_name: String) -> void:
     for i in _rig_nodes.size():
-        if _rig_nodes[i].name == name:
+        if _rig_nodes[i].name == rig_name:
             activate_index(i)
             return
+
+@export_tool_button("Next Rig")
+var _next_rig: Callable
 
 func next_rig() -> void:
     if _rig_nodes.is_empty():
@@ -82,7 +90,10 @@ func next_rig() -> void:
     activate_index((_active + 1) % _rig_nodes.size())
 
 func current_rig_name() -> String:
-    return _rig_nodes[_active].name if !_rig_nodes.is_empty() else ""
+    var rig_name = _rig_nodes[_active].name
+    if not rig_name:
+        return ""
+    return rig_name
 
 func current_rig_index() -> int:
     return _active

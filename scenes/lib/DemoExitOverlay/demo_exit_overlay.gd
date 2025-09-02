@@ -67,9 +67,9 @@ func _position_button() -> void:
     _btn.anchor_right = 0
     _btn.anchor_bottom = 0
     _btn.size = button_size
-    var vp := get_viewport().get_visible_rect().size
-    var x := padding
-    var y := padding
+    var vp :Vector2 = get_viewport().get_visible_rect().size
+    var x :float = padding
+    var y :float = padding
     match corner:
         1: x = vp.x - padding - button_size.x   # top-right
         2: y = vp.y - padding - button_size.y   # bottom-left

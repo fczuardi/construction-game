@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://ckdfysx2pcv7m"]
+[gd_scene load_steps=16 format=3 uid="uid://ckdfysx2pcv7m"]
 
 [ext_resource type="FontFile" uid="uid://bgn10o8bm34q6" path="res://imports/fonts/ArgulaRegular/Arugula20250312-Regular.ttf" id="1_rxmpw"]
 [ext_resource type="PackedScene" uid="uid://3l7fe0kmxuqf" path="res://demos/PlayerControlsDemo.tscn" id="1_tqvmb"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dkb5uhyt7ffpi" path="res://demos/PlayerRunnerDemo.tscn" id="4_2lln2"]
 [ext_resource type="PackedScene" uid="uid://cdsqtykisydyo" path="res://demos/PlayerCamerasDemo.tscn" id="5_2lln2"]
 [ext_resource type="PackedScene" uid="uid://ccjlcg6tf5mev" path="res://demos/SunDemo.tscn" id="5_o6pdu"]
+[ext_resource type="PackedScene" uid="uid://bvqjumns0dvc1" path="res://slices/WalkOnDesert.tscn" id="7_htab0"]
 
 [sub_resource type="GDScript" id="GDScript_rxmpw"]
 resource_name = "demo_index"
@@ -20,35 +21,67 @@ const VERSION := \"0.1.0\"
 @export var demos: Array[PackedScene] = []      # drag your *Demo.tscn files here
 @export var demo_names: Array[StringName] = []  # optional pretty names (same length as demos)
 
-@onready var _list: OptionButton = %DemoList
-@onready var _play: Button = %PlayBtn
+@export var slices: Array[PackedScene] = []
+@export var slice_names: Array[StringName] = []
+
+@onready var _demo_list: OptionButton = %DemoList
+@onready var _slice_list: OptionButton = %SliceList
+@onready var _play_demo: Button = %PlayBtn
+@onready var _play_slice: Button = %PlayBtn2
 
 func _ready() -> void:
-    if _list:
-        _populate()
+    if _demo_list:
+        _populate_demos()
     else:
         push_warning(\"DemoIndex: OptionButton 'DemoList' not found.\")
-    if _play:
-        _play.pressed.connect(_on_play)
+    if _slice_list:
+        _populate_slices()
     else:
-        push_warning(\"DemoIndex: Button 'PlayBtn' not found.\")    
+        push_warning(\"DemoIndex: OptionButton 'SliceList' not found.\")
+    if _play_demo:
+        _play_demo.pressed.connect(_on_play_demo)
+    else:
+        push_warning(\"DemoIndex: Button 'PlayBtn' not found.\")  
+    if _play_slice:  
+        _play_slice.pressed.connect(_on_play_slice)
+    else:
+        push_warning(\"DemoIndex: Button 'PlayBtn2' not found.\")  
 
-func _populate() -> void:
-    _list.clear()
+func _populate_demos() -> void:
+    _demo_list.clear()
     for i in demos.size():
         var label := String(demo_names[i]) \\
             if (i < demo_names.size() and String(demo_names[i]) != \"\") \\
             else demos[i].resource_path.get_file()
-        _list.add_item(label, i)
-    _list.select(0)
+        _demo_list.add_item(label, i)
+    _demo_list.select(0)
 
-func _on_play() -> void:
-    if _list.item_count == 0:
+func _populate_slices() -> void:
+    _slice_list.clear()
+    for i in slices.size():
+        var label := String(slice_names[i]) \\
+            if (i < slice_names.size() and String(slice_names[i]) != \"\") \\
+            else slices[i].resource_path.get_file()
+        _slice_list.add_item(label, i)
+    _slice_list.select(0)
+
+func _on_play_demo() -> void:
+    if _demo_list.item_count == 0:
         return
-    var idx := _list.get_selected_id()
+    var idx := _demo_list.get_selected_id()
     if idx < 0 or idx >= demos.size():
         return
     var ps := demos[idx]
+    get_tree().root.set_meta(\"launched_from_index\", true)
+    get_tree().change_scene_to_packed(ps)
+
+func _on_play_slice() -> void:
+    if _slice_list.item_count == 0:
+        return
+    var idx := _slice_list.get_selected_id()
+    if idx < 0 or idx >= slices.size():
+        return
+    var ps := slices[idx]
     get_tree().root.set_meta(\"launched_from_index\", true)
     get_tree().change_scene_to_packed(ps)
 "
@@ -79,6 +112,8 @@ size = Vector3(100, 1, 200)
 script = SubResource("GDScript_rxmpw")
 demos = Array[PackedScene]([ExtResource("4_2lln2"), ExtResource("2_o6pdu"), ExtResource("5_2lln2"), ExtResource("1_tqvmb"), ExtResource("2_qugmx"), ExtResource("5_o6pdu")])
 demo_names = Array[StringName]([&"Player Body", &"Player Visuals", &"Player Cameras", &"Player Controls", &"Textured Flat Terrain", &"Sun Orbit"])
+slices = Array[PackedScene]([ExtResource("7_htab0")])
+slice_names = Array[StringName]([&"Walk on Desert"])
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_u5qyn")
@@ -100,11 +135,11 @@ offset_right = 360.0
 offset_bottom = 640.0
 
 [node name="MarginContainer" type="MarginContainer" parent="CenterContainer"]
+custom_minimum_size = Vector2(0, 580)
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 192
 
 [node name="Title" type="Label" parent="CenterContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -113,14 +148,54 @@ theme_override_font_sizes/font_size = 28
 text = "Contractor Hero Library"
 horizontal_alignment = 1
 
-[node name="DemoList" type="OptionButton" parent="CenterContainer/MarginContainer/VBoxContainer"]
+[node name="spacer" type="Control" parent="CenterContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Component Demo: "
+
+[node name="DemoList" type="OptionButton" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 21
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
 
 [node name="PlayBtn" type="Button" parent="CenterContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_rxmpw")
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 32
 text = "Play"
+
+[node name="spacer2" type="Control" parent="CenterContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CenterContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Vertical Slice: "
+
+[node name="SliceList" type="OptionButton" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+
+[node name="PlayBtn2" type="Button" parent="CenterContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_rxmpw")
+theme_override_font_sizes/font_size = 32
+text = "Play"
+
+[node name="spacer3" type="Control" parent="CenterContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3

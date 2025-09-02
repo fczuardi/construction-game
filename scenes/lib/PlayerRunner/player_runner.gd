@@ -1,9 +1,8 @@
 class_name PlayerRunner
 extends CharacterBody3D
 ## Runner body: falls, queues yaw turns, moves forward with switchable speeds.
-## Controls direction of a visuals node (player's character).
 
-const VERSION := "0.5.0"
+const VERSION := "0.5.1"
 
 
 signal distance_moved(delta_m: float)
@@ -31,12 +30,8 @@ const DEFAULT_TURN_RATE: float = 180.0
 ## Max rotate speed (deg/sec). Higher = snappier.
 @export var turn_rate_deg := DEFAULT_TURN_RATE
 
-## Reference to an existing visuals node in the scene (must be a Node3D)
-@export var visuals_path: NodePath
-
 
 # --- Private --------------------------
-var _visuals: Node3D
 var _move_dir: Vector3
 var _remaining_turn_deg: float  # +left / -right, consumed over time
 
@@ -49,9 +44,6 @@ var _start_xform: Transform3D
 
 # --- Lifecycle -----------------------
 func _ready() -> void:
-    _visuals = get_node_or_null(visuals_path) as Node3D
-    if _visuals == null:
-        push_warning("PlayerRunner: visuals_path not set or not a Node3D")
     _start_xform = global_transform
     reset_to_start()
 
