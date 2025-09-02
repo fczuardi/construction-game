@@ -1,0 +1,16 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://m4c07od4m3dy"]
+
+[ext_resource type="Texture2D" uid="uid://dkwl2fgpy1k6c" path="res://imports/models/mixamo/textures/Ch17_1001_Diffuse_512.png" id="1_lxuxt"]
+[ext_resource type="Texture2D" uid="uid://bm1ipgrr7fce2" path="res://imports/models/mixamo/textures/Ch17_1001_Normal_512.png" id="2_b3l1y"]
+[ext_resource type="Texture2D" uid="uid://6s7n7fv0r75m" path="res://imports/models/mixamo/textures/Ch17_1001_Glossiness_512.png" id="3_m34bj"]
+
+[resource]
+resource_name = "Ch17_body"
+cull_mode = 2
+albedo_texture = ExtResource("1_lxuxt")
+metallic_specular = 0.0
+metallic_texture_channel = 2
+roughness_texture = ExtResource("3_m34bj")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("2_b3l1y")

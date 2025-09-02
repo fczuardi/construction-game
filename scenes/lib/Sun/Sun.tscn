@@ -1,19 +1,19 @@
 [gd_scene load_steps=2 format=3 uid="uid://bd5aj5us85j5a"]
 
-[ext_resource type="Script" uid="uid://bfouodcrwdmxn" path="res://Sun/sun.gd" id="1_1y2s6"]
+[ext_resource type="Script" uid="uid://bfouodcrwdmxn" path="res://lib/Sun/sun.gd" id="1_1y2s6"]
 
 [node name="SunPivot" type="Node3D" node_paths=PackedStringArray("sun_light")]
-transform = Transform3D(1, 0, 0, 0, 1, -2.85767e-09, 0, 2.85767e-09, 1, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, -2.8576697e-09, 0, 2.8576697e-09, 1, 0, 0, 0)
 script = ExtResource("1_1y2s6")
 sun_light = NodePath("SunLight")
 
 [node name="SunLight" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.999848, -0.00227791, -0.0173032, -8.66749e-08, -0.991443, 0.130526, -0.0174525, 0.130506, 0.991294, 0, 0, 0)
+transform = Transform3D(-0.99984795, -0.0022776178, 0.017303199, 3.8608295e-07, 0.99144286, 0.13052633, -0.01745246, 0.13050619, -0.99129397, 0, 0, 0)
 light_volumetric_fog_energy = 0.2
 light_angular_distance = 0.5
 shadow_enabled = true
 shadow_blur = 0.8
-directional_shadow_split_1 = 0.003
+directional_shadow_split_1 = 0.005
 directional_shadow_split_2 = 0.1
-directional_shadow_split_3 = 0.2
+directional_shadow_split_3 = 0.6
 directional_shadow_pancake_size = 105.0

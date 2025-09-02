@@ -16,6 +16,18 @@ signal active_rig_changed(name: String, index: int)
 ## Transition time in seconds
 @export_range(0.0, 5.0, 0.01) var blend_time: float = 0.35
 
+
+## other cameras not child of the main rig
+@export var extra_rigs: Array[NodePath] = []   # add this
+
+@export var wiggle_run_enabled: bool = true
+@export var wiggle_pos_amp: Vector3 = Vector3(0.02, 0.05, 0.0) # x=sway, y=bob, z=push/pull
+@export var wiggle_freq_hz: float = 2.0
+@export var wiggle_roll_deg: float = 0.8
+
+var _wiggle_t: float = 0.0
+
+
 # --- Runtime state ---
 @onready var _out_cam: Camera3D = get_node_or_null(output_camera_path)
 
@@ -43,27 +55,44 @@ func _process(delta: float) -> void:
     if _out_cam == null or _rig_nodes.is_empty():
         return
 
-    # Always fetch the live target pose/FOV from the active rig
+    # Time only advances in-game (keeps editor preview stable).
+    if !Engine.is_editor_hint():
+        _wiggle_t += delta
+
+    # Live target (rig keeps moving with the player)
     var tgt_tf := _rig_nodes[_active].global_transform
     var tgt_fov := _out_cam.fov
     if _rig_cams[_active] != null:
         tgt_fov = _rig_cams[_active].fov
 
+    # Blend or follow
+    var out_tf: Transform3D
+    var out_fov: float
     if _t < 1.0 and blend_time > 0.0:
         _t = min(1.0, _t + delta / blend_time)
         var t := _ease(_t)
-
         var pos := _from_tf.origin.lerp(tgt_tf.origin, t)
-        var q0 := Quaternion(_from_tf.basis)
-        var q1 := Quaternion(tgt_tf.basis)
-        var q := q0.slerp(q1, t)
-
-        _out_cam.global_transform = Transform3D(Basis(q), pos)
-        _out_cam.fov = lerpf(_from_fov, tgt_fov, t)
+        var q := Quaternion(_from_tf.basis).slerp(Quaternion(tgt_tf.basis), t)
+        out_tf = Transform3D(Basis(q), pos)
+        out_fov = lerpf(_from_fov, tgt_fov, t)
     else:
-        # Follow the active rig exactly once the blend is done
-        _out_cam.global_transform = tgt_tf
-        _out_cam.fov = tgt_fov
+        out_tf = tgt_tf
+        out_fov = tgt_fov
+
+    # Optional run wiggle applied in camera-local space
+    if wiggle_run_enabled and _is_run_rig(_active):
+        var w := TAU * wiggle_freq_hz * _wiggle_t
+        var sway_x := sin(w * 0.5) * wiggle_pos_amp.x           # gentle left/right
+        var bob_y:float = abs(sin(w)) * wiggle_pos_amp.y            # up/down (always up on impact)
+        var push_z := sin(w) * wiggle_pos_amp.z                 # fore/aft, usually small or zero
+        var roll_r := sin(w) * deg_to_rad(wiggle_roll_deg)      # tiny roll
+
+        var wiggle_basis := Basis(Vector3(0,0,1), roll_r)       # roll around camera forward
+        var wiggle_tf := Transform3D(wiggle_basis, Vector3(sway_x, bob_y, push_z))
+        out_tf = out_tf * wiggle_tf                              # apply in camera local space
+
+    _out_cam.global_transform = out_tf
+    _out_cam.fov = out_fov
 
 
 # --- Public API ---
@@ -99,17 +128,35 @@ func current_rig_index() -> int:
     return _active
 
 # --- Internals ---
+
+func _is_run_rig(i: int) -> bool:
+    var n := _rig_nodes[i].name.to_lower()
+    return n.find("run") != -1
+
+
 func _collect_rigs() -> void:
     _rig_nodes.clear()
     _rig_cams.clear()
+
+    # 1) direct children (world-aligned shoulder rigs)
     for child in get_children():
         if child is Node3D and child != _out_cam:
             _rig_nodes.append(child)
-            # find a Camera3D inside rig
             var cam: Camera3D = child.get_node_or_null("Camera3D")
             if cam == null:
                 cam = child.get_node_or_null("SpringArm3D/Camera3D")
             _rig_cams.append(cam)
+
+    # 2) extra rigs (yaw-follow FP rigs under visuals/yaw pivot)
+    for p in extra_rigs:
+        var n := get_node_or_null(p)
+        if n is Node3D and not _rig_nodes.has(n):
+            _rig_nodes.append(n)
+            var cam2: Camera3D = n.get_node_or_null("Camera3D")
+            if cam2 == null:
+                cam2 = n.get_node_or_null("SpringArm3D/Camera3D")
+            _rig_cams.append(cam2)
+
 
 func _snap_to(i: int) -> void:
     _active = i

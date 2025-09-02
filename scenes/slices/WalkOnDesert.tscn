@@ -174,27 +174,30 @@ runner_path = NodePath("..")
 stride_ref_speed = 0.9
 stride_scale_min = 0.5
 
+[node name="FPCams" type="Node3D" parent="PlayerRunner/Visuals"]
+
+[node name="ClipboardWalkCam" type="Camera3D" parent="PlayerRunner/Visuals/FPCams"]
+transform = Transform3D(-1, 8.3144e-08, -2.7015123e-08, 0, 0.30901697, 0.95105654, 8.742278e-08, 0.95105654, -0.30901697, 0.05, 1.6, 0.3)
+
+[node name="ClipboardRunCam" type="Camera3D" parent="PlayerRunner/Visuals/FPCams"]
+transform = Transform3D(-1, -8.3144e-08, 2.7015123e-08, 0, 0.30901697, 0.95105654, -8.742278e-08, 0.95105654, -0.30901697, 0, 1.27, 0.5)
+
 [node name="Cameras" type="Node3D" parent="PlayerRunner"]
 unique_name_in_owner = true
 script = ExtResource("4_q5p3a")
 blend_time = 0.5
+extra_rigs = Array[NodePath]([NodePath("../Visuals/FPCams/ClipboardWalkCam"), NodePath("../Visuals/FPCams/ClipboardRunCam")])
 
 [node name="OutputCamera" type="Camera3D" parent="PlayerRunner/Cameras"]
-transform = Transform3D(-1, 1.21669e-08, -8.657199e-08, 0, 0.9902681, 0.13917312, 8.742278e-08, 0.13917312, -0.9902681, 0, 2.5, -3)
+transform = Transform3D(-1, 1.21669e-08, -8.657199e-08, 0, 0.9902681, 0.13917312, 8.742278e-08, 0.13917312, -0.9902681, 0, 2.5, -5)
 current = true
 fov = 70.0
 
 [node name="ShoulderWalkCam" type="Camera3D" parent="PlayerRunner/Cameras"]
-transform = Transform3D(-1, 1.21669e-08, -8.657199e-08, 0, 0.9902681, 0.13917312, 8.742278e-08, 0.13917312, -0.9902681, 0, 2.5, -3)
+transform = Transform3D(-1, 1.21669e-08, -8.657199e-08, 0, 0.9902681, 0.13917312, 8.742278e-08, 0.13917312, -0.9902681, 0, 2.5, -5)
 
 [node name="ShoulderRunCam" type="Camera3D" parent="PlayerRunner/Cameras"]
-transform = Transform3D(-1, 1.21669e-08, -8.657199e-08, 0, 0.9902681, 0.13917312, 8.742278e-08, 0.13917312, -0.9902681, 0, 1.5, -4)
-
-[node name="ClipboardWalkCam" type="Camera3D" parent="PlayerRunner/Cameras"]
-transform = Transform3D(-1, 8.3144e-08, -2.7015123e-08, 0, 0.30901697, 0.95105654, 8.742278e-08, 0.95105654, -0.30901697, 0, 1.6, 0.3)
-
-[node name="ClipboardRunCam" type="Camera3D" parent="PlayerRunner/Cameras"]
-transform = Transform3D(-1, -8.3144e-08, 2.7015123e-08, 0, 0.30901697, 0.95105654, -8.742278e-08, 0.95105654, -0.30901697, 0, 2, 0.6)
+transform = Transform3D(-1, 1.21669e-08, -8.657199e-08, 0, 0.9902681, 0.13917312, 8.742278e-08, 0.13917312, -0.9902681, 0, 1.3, -4)
 
 [node name="HUD" type="Control" parent="."]
 layout_mode = 3
@@ -257,22 +260,24 @@ offset_bottom = 40.0
 
 [node name="Button" type="Button" parent="DebugHUD/HBoxContainer"]
 layout_mode = 2
+focus_mode = 0
 text = "NextCam"
 script = SubResource("GDScript_eqn0a")
 
 [node name="Button2" type="Button" parent="DebugHUD/HBoxContainer"]
 layout_mode = 2
+focus_mode = 0
 text = "Reset"
 script = SubResource("GDScript_q5p3a")
 
 [node name="Other" type="Node3D" parent="."]
 
 [node name="SunPivot" parent="Other" instance=ExtResource("5_q5p3a")]
-transform = Transform3D(-0.7519617, -0.27517906, -0.59902364, -0.34365943, 0.9390941, -4.483844e-08, 0.5625393, 0.20586018, -0.80073136, 0, 0, 0)
+transform = Transform3D(0.71703756, 0.24969909, 0.65077394, -0.3288664, 0.94437623, -3.8348304e-08, -0.6145751, -0.21401778, 0.75927156, 0, 0, 0)
 auto_intensity = true
 hour = 14.58999989827474
-east = -143.2
-season = -20.099997
+east = 40.59998
+season = -19.199999
 
 [node name="FlatTerrain" parent="Other" instance=ExtResource("3_qldhu")]
 size = 1000.0
