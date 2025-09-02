@@ -6,7 +6,7 @@ extends Control
 signal action(side: int, event: int)
 
 enum Side  { NORTH, SOUTH, WEST, EAST }
-enum Event { PRESS, TOGGLE_ON, TOGGLE_OFF }
+enum Event { TOGGLE_OFF, TOGGLE_ON, PRESS }
 
 const VERSION := "0.5.0"
 

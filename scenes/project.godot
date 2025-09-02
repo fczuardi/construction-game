@@ -38,6 +38,10 @@ ui_right={
 
 pointing/emulate_touch_from_mouse=true
 
+[physics]
+
+3d/physics_engine="Jolt Physics"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

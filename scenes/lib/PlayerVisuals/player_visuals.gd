@@ -51,6 +51,8 @@ func _ready() -> void:
         _anim_tree.active = true
 
 func _process(delta: float) -> void:
+    if Engine.is_editor_hint():
+        return  # skip driving the AnimationTree when not playing
     # Optional auto-pull from runner
     if runner_path != NodePath():
         var runner := get_node_or_null(runner_path)
