@@ -78,11 +78,6 @@ func _position_button() -> void:
             y = vp.y - padding - button_size.y
     _btn.position = Vector2(x, y)
 
-func _input(event: InputEvent) -> void:
-    # Desktop convenience: Esc to return
-    if event.is_action_pressed("ui_cancel"):
-        _go_back()
-
 func _go_back() -> void:
     if index_scene:
         get_tree().change_scene_to_packed(index_scene)

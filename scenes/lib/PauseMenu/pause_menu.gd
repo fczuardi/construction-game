@@ -1,3 +1,4 @@
+@tool
 class_name PauseMenu
 extends Control
 ## A toggleable overlay panel that pauses the game and present options, for
@@ -7,39 +8,74 @@ extends Control
 enum MenuCategoryIcon { SLICE, DEMO, NONE }
 
 ## Settings
-@export var category_icon: MenuCategoryIcon = MenuCategoryIcon.NONE
+
+var _category_icon_dict: Dictionary[MenuCategoryIcon, String] = {
+    MenuCategoryIcon.NONE: "",
+    MenuCategoryIcon.SLICE: "🍰",
+    MenuCategoryIcon.DEMO: "🔩",
+}
+var _category_icon: MenuCategoryIcon = MenuCategoryIcon.NONE
+@export var category_icon: MenuCategoryIcon:
+    get():
+        return _category_icon
+    set(value):
+        _category_icon = value
+        if pause_menu_bg_icon:
+            pause_menu_bg_icon.text = _category_icon_dict[value]
+
 @export var items_to_hide: Array[NodePath] = []
 
 ## Nodes
 @onready var pause_menu_panel: Panel = %PauseMenuPanel
 @onready var pause_menu_button: TextureButton = %PauseMenuButton
+@onready var pause_menu_bg_icon: Label = %PauseMenuBgIcon
 
 ## Lifecycle
 func _ready() -> void:
     process_mode = Node.PROCESS_MODE_ALWAYS
     pause_menu_panel.visible = false
     pause_menu_button.toggled.connect(_on_menu_toggled)
+    category_icon = _category_icon
+    _register_items_visibility()
 
 ## Helpers
 var _visibility_before_hide: Dictionary[NodePath, bool] = {}
 
 func _register_items_visibility():
     for node_path in items_to_hide:
-        _visibility_before_hide[node_path] =  get_node(node_path).visible
+        if has_node(node_path):
+            _visibility_before_hide[node_path] =  get_node(node_path).visible
 
 func _hide_items():
     for node_path in items_to_hide:
-        get_node(node_path).visible = false
+        if has_node(node_path):
+            get_node(node_path).visible = false
 
 func _untoggle_items_visibility():
     for node_path in items_to_hide:
-        get_node(node_path).visible = _visibility_before_hide[node_path]
-    
+        if has_node(node_path):
+            get_node(node_path).visible = _visibility_before_hide[node_path]
+
+func show_panel():
+    pause_menu_panel.visible = true
+    pause_menu_panel.modulate.a = 0.0
+    var tween = create_tween()
+    tween.tween_property(pause_menu_panel, "modulate:a", 1.0, 0.25) # fade in over 0.25s
+
+func hide_panel():
+    var tween = create_tween()
+    tween.tween_property(pause_menu_panel, "modulate:a", 0.0, 0.25) # fade out over 0.25s
+    tween.finished.connect(func():
+        pause_menu_panel.visible = false
+    )
+
 func _on_menu_toggled(toggled_on: bool) -> void:
     get_tree().paused = toggled_on
     pause_menu_panel.visible = toggled_on
     if toggled_on == true:
         _register_items_visibility()
         _hide_items()
+        show_panel()
     else:
         _untoggle_items_visibility()
+        hide_panel()

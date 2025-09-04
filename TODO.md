@@ -1,15 +1,16 @@
 ## Ongoing
-- [ ] [UI] fade-in-ou titles 
+- [ ] [BUG] main library initial screen/menu are not viewport aware 
 
 
 ## Low hanging fruits/quick wins
-- [ ] fix main library initial screen/menu 
-- [ ] [UI] "settings" pause screen
+- [ ] [UI] fade-in-ou titles 
 
 
 ## Known Bugs
 
 ## Done
+- [x] pause menu choose icon
+- [x] [UI] "settings" pause screen
 - [x] [BUG, FIXED] hover on input buttons make them squared
 - [x] Navigation Trail on map
 - [x] PlayerVisuals

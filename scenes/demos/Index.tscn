@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://ckdfysx2pcv7m"]
+[gd_scene load_steps=17 format=3 uid="uid://ckdfysx2pcv7m"]
 
 [ext_resource type="FontFile" uid="uid://bgn10o8bm34q6" path="res://imports/fonts/ArgulaRegular/Arugula20250312-Regular.ttf" id="1_rxmpw"]
 [ext_resource type="PackedScene" uid="uid://3l7fe0kmxuqf" path="res://demos/PlayerControlsDemo.tscn" id="1_tqvmb"]
@@ -108,6 +108,21 @@ uv1_scale = Vector3(60, 60, 60)
 [sub_resource type="BoxMesh" id="BoxMesh_tqvmb"]
 size = Vector3(100, 1, 200)
 
+[sub_resource type="GDScript" id="GDScript_htab0"]
+resource_name = "resizecontainer"
+script/source = "extends MarginContainer
+
+@onready var player_controls: PlayerControls = %PlayerControls
+
+func _ready() -> void:
+    get_tree().get_root().size_changed.connect(_resize)
+    _resize()
+
+func _resize():
+    var s := get_viewport_rect().size
+    self.size = s    
+"
+
 [node name="Index" type="Node3D"]
 script = SubResource("GDScript_rxmpw")
 demos = Array[PackedScene]([ExtResource("4_2lln2"), ExtResource("2_o6pdu"), ExtResource("5_2lln2"), ExtResource("1_tqvmb"), ExtResource("2_qugmx"), ExtResource("5_o6pdu")])
@@ -130,8 +145,17 @@ current = true
 material_override = SubResource("StandardMaterial3D_ji7lb")
 mesh = SubResource("BoxMesh_tqvmb")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-custom_minimum_size = Vector2(540, 0)
+[node name="HUD" type="Control" parent="."]
+custom_minimum_size = Vector2(540, 1200)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD"]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -141,64 +165,65 @@ theme_override_constants/margin_left = 60
 theme_override_constants/margin_top = 60
 theme_override_constants/margin_right = 60
 theme_override_constants/margin_bottom = 60
+script = SubResource("GDScript_htab0")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/MarginContainer"]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="Title" type="Label" parent="HUD/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_rxmpw")
-theme_override_font_sizes/font_size = 55
+theme_override_font_sizes/font_size = 41
 text = "Contractor Hero Tests
 
 "
 horizontal_alignment = 1
 
-[node name="Vbox" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="Vbox" type="VBoxContainer" parent="HUD/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Vbox"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/MarginContainer/VBoxContainer/Vbox"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Vbox/HBoxContainer"]
+[node name="Label" type="Label" parent="HUD/MarginContainer/VBoxContainer/Vbox/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Slices:"
 horizontal_alignment = 1
 
-[node name="SliceList" type="OptionButton" parent="MarginContainer/VBoxContainer/Vbox/HBoxContainer"]
+[node name="SliceList" type="OptionButton" parent="HUD/MarginContainer/VBoxContainer/Vbox/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 24
 alignment = 1
 
-[node name="PlayBtn2" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="PlayBtn2" type="Button" parent="HUD/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_rxmpw")
 theme_override_font_sizes/font_size = 100
 text = "Play"
 
-[node name="spacer3" type="Control" parent="MarginContainer/VBoxContainer"]
+[node name="spacer3" type="Control" parent="HUD/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="HUD/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Demos:"
 
-[node name="DemoList" type="OptionButton" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="DemoList" type="OptionButton" parent="HUD/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 24
 
-[node name="PlayBtn" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="PlayBtn" type="Button" parent="HUD/MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_rxmpw")
