@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://bvqjumns0dvc1"]
+[gd_scene load_steps=32 format=3 uid="uid://bvqjumns0dvc1"]
 
 [ext_resource type="Script" uid="uid://bjc7lry15qhrc" path="res://slices/walk_on_desert.gd" id="1_eqn0a"]
 [ext_resource type="PackedScene" uid="uid://br08vaqh6iywm" path="res://lib/PlayerRunner/PlayerRunner.tscn" id="1_f4lrq"]
@@ -10,112 +10,124 @@
 [ext_resource type="Script" uid="uid://b03qu5uc3bmit" path="res://lib/DemoExitOverlay/demo_exit_overlay.gd" id="6_roq0i"]
 [ext_resource type="PackedScene" uid="uid://rnjcf0y4dsgm" path="res://lib/PlayerControls/PlayerControls.tscn" id="9_q5p3a"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q5p3a"]
+[sub_resource type="GDScript" id="GDScript_fgmfs"]
+script/source = "extends MarginContainer
+
+func _ready() -> void:
+    get_tree().get_root().size_changed.connect(_resize)
+    _resize()
+
+func _resize():
+    var s := get_viewport_rect().size
+    self.size = s    
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fgmfs"]
 bg_color = Color(0.2, 0.2, 0.2, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s8s8t"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m3ooj"]
 bg_color = Color(0.18, 0.18, 0.18, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u02a0"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u2pij"]
 bg_color = Color(0.212, 0.212, 0.212, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n34ds"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e724c"]
 bg_color = Color(0.13, 0.13, 0.13, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sv1qo"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_57fmn"]
 bg_color = Color(0.2, 0.2, 0.2, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bwdut"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g3wq7"]
 bg_color = Color(0.18, 0.18, 0.18, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kdq8o"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6njd1"]
 bg_color = Color(0.212, 0.212, 0.212, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hoxwi"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2es3r"]
 bg_color = Color(0.13, 0.13, 0.13, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ycfqn"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o4a7a"]
 bg_color = Color(0.2, 0.2, 0.2, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2g4pj"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b3w8r"]
 bg_color = Color(0.18, 0.18, 0.18, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m2yas"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ojhc6"]
 bg_color = Color(0.212, 0.212, 0.212, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uuuuj"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wia8x"]
 bg_color = Color(0.13, 0.13, 0.13, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2yuqj"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ewarj"]
 bg_color = Color(0.2, 0.2, 0.2, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kjbv7"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8hhkl"]
 bg_color = Color(0.18, 0.18, 0.18, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6pvdt"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_apywh"]
 bg_color = Color(0.212, 0.212, 0.212, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0hkfq"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6uyfv"]
 bg_color = Color(0.13, 0.13, 0.13, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
@@ -180,12 +192,11 @@ stride_scale_min = 0.5
 transform = Transform3D(-1, 8.3144e-08, -2.7015123e-08, 0, 0.30901697, 0.95105654, 8.742278e-08, 0.95105654, -0.30901697, 0.05, 1.6, 0.3)
 
 [node name="ClipboardRunCam" type="Camera3D" parent="PlayerRunner/Visuals/FPCams"]
-transform = Transform3D(-1, -8.3144e-08, 2.7015123e-08, 0, 0.30901697, 0.95105654, -8.742278e-08, 0.95105654, -0.30901697, 0, 1.27, 0.5)
+transform = Transform3D(-1, 8.742278e-08, 3.821371e-15, 0, -4.371139e-08, 1, 8.742278e-08, 1, 4.371139e-08, 0, 1.27, 0.5)
 
 [node name="Cameras" type="Node3D" parent="PlayerRunner"]
 unique_name_in_owner = true
 script = ExtResource("4_q5p3a")
-blend_time = 0.5
 extra_rigs = Array[NodePath]([NodePath("../Visuals/FPCams/ClipboardWalkCam"), NodePath("../Visuals/FPCams/ClipboardRunCam")])
 
 [node name="OutputCamera" type="Camera3D" parent="PlayerRunner/Cameras"]
@@ -206,46 +217,47 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="MarginContainer" type="MarginContainer" parent="HUD"]
-custom_minimum_size = Vector2(360, 640)
-layout_mode = 1
-offset_right = 360.0
-offset_bottom = 640.0
+layout_mode = 0
+offset_right = 520.0
+offset_bottom = 1200.0
+theme_override_constants/margin_left = 60
+theme_override_constants/margin_top = 60
+theme_override_constants/margin_right = 60
+theme_override_constants/margin_bottom = 120
+script = SubResource("GDScript_fgmfs")
 
 [node name="PlayerControls" parent="HUD/MarginContainer" instance=ExtResource("9_q5p3a")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(130, 160)
+custom_minimum_size = Vector2(212, 212)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 toggle_north = true
 toggle_south = true
 
-[node name="Control" parent="HUD/MarginContainer/PlayerControls" index="1"]
-scale = Vector2(0.65, 0.65)
+[node name="BtnNorth" parent="HUD/MarginContainer/PlayerControls/Control/VBoxContainer/HBoxContainer" index="0"]
+theme_override_styles/normal = SubResource("StyleBoxFlat_fgmfs")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_m3ooj")
+theme_override_styles/hover = SubResource("StyleBoxFlat_u2pij")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_e724c")
 
-[node name="BtnNorth" parent="HUD/MarginContainer/PlayerControls/Control" index="0"]
-theme_override_styles/normal = SubResource("StyleBoxFlat_q5p3a")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_s8s8t")
-theme_override_styles/hover = SubResource("StyleBoxFlat_u02a0")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_n34ds")
+[node name="BtnEast" parent="HUD/MarginContainer/PlayerControls/Control/VBoxContainer/HBoxContainer" index="1"]
+theme_override_styles/normal = SubResource("StyleBoxFlat_57fmn")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_g3wq7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6njd1")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_2es3r")
 
-[node name="BtnSouth" parent="HUD/MarginContainer/PlayerControls/Control" index="1"]
-theme_override_styles/normal = SubResource("StyleBoxFlat_sv1qo")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_bwdut")
-theme_override_styles/hover = SubResource("StyleBoxFlat_kdq8o")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_hoxwi")
+[node name="BtnWest" parent="HUD/MarginContainer/PlayerControls/Control/VBoxContainer/HBoxContainer2" index="0"]
+theme_override_styles/normal = SubResource("StyleBoxFlat_o4a7a")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_b3w8r")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ojhc6")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_wia8x")
 
-[node name="BtnEast" parent="HUD/MarginContainer/PlayerControls/Control" index="2"]
-theme_override_styles/normal = SubResource("StyleBoxFlat_ycfqn")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_2g4pj")
-theme_override_styles/hover = SubResource("StyleBoxFlat_m2yas")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_uuuuj")
-
-[node name="BtnWest" parent="HUD/MarginContainer/PlayerControls/Control" index="3"]
-theme_override_styles/normal = SubResource("StyleBoxFlat_2yuqj")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_kjbv7")
-theme_override_styles/hover = SubResource("StyleBoxFlat_6pvdt")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_0hkfq")
+[node name="BtnSouth" parent="HUD/MarginContainer/PlayerControls/Control/VBoxContainer/HBoxContainer2" index="1"]
+theme_override_styles/normal = SubResource("StyleBoxFlat_ewarj")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_8hhkl")
+theme_override_styles/hover = SubResource("StyleBoxFlat_apywh")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_6uyfv")
 
 [node name="DebugHUD" type="Control" parent="."]
 layout_mode = 3
@@ -273,11 +285,11 @@ script = SubResource("GDScript_q5p3a")
 [node name="Other" type="Node3D" parent="."]
 
 [node name="SunPivot" parent="Other" instance=ExtResource("5_q5p3a")]
-transform = Transform3D(0.71703756, 0.24969909, 0.65077394, -0.3288664, 0.94437623, -3.8348304e-08, -0.6145751, -0.21401778, 0.75927156, 0, 0, 0)
+transform = Transform3D(0.7170376, 0.24969886, 0.65077394, -0.3288662, 0.94437593, -4.136121e-08, -0.6145751, -0.21401758, 0.75927156, 0, 0, 0)
 auto_intensity = true
 hour = 14.58999989827474
 east = 40.59998
-season = -19.199999
+season = -19.19999
 
 [node name="FlatTerrain" parent="Other" instance=ExtResource("3_qldhu")]
 size = 1000.0
@@ -285,7 +297,7 @@ material = ExtResource("4_eqn0a")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Other"]
 script = ExtResource("6_roq0i")
-corner = 2
+corner = 1
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Other"]
 environment = SubResource("Environment_s8s8t")

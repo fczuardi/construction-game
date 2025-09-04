@@ -152,114 +152,118 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("2_w4hr5")
 palette = ExtResource("2_x4854")
-button_palette_order = [NodePath("../Control/BtnNorth"), NodePath("../Control/BtnSouth"), NodePath("../Control/BtnEast"), NodePath("../Control/BtnWest")]
+button_palette_order = [NodePath("../Control/VBoxContainer/HBoxContainer/BtnNorth"), NodePath("../Control/VBoxContainer/HBoxContainer2/BtnSouth"), NodePath("../Control/VBoxContainer/HBoxContainer/BtnEast"), NodePath("../Control/VBoxContainer/HBoxContainer2/BtnWest")]
 
 [node name="Control" type="Control" parent="."]
 anchors_preset = 0
 
-[node name="BtnNorth" type="Button" parent="Control"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(80, 80)
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
 layout_mode = 0
-offset_right = 80.0
-offset_bottom = 80.0
+offset_right = 212.0
+offset_bottom = 212.0
+theme_override_constants/separation = 20
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="BtnNorth" type="Button" parent="Control/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_x4854")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_d6lbv")
 theme_override_styles/hover = SubResource("StyleBoxFlat_ou1op")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_ncw1t")
 
-[node name="TextureRect" type="TextureRect" parent="Control/BtnNorth"]
+[node name="TextureRect" type="TextureRect" parent="Control/VBoxContainer/HBoxContainer/BtnNorth"]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 10.0
-offset_right = 70.0
-offset_bottom = 70.0
+offset_right = 86.0
+offset_bottom = 86.0
 rotation = -0.785398
-pivot_offset = Vector2(30, 30)
+pivot_offset = Vector2(38, 38)
 texture = ExtResource("3_y3xte")
 expand_mode = 1
 
-[node name="BtnSouth" type="Button" parent="Control"]
+[node name="BtnEast" type="Button" parent="Control/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(80, 80)
-layout_mode = 0
-offset_left = 88.0
-offset_top = 88.0
-offset_right = 168.0
-offset_bottom = 168.0
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_fg561")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_ia7xe")
 theme_override_styles/hover = SubResource("StyleBoxFlat_4iule")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_motgb")
 
-[node name="TextureRect" type="TextureRect" parent="Control/BtnSouth"]
-layout_mode = 0
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 70.0
-offset_bottom = 70.0
-rotation = -0.785398
-pivot_offset = Vector2(30, 30)
-texture = ExtResource("3_vcta7")
-expand_mode = 1
+[node name="Label" type="Label" parent="Control/VBoxContainer/HBoxContainer/BtnEast"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -25.0
+offset_right = 25.0
+offset_bottom = 79.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_76wlr")
+theme_override_font_sizes/font_size = 76
+text = "↗"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="BtnEast" type="Button" parent="Control"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="BtnWest" type="Button" parent="Control/VBoxContainer/HBoxContainer2"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(80, 80)
-layout_mode = 0
-offset_left = 88.0
-offset_right = 168.0
-offset_bottom = 80.0
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_1timf")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_wl0bj")
 theme_override_styles/hover = SubResource("StyleBoxFlat_rf3py")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_5a8o6")
 
-[node name="Label" type="Label" parent="Control/BtnEast"]
-custom_minimum_size = Vector2(50, 50)
+[node name="Label" type="Label" parent="Control/VBoxContainer/HBoxContainer2/BtnWest"]
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = 7
 anchor_left = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-offset_left = -25.0
-offset_right = 25.0
-offset_bottom = 79.0
+anchor_bottom = 1.0
+offset_left = -48.0
+offset_top = -96.0
+offset_right = 48.0
 grow_horizontal = 2
+grow_vertical = 0
+rotation = 3.14159
+pivot_offset = Vector2(48, 48)
 theme_override_fonts/font = ExtResource("2_76wlr")
-theme_override_font_sizes/font_size = 62
+theme_override_font_sizes/font_size = 76
 text = "↗"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BtnWest" type="Button" parent="Control"]
+[node name="BtnSouth" type="Button" parent="Control/VBoxContainer/HBoxContainer2"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(80, 80)
-layout_mode = 0
-offset_top = 88.0
-offset_right = 80.0
-offset_bottom = 168.0
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_jxkj2")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_w004m")
 theme_override_styles/hover = SubResource("StyleBoxFlat_5ajcq")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_xe3or")
 
-[node name="Label" type="Label" parent="Control/BtnWest"]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -25.0
-offset_right = 25.0
-offset_bottom = 79.0
-grow_horizontal = 2
-rotation = 3.14159
-pivot_offset = Vector2(25, 40)
-theme_override_fonts/font = ExtResource("2_76wlr")
-theme_override_font_sizes/font_size = 62
-text = "↗"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="TextureRect" type="TextureRect" parent="Control/VBoxContainer/HBoxContainer2/BtnSouth"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 86.0
+offset_bottom = 86.0
+rotation = -0.785398
+pivot_offset = Vector2(38, 38)
+texture = ExtResource("3_vcta7")
+expand_mode = 1
 
 [node name="debug" type="Node" parent="."]
 script = SubResource("GDScript_3mnar")

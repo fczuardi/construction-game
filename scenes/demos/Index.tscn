@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dkb5uhyt7ffpi" path="res://demos/PlayerRunnerDemo.tscn" id="4_2lln2"]
 [ext_resource type="PackedScene" uid="uid://cdsqtykisydyo" path="res://demos/PlayerCamerasDemo.tscn" id="5_2lln2"]
 [ext_resource type="PackedScene" uid="uid://ccjlcg6tf5mev" path="res://demos/SunDemo.tscn" id="5_o6pdu"]
-[ext_resource type="PackedScene" uid="uid://bvqjumns0dvc1" path="res://slices/WalkOnDesert.tscn" id="7_htab0"]
+[ext_resource type="PackedScene" uid="uid://bvqjumns0dvc1" path="res://slices/WalkOnEmptyGround.tscn" id="7_htab0"]
 
 [sub_resource type="GDScript" id="GDScript_rxmpw"]
 resource_name = "demo_index"
@@ -113,7 +113,7 @@ script = SubResource("GDScript_rxmpw")
 demos = Array[PackedScene]([ExtResource("4_2lln2"), ExtResource("2_o6pdu"), ExtResource("5_2lln2"), ExtResource("1_tqvmb"), ExtResource("2_qugmx"), ExtResource("5_o6pdu")])
 demo_names = Array[StringName]([&"Player Body", &"Player Visuals", &"Player Cameras", &"Player Controls", &"Textured Flat Terrain", &"Sun Orbit"])
 slices = Array[PackedScene]([ExtResource("7_htab0")])
-slice_names = Array[StringName]([&"Walk on Desert"])
+slice_names = Array[StringName]([&"Free Walk"])
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_u5qyn")
@@ -130,72 +130,77 @@ current = true
 material_override = SubResource("StandardMaterial3D_ji7lb")
 mesh = SubResource("BoxMesh_tqvmb")
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
-offset_right = 360.0
-offset_bottom = 640.0
+[node name="MarginContainer" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(540, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 60
+theme_override_constants/margin_top = 60
+theme_override_constants/margin_right = 60
+theme_override_constants/margin_bottom = 60
 
-[node name="MarginContainer" type="MarginContainer" parent="CenterContainer"]
-custom_minimum_size = Vector2(0, 580)
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/MarginContainer"]
-layout_mode = 2
-
-[node name="Title" type="Label" parent="CenterContainer/MarginContainer/VBoxContainer"]
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_rxmpw")
-theme_override_font_sizes/font_size = 28
-text = "Contractor Hero Library"
+theme_override_font_sizes/font_size = 55
+text = "Contractor Hero Tests
+
+"
 horizontal_alignment = 1
 
-[node name="spacer" type="Control" parent="CenterContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/MarginContainer/VBoxContainer"]
+[node name="Vbox" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Vbox"]
 layout_mode = 2
-text = "Component Demo: "
 
-[node name="DemoList" type="OptionButton" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Vbox/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Slices:"
+horizontal_alignment = 1
+
+[node name="SliceList" type="OptionButton" parent="MarginContainer/VBoxContainer/Vbox/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 24
+alignment = 1
 
-[node name="PlayBtn" type="Button" parent="CenterContainer/MarginContainer/VBoxContainer"]
+[node name="PlayBtn2" type="Button" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_rxmpw")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 100
 text = "Play"
 
-[node name="spacer2" type="Control" parent="CenterContainer/MarginContainer/VBoxContainer"]
+[node name="spacer3" type="Control" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="CenterContainer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-text = "Vertical Slice: "
+theme_override_font_sizes/font_size = 24
+text = "Demos:"
 
-[node name="SliceList" type="OptionButton" parent="CenterContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="DemoList" type="OptionButton" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 24
 
-[node name="PlayBtn2" type="Button" parent="CenterContainer/MarginContainer/VBoxContainer"]
+[node name="PlayBtn" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_rxmpw")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 24
 text = "Play"
-
-[node name="spacer3" type="Control" parent="CenterContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3

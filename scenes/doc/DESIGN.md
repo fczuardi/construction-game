@@ -1,12 +1,10 @@
 Brainstorm /  reasoning
 
+THIS DOCUMENT IS A DRAFT, MANY THINGS CAN CHANGE
+
 The protagonist of this game is a construction worker, a contractor, with regular human speed,
 regular strengh (maybe a little stronger than average because of physical job), cannot jump 
 high altitudes.
-
-The game interface keeps track of the number of steps "spent" on each stage, as well as the
-number of the collision in obstacles, passing a certain number of steps or collisions do
-causes a game over condition.
 
 The game's main audience is mobile gamers, so mechanics that assumes a controller pad
 or a fullblown keyboard+mouse is out of the scope, this wont be a first person shooter or
@@ -28,4 +26,29 @@ because he was "looking down on the map".
 Each stage will have some points of intersest or goal places that you need to reach with few steps
 few turns and few mistakes, like for example a bathroom booth. At wich time, you can sit, and
 enjoy the pause while reviewing your score.
+
+But the stage of development of this game is still early and the gameplay mechanics are still open
+to be found through experimentation as we go along.
+
+I know that there should be a balance between a full copy of an existing game versus too much
+innovation, having a genre as the basis to work on top of is probably good, and in the case of 
+"contractor hero" my feeling is that the "base" genre is of Endless Runner.
+
+In summary, the overall theme/ambientation is of a construction site, with tower cranes, cones,
+fences, pipes, planks, steel bars, wheelbarrow, containers, cement bags, barriers, etc.
+
+The protagonist will always be moving, so in my search for game mechanics, I am favouring something
+that dont have pauses, the player choices will probably be related to tracing a path to get to
+objectives, making turns and checking map information on a clipboard are elements that is safe
+to assume that will be present.
+
+The innovation part to put on top of the "endless runner" genre is the idea to have more directions
+and more liberty over which path to follow, unlike the limited 3 lanes like subway surfer or hard 90
+degree turns like Temple run.
+
+Another inovation in mechanics might be the introduction of some rythm game elements on top of it,
+the name of the game reminds us of Guitar Hero for example, but the "hero" part can also be something
+else, like an everyday hero, a simple worker that saves the day for example, getting children
+alway from danger for example (and a construction site might have lots of dangerous situations).
+
 

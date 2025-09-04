@@ -14,14 +14,17 @@ config/name="Construction Hero Scenes"
 run/main_scene="uid://ckdfysx2pcv7m"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 
+[autoload]
+
+PoseBus="*res://lib/autoload/PoseBus/pose_bus.gd"
+
 [display]
 
-window/size/viewport_width=360
-window/size/viewport_height=640
-window/size/initial_position_type=0
-window/size/initial_screen=1
-window/stretch/mode="viewport"
-window/stretch/aspect="keep_width"
+window/size/viewport_width=540
+window/size/viewport_height=1200
+window/size/initial_position_type=3
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 window/handheld/orientation=1
 
 [input]
