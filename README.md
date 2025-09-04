@@ -16,6 +16,9 @@ Copyright Fabricio Campos Zuardi - 2025 - 2025
     - Items:
         - ["Pete"](https://www.mixamo.com/#/?page=1&query=pete&type=Character)
         - ["Walking With a Swagger"](https://www.mixamo.com/#/?page=1&query=walk+with+swagger&type=Motion%2CMotionPack)
+        - ["Standing Idle Male](https://www.mixamo.com/#/?page=1&query=standing+idle+male&type=Motion%2CMotionPack)
+        - ["Standard Running"](https://www.mixamo.com/#/?page=1&query=run+standard+running&type=Motion%2CMotionPack)
+        - ["Walk While Texting"](https://www.mixamo.com/#/?page=1&query=walking+while+texting&type=Motion%2CMotionPack)
     - Author: [Adobe Mixamo](https://www.mixamo.com)
     - License: [Adobe Terms of Service](https://www.adobe.com/legal/terms.html#content-files)
 - Obstacles:
@@ -36,6 +39,8 @@ Copyright Fabricio Campos Zuardi - 2025 - 2025
         - Authors: [Remix Design Studio (Wendy Gao and Jimmy Cheung)](https://github.com/Remix-Design)
         - Items:
             - treasure-map-line
+            - ri-run-line
+            - ri-menu-line
         - License: [Apache License 2.0](https://github.com/Remix-Design/remixicon/blob/master/License)
 
 

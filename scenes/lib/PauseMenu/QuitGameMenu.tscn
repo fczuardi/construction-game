@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3 uid="uid://dckxqiei76mb2"]
+
+[ext_resource type="Script" uid="uid://jmks2v7qat1r" path="res://lib/PauseMenu/quit_game_menu.gd" id="1_n52gk"]
+
+[node name="QuitGameMenu" type="VBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
+script = ExtResource("1_n52gk")
+
+[node name="QuitGameButton" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+text = "Quit Game
+"
+
+[node name="QuitGameConfirmDialog" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CancelButton" type="Button" parent="QuitGameConfirmDialog"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Cancel"
+
+[node name="ConfirmationLabel" type="Label" parent="QuitGameConfirmDialog"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Really Quit?"
+horizontal_alignment = 1
+
+[node name="ConfirmButton" type="Button" parent="QuitGameConfirmDialog"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Yes"

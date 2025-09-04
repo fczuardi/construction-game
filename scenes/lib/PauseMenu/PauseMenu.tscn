@@ -1,0 +1,103 @@
+[gd_scene load_steps=8 format=3 uid="uid://cq7lqptnqemxp"]
+
+[ext_resource type="Script" uid="uid://dnm4eml6s5h78" path="res://lib/PauseMenu/pause_menu.gd" id="1_eslww"]
+[ext_resource type="FontFile" uid="uid://bgn10o8bm34q6" path="res://imports/fonts/ArgulaRegular/Arugula20250312-Regular.ttf" id="1_wve36"]
+[ext_resource type="Texture2D" uid="uid://qmwe1ss0eryi" path="res://imports/icons/menu-line_240px.png" id="2_eslww"]
+[ext_resource type="PackedScene" uid="uid://dckxqiei76mb2" path="res://lib/PauseMenu/QuitGameMenu.tscn" id="3_qqgi3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5h556"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.09985284, 0.09985284, 0.09985284, 0.95000005)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+corner_detail = 5
+
+[sub_resource type="InputEventAction" id="InputEventAction_m3ooj"]
+action = &"ui_cancel"
+
+[sub_resource type="Shortcut" id="Shortcut_u2pij"]
+events = [SubResource("InputEventAction_m3ooj")]
+
+[node name="PauseMenu" type="Control"]
+custom_minimum_size = Vector2(480, 1000)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_eslww")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 70
+theme_override_constants/margin_bottom = 0
+
+[node name="PauseMenuPanel" type="Panel" parent="MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5h556")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PauseMenuPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PauseMenuPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="SliceTitleLabel" type="Label" parent="MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_wve36")
+theme_override_font_sizes/font_size = 30
+text = "Free Walk"
+horizontal_alignment = 1
+
+[node name="QuitGameMenu" parent="MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer" instance=ExtResource("3_qqgi3")]
+layout_mode = 2
+
+[node name="PauseMenuBgIcon" type="Label" parent="MarginContainer/PauseMenuPanel"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = -20.0
+offset_right = 127.0
+offset_bottom = 132.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 0.1)
+theme_override_constants/line_spacing = 0
+theme_override_font_sizes/font_size = 107
+text = "🍰"
+
+[node name="PauseBtnContainer" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="PauseMenuButton" type="TextureButton" parent="PauseBtnContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+toggle_mode = true
+action_mode = 0
+shortcut = SubResource("Shortcut_u2pij")
+texture_normal = ExtResource("2_eslww")
+ignore_texture_size = true
+stretch_mode = 4

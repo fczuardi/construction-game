@@ -1,11 +1,18 @@
 ## Ongoing
-- [ ] PlayerVisuals
-    - an animation switcher
+- [ ] [UI] fade-in-ou titles 
+
+
+## Low hanging fruits/quick wins
+- [ ] fix main library initial screen/menu 
+- [ ] [UI] "settings" pause screen
+
 
 ## Known Bugs
-- hover on input buttons make them squared
 
 ## Done
+- [x] [BUG, FIXED] hover on input buttons make them squared
+- [x] Navigation Trail on map
+- [x] PlayerVisuals
 - [x] alternative/better camera switcher
 - [x] refactor playerrunner
 - [x] player_controls_skin adjust after code review

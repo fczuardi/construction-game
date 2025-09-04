@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://bvqjumns0dvc1"]
+[gd_scene load_steps=33 format=3 uid="uid://bvqjumns0dvc1"]
 
 [ext_resource type="Script" uid="uid://bjc7lry15qhrc" path="res://slices/walk_on_desert.gd" id="1_eqn0a"]
 [ext_resource type="PackedScene" uid="uid://br08vaqh6iywm" path="res://lib/PlayerRunner/PlayerRunner.tscn" id="1_f4lrq"]
@@ -6,12 +6,15 @@
 [ext_resource type="PackedScene" uid="uid://jdvf8pm0rn4r" path="res://lib/FlatTerrain/FlatTerrain.tscn" id="3_qldhu"]
 [ext_resource type="Material" uid="uid://db8idpthygrsm" path="res://materials/kenney_prototype_dark_09.tres" id="4_eqn0a"]
 [ext_resource type="Script" uid="uid://cqsox5yy3agv1" path="res://lib/PlayerCameras/player_cameras.gd" id="4_q5p3a"]
+[ext_resource type="PackedScene" uid="uid://cq7lqptnqemxp" path="res://lib/PauseMenu/PauseMenu.tscn" id="5_m3ooj"]
 [ext_resource type="PackedScene" uid="uid://bd5aj5us85j5a" path="res://lib/Sun/Sun.tscn" id="5_q5p3a"]
 [ext_resource type="Script" uid="uid://b03qu5uc3bmit" path="res://lib/DemoExitOverlay/demo_exit_overlay.gd" id="6_roq0i"]
 [ext_resource type="PackedScene" uid="uid://rnjcf0y4dsgm" path="res://lib/PlayerControls/PlayerControls.tscn" id="9_q5p3a"]
 
 [sub_resource type="GDScript" id="GDScript_fgmfs"]
 script/source = "extends MarginContainer
+
+@onready var player_controls: PlayerControls = %PlayerControls
 
 func _ready() -> void:
     get_tree().get_root().size_changed.connect(_resize)
@@ -22,112 +25,112 @@ func _resize():
     self.size = s    
 "
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fgmfs"]
-bg_color = Color(0.2, 0.2, 0.2, 1)
-corner_radius_top_left = 25
-corner_radius_top_right = 25
-corner_radius_bottom_right = 25
-corner_radius_bottom_left = 25
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m3ooj"]
-bg_color = Color(0.18, 0.18, 0.18, 1)
+bg_color = Color(0.2, 0.2, 0.2, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u2pij"]
-bg_color = Color(0.212, 0.212, 0.212, 1)
+bg_color = Color(0.18, 0.18, 0.18, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e724c"]
-bg_color = Color(0.13, 0.13, 0.13, 1)
+bg_color = Color(0.212, 0.212, 0.212, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_57fmn"]
-bg_color = Color(0.2, 0.2, 0.2, 1)
+bg_color = Color(0.13, 0.13, 0.13, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g3wq7"]
-bg_color = Color(0.18, 0.18, 0.18, 1)
+bg_color = Color(0.2, 0.2, 0.2, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6njd1"]
-bg_color = Color(0.212, 0.212, 0.212, 1)
+bg_color = Color(0.18, 0.18, 0.18, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2es3r"]
-bg_color = Color(0.13, 0.13, 0.13, 1)
+bg_color = Color(0.212, 0.212, 0.212, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o4a7a"]
-bg_color = Color(0.2, 0.2, 0.2, 1)
-corner_radius_top_left = 25
-corner_radius_top_right = 25
-corner_radius_bottom_right = 25
-corner_radius_bottom_left = 25
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b3w8r"]
-bg_color = Color(0.18, 0.18, 0.18, 1)
-corner_radius_top_left = 25
-corner_radius_top_right = 25
-corner_radius_bottom_right = 25
-corner_radius_bottom_left = 25
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ojhc6"]
-bg_color = Color(0.212, 0.212, 0.212, 1)
-corner_radius_top_left = 25
-corner_radius_top_right = 25
-corner_radius_bottom_right = 25
-corner_radius_bottom_left = 25
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wia8x"]
 bg_color = Color(0.13, 0.13, 0.13, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ewarj"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b3w8r"]
 bg_color = Color(0.2, 0.2, 0.2, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8hhkl"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ojhc6"]
 bg_color = Color(0.18, 0.18, 0.18, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_apywh"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wia8x"]
 bg_color = Color(0.212, 0.212, 0.212, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ewarj"]
+bg_color = Color(0.13, 0.13, 0.13, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8hhkl"]
+bg_color = Color(0.2, 0.2, 0.2, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_apywh"]
+bg_color = Color(0.18, 0.18, 0.18, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6uyfv"]
+bg_color = Color(0.212, 0.212, 0.212, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ttwjx"]
 bg_color = Color(0.13, 0.13, 0.13, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
@@ -211,24 +214,33 @@ transform = Transform3D(-1, 1.21669e-08, -8.657199e-08, 0, 0.9902681, 0.13917312
 transform = Transform3D(-1, 1.21669e-08, -8.657199e-08, 0, 0.9902681, 0.13917312, 8.742278e-08, 0.13917312, -0.9902681, 0, 1.3, -4)
 
 [node name="HUD" type="Control" parent="."]
+custom_minimum_size = Vector2(540, 1200)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="MarginContainer" type="MarginContainer" parent="HUD"]
-layout_mode = 0
-offset_right = 520.0
-offset_bottom = 1200.0
-theme_override_constants/margin_left = 60
-theme_override_constants/margin_top = 60
-theme_override_constants/margin_right = 60
-theme_override_constants/margin_bottom = 120
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
 script = SubResource("GDScript_fgmfs")
+
+[node name="PauseMenu" parent="HUD/MarginContainer" instance=ExtResource("5_m3ooj")]
+layout_mode = 2
+category_icon = 0
+items_to_hide = Array[NodePath]([NodePath("../PlayerControls")])
 
 [node name="PlayerControls" parent="HUD/MarginContainer" instance=ExtResource("9_q5p3a")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(212, 212)
+custom_minimum_size = Vector2(242, 302)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
@@ -236,30 +248,31 @@ toggle_north = true
 toggle_south = true
 
 [node name="BtnNorth" parent="HUD/MarginContainer/PlayerControls/Control/VBoxContainer/HBoxContainer" index="0"]
-theme_override_styles/normal = SubResource("StyleBoxFlat_fgmfs")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_m3ooj")
-theme_override_styles/hover = SubResource("StyleBoxFlat_u2pij")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_e724c")
+theme_override_styles/normal = SubResource("StyleBoxFlat_m3ooj")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_u2pij")
+theme_override_styles/hover = SubResource("StyleBoxFlat_e724c")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_57fmn")
 
 [node name="BtnEast" parent="HUD/MarginContainer/PlayerControls/Control/VBoxContainer/HBoxContainer" index="1"]
-theme_override_styles/normal = SubResource("StyleBoxFlat_57fmn")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_g3wq7")
-theme_override_styles/hover = SubResource("StyleBoxFlat_6njd1")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_2es3r")
+theme_override_styles/normal = SubResource("StyleBoxFlat_g3wq7")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_6njd1")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2es3r")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_o4a7a")
 
 [node name="BtnWest" parent="HUD/MarginContainer/PlayerControls/Control/VBoxContainer/HBoxContainer2" index="0"]
-theme_override_styles/normal = SubResource("StyleBoxFlat_o4a7a")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_b3w8r")
-theme_override_styles/hover = SubResource("StyleBoxFlat_ojhc6")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_wia8x")
+theme_override_styles/normal = SubResource("StyleBoxFlat_b3w8r")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ojhc6")
+theme_override_styles/hover = SubResource("StyleBoxFlat_wia8x")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_ewarj")
 
 [node name="BtnSouth" parent="HUD/MarginContainer/PlayerControls/Control/VBoxContainer/HBoxContainer2" index="1"]
-theme_override_styles/normal = SubResource("StyleBoxFlat_ewarj")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_8hhkl")
-theme_override_styles/hover = SubResource("StyleBoxFlat_apywh")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_6uyfv")
+theme_override_styles/normal = SubResource("StyleBoxFlat_8hhkl")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_apywh")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6uyfv")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_ttwjx")
 
 [node name="DebugHUD" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
