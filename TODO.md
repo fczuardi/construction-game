@@ -1,5 +1,4 @@
 ## Ongoing
-- [ ] [BUG] main library initial screen/menu are not viewport aware 
 
 
 ## Low hanging fruits/quick wins
@@ -9,6 +8,7 @@
 ## Known Bugs
 
 ## Done
+- [x] [BUG] main library initial screen/menu are not viewport aware 
 - [x] pause menu choose icon
 - [x] [UI] "settings" pause screen
 - [x] [BUG, FIXED] hover on input buttons make them squared

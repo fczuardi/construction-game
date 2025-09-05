@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://cq7lqptnqemxp"]
+[gd_scene load_steps=9 format=3 uid="uid://cq7lqptnqemxp"]
 
 [ext_resource type="Script" uid="uid://dnm4eml6s5h78" path="res://lib/PauseMenu/pause_menu.gd" id="1_eslww"]
 [ext_resource type="FontFile" uid="uid://bgn10o8bm34q6" path="res://imports/fonts/ArgulaRegular/Arugula20250312-Regular.ttf" id="1_wve36"]
 [ext_resource type="Texture2D" uid="uid://qmwe1ss0eryi" path="res://imports/icons/menu-line_240px.png" id="2_eslww"]
 [ext_resource type="PackedScene" uid="uid://dckxqiei76mb2" path="res://lib/PauseMenu/QuitGameMenu.tscn" id="3_qqgi3"]
+[ext_resource type="FontFile" uid="uid://puw8wtbfcgof" path="res://imports/fonts/Noto_Emoji/NotoEmoji-VariableFont_wght.ttf" id="4_woidn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5h556"]
 content_margin_left = 0.0
@@ -43,7 +44,6 @@ theme_override_constants/margin_bottom = 0
 
 [node name="PauseMenuPanel" type="Panel" parent="MarginContainer"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_5h556")
 
@@ -76,12 +76,15 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 20.0
-offset_right = 127.0
-offset_bottom = 152.0
+offset_top = 20.0
+offset_right = 156.0
+offset_bottom = 172.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(1, 1, 1, 0.1)
+theme_override_fonts/font = ExtResource("4_woidn")
 theme_override_font_sizes/font_size = 107
+text = "🔩"
 
 [node name="PauseBtnContainer" type="MarginContainer" parent="."]
 custom_minimum_size = Vector2(40, 40)
