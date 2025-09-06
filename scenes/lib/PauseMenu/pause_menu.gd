@@ -26,8 +26,8 @@ var _category_icon: MenuCategoryIcon = MenuCategoryIcon.NONE
 @export var items_to_hide: Array[NodePath] = []
 
 ## Nodes
+@onready var pause_menu_button: Button = %PauseMenuButton
 @onready var pause_menu_panel: Panel = %PauseMenuPanel
-@onready var pause_menu_button: TextureButton = %PauseMenuButton
 @onready var pause_menu_bg_icon: Label = %PauseMenuBgIcon
 
 ## Lifecycle

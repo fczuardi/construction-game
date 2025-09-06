@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://rnjcf0y4dsgm"]
+[gd_scene load_steps=40 format=3 uid="uid://rnjcf0y4dsgm"]
 
 [ext_resource type="Script" uid="uid://0pf84kqbgh2v" path="res://lib/PlayerControls/player_controls.gd" id="1_3mnar"]
 [ext_resource type="FontFile" uid="uid://bgn10o8bm34q6" path="res://imports/fonts/ArgulaRegular/Arugula20250312-Regular.ttf" id="2_76wlr"]
@@ -7,56 +7,112 @@
 [ext_resource type="Texture2D" uid="uid://buvdvm0v1gqb7" path="res://imports/icons/treasure-map-line_240px.png" id="3_vcta7"]
 [ext_resource type="Texture2D" uid="uid://3fiaiv5vq0s1" path="res://imports/icons/run-line_240px.png" id="3_y3xte"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x4854"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xnfnx"]
 bg_color = Color(0.2, 0.2, 0.2, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d6lbv"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xd0nx"]
 bg_color = Color(0.18, 0.18, 0.18, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ou1op"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_64q3u"]
 bg_color = Color(0.212, 0.212, 0.212, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ncw1t"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6ymj4"]
 bg_color = Color(0.13, 0.13, 0.13, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fg561"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gx1m0"]
 bg_color = Color(0.2, 0.2, 0.2, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ia7xe"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_euja2"]
 bg_color = Color(0.18, 0.18, 0.18, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4iule"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xn72r"]
 bg_color = Color(0.212, 0.212, 0.212, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_motgb"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j2cdc"]
+bg_color = Color(0.13, 0.13, 0.13, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_scrmt"]
+bg_color = Color(0.2, 0.2, 0.2, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eth24"]
+bg_color = Color(0.18, 0.18, 0.18, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c46sm"]
+bg_color = Color(0.212, 0.212, 0.212, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i3hj0"]
+bg_color = Color(0.13, 0.13, 0.13, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kq32s"]
+bg_color = Color(0.2, 0.2, 0.2, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wy1tc"]
+bg_color = Color(0.18, 0.18, 0.18, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_30ddw"]
+bg_color = Color(0.212, 0.212, 0.212, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8wnfu"]
 bg_color = Color(0.13, 0.13, 0.13, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
@@ -91,6 +147,34 @@ corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x4854"]
+bg_color = Color(0.2, 0.2, 0.2, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d6lbv"]
+bg_color = Color(0.18, 0.18, 0.18, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ou1op"]
+bg_color = Color(0.212, 0.212, 0.212, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ncw1t"]
+bg_color = Color(0.13, 0.13, 0.13, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jxkj2"]
 bg_color = Color(0.2, 0.2, 0.2, 1)
 corner_radius_top_left = 25
@@ -113,6 +197,34 @@ corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xe3or"]
+bg_color = Color(0.13, 0.13, 0.13, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fg561"]
+bg_color = Color(0.2, 0.2, 0.2, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ia7xe"]
+bg_color = Color(0.18, 0.18, 0.18, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4iule"]
+bg_color = Color(0.212, 0.212, 0.212, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_motgb"]
 bg_color = Color(0.13, 0.13, 0.13, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
@@ -142,7 +254,14 @@ func _on_player_controls_action_west() -> void:
 
 [node name="PlayerControls" type="Control"]
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1200.0
+offset_bottom = -1200.0
+grow_horizontal = 2
+grow_vertical = 0
 script = ExtResource("1_3mnar")
 
 [node name="PlayerControlsSkin" type="Control" parent="." node_paths=PackedStringArray("button_palette_order")]
@@ -152,32 +271,64 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("2_w4hr5")
 palette = ExtResource("2_x4854")
-button_palette_order = [NodePath("../Control/VBoxContainer/HBoxContainer/BtnNorth"), NodePath("../Control/VBoxContainer/HBoxContainer2/BtnSouth"), NodePath("../Control/VBoxContainer/HBoxContainer/BtnEast"), NodePath("../Control/VBoxContainer/HBoxContainer2/BtnWest")]
+button_palette_order = [NodePath("../Control/MarginContainer/RightSide/RightThumbCluster/HBoxContainer/BtnNorth"), NodePath("../Control/MarginContainer/RightSide/RightThumbCluster/HBoxContainer2/BtnSouth"), NodePath("../Control/MarginContainer/RightSide/RightThumbCluster/HBoxContainer/BtnEast"), NodePath("../Control/MarginContainer/RightSide/RightThumbCluster/HBoxContainer2/BtnWest")]
 
 [node name="Control" type="Control" parent="."]
-anchors_preset = 0
+custom_minimum_size = Vector2(540, 0)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 1
+mouse_behavior_recursive = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
-layout_mode = 0
-offset_right = 212.0
-offset_bottom = 212.0
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 42
+theme_override_constants/margin_right = 42
+theme_override_constants/margin_bottom = 42
+
+[node name="RightSide" type="Control" parent="Control/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="RightThumbCluster" type="VBoxContainer" parent="Control/MarginContainer/RightSide"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -212.0
+offset_top = -212.0
+grow_horizontal = 0
+grow_vertical = 0
 theme_override_constants/separation = 20
 metadata/_edit_use_anchors_ = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer/RightSide/RightThumbCluster"]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="BtnNorth" type="Button" parent="Control/VBoxContainer/HBoxContainer"]
-unique_name_in_owner = true
+[node name="BtnNorth" type="Button" parent="Control/MarginContainer/RightSide/RightThumbCluster/HBoxContainer"]
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_x4854")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_d6lbv")
-theme_override_styles/hover = SubResource("StyleBoxFlat_ou1op")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_ncw1t")
+theme_override_styles/normal = SubResource("StyleBoxFlat_xnfnx")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_xd0nx")
+theme_override_styles/hover = SubResource("StyleBoxFlat_64q3u")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_6ymj4")
 
-[node name="TextureRect" type="TextureRect" parent="Control/VBoxContainer/HBoxContainer/BtnNorth"]
+[node name="TextureRect" type="TextureRect" parent="Control/MarginContainer/RightSide/RightThumbCluster/HBoxContainer/BtnNorth"]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 10.0
@@ -188,16 +339,15 @@ pivot_offset = Vector2(38, 38)
 texture = ExtResource("3_y3xte")
 expand_mode = 1
 
-[node name="BtnEast" type="Button" parent="Control/VBoxContainer/HBoxContainer"]
-unique_name_in_owner = true
+[node name="BtnEast" type="Button" parent="Control/MarginContainer/RightSide/RightThumbCluster/HBoxContainer"]
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_fg561")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_ia7xe")
-theme_override_styles/hover = SubResource("StyleBoxFlat_4iule")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_motgb")
+theme_override_styles/normal = SubResource("StyleBoxFlat_gx1m0")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_euja2")
+theme_override_styles/hover = SubResource("StyleBoxFlat_xn72r")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_j2cdc")
 
-[node name="Label" type="Label" parent="Control/VBoxContainer/HBoxContainer/BtnEast"]
+[node name="Label" type="Label" parent="Control/MarginContainer/RightSide/RightThumbCluster/HBoxContainer/BtnEast"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -212,20 +362,19 @@ text = "↗"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Control/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/MarginContainer/RightSide/RightThumbCluster"]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="BtnWest" type="Button" parent="Control/VBoxContainer/HBoxContainer2"]
-unique_name_in_owner = true
+[node name="BtnWest" type="Button" parent="Control/MarginContainer/RightSide/RightThumbCluster/HBoxContainer2"]
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_1timf")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_wl0bj")
-theme_override_styles/hover = SubResource("StyleBoxFlat_rf3py")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_5a8o6")
+theme_override_styles/normal = SubResource("StyleBoxFlat_scrmt")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_eth24")
+theme_override_styles/hover = SubResource("StyleBoxFlat_c46sm")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_i3hj0")
 
-[node name="Label" type="Label" parent="Control/VBoxContainer/HBoxContainer2/BtnWest"]
+[node name="Label" type="Label" parent="Control/MarginContainer/RightSide/RightThumbCluster/HBoxContainer2/BtnWest"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -245,16 +394,15 @@ text = "↗"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="BtnSouth" type="Button" parent="Control/VBoxContainer/HBoxContainer2"]
-unique_name_in_owner = true
+[node name="BtnSouth" type="Button" parent="Control/MarginContainer/RightSide/RightThumbCluster/HBoxContainer2"]
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_jxkj2")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_w004m")
-theme_override_styles/hover = SubResource("StyleBoxFlat_5ajcq")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_xe3or")
+theme_override_styles/normal = SubResource("StyleBoxFlat_kq32s")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_wy1tc")
+theme_override_styles/hover = SubResource("StyleBoxFlat_30ddw")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_8wnfu")
 
-[node name="TextureRect" type="TextureRect" parent="Control/VBoxContainer/HBoxContainer2/BtnSouth"]
+[node name="TextureRect" type="TextureRect" parent="Control/MarginContainer/RightSide/RightThumbCluster/HBoxContainer2/BtnSouth"]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 10.0
@@ -264,6 +412,258 @@ rotation = -0.785398
 pivot_offset = Vector2(38, 38)
 texture = ExtResource("3_vcta7")
 expand_mode = 1
+
+[node name="LeftSide" type="Control" parent="Control/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="LeftThumbCluster" type="VBoxContainer" parent="Control/MarginContainer/LeftSide"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -212.0
+offset_right = 212.0
+grow_vertical = 0
+theme_override_constants/separation = 20
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer/LeftSide/LeftThumbCluster"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="RotationPivot" type="Control" parent="Control/MarginContainer/LeftSide/LeftThumbCluster/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BtnWest" type="Button" parent="Control/MarginContainer/LeftSide/LeftThumbCluster/HBoxContainer/RotationPivot"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 0
+offset_right = 96.0
+offset_bottom = 96.0
+rotation = 1.5707964
+pivot_offset = Vector2(48, 48)
+theme_override_styles/normal = SubResource("StyleBoxFlat_1timf")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_wl0bj")
+theme_override_styles/hover = SubResource("StyleBoxFlat_rf3py")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_5a8o6")
+
+[node name="Label" type="Label" parent="Control/MarginContainer/LeftSide/LeftThumbCluster/HBoxContainer/RotationPivot/BtnWest"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -48.0
+offset_top = -96.0
+offset_right = 48.0
+grow_horizontal = 2
+grow_vertical = 0
+rotation = 3.14159
+pivot_offset = Vector2(48, 48)
+theme_override_fonts/font = ExtResource("2_76wlr")
+theme_override_font_sizes/font_size = 76
+text = "↗"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BtnNorth" type="Button" parent="Control/MarginContainer/LeftSide/LeftThumbCluster/HBoxContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_x4854")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_d6lbv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ou1op")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_ncw1t")
+
+[node name="TextureRect" type="TextureRect" parent="Control/MarginContainer/LeftSide/LeftThumbCluster/HBoxContainer/BtnNorth"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 86.0
+offset_bottom = 86.0
+rotation = -0.785398
+pivot_offset = Vector2(38, 38)
+texture = ExtResource("3_y3xte")
+expand_mode = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/MarginContainer/LeftSide/LeftThumbCluster"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="BtnSouth" type="Button" parent="Control/MarginContainer/LeftSide/LeftThumbCluster/HBoxContainer2"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_jxkj2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_w004m")
+theme_override_styles/hover = SubResource("StyleBoxFlat_5ajcq")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_xe3or")
+
+[node name="TextureRect" type="TextureRect" parent="Control/MarginContainer/LeftSide/LeftThumbCluster/HBoxContainer2/BtnSouth"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 86.0
+offset_bottom = 86.0
+rotation = -0.785398
+pivot_offset = Vector2(38, 38)
+texture = ExtResource("3_vcta7")
+expand_mode = 1
+
+[node name="RotationPivot" type="Control" parent="Control/MarginContainer/LeftSide/LeftThumbCluster/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BtnEast" type="Button" parent="Control/MarginContainer/LeftSide/LeftThumbCluster/HBoxContainer2/RotationPivot"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 0
+offset_right = 96.0
+offset_bottom = 96.0
+rotation = 1.5707964
+pivot_offset = Vector2(48, 48)
+theme_override_styles/normal = SubResource("StyleBoxFlat_fg561")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ia7xe")
+theme_override_styles/hover = SubResource("StyleBoxFlat_4iule")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_motgb")
+
+[node name="Label" type="Label" parent="Control/MarginContainer/LeftSide/LeftThumbCluster/HBoxContainer2/RotationPivot/BtnEast"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -25.0
+offset_right = 25.0
+offset_bottom = 79.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_76wlr")
+theme_override_font_sizes/font_size = 76
+text = "↗"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BothHands" type="Control" parent="Control/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer/BothHands"]
+custom_minimum_size = Vector2(0, 90)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -96.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 20
+
+[node name="RotationPivot" type="Control" parent="Control/MarginContainer/BothHands/HBoxContainer"]
+custom_minimum_size = Vector2(96, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="BtnWest" type="Button" parent="Control/MarginContainer/BothHands/HBoxContainer/RotationPivot"]
+custom_minimum_size = Vector2(96, 0)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -48.0
+offset_right = 96.0
+offset_bottom = 48.0
+grow_vertical = 2
+rotation = 1.5707964
+pivot_offset = Vector2(48, 48)
+theme_override_styles/normal = SubResource("StyleBoxFlat_1timf")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_wl0bj")
+theme_override_styles/hover = SubResource("StyleBoxFlat_rf3py")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_5a8o6")
+
+[node name="Label" type="Label" parent="Control/MarginContainer/BothHands/HBoxContainer/RotationPivot/BtnWest"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -48.0
+offset_top = -96.0
+offset_right = 48.0
+grow_horizontal = 2
+grow_vertical = 0
+rotation = 3.14159
+pivot_offset = Vector2(48, 48)
+theme_override_fonts/font = ExtResource("2_76wlr")
+theme_override_font_sizes/font_size = 76
+text = "↗"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BtnSouth" type="Button" parent="Control/MarginContainer/BothHands/HBoxContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_jxkj2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_w004m")
+theme_override_styles/hover = SubResource("StyleBoxFlat_5ajcq")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_xe3or")
+
+[node name="TextureRect" type="TextureRect" parent="Control/MarginContainer/BothHands/HBoxContainer/BtnSouth"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 86.0
+offset_bottom = 86.0
+rotation = -0.785398
+pivot_offset = Vector2(38, 38)
+texture = ExtResource("3_vcta7")
+expand_mode = 1
+
+[node name="BtnNorth" type="Button" parent="Control/MarginContainer/BothHands/HBoxContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_x4854")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_d6lbv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ou1op")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_ncw1t")
+
+[node name="TextureRect" type="TextureRect" parent="Control/MarginContainer/BothHands/HBoxContainer/BtnNorth"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 86.0
+offset_bottom = 86.0
+rotation = -0.785398
+pivot_offset = Vector2(38, 38)
+texture = ExtResource("3_y3xte")
+expand_mode = 1
+
+[node name="BtnEast" type="Button" parent="Control/MarginContainer/BothHands/HBoxContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/normal = SubResource("StyleBoxFlat_fg561")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ia7xe")
+theme_override_styles/hover = SubResource("StyleBoxFlat_4iule")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_motgb")
+
+[node name="Label" type="Label" parent="Control/MarginContainer/BothHands/HBoxContainer/BtnEast"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -25.0
+offset_right = 25.0
+offset_bottom = 79.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_76wlr")
+theme_override_font_sizes/font_size = 76
+text = "↗"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="debug" type="Node" parent="."]
 script = SubResource("GDScript_3mnar")

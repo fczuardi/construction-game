@@ -34,6 +34,9 @@ Copyright Fabricio Campos Zuardi - 2025 - 2025
         - Author: [David Jones (Cubic Type)](https://about.cubictype.com/)
         - License: [Human Rights Font Licence Version 1.0](./fonts/License.html)
             - a modified version of the [Hippocratic License 2.0](https://spdx.org/licenses/Hippocratic-2.1.html)
+    - [Noto Emoji](https://fonts.google.com/noto/specimen/Noto+Emoji)
+        - Author: Google LLC
+        - License: [Open Font License 1.1](https://fonts.google.com/noto/specimen/Noto+Emoji/license)
 - Icons:
     - [Remix Icon](https://remixicon.com/)
         - Authors: [Remix Design Studio (Wendy Gao and Jimmy Cheung)](https://github.com/Remix-Design)

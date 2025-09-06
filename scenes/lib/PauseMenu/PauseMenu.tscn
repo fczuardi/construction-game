@@ -1,10 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://cq7lqptnqemxp"]
+[gd_scene load_steps=15 format=3 uid="uid://cq7lqptnqemxp"]
 
 [ext_resource type="Script" uid="uid://dnm4eml6s5h78" path="res://lib/PauseMenu/pause_menu.gd" id="1_eslww"]
 [ext_resource type="FontFile" uid="uid://bgn10o8bm34q6" path="res://imports/fonts/ArgulaRegular/Arugula20250312-Regular.ttf" id="1_wve36"]
 [ext_resource type="Texture2D" uid="uid://qmwe1ss0eryi" path="res://imports/icons/menu-line_240px.png" id="2_eslww"]
 [ext_resource type="PackedScene" uid="uid://dckxqiei76mb2" path="res://lib/PauseMenu/QuitGameMenu.tscn" id="3_qqgi3"]
+[ext_resource type="Script" uid="uid://cofosv5dg2lxa" path="res://lib/PauseMenu/touch_controls_menu.gd" id="3_uwrx0"]
 [ext_resource type="FontFile" uid="uid://puw8wtbfcgof" path="res://imports/fonts/Noto_Emoji/NotoEmoji-VariableFont_wght.ttf" id="4_woidn"]
+[ext_resource type="Texture2D" uid="uid://bqltjr4rulvwc" path="res://imports/icons/arrow-left-s-line_240px.png" id="6_834gu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5h556"]
 content_margin_left = 0.0
@@ -18,6 +20,32 @@ corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 corner_detail = 5
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_uwrx0"]
+texture = ExtResource("2_eslww")
+texture_margin_top = 20.0
+texture_margin_right = 40.0
+texture_margin_bottom = 20.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dqwxq"]
+texture = ExtResource("6_834gu")
+texture_margin_top = 20.0
+texture_margin_right = 40.0
+texture_margin_bottom = 20.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gw048"]
+texture = ExtResource("2_eslww")
+texture_margin_top = 20.0
+texture_margin_right = 40.0
+texture_margin_bottom = 20.0
+modulate_color = Color(0.8, 0.8, 0.8, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_av4h2"]
+texture = ExtResource("6_834gu")
+texture_margin_top = 20.0
+texture_margin_right = 40.0
+texture_margin_bottom = 20.0
+modulate_color = Color(0.8, 0.8, 0.8, 1)
+
 [sub_resource type="InputEventAction" id="InputEventAction_m3ooj"]
 action = &"ui_cancel"
 
@@ -26,7 +54,7 @@ events = [SubResource("InputEventAction_m3ooj")]
 
 [node name="PauseMenu" type="Control"]
 process_mode = 3
-custom_minimum_size = Vector2(480, 1000)
+custom_minimum_size = Vector2(480, 866)
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_eslww")
@@ -44,6 +72,7 @@ theme_override_constants/margin_bottom = 0
 
 [node name="PauseMenuPanel" type="Panel" parent="MarginContainer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_5h556")
 
@@ -69,7 +98,61 @@ theme_override_font_sizes/font_size = 30
 text = "Free Walk"
 horizontal_alignment = 1
 
-[node name="QuitGameMenu" parent="MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer" instance=ExtResource("3_qqgi3")]
+[node name="TouchControlMenuSection" type="VBoxContainer" parent="MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+script = ExtResource("3_uwrx0")
+
+[node name="margin-top" type="Control" parent="MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer/TouchControlMenuSection"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer/TouchControlMenuSection"]
+layout_mode = 2
+
+[node name="ControlsLabel" type="Label" parent="MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer/TouchControlMenuSection/HBoxContainer"]
+layout_mode = 2
+text = "Touch Controls"
+
+[node name="CheckButton" type="CheckButton" parent="MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer/TouchControlMenuSection/HBoxContainer"]
+visible = false
+layout_mode = 2
+button_pressed = true
+
+[node name="ThumbClusterOptionsContainer" type="HBoxContainer" parent="MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer/TouchControlMenuSection"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+
+[node name="LayoutLeftBtn" type="Button" parent="MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer/TouchControlMenuSection/ThumbClusterOptionsContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+text = "Left Thumb"
+
+[node name="LayoutBothBtn" type="Button" parent="MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer/TouchControlMenuSection/ThumbClusterOptionsContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+text = "Both Hands"
+
+[node name="LayoutRightBtn" type="Button" parent="MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer/TouchControlMenuSection/ThumbClusterOptionsContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+button_pressed = true
+text = "Right Thumb"
+
+[node name="separator2" type="Control" parent="MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quit"
+
+[node name="QuitGameMenuSection" parent="MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer" instance=ExtResource("3_qqgi3")]
 layout_mode = 2
 
 [node name="PauseMenuBgIcon" type="Label" parent="MarginContainer/PauseMenuPanel"]
@@ -84,7 +167,6 @@ size_flags_vertical = 0
 theme_override_colors/font_color = Color(1, 1, 1, 0.1)
 theme_override_fonts/font = ExtResource("4_woidn")
 theme_override_font_sizes/font_size = 107
-text = "🔩"
 
 [node name="PauseBtnContainer" type="MarginContainer" parent="."]
 custom_minimum_size = Vector2(40, 40)
@@ -96,12 +178,17 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="PauseMenuButton" type="TextureButton" parent="PauseBtnContainer"]
+[node name="PauseMenuButton" type="Button" parent="PauseBtnContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxTexture_uwrx0")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_dqwxq")
+theme_override_styles/hover = SubResource("StyleBoxTexture_gw048")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_av4h2")
 toggle_mode = true
 action_mode = 0
 shortcut = SubResource("Shortcut_u2pij")
-texture_normal = ExtResource("2_eslww")
-ignore_texture_size = true
-stretch_mode = 4
+icon_alignment = 1
+expand_icon = true

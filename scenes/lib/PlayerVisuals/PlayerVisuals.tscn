@@ -1670,11 +1670,10 @@ parameters/UpperBodyBlend/blend_amount = 0.0
 
 [node name="SubViewport" type="SubViewport" parent="." index="3"]
 size = Vector2i(640, 1024)
+render_target_clear_mode = 1
 
 [node name="TrailCanvas" type="Node2D" parent="SubViewport" index="0"]
 script = ExtResource("4_hddjc")
-meters_per_dot = 5.0
-meters_to_pixels = 10.0
 
 [node name="Debug" type="Control" parent="SubViewport" index="1"]
 visible = false

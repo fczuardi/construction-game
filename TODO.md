@@ -1,13 +1,14 @@
 ## Ongoing
+- [ ] [UI] fade-in-ou titles 
 
 
 ## Low hanging fruits/quick wins
-- [ ] [UI] fade-in-ou titles 
 
 
 ## Known Bugs
 
 ## Done
+- [x] emoji font for menu category icons
 - [x] [BUG] main library initial screen/menu are not viewport aware 
 - [x] pause menu choose icon
 - [x] [UI] "settings" pause screen

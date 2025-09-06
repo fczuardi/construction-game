@@ -16,13 +16,13 @@ const ORIENTATION_PLAYER_UP := true         # sane default
 #---------------------------------------
 
 ## world meters between dots
-@export var meters_per_dot: float = 3.0
+@export var meters_per_dot: float = 21.0
 
 ## map scale
-@export var meters_to_pixels: float = 5.0
+@export var meters_to_pixels: float = 6.0
 
 ## dot size in pixels
-@export var dot_radius_px: float = 2.0
+@export var dot_radius_px: float = 3.0
 
 ## paper color
 @export var paper_color: Color = Color("9e8d6fff") # off-white
@@ -31,7 +31,6 @@ const ORIENTATION_PLAYER_UP := true         # sane default
 @export var dot_color: Color = Color("000641ff")   # BIC pen
 
 # ---- private state
-var _runner: Node = null
 var _origin_world: Vector3
 var _last_mark_world: Vector3
 var _have_origin := false

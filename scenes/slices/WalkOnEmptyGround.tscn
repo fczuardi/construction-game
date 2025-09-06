@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://bvqjumns0dvc1"]
+[gd_scene load_steps=17 format=3 uid="uid://bvqjumns0dvc1"]
 
 [ext_resource type="Script" uid="uid://bjc7lry15qhrc" path="res://slices/walk_on_desert.gd" id="1_eqn0a"]
 [ext_resource type="PackedScene" uid="uid://br08vaqh6iywm" path="res://lib/PlayerRunner/PlayerRunner.tscn" id="1_f4lrq"]
@@ -17,11 +17,16 @@ script/source = "extends MarginContainer
 
 func _ready() -> void:
     get_tree().get_root().size_changed.connect(_resize)
+    EventBus.touch_control_layout_changed.connect(_on_controls_layout_change)
     _resize()
 
 func _resize():
     var s := get_viewport_rect().size
-    self.size = s    
+    self.set_deferred(\"size\", s)    
+
+func _on_controls_layout_change(new_layout):
+    assert(player_controls, \"scene dont have player_controls\")
+    player_controls.set_layout(new_layout)
 "
 
 [sub_resource type="GDScript" id="GDScript_m3ooj"]
@@ -47,118 +52,6 @@ func _go_back():
         get_tree().paused = false
         get_tree().change_scene_to_file(index_scene_path)
 "
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fgmfs"]
-bg_color = Color(0.2, 0.2, 0.2, 1)
-corner_radius_top_left = 25
-corner_radius_top_right = 25
-corner_radius_bottom_right = 25
-corner_radius_bottom_left = 25
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m3ooj"]
-bg_color = Color(0.18, 0.18, 0.18, 1)
-corner_radius_top_left = 25
-corner_radius_top_right = 25
-corner_radius_bottom_right = 25
-corner_radius_bottom_left = 25
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u2pij"]
-bg_color = Color(0.212, 0.212, 0.212, 1)
-corner_radius_top_left = 25
-corner_radius_top_right = 25
-corner_radius_bottom_right = 25
-corner_radius_bottom_left = 25
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e724c"]
-bg_color = Color(0.13, 0.13, 0.13, 1)
-corner_radius_top_left = 25
-corner_radius_top_right = 25
-corner_radius_bottom_right = 25
-corner_radius_bottom_left = 25
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_57fmn"]
-bg_color = Color(0.2, 0.2, 0.2, 1)
-corner_radius_top_left = 25
-corner_radius_top_right = 25
-corner_radius_bottom_right = 25
-corner_radius_bottom_left = 25
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g3wq7"]
-bg_color = Color(0.18, 0.18, 0.18, 1)
-corner_radius_top_left = 25
-corner_radius_top_right = 25
-corner_radius_bottom_right = 25
-corner_radius_bottom_left = 25
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6njd1"]
-bg_color = Color(0.212, 0.212, 0.212, 1)
-corner_radius_top_left = 25
-corner_radius_top_right = 25
-corner_radius_bottom_right = 25
-corner_radius_bottom_left = 25
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2es3r"]
-bg_color = Color(0.13, 0.13, 0.13, 1)
-corner_radius_top_left = 25
-corner_radius_top_right = 25
-corner_radius_bottom_right = 25
-corner_radius_bottom_left = 25
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o4a7a"]
-bg_color = Color(0.2, 0.2, 0.2, 1)
-corner_radius_top_left = 25
-corner_radius_top_right = 25
-corner_radius_bottom_right = 25
-corner_radius_bottom_left = 25
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b3w8r"]
-bg_color = Color(0.18, 0.18, 0.18, 1)
-corner_radius_top_left = 25
-corner_radius_top_right = 25
-corner_radius_bottom_right = 25
-corner_radius_bottom_left = 25
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ojhc6"]
-bg_color = Color(0.212, 0.212, 0.212, 1)
-corner_radius_top_left = 25
-corner_radius_top_right = 25
-corner_radius_bottom_right = 25
-corner_radius_bottom_left = 25
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wia8x"]
-bg_color = Color(0.13, 0.13, 0.13, 1)
-corner_radius_top_left = 25
-corner_radius_top_right = 25
-corner_radius_bottom_right = 25
-corner_radius_bottom_left = 25
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ewarj"]
-bg_color = Color(0.2, 0.2, 0.2, 1)
-corner_radius_top_left = 25
-corner_radius_top_right = 25
-corner_radius_bottom_right = 25
-corner_radius_bottom_left = 25
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8hhkl"]
-bg_color = Color(0.18, 0.18, 0.18, 1)
-corner_radius_top_left = 25
-corner_radius_top_right = 25
-corner_radius_bottom_right = 25
-corner_radius_bottom_left = 25
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_apywh"]
-bg_color = Color(0.212, 0.212, 0.212, 1)
-corner_radius_top_left = 25
-corner_radius_top_right = 25
-corner_radius_bottom_right = 25
-corner_radius_bottom_left = 25
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6uyfv"]
-bg_color = Color(0.13, 0.13, 0.13, 1)
-corner_radius_top_left = 25
-corner_radius_top_right = 25
-corner_radius_bottom_right = 25
-corner_radius_bottom_left = 25
 
 [sub_resource type="GDScript" id="GDScript_eqn0a"]
 script/source = "extends Button
@@ -239,9 +132,11 @@ transform = Transform3D(-1, 1.21669e-08, -8.657199e-08, 0, 0.9902681, 0.13917312
 [node name="HUD" type="Control" parent="."]
 custom_minimum_size = Vector2(540, 1200)
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="HUD"]
 layout_mode = 1
@@ -258,11 +153,8 @@ script = SubResource("GDScript_fgmfs")
 
 [node name="PauseMenu" parent="HUD/MarginContainer" instance=ExtResource("5_m3ooj")]
 layout_mode = 2
+size_flags_vertical = 0
 category_icon = 0
-items_to_hide = Array[NodePath]([NodePath("../PlayerControls")])
-
-[node name="PauseMenuPanel" parent="HUD/MarginContainer/PauseMenu/MarginContainer" index="0"]
-visible = false
 
 [node name="BackToIndex" type="VBoxContainer" parent="HUD/MarginContainer/PauseMenu/MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer" index="1"]
 layout_mode = 2
@@ -273,41 +165,19 @@ layout_mode = 2
 text = "Back To Library Index"
 script = SubResource("GDScript_m3ooj")
 
+[node name="TouchControlMenuSection" parent="HUD/MarginContainer/PauseMenu/MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer" index="2"]
+player_controls_path = NodePath("../../../../../../PlayerControls")
+
 [node name="PauseMenuBgIcon" parent="HUD/MarginContainer/PauseMenu/MarginContainer/PauseMenuPanel" index="1"]
 text = "🍰"
 
 [node name="PlayerControls" parent="HUD/MarginContainer" instance=ExtResource("9_q5p3a")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(242, 302)
 layout_mode = 2
-size_flags_horizontal = 8
 size_flags_vertical = 8
+mouse_filter = 1
 toggle_north = true
 toggle_south = true
-
-[node name="BtnNorth" parent="HUD/MarginContainer/PlayerControls/Control/VBoxContainer/HBoxContainer" index="0"]
-theme_override_styles/normal = SubResource("StyleBoxFlat_fgmfs")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_m3ooj")
-theme_override_styles/hover = SubResource("StyleBoxFlat_u2pij")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_e724c")
-
-[node name="BtnEast" parent="HUD/MarginContainer/PlayerControls/Control/VBoxContainer/HBoxContainer" index="1"]
-theme_override_styles/normal = SubResource("StyleBoxFlat_57fmn")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_g3wq7")
-theme_override_styles/hover = SubResource("StyleBoxFlat_6njd1")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_2es3r")
-
-[node name="BtnWest" parent="HUD/MarginContainer/PlayerControls/Control/VBoxContainer/HBoxContainer2" index="0"]
-theme_override_styles/normal = SubResource("StyleBoxFlat_o4a7a")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_b3w8r")
-theme_override_styles/hover = SubResource("StyleBoxFlat_ojhc6")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_wia8x")
-
-[node name="BtnSouth" parent="HUD/MarginContainer/PlayerControls/Control/VBoxContainer/HBoxContainer2" index="1"]
-theme_override_styles/normal = SubResource("StyleBoxFlat_ewarj")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_8hhkl")
-theme_override_styles/hover = SubResource("StyleBoxFlat_apywh")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_6uyfv")
 
 [node name="DebugHUD" type="Control" parent="."]
 visible = false
@@ -350,4 +220,3 @@ material = ExtResource("4_eqn0a")
 environment = SubResource("Environment_s8s8t")
 
 [editable path="HUD/MarginContainer/PauseMenu"]
-[editable path="HUD/MarginContainer/PlayerControls"]

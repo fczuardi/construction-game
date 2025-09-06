@@ -8,6 +8,7 @@ script = ExtResource("1_n52gk")
 
 [node name="QuitGameButton" type="Button" parent="."]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 size_flags_vertical = 3
 text = "Quit Game
@@ -15,6 +16,7 @@ text = "Quit Game
 
 [node name="QuitGameConfirmDialog" type="HBoxContainer" parent="."]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 size_flags_vertical = 3
 

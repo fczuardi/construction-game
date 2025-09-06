@@ -9,7 +9,6 @@ signal distance_moved(delta_m: float)
 signal obstacle_bumped(collider: Node, surface_normal: Vector3)
 signal turn_buffer_changed(remaining_deg: float)
 signal speed_changed(new_speed: float, mode: String)
-signal pose_updated(world_pos: Vector3, yaw_radians: float)
 
 
 # --- Defaults ------------------------
@@ -39,7 +38,6 @@ var _remaining_turn_deg: float  # +left / -right, consumed over time
 var _speed: float
 var _speed_mode: String = "custom"  # "walk" | "run" | "custom"
 
-@onready var trail_canvas: Node = %Visuals/ClipboardMapViewport/TrailCanvas # adjust path
 var _have_last := false
 
 var _last_pos: Vector3
@@ -57,9 +55,6 @@ func _physics_process(delta: float) -> void:
     if not _have_last:
         _last_pos = pos
         _have_last = true
-    # feed position to the trail canvas
-    #if trail_canvas:
-    #    trail_canvas.update_with_world_position(pos)
     
     # gravity / falling
     if not is_on_floor():

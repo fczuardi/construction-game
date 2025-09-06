@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://ckdfysx2pcv7m"]
+[gd_scene load_steps=17 format=3 uid="uid://ckdfysx2pcv7m"]
 
 [ext_resource type="FontFile" uid="uid://bgn10o8bm34q6" path="res://imports/fonts/ArgulaRegular/Arugula20250312-Regular.ttf" id="1_rxmpw"]
 [ext_resource type="PackedScene" uid="uid://3l7fe0kmxuqf" path="res://demos/PlayerControlsDemo.tscn" id="1_tqvmb"]
@@ -112,18 +112,14 @@ size = Vector3(100, 1, 200)
 resource_name = "resizecontainer"
 script/source = "extends MarginContainer
 
-@onready var player_controls: PlayerControls = %PlayerControls
-
 func _ready() -> void:
     get_tree().get_root().size_changed.connect(_resize)
     _resize()
 
 func _resize():
     var s := get_viewport_rect().size
-    self.size = s    
+    set_deferred(\"size\", s)    
 "
-
-[sub_resource type="SystemFont" id="SystemFont_htab0"]
 
 [node name="Index" type="Node3D"]
 script = SubResource("GDScript_rxmpw")
@@ -174,7 +170,7 @@ layout_mode = 2
 
 [node name="Title" type="Label" parent="HUD/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = SubResource("SystemFont_htab0")
+theme_override_fonts/font = ExtResource("1_rxmpw")
 theme_override_font_sizes/font_size = 41
 text = "Contractor Hero Tests
 
