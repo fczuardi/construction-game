@@ -1,13 +1,16 @@
 ## Ongoing
-- [ ] [UI] fade-in-ou titles 
+- improve performance of the trail code
 
 
 ## Low hanging fruits/quick wins
+- [ ] [UI] fade-in-ou titles 
 
 
 ## Known Bugs
 
 ## Done
+- [x] integrate slices back-to-lib-index buttons/logic into main pausemenu component
+- [x] put bg image on clipboard paper
 - [x] emoji font for menu category icons
 - [x] [BUG] main library initial screen/menu are not viewport aware 
 - [x] pause menu choose icon

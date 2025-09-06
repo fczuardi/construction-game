@@ -1,0 +1,115 @@
+[gd_scene load_steps=5 format=3 uid="uid://nib6iiqudstl"]
+
+[ext_resource type="Texture2D" uid="uid://cl5ayenfo5ovq" path="res://imports/icons/run-line.svg" id="1_s6s7n"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3ibs4"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.88235295, 0.41568628, 0.4704098, 1)
+corner_radius_top_left = 60
+corner_radius_top_right = 60
+corner_radius_bottom_right = 60
+corner_radius_bottom_left = 60
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_woxc3"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.88235295, 0.79643506, 0.41568628, 1)
+corner_radius_top_left = 60
+corner_radius_top_right = 60
+corner_radius_bottom_right = 60
+corner_radius_bottom_left = 60
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5h5xw"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.5051522, 0.88235295, 0.41568628, 1)
+corner_radius_top_left = 60
+corner_radius_top_right = 60
+corner_radius_bottom_right = 60
+corner_radius_bottom_left = 60
+corner_detail = 5
+
+[node name="Objectives" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 410.0
+offset_top = 432.0
+offset_right = 450.0
+offset_bottom = 472.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_3ibs4")
+
+[node name="TextureRect" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 35.0
+offset_bottom = 35.0
+texture = ExtResource("1_s6s7n")
+expand_mode = 2
+
+[node name="Panel2" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 220.0
+offset_top = 582.0
+offset_right = 260.0
+offset_bottom = 622.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_woxc3")
+
+[node name="TextureRect" type="TextureRect" parent="Panel2"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 35.0
+offset_bottom = 35.0
+texture = ExtResource("1_s6s7n")
+expand_mode = 2
+
+[node name="Panel3" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 422.0
+offset_top = 530.0
+offset_right = 462.0
+offset_bottom = 570.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_woxc3")
+
+[node name="TextureRect" type="TextureRect" parent="Panel3"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 35.0
+offset_bottom = 35.0
+texture = ExtResource("1_s6s7n")
+expand_mode = 2
+
+[node name="Panel4" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 228.0
+offset_top = 397.0
+offset_right = 268.0
+offset_bottom = 437.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_5h5xw")
+
+[node name="TextureRect" type="TextureRect" parent="Panel4"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 35.0
+offset_bottom = 35.0
+texture = ExtResource("1_s6s7n")
+expand_mode = 2

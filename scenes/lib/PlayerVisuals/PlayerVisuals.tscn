@@ -1,9 +1,11 @@
-[gd_scene load_steps=33 format=3 uid="uid://dbsb8ppq8g32i"]
+[gd_scene load_steps=35 format=3 uid="uid://dbsb8ppq8g32i"]
 
 [ext_resource type="PackedScene" uid="uid://cdst6dnx33ejv" path="res://imports/models/mixamo/reduced_ch17.blend" id="1_u18do"]
 [ext_resource type="Script" uid="uid://bu3he14ldqp6u" path="res://lib/PlayerVisuals/player_visuals.gd" id="2_a7gl2"]
 [ext_resource type="PackedScene" uid="uid://xk6ne5fdfg4x" path="res://lib/PlayerVisuals/ClipboardProp.tscn" id="3_jffdo"]
 [ext_resource type="Script" uid="uid://c3uhktgwbk3rt" path="res://lib/PlayerVisuals/trail_canvas.gd" id="4_hddjc"]
+[ext_resource type="PackedScene" uid="uid://d0mqwwv0bewc1" path="res://lib/PlayerVisuals/GroundPlan.tscn" id="4_keagr"]
+[ext_resource type="PackedScene" uid="uid://nib6iiqudstl" path="res://lib/PlayerVisuals/Objectives.tscn" id="6_scnq0"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_hddjc"]
 size = Vector2(0.15, 0.24)
@@ -1643,7 +1645,7 @@ transform = Transform3D(-0.06151645, -0.9478457, 0.31273684, 0.73171324, 0.17027
 [node name="ClipboardProp" parent="Armature/Skeleton3D/ClipboardGrip/Clipboard" index="0" instance=ExtResource("3_jffdo")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.08, 0, -0.1)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Armature/Skeleton3D/ClipboardGrip/Clipboard/ClipboardProp" index="1"]
+[node name="Paper" type="MeshInstance3D" parent="Armature/Skeleton3D/ClipboardGrip/Clipboard/ClipboardProp" index="1"]
 transform = Transform3D(-4.371139e-08, -1, -4.371139e-08, 0, -4.371139e-08, 1, -1, 4.371139e-08, 1.9106855e-15, 0, 0.004, 0)
 mesh = SubResource("QuadMesh_hddjc")
 surface_material_override/0 = SubResource("StandardMaterial3D_scnq0")
@@ -1671,11 +1673,9 @@ parameters/UpperBodyBlend/blend_amount = 0.0
 [node name="SubViewport" type="SubViewport" parent="." index="3"]
 size = Vector2i(640, 1024)
 render_target_clear_mode = 1
+render_target_update_mode = 1
 
-[node name="TrailCanvas" type="Node2D" parent="SubViewport" index="0"]
-script = ExtResource("4_hddjc")
-
-[node name="Debug" type="Control" parent="SubViewport" index="1"]
+[node name="Debug" type="Control" parent="SubViewport" index="0"]
 visible = false
 layout_mode = 3
 anchors_preset = 15
@@ -1736,3 +1736,20 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_keagr")
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_scnq0")
+
+[node name="GroundPlan" parent="SubViewport" index="1" instance=ExtResource("4_keagr")]
+
+[node name="TrailCanvas" type="Node2D" parent="SubViewport" index="2" node_paths=PackedStringArray("target_rect", "subvp")]
+script = ExtResource("4_hddjc")
+target_rect = NodePath("../TrailImage")
+subvp = NodePath("..")
+
+[node name="TrailImage" type="TextureRect" parent="SubViewport" index="3"]
+custom_minimum_size = Vector2(640, 1024)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Objectives" parent="SubViewport" index="4" instance=ExtResource("6_scnq0")]

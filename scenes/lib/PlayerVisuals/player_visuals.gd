@@ -85,7 +85,7 @@ func _process(delta: float) -> void:
 
     # 2) Map overlay (upper body)
     if _map_enabled:
-        _anim_tree.set(PATH_MAP_BLEND, 1.0)
+        _anim_tree.set(PATH_MAP_BLEND, 1)
     else:
         _anim_tree.set(PATH_MAP_BLEND, 0.0)
 

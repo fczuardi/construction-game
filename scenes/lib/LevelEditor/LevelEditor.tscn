@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://cf4juia25ihit"]
+
+[node name="LevelEditor" type="Node3D"]

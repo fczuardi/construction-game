@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cq7lqptnqemxp"]
+[gd_scene load_steps=16 format=3 uid="uid://cq7lqptnqemxp"]
 
 [ext_resource type="Script" uid="uid://dnm4eml6s5h78" path="res://lib/PauseMenu/pause_menu.gd" id="1_eslww"]
 [ext_resource type="FontFile" uid="uid://bgn10o8bm34q6" path="res://imports/fonts/ArgulaRegular/Arugula20250312-Regular.ttf" id="1_wve36"]
@@ -19,6 +19,30 @@ corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 corner_detail = 5
+
+[sub_resource type="GDScript" id="GDScript_uwrx0"]
+resource_name = "back to index scene"
+script/source = "extends Button
+
+var index_scene_path: String = \"res://demos/Index.tscn\" 
+
+func _ready() -> void:
+    #check if it came from index or make if invisible otherwise
+    # If we weren't launched from Index, hide this overlay in direct (F6) runs
+    var from_index := get_tree().root.has_meta(\"launched_from_index\") \\
+        and bool(get_tree().root.get_meta(\"launched_from_index\"))
+    if not from_index:
+        visible = false
+        return
+    get_tree().root.set_meta(\"launched_from_index\", false)
+    pressed.connect(_go_back)
+
+    
+func _go_back():
+    if index_scene_path != \"\":
+        get_tree().paused = false
+        get_tree().change_scene_to_file(index_scene_path)
+"
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_uwrx0"]
 texture = ExtResource("2_eslww")
@@ -72,7 +96,6 @@ theme_override_constants/margin_bottom = 0
 
 [node name="PauseMenuPanel" type="Panel" parent="MarginContainer"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_5h556")
 
@@ -143,6 +166,15 @@ size_flags_horizontal = 3
 toggle_mode = true
 button_pressed = true
 text = "Right Thumb"
+
+[node name="BackToIndex" type="VBoxContainer" parent="MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer/BackToIndex"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+text = "Back To Library Index"
+script = SubResource("GDScript_uwrx0")
 
 [node name="separator2" type="Control" parent="MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 20)

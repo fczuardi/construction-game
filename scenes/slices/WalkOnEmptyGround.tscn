@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bvqjumns0dvc1"]
+[gd_scene load_steps=16 format=3 uid="uid://bvqjumns0dvc1"]
 
 [ext_resource type="Script" uid="uid://bjc7lry15qhrc" path="res://slices/walk_on_desert.gd" id="1_eqn0a"]
 [ext_resource type="PackedScene" uid="uid://br08vaqh6iywm" path="res://lib/PlayerRunner/PlayerRunner.tscn" id="1_f4lrq"]
@@ -27,30 +27,6 @@ func _resize():
 func _on_controls_layout_change(new_layout):
     assert(player_controls, \"scene dont have player_controls\")
     player_controls.set_layout(new_layout)
-"
-
-[sub_resource type="GDScript" id="GDScript_m3ooj"]
-resource_name = "back to index scene"
-script/source = "extends Button
-
-var index_scene_path: String = \"res://demos/Index.tscn\" 
-
-func _ready() -> void:
-    #check if it came from index or make if invisible otherwise
-    # If we weren't launched from Index, hide this overlay in direct (F6) runs
-    var from_index := get_tree().root.has_meta(\"launched_from_index\") \\
-        and bool(get_tree().root.get_meta(\"launched_from_index\"))
-    if not from_index:
-        visible = false
-        return
-    get_tree().root.set_meta(\"launched_from_index\", false)
-    pressed.connect(_go_back)
-
-    
-func _go_back():
-    if index_scene_path != \"\":
-        get_tree().paused = false
-        get_tree().change_scene_to_file(index_scene_path)
 "
 
 [sub_resource type="GDScript" id="GDScript_eqn0a"]
@@ -86,7 +62,7 @@ sky_material = SubResource("PhysicalSkyMaterial_eqn0a")
 
 [sub_resource type="Environment" id="Environment_s8s8t"]
 background_mode = 2
-background_energy_multiplier = 5.0
+background_energy_multiplier = 3.5
 sky = SubResource("Sky_q5p3a")
 
 [node name="WalkOnDesert" type="Node3D"]
@@ -108,7 +84,7 @@ stride_scale_min = 0.5
 [node name="FPCams" type="Node3D" parent="PlayerRunner/Visuals"]
 
 [node name="ClipboardWalkCam" type="Camera3D" parent="PlayerRunner/Visuals/FPCams"]
-transform = Transform3D(-1, 8.3144e-08, -2.7015123e-08, 0, 0.30901697, 0.95105654, 8.742278e-08, 0.95105654, -0.30901697, 0.05, 1.6, 0.3)
+transform = Transform3D(-0.9961947, 0.082889944, -0.026932573, 0, 0.30901697, 0.95105654, 0.08715564, 0.9474375, -0.30784106, 0.05, 1.6, 0.3)
 
 [node name="ClipboardRunCam" type="Camera3D" parent="PlayerRunner/Visuals/FPCams"]
 transform = Transform3D(-1, 8.742278e-08, 3.821371e-15, 0, -4.371139e-08, 1, 8.742278e-08, 1, 4.371139e-08, 0, 1.27, 0.5)
@@ -156,16 +132,10 @@ layout_mode = 2
 size_flags_vertical = 0
 category_icon = 0
 
-[node name="BackToIndex" type="VBoxContainer" parent="HUD/MarginContainer/PauseMenu/MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer" index="1"]
-layout_mode = 2
+[node name="PauseMenuPanel" parent="HUD/MarginContainer/PauseMenu/MarginContainer" index="0"]
+visible = false
 
-[node name="Button" type="Button" parent="HUD/MarginContainer/PauseMenu/MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer/BackToIndex"]
-custom_minimum_size = Vector2(0, 80)
-layout_mode = 2
-text = "Back To Library Index"
-script = SubResource("GDScript_m3ooj")
-
-[node name="TouchControlMenuSection" parent="HUD/MarginContainer/PauseMenu/MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer" index="2"]
+[node name="TouchControlMenuSection" parent="HUD/MarginContainer/PauseMenu/MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer" index="1"]
 player_controls_path = NodePath("../../../../../../PlayerControls")
 
 [node name="PauseMenuBgIcon" parent="HUD/MarginContainer/PauseMenu/MarginContainer/PauseMenuPanel" index="1"]
@@ -206,14 +176,15 @@ script = SubResource("GDScript_q5p3a")
 [node name="Other" type="Node3D" parent="."]
 
 [node name="SunPivot" parent="Other" instance=ExtResource("5_q5p3a")]
-transform = Transform3D(0.7170376, 0.24969886, 0.65077394, -0.3288662, 0.94437593, -4.136121e-08, -0.6145751, -0.21401758, 0.75927156, 0, 0, 0)
+transform = Transform3D(-0.78014696, -0.27167585, -0.5635263, -0.3288662, 0.94437593, -2.1759238e-08, 0.5321805, 0.18532479, -0.82609814, 0, 0, 0)
 auto_intensity = true
-hour = 14.58999989827474
-east = 40.59998
+hour = 10.0
+east = -145.69998
 season = -19.19999
 
 [node name="FlatTerrain" parent="Other" instance=ExtResource("3_qldhu")]
 size = 1000.0
+tile = 0.8
 material = ExtResource("4_eqn0a")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Other"]

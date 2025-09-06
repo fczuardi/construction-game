@@ -1,6 +1,7 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
+/scenes/android/
 /scenes/imports/
 /scenes/export_presets.cfg
 /build/
