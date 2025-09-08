@@ -1,3 +1,35 @@
-[gd_scene format=3 uid="uid://cf4juia25ihit"]
+[gd_scene load_steps=5 format=3 uid="uid://cf4juia25ihit"]
+
+[ext_resource type="Texture2D" uid="uid://c3ggid41yoxw5" path="res://imports/textures/Maryborough Courthouse/ground-floor_640x1024.jpg" id="1_0cihh"]
+[ext_resource type="Script" uid="uid://cb1ci7fj8tos" path="res://lib/LevelEditor/scale_checker.gd" id="2_b7fx1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b7fx1"]
+albedo_color = Color(0.52156866, 0.52156866, 0.52156866, 1)
+albedo_texture = ExtResource("1_0cihh")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ydhca"]
+material = SubResource("StandardMaterial3D_b7fx1")
+size = Vector2(26.25, 42)
+center_offset = Vector3(-0.861, 0, 15.38)
 
 [node name="LevelEditor" type="Node3D"]
+
+[node name="MappedGround" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_ydhca")
+
+[node name="ScaleChecker" type="Node3D" parent="." node_paths=PackedStringArray("plan_mesh", "span_a", "span_b")]
+script = ExtResource("2_b7fx1")
+plan_mesh = NodePath("../MappedGround")
+span_a = NodePath("Span A")
+span_b = NodePath("Span B")
+expected_span_feet = 23.0
+
+[node name="Span A" type="Marker3D" parent="ScaleChecker"]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, -0.957, 0, 16.094)
+
+[node name="Span A2" type="Marker3D" parent="ScaleChecker"]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, -0.957, 0, 22.728)
+visible = false
+
+[node name="Span B" type="Marker3D" parent="ScaleChecker"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.928, 0, 22.982)

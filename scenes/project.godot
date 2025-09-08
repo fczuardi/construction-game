@@ -19,7 +19,6 @@ config/icon="uid://bbbwowwiu8pqc"
 
 Enums="*res://lib/autoload/enums.gd"
 EventBus="*res://lib/autoload/event_bus.gd"
-PoseBus="*res://lib/autoload/PoseBus/pose_bus.gd"
 
 [display]
 

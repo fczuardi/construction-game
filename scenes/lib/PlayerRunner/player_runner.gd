@@ -72,7 +72,7 @@ func _physics_process(delta: float) -> void:
     move_and_slide()
 
     # ... update movement & yaw ...
-    PoseBus.pose_updated.emit(global_transform.origin, rotation.y)
+    EventBus.player_runner_pose_updated.emit(global_transform.origin, rotation.y)
 
     # distance event
     var p := global_position

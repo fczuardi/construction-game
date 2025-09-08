@@ -1,22 +1,23 @@
-[gd_scene load_steps=35 format=3 uid="uid://dbsb8ppq8g32i"]
+[gd_scene load_steps=32 format=3 uid="uid://dbsb8ppq8g32i"]
 
 [ext_resource type="PackedScene" uid="uid://cdst6dnx33ejv" path="res://imports/models/mixamo/reduced_ch17.blend" id="1_u18do"]
 [ext_resource type="Script" uid="uid://bu3he14ldqp6u" path="res://lib/PlayerVisuals/player_visuals.gd" id="2_a7gl2"]
 [ext_resource type="PackedScene" uid="uid://xk6ne5fdfg4x" path="res://lib/PlayerVisuals/ClipboardProp.tscn" id="3_jffdo"]
-[ext_resource type="Script" uid="uid://c3uhktgwbk3rt" path="res://lib/PlayerVisuals/trail_canvas.gd" id="4_hddjc"]
 [ext_resource type="PackedScene" uid="uid://d0mqwwv0bewc1" path="res://lib/PlayerVisuals/GroundPlan.tscn" id="4_keagr"]
+[ext_resource type="Image" uid="uid://baueg8w5vv2r1" path="res://imports/icons/circle-fill_12px.png" id="5_cas38"]
+[ext_resource type="Script" uid="uid://cjt8to0ntiyo8" path="res://lib/TrailCanvas/trail_canvas.gd" id="5_scnq0"]
 [ext_resource type="PackedScene" uid="uid://nib6iiqudstl" path="res://lib/PlayerVisuals/Objectives.tscn" id="6_scnq0"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_hddjc"]
 size = Vector2(0.15, 0.24)
-center_offset = Vector3(0, -0.05, 0)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_keagr"]
-viewport_path = NodePath("SubViewport")
+viewport_path = NodePath("SubViewportContainer/SubViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_scnq0"]
 resource_local_to_scene = true
 albedo_texture = SubResource("ViewportTexture_keagr")
+uv1_scale = Vector3(1, 1, 0)
 
 [sub_resource type="Animation" id="Animation_mohhg"]
 resource_name = "IdleStanding_2"
@@ -1527,54 +1528,6 @@ nodes/UpperBodyBlend/node = SubResource("AnimationNodeBlend2_ip36b")
 nodes/UpperBodyBlend/position = Vector2(580, 40)
 node_connections = [&"output", 0, &"UpperBodyBlend", &"StrideScale", 0, &"Locomotion", &"UpperBodyBlend", 0, &"StrideScale", &"UpperBodyBlend", 1, &"MapUpperBody"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_07gks"]
-content_margin_left = 0.0
-content_margin_top = 0.0
-content_margin_right = 0.0
-content_margin_bottom = 0.0
-bg_color = Color(0.16131975, 0.21443096, 0.6597881, 0.6)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cas38"]
-content_margin_left = 0.0
-content_margin_top = 0.0
-content_margin_right = 0.0
-content_margin_bottom = 0.0
-bg_color = Color(1, 0, 0, 0.6)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_keagr"]
-content_margin_left = 0.0
-content_margin_top = 0.0
-content_margin_right = 0.0
-content_margin_bottom = 0.0
-bg_color = Color(0.9370526, 1, 0, 0.6)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_scnq0"]
-content_margin_left = 0.0
-content_margin_top = 0.0
-content_margin_right = 0.0
-content_margin_bottom = 0.0
-bg_color = Color(0.17651413, 0.65882355, 0.16078429, 0.6)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
-
 [node name="reduced_ch17" instance=ExtResource("1_u18do")]
 script = ExtResource("2_a7gl2")
 stride_scale_max = 1.0
@@ -1645,9 +1598,13 @@ transform = Transform3D(-0.06151645, -0.9478457, 0.31273684, 0.73171324, 0.17027
 [node name="ClipboardProp" parent="Armature/Skeleton3D/ClipboardGrip/Clipboard" index="0" instance=ExtResource("3_jffdo")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.08, 0, -0.1)
 
-[node name="Paper" type="MeshInstance3D" parent="Armature/Skeleton3D/ClipboardGrip/Clipboard/ClipboardProp" index="1"]
-transform = Transform3D(-4.371139e-08, -1, -4.371139e-08, 0, -4.371139e-08, 1, -1, 4.371139e-08, 1.9106855e-15, 0, 0.004, 0)
+[node name="PaperPivot" type="Node3D" parent="Armature/Skeleton3D/ClipboardGrip/Clipboard/ClipboardProp" index="1"]
+transform = Transform3D(-4.371139e-08, 1, 4.371139e-08, 0, -4.371139e-08, 1, 1, 4.371139e-08, 1.9106855e-15, 0.05, 0.004, 0)
+
+[node name="Paper" type="MeshInstance3D" parent="Armature/Skeleton3D/ClipboardGrip/Clipboard/ClipboardProp/PaperPivot" index="0"]
+transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 0, 0, 0)
 mesh = SubResource("QuadMesh_hddjc")
+skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_scnq0")
 
 [node name="AnimationPlayer" parent="." index="1"]
@@ -1670,86 +1627,35 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/StrideScale/scale = 1.0
 parameters/UpperBodyBlend/blend_amount = 0.0
 
-[node name="SubViewport" type="SubViewport" parent="." index="3"]
-size = Vector2i(640, 1024)
-render_target_clear_mode = 1
-render_target_update_mode = 1
-
-[node name="Debug" type="Control" parent="SubViewport" index="0"]
-visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/Debug" index="0"]
-custom_minimum_size = Vector2(300, 600)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="SubViewport/Debug/VBoxContainer" index="0"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Azul" type="Panel" parent="SubViewport/Debug/VBoxContainer/HBoxContainer2" index="0"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_07gks")
-
-[node name="Label" type="Label" parent="SubViewport/Debug/VBoxContainer/HBoxContainer2/Azul" index="0"]
-layout_mode = 1
-anchors_preset = 13
-anchor_left = 0.5
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -72.5
-offset_right = 72.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 28
-text = "Azul 12345"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Panel" type="Panel" parent="SubViewport/Debug/VBoxContainer/HBoxContainer2" index="1"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_cas38")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="SubViewport/Debug/VBoxContainer" index="1"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Amarelo" type="Panel" parent="SubViewport/Debug/VBoxContainer/HBoxContainer" index="0"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_keagr")
-
-[node name="Panel2" type="Panel" parent="SubViewport/Debug/VBoxContainer/HBoxContainer" index="1"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_scnq0")
-
-[node name="GroundPlan" parent="SubViewport" index="1" instance=ExtResource("4_keagr")]
-
-[node name="TrailCanvas" type="Node2D" parent="SubViewport" index="2" node_paths=PackedStringArray("target_rect", "subvp")]
-script = ExtResource("4_hddjc")
-target_rect = NodePath("../TrailImage")
-subvp = NodePath("..")
-
-[node name="TrailImage" type="TextureRect" parent="SubViewport" index="3"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." index="3"]
 custom_minimum_size = Vector2(640, 1024)
+offset_right = 640.0
+offset_bottom = 1024.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" index="0"]
+handle_input_locally = false
+size = Vector2i(640, 1024)
+render_target_update_mode = 4
+script = ExtResource("5_scnq0")
+dot_stamp = ExtResource("5_cas38")
+
+[node name="GroundPlan" parent="SubViewportContainer/SubViewport" index="0" instance=ExtResource("4_keagr")]
+custom_minimum_size = Vector2(0, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TrailLayer" type="TextureRect" parent="SubViewportContainer/SubViewport" index="1"]
+unique_name_in_owner = true
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Objectives" parent="SubViewport" index="4" instance=ExtResource("6_scnq0")]
+[node name="Objectives" parent="SubViewportContainer/SubViewport" index="2" instance=ExtResource("6_scnq0")]
+visible = false

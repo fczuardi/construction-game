@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bvqjumns0dvc1"]
+[gd_scene load_steps=18 format=3 uid="uid://bvqjumns0dvc1"]
 
 [ext_resource type="Script" uid="uid://bjc7lry15qhrc" path="res://slices/walk_on_desert.gd" id="1_eqn0a"]
 [ext_resource type="PackedScene" uid="uid://br08vaqh6iywm" path="res://lib/PlayerRunner/PlayerRunner.tscn" id="1_f4lrq"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cq7lqptnqemxp" path="res://lib/PauseMenu/PauseMenu.tscn" id="5_m3ooj"]
 [ext_resource type="PackedScene" uid="uid://bd5aj5us85j5a" path="res://lib/Sun/Sun.tscn" id="5_q5p3a"]
 [ext_resource type="PackedScene" uid="uid://rnjcf0y4dsgm" path="res://lib/PlayerControls/PlayerControls.tscn" id="9_q5p3a"]
+[ext_resource type="PackedScene" uid="uid://cf4juia25ihit" path="res://lib/LevelEditor/LevelEditor.tscn" id="10_m3ooj"]
 
 [sub_resource type="GDScript" id="GDScript_fgmfs"]
 script/source = "extends MarginContainer
@@ -64,6 +65,19 @@ sky_material = SubResource("PhysicalSkyMaterial_eqn0a")
 background_mode = 2
 background_energy_multiplier = 3.5
 sky = SubResource("Sky_q5p3a")
+
+[sub_resource type="GDScript" id="GDScript_m3ooj"]
+resource_name = "leveleditor"
+script/source = "extends Node3D
+
+@onready var sub_viewport: TrailCanvas = $\"../../PlayerRunner/Visuals/SubViewportContainer/SubViewport\"
+
+func _on_ground_plan_toggled(toggled_on: bool) -> void:
+    visible = toggled_on
+
+func _on_clear_trail_pressed() -> void:
+    sub_viewport.clear_trail()
+"
 
 [node name="WalkOnDesert" type="Node3D"]
 script = ExtResource("1_eqn0a")
@@ -132,9 +146,6 @@ layout_mode = 2
 size_flags_vertical = 0
 category_icon = 0
 
-[node name="PauseMenuPanel" parent="HUD/MarginContainer/PauseMenu/MarginContainer" index="0"]
-visible = false
-
 [node name="TouchControlMenuSection" parent="HUD/MarginContainer/PauseMenu/MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer" index="1"]
 player_controls_path = NodePath("../../../../../../PlayerControls")
 
@@ -189,5 +200,13 @@ material = ExtResource("4_eqn0a")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Other"]
 environment = SubResource("Environment_s8s8t")
+
+[node name="LevelEditor" parent="Other" instance=ExtResource("10_m3ooj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
+visible = false
+script = SubResource("GDScript_m3ooj")
+
+[connection signal="toggled" from="HUD/MarginContainer/PauseMenu/MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer/DebugMenuSection/HBoxContainer2/GroundPlan" to="Other/LevelEditor" method="_on_ground_plan_toggled"]
+[connection signal="pressed" from="HUD/MarginContainer/PauseMenu/MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer/DebugMenuSection/HBoxContainer2/ClearTrail" to="Other/LevelEditor" method="_on_clear_trail_pressed"]
 
 [editable path="HUD/MarginContainer/PauseMenu"]
