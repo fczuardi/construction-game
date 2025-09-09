@@ -15,24 +15,23 @@ Copyright Fabricio Campos Zuardi - 2025 - 2025
 - Character and Animations:
     - Items:
         - ["Pete"](https://www.mixamo.com/#/?page=1&query=pete&type=Character)
-        - ["Walking With a Swagger"](https://www.mixamo.com/#/?page=1&query=walk+with+swagger&type=Motion%2CMotionPack)
-        - ["Standing Idle Male](https://www.mixamo.com/#/?page=1&query=standing+idle+male&type=Motion%2CMotionPack)
-        - ["Standard Running"](https://www.mixamo.com/#/?page=1&query=run+standard+running&type=Motion%2CMotionPack)
-        - ["Walk While Texting"](https://www.mixamo.com/#/?page=1&query=walking+while+texting&type=Motion%2CMotionPack)
+        - ["Walking With A Swagger"](https://www.mixamo.com/#/?page=1&query=male+swagger)
+        - ["Male Walking While Texting On A Smartphone"](https://www.mixamo.com/#/?page=1&query=texting+walking+male)
+        - ["Male Weighted Run"](https://www.mixamo.com/#/?page=1&query=weighted)
+        - ["Brief Stumble While Jogging"](https://www.mixamo.com/#/?page=1&query=brief+stumble+jog)
+        - ["Walk To Tripping And Falling"](https://www.mixamo.com/#/?page=1&query=walk+tripping+falling)
     - Author: [Adobe Mixamo](https://www.mixamo.com)
     - License: [Adobe Terms of Service](https://www.adobe.com/legal/terms.html#content-files)
-- Obstacles:
-        - [Low Poly Construction Pack](https://lowpolyassets.itch.io/low-poly-construction-pack)
-            - Author: [LowPolyAssets](https://lowpolyassets.itch.io/)
-            - License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/)
 - Textures:
     - [Architectural plan of the Public Offices and Court House, Maryborough, circa 1888](https://en.wikipedia.org/wiki/File:Architectural_plan_of_the_Public_Offices_and_Court_House,_Maryborough,_circa_1888.jpg)
-        - Author: Unknown
+        - Author: [Francis Drummond Greville Stanley](https://en.wikipedia.org/wiki/Francis_Drummond_Greville_Stanley)
         - Published by: [State Archives of Queensland](https://www.qld.gov.au/recreation/arts/heritage/archives)
         - License: Public Domain
-    - [Rocky Trail 02](https://polyhaven.com/a/rocky_trail_02)
-        - Author: [Amal Kumar](https://polyhaven.com/all?a=Amal%20Kumar)
+    - [Photorealistic Texture Pack 3](https://screamingbrainstudios.itch.io/photorealistic-texture-pack-3)
+        - Author: [Screaming Brain Studios](https://screamingbrainstudios.com/)
         - License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/)
+        - Items:
+            - Ground/PTP-Ground_08
 - Fonts:
     - [Argula Font](https://drj11.itch.io/arugula-font)
         - Author: [David Jones (Cubic Type)](https://about.cubictype.com/)
@@ -44,17 +43,30 @@ Copyright Fabricio Campos Zuardi - 2025 - 2025
 - Icons:
     - [Remix Icon](https://remixicon.com/)
         - Authors: [Remix Design Studio (Wendy Gao and Jimmy Cheung)](https://github.com/Remix-Design)
+        - License: [Apache License 2.0](https://github.com/Remix-Design/remixicon/blob/master/License)
         - Items:
             - treasure-map-line
             - ri-run-line
             - ri-menu-line
             - circle-fill
-        - License: [Apache License 2.0](https://github.com/Remix-Design/remixicon/blob/master/License)
 
 
 -----
 
 #### Not (yet) used / Research
+- Obstacles:
+        - [Low Poly Construction Pack](https://lowpolyassets.itch.io/low-poly-construction-pack)
+            - Author: [LowPolyAssets](https://lowpolyassets.itch.io/)
+            - License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/)
+- Textures:
+    - [Tiny Texture Pack 3](https://screamingbrainstudios.itch.io/tiny-texture-pack-3)
+        - Author: [Screaming Brain Studios](https://screamingbrainstudios.com/)
+        - License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/)
+        -Items:
+            - Terrain/Terrain_21
+    - [Rocky Trail 02](https://polyhaven.com/a/rocky_trail_02)
+        - Author: [Amal Kumar](https://polyhaven.com/all?a=Amal%20Kumar)
+        - License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/)
 
     - Icon Font
     - Maki - https://labs.mapbox.com/maki-icons/

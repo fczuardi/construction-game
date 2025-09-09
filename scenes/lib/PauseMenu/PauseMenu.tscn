@@ -96,7 +96,6 @@ theme_override_constants/margin_bottom = 0
 
 [node name="PauseMenuPanel" type="Panel" parent="MarginContainer"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_5h556")
 
@@ -120,7 +119,6 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_wve36")
 theme_override_font_sizes/font_size = 30
-text = "Free Walk"
 horizontal_alignment = 1
 
 [node name="TouchControlMenuSection" type="VBoxContainer" parent="MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer"]
@@ -168,33 +166,6 @@ size_flags_horizontal = 3
 toggle_mode = true
 button_pressed = true
 text = "Right Thumb"
-
-[node name="DebugMenuSection" type="VBoxContainer" parent="MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer"]
-layout_mode = 2
-script = ExtResource("3_uwrx0")
-
-[node name="margin-top" type="Control" parent="MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer/DebugMenuSection"]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-
-[node name="Label" type="Label" parent="MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer/DebugMenuSection"]
-layout_mode = 2
-text = "Debug"
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer/DebugMenuSection"]
-custom_minimum_size = Vector2(0, 80)
-layout_mode = 2
-
-[node name="GroundPlan" type="Button" parent="MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer/DebugMenuSection/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-toggle_mode = true
-text = "Plan on the Ground"
-
-[node name="ClearTrail" type="Button" parent="MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer/DebugMenuSection/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Clear Trail"
 
 [node name="BackToIndex" type="VBoxContainer" parent="MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer"]
 layout_mode = 2

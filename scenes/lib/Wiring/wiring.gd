@@ -6,6 +6,7 @@ extends Node
 @export var controls: PlayerControls
 @export var character_body: PlayerRunner
 @export var character_visuals: PlayerVisuals
+@export var new_character_visuals: PlayerVisuals2
 @export var cameras: PlayerCameras
 
 ## wire
@@ -31,7 +32,7 @@ func _exit_tree() -> void:
 
 func _on_size_changed():
     var s := hud_container.get_viewport_rect().size
-    self.set_deferred("size", s)    
+    hud_container.set_deferred("size", s)    
 
 func _on_controls_layout_change(new_layout):
     controls.set_layout(new_layout)

@@ -1,0 +1,161 @@
+[gd_resource type="AnimationNodeBlendTree" load_steps=21 format=3 uid="uid://b5e4i51t6b1p0"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1pben"]
+animation = &"UpperBody/PointForward"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_iqcko"]
+animation = &"WalkScale/SwaggerWalk"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5ucwi"]
+animation = &"WalkScale/MaleWeightedRunning"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_r2xah"]
+animation = &"WalkScale/RunningLeaningBackAndForth"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hc2ft"]
+animation = &"Hits/BriefStumbleWhileJogging"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wh0al"]
+animation = &"Hits/WalkToTrippingAnsFalling"
+use_custom_timeline = true
+timeline_length = 1.35
+stretch_time_scale = false
+start_offset = 0.7000000000000028
+loop_mode = 0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_byl04"]
+animation = &"UpperBody/PointBackwards"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_33xuw"]
+animation = &"Hits/RollToSprint"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xn5mo"]
+animation = &"UpperBody/ArmsStretching"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_70bq1"]
+animation = &"WalkScale/StandingIdleMale"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cgxdm"]
+animation = &"UpperBody/WalkWhileTextingOnASmartphone"
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_33xuw"]
+xfade_time = 0.4
+input_0/name = "Standing"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "Walking"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+input_2/name = "Jogging"
+input_2/auto_advance = false
+input_2/break_loop_at_end = false
+input_2/reset = true
+input_3/name = "Sprinting"
+input_3/auto_advance = false
+input_3/break_loop_at_end = false
+input_3/reset = true
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_xn5mo"]
+xfade_time = 0.2
+allow_transition_to_self = true
+input_0/name = "Moving"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "Falling"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_1pben"]
+fadein_time = 0.5
+fadeout_time = 0.5
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_iqcko"]
+input_0/name = "Stumble"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "Roll"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_1pben"]
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_mggjd"]
+filter_enabled = true
+filters = ["Skeleton3D:mixamorig1_Head", "Skeleton3D:mixamorig1_LeftArm", "Skeleton3D:mixamorig1_LeftForeArm", "Skeleton3D:mixamorig1_LeftHand", "Skeleton3D:mixamorig1_LeftHandIndex1", "Skeleton3D:mixamorig1_LeftHandIndex2", "Skeleton3D:mixamorig1_LeftHandIndex3", "Skeleton3D:mixamorig1_LeftHandMiddle1", "Skeleton3D:mixamorig1_LeftHandMiddle2", "Skeleton3D:mixamorig1_LeftHandMiddle3", "Skeleton3D:mixamorig1_LeftHandPinky1", "Skeleton3D:mixamorig1_LeftHandPinky2", "Skeleton3D:mixamorig1_LeftHandPinky3", "Skeleton3D:mixamorig1_LeftHandRing1", "Skeleton3D:mixamorig1_LeftHandRing2", "Skeleton3D:mixamorig1_LeftHandRing3", "Skeleton3D:mixamorig1_LeftHandThumb1", "Skeleton3D:mixamorig1_LeftHandThumb2", "Skeleton3D:mixamorig1_LeftHandThumb3", "Skeleton3D:mixamorig1_LeftShoulder", "Skeleton3D:mixamorig1_Neck", "Skeleton3D:mixamorig1_RightArm", "Skeleton3D:mixamorig1_RightForeArm", "Skeleton3D:mixamorig1_RightHand", "Skeleton3D:mixamorig1_RightHandIndex1", "Skeleton3D:mixamorig1_RightHandIndex2", "Skeleton3D:mixamorig1_RightHandIndex3", "Skeleton3D:mixamorig1_RightHandMiddle1", "Skeleton3D:mixamorig1_RightHandMiddle2", "Skeleton3D:mixamorig1_RightHandMiddle3", "Skeleton3D:mixamorig1_RightHandPinky1", "Skeleton3D:mixamorig1_RightHandPinky2", "Skeleton3D:mixamorig1_RightHandPinky3", "Skeleton3D:mixamorig1_RightHandRing1", "Skeleton3D:mixamorig1_RightHandRing2", "Skeleton3D:mixamorig1_RightHandRing3", "Skeleton3D:mixamorig1_RightHandThumb1", "Skeleton3D:mixamorig1_RightHandThumb2", "Skeleton3D:mixamorig1_RightHandThumb3", "Skeleton3D:mixamorig1_RightShoulder", "Skeleton3D:mixamorig1_Spine2"]
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_5ucwi"]
+xfade_time = 0.4
+input_0/name = "Reading"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_mggjd"]
+sync = true
+fadein_time = 0.5
+fadeout_time = 0.5
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_6qa8w"]
+xfade_time = 0.5
+input_0/name = "Stretch"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = false
+input_1/name = "PointForward"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = false
+input_2/name = "PointBackwards"
+input_2/auto_advance = false
+input_2/break_loop_at_end = false
+input_2/reset = false
+
+[resource]
+nodes/output/position = Vector2(620, -560)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_70bq1")
+nodes/Animation/position = Vector2(-1700, -380)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_iqcko")
+"nodes/Animation 2/position" = Vector2(-1700, -140)
+"nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_5ucwi")
+"nodes/Animation 3/position" = Vector2(-1700, 120)
+"nodes/Animation 4/node" = SubResource("AnimationNodeAnimation_r2xah")
+"nodes/Animation 4/position" = Vector2(-1700, 360)
+nodes/MovementBase/node = SubResource("AnimationNodeTransition_33xuw")
+nodes/MovementBase/position = Vector2(-1340, -180)
+"nodes/Animation 7/node" = SubResource("AnimationNodeAnimation_byl04")
+"nodes/Animation 7/position" = Vector2(-1060, -760)
+"nodes/Animation 6/node" = SubResource("AnimationNodeAnimation_wh0al")
+"nodes/Animation 6/position" = Vector2(-140, -480)
+"nodes/Animation 5/node" = SubResource("AnimationNodeAnimation_hc2ft")
+"nodes/Animation 5/position" = Vector2(-1060, 60)
+nodes/MovementEnd/node = SubResource("AnimationNodeTransition_xn5mo")
+nodes/MovementEnd/position = Vector2(160, -540)
+nodes/StrideScale/node = SubResource("AnimationNodeTimeScale_1pben")
+nodes/StrideScale/position = Vector2(400, -560)
+nodes/MapState/node = SubResource("AnimationNodeAnimation_cgxdm")
+nodes/MapState/position = Vector2(-1720, -660)
+nodes/UpperBody/node = SubResource("AnimationNodeBlend2_mggjd")
+nodes/UpperBody/position = Vector2(-140, -240)
+"nodes/Animation 8/node" = SubResource("AnimationNodeAnimation_33xuw")
+"nodes/Animation 8/position" = Vector2(-1000, 240)
+nodes/MovementEventTrigger/node = SubResource("AnimationNodeOneShot_1pben")
+nodes/MovementEventTrigger/position = Vector2(-500, -100)
+nodes/UpperBodyEvents/node = SubResource("AnimationNodeTransition_6qa8w")
+nodes/UpperBodyEvents/position = Vector2(-720, -720)
+"nodes/Animation 9/node" = SubResource("AnimationNodeAnimation_xn5mo")
+"nodes/Animation 9/position" = Vector2(-1040, -1080)
+nodes/UpperBodyEventTrigger/node = SubResource("AnimationNodeOneShot_mggjd")
+nodes/UpperBodyEventTrigger/position = Vector2(-500, -400)
+"nodes/Animation 10/node" = SubResource("AnimationNodeAnimation_1pben")
+"nodes/Animation 10/position" = Vector2(-1060, -920)
+nodes/MovementEvents/node = SubResource("AnimationNodeTransition_iqcko")
+nodes/MovementEvents/position = Vector2(-700, 80)
+nodes/UpperBodyBase/node = SubResource("AnimationNodeTransition_5ucwi")
+nodes/UpperBodyBase/position = Vector2(-1340, -680)
+node_connections = [&"output", 0, &"StrideScale", &"MovementBase", 0, &"Animation", &"MovementBase", 1, &"Animation 2", &"MovementBase", 2, &"Animation 3", &"MovementBase", 3, &"Animation 4", &"MovementEnd", 0, &"UpperBody", &"MovementEnd", 1, &"Animation 6", &"StrideScale", 0, &"MovementEnd", &"UpperBody", 0, &"MovementEventTrigger", &"UpperBody", 1, &"UpperBodyEventTrigger", &"MovementEventTrigger", 0, &"MovementBase", &"MovementEventTrigger", 1, &"MovementEvents", &"UpperBodyEvents", 0, &"Animation 9", &"UpperBodyEvents", 1, &"Animation 10", &"UpperBodyEvents", 2, &"Animation 7", &"UpperBodyEventTrigger", 0, &"UpperBodyBase", &"UpperBodyEventTrigger", 1, &"UpperBodyEvents", &"MovementEvents", 0, &"Animation 5", &"MovementEvents", 1, &"Animation 8", &"UpperBodyBase", 0, &"MapState"]

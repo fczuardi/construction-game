@@ -1,12 +1,20 @@
-## Ongoing
+## Daily Milestone
 
-- valas
+- September 10th
+    - [ ] Trenches on all walls of the Maryborough Courthouse
+    - [ ] Playable slice over this terrain with stumble and fall working
+    - [ ] Extended goal: Wood planks on the door positions
+
+## Ongoing
 
 ## Low hanging fruits/quick wins
 
 ## Known Bugs
 
 ## Done
+- [x] update README with new used animations
+- [x] refactor player_visuals
+- [x] valas
 - [x] improve performance of the trail code
 - [x] integrate slices back-to-lib-index buttons/logic into main pausemenu component
 - [x] put bg image on clipboard paper

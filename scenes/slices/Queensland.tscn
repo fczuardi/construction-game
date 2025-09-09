@@ -1,0 +1,72 @@
+[gd_scene load_steps=10 format=3 uid="uid://giqxuc0gq0fk"]
+
+[ext_resource type="Script" uid="uid://cq16dqdvi8ncx" path="res://slices/queensland.gd" id="1_glf58"]
+[ext_resource type="Script" uid="uid://bly6ty8fepn6x" path="res://lib/Wiring/wiring.gd" id="2_5p6w5"]
+[ext_resource type="PackedScene" uid="uid://br08vaqh6iywm" path="res://lib/PlayerRunner/PlayerRunner.tscn" id="2_luako"]
+[ext_resource type="Texture2D" uid="uid://dbn38v58mp2ko" path="res://imports/textures/SBS - Photorealistic Texture Pack 3/PTP-Ground_08-128x128.png" id="3_4fwwo"]
+[ext_resource type="PackedScene" uid="uid://b4s4endyk5m4l" path="res://lib/PlayerVisuals2/player_visuals_2.tscn" id="4_4o0cy"]
+[ext_resource type="PackedScene" uid="uid://cq7lqptnqemxp" path="res://lib/PauseMenu/PauseMenu.tscn" id="5_cbo7l"]
+[ext_resource type="PackedScene" uid="uid://rnjcf0y4dsgm" path="res://lib/PlayerControls/PlayerControls.tscn" id="6_4o0cy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5p6w5"]
+albedo_texture = ExtResource("3_4fwwo")
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_luako"]
+size = Vector3(26.25, 1, 42)
+
+[node name="Queensland" type="Node3D"]
+script = ExtResource("1_glf58")
+
+[node name="Wiring" type="Node" parent="." node_paths=PackedStringArray("hud_container", "controls", "character_body")]
+script = ExtResource("2_5p6w5")
+hud_container = NodePath("../HUD/MarginContainer")
+controls = NodePath("../HUD/MarginContainer/PlayerControls")
+character_body = NodePath("../PlayerRunner")
+
+[node name="PlayerRunner" parent="." instance=ExtResource("2_luako")]
+
+[node name="PlayerVisuals2" parent="PlayerRunner" instance=ExtResource("4_4o0cy")]
+
+[node name="Draft" type="Node3D" parent="."]
+
+[node name="Terrain" type="CSGCombiner3D" parent="Draft"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+material_override = SubResource("StandardMaterial3D_5p6w5")
+use_collision = true
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Draft/Terrain"]
+mesh = SubResource("BoxMesh_luako")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Draft"]
+transform = Transform3D(1, 0, 0, 0, -0.59979194, 0.800156, 0, -0.800156, -0.59979194, 0, 9.084686, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Draft"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 2.7442455, -4.1946783)
+
+[node name="HUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD"]
+custom_minimum_size = Vector2(540, 1200)
+layout_mode = 1
+offset_right = 540.0
+offset_bottom = 1200.0
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="PauseMenu" parent="HUD/MarginContainer" instance=ExtResource("5_cbo7l")]
+layout_mode = 2
+size_flags_vertical = 0
+category_icon = 0
+main_title = "Maryborough Court House"
+
+[node name="PlayerControls" parent="HUD/MarginContainer" instance=ExtResource("6_4o0cy")]
+layout_mode = 2
+size_flags_vertical = 8
