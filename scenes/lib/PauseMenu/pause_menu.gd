@@ -25,10 +25,13 @@ var _category_icon: MenuCategoryIcon = MenuCategoryIcon.NONE
 
 @export var items_to_hide: Array[NodePath] = []
 
+@export var main_title: String
+
 ## Nodes
 @onready var pause_menu_button: Button = %PauseMenuButton
 @onready var pause_menu_panel: Panel = %PauseMenuPanel
 @onready var pause_menu_bg_icon: Label = %PauseMenuBgIcon
+@onready var slice_title_label: Label = %SliceTitleLabel
 
 ## Lifecycle
 func _ready() -> void:
@@ -36,6 +39,7 @@ func _ready() -> void:
     pause_menu_panel.visible = false
     pause_menu_button.toggled.connect(_on_menu_toggled)
     category_icon = _category_icon
+    slice_title_label.text = main_title
     _register_items_visibility()
 
 ## Helpers

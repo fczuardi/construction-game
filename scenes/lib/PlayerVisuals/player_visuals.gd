@@ -24,7 +24,8 @@ signal state_changed(run_enabled: bool, map_enabled: bool)
 @export var zero_speed_epsilon: float = 0.05
 
 # AnimationTree parameter paths (match your BlendTree layout)
-const PATH_SM_PLAYBACK := "parameters/Locomotion/playback"
+const PATH_SM: = "parameters/Locomotion"
+const PATH_SM_PLAYBACK: = "parameters/Locomotion/playback"
 const PATH_STRIDE_SCALE := "parameters/StrideScale/scale"
 const PATH_MAP_BLEND := "parameters/UpperBodyBlend/blend_amount"
 
@@ -43,6 +44,8 @@ var _speed_param := 0.0
 var _yaw := 0.0
 var _yaw_target := 0.0
 
+var _stumble_severity = 0
+
 func _ready() -> void:
     _bind_anim_tree()
     _yaw = rotation.y
@@ -54,12 +57,11 @@ func _process(delta: float) -> void:
     if Engine.is_editor_hint():
         return  # skip driving the AnimationTree when not playing
     # Optional auto-pull from runner
-    if runner_path != NodePath():
-        var runner := get_node_or_null(runner_path)
-        if runner is CharacterBody3D:
-            var cb := runner as CharacterBody3D
-            _on_floor = cb.is_on_floor()
-            _vel = cb.velocity
+    var runner := get_node_or_null(runner_path)
+    if runner is CharacterBody3D:
+        var cb := runner as CharacterBody3D
+        _on_floor = cb.is_on_floor()
+        _vel = cb.velocity
 
     # derive facing / speed
     _speed_raw = _vel.length()
@@ -91,6 +93,18 @@ func _process(delta: float) -> void:
 
     # 3) Locomotion state
     if _sm:
+        var sm_state = _sm.get_current_node()
+        if _stumble_severity > 0.5: 
+            if _run_enabled or sm_state == "TripAndFall":
+                _sm.travel("TripAndFall")
+                runner.set_speed_value(0.0)
+                _run_enabled = false
+                return
+            if sm_state != "Stumble":
+                _sm.travel("Stumble")
+                _stumble_severity = 0
+                return
+        
         if _speed_raw <= zero_speed_epsilon:
             _sm.travel("Idle")
         else:
@@ -99,7 +113,15 @@ func _process(delta: float) -> void:
             else:
                 _sm.travel("Walk")
 
+func _on_stumble_finished():
+    print("stumble finished")
+    #_stumble_severity = 0
+
 # --- Public API --------------------------------------------------------
+
+func play_stumble(severity: float):
+    _stumble_severity = severity
+
 func update_motion(velocity: Vector3, on_floor: bool) -> void:
     _vel = velocity
     _on_floor = on_floor
@@ -131,6 +153,7 @@ func _bind_anim_tree() -> void:
         push_warning("PlayerVisuals: expected a child node named 'AnimationTree'.")
         return
     var pb = _anim_tree.get(PATH_SM_PLAYBACK)
+
     if pb is AnimationNodeStateMachinePlayback:
         _sm = pb
     else:

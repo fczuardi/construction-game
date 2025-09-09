@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://h8tx6k4bh2tf" path="res://lib/PlayerRunner/player_runner.gd" id="1_0xrjn"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3itk6"]
+radius = 0.3
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_3itk6"]
 

@@ -146,6 +146,9 @@ layout_mode = 2
 size_flags_vertical = 0
 category_icon = 0
 
+[node name="SliceTitleLabel" parent="HUD/MarginContainer/PauseMenu/MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer" index="0"]
+text = ""
+
 [node name="TouchControlMenuSection" parent="HUD/MarginContainer/PauseMenu/MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer" index="1"]
 player_controls_path = NodePath("../../../../../../PlayerControls")
 

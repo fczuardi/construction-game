@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://ckdfysx2pcv7m"]
+[gd_scene load_steps=18 format=3 uid="uid://ckdfysx2pcv7m"]
 
 [ext_resource type="FontFile" uid="uid://bgn10o8bm34q6" path="res://imports/fonts/ArgulaRegular/Arugula20250312-Regular.ttf" id="1_rxmpw"]
 [ext_resource type="PackedScene" uid="uid://3l7fe0kmxuqf" path="res://demos/PlayerControlsDemo.tscn" id="1_tqvmb"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cdsqtykisydyo" path="res://demos/PlayerCamerasDemo.tscn" id="5_2lln2"]
 [ext_resource type="PackedScene" uid="uid://ccjlcg6tf5mev" path="res://demos/SunDemo.tscn" id="5_o6pdu"]
 [ext_resource type="PackedScene" uid="uid://bvqjumns0dvc1" path="res://slices/WalkOnEmptyGround.tscn" id="7_htab0"]
+[ext_resource type="PackedScene" uid="uid://c4ngp6i1r246e" path="res://slices/TrenchesSclice.tscn" id="8_8cld1"]
 
 [sub_resource type="GDScript" id="GDScript_rxmpw"]
 resource_name = "demo_index"
@@ -63,7 +64,7 @@ func _populate_slices() -> void:
             if (i < slice_names.size() and String(slice_names[i]) != \"\") \\
             else slices[i].resource_path.get_file()
         _slice_list.add_item(label, i)
-    _slice_list.select(0)
+    _slice_list.select(1)
 
 func _on_play_demo() -> void:
     if _demo_list.item_count == 0:
@@ -125,8 +126,8 @@ func _resize():
 script = SubResource("GDScript_rxmpw")
 demos = Array[PackedScene]([ExtResource("4_2lln2"), ExtResource("2_o6pdu"), ExtResource("5_2lln2"), ExtResource("1_tqvmb"), ExtResource("2_qugmx"), ExtResource("5_o6pdu")])
 demo_names = Array[StringName]([&"Player Body", &"Player Visuals", &"Player Cameras", &"Player Controls", &"Textured Flat Terrain", &"Sun Orbit"])
-slices = Array[PackedScene]([ExtResource("7_htab0")])
-slice_names = Array[StringName]([&"Free Walk"])
+slices = Array[PackedScene]([ExtResource("7_htab0"), ExtResource("8_8cld1")])
+slice_names = Array[StringName]([&"Free Walk", &"Trenches"])
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_u5qyn")

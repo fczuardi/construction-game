@@ -26,6 +26,10 @@ Copyright Fabricio Campos Zuardi - 2025 - 2025
             - Author: [LowPolyAssets](https://lowpolyassets.itch.io/)
             - License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/)
 - Textures:
+    - [Architectural plan of the Public Offices and Court House, Maryborough, circa 1888](https://en.wikipedia.org/wiki/File:Architectural_plan_of_the_Public_Offices_and_Court_House,_Maryborough,_circa_1888.jpg)
+        - Author: Unknown
+        - Published by: [State Archives of Queensland](https://www.qld.gov.au/recreation/arts/heritage/archives)
+        - License: Public Domain
     - [Rocky Trail 02](https://polyhaven.com/a/rocky_trail_02)
         - Author: [Amal Kumar](https://polyhaven.com/all?a=Amal%20Kumar)
         - License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/)
@@ -44,6 +48,7 @@ Copyright Fabricio Campos Zuardi - 2025 - 2025
             - treasure-map-line
             - ri-run-line
             - ri-menu-line
+            - circle-fill
         - License: [Apache License 2.0](https://github.com/Remix-Design/remixicon/blob/master/License)
 
 

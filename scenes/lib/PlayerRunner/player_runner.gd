@@ -5,15 +5,22 @@ extends CharacterBody3D
 const VERSION := "0.5.1"
 
 
-signal distance_moved(delta_m: float)
-signal obstacle_bumped(collider: Node, surface_normal: Vector3)
-signal turn_buffer_changed(remaining_deg: float)
+# important for tripping over trenches
+signal collided(collider: Node, normal: Vector3, grounded: bool, speed_mps: float, speed_mode: String)
+
+
+## DELME: unused signals
+## TODO: check if anyone is consuming those signal below (we might have overdesigned)
+# signal distance_moved(delta_m: float)
+# signal turn_buffer_changed(remaining_deg: float)
+# 
+# there is a demo using it to display custom speed on screen
 signal speed_changed(new_speed: float, mode: String)
 
 
 # --- Defaults ------------------------
-const DEFAULT_SPEED_WALK: float = 1.11
-const DEFAULT_SPEED_RUN: float  = 2.50
+const DEFAULT_SPEED_WALK: float = 0.9 # 1.11
+const DEFAULT_SPEED_RUN: float  = 4.0 # 2.50
 const DEFAULT_TURN_RATE: float = 180.0
 
 
@@ -66,7 +73,7 @@ func _physics_process(delta: float) -> void:
         if step != 0.0:
             _move_dir = _move_dir.rotated(Vector3.UP, deg_to_rad(step)).normalized()
             _remaining_turn_deg -= step
-            turn_buffer_changed.emit(_remaining_turn_deg)
+            # turn_buffer_changed.emit(_remaining_turn_deg)
         velocity = _move_dir * _speed
 
     move_and_slide()
@@ -78,20 +85,23 @@ func _physics_process(delta: float) -> void:
     var p := global_position
     var dlen := p.distance_to(_last_pos)
     if dlen > 0.0:
-        distance_moved.emit(dlen)
+        # TODO uncomment when someone starts using this
+        # distance_moved.emit(dlen)
         _last_pos = p
 
     # raw collision events
     for i in range(get_slide_collision_count()):
         var c := get_slide_collision(i)
         if c:
-            obstacle_bumped.emit(c.get_collider(), c.get_normal())
+            collided.emit(c.get_collider(), c.get_normal(), is_on_floor(), _speed, _speed_mode)
+            # TODO uncomment when someone starts using this
+            # obstacle_bumped.emit(c.get_collider(), c.get_normal())
 
 
 # --- Public API -----------------------
 func queue_turn(delta_deg: float) -> void:
     _remaining_turn_deg = clamp(_remaining_turn_deg + delta_deg, -360.0, 360.0)
-    turn_buffer_changed.emit(_remaining_turn_deg)
+    # turn_buffer_changed.emit(_remaining_turn_deg)
 
 ## Set by mode name (must exist in speed_modes)
 func set_speed_mode(mode: String) -> void:

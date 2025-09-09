@@ -1,14 +1,13 @@
 ## Ongoing
-- improve performance of the trail code
 
+- valas
 
 ## Low hanging fruits/quick wins
-- [ ] [UI] fade-in-ou titles 
-
 
 ## Known Bugs
 
 ## Done
+- [x] improve performance of the trail code
 - [x] integrate slices back-to-lib-index buttons/logic into main pausemenu component
 - [x] put bg image on clipboard paper
 - [x] emoji font for menu category icons
