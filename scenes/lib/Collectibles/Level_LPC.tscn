@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://bgwfbrcwkouws"]
+
+[ext_resource type="Script" uid="uid://cfodh0ignnuo4" path="res://lib/Collectibles/collectible.gd" id="1_jxjtc"]
+[ext_resource type="PackedScene" uid="uid://ybks6il6dtgg" path="res://imports/models/Low Poly Construction/Level.fbx" id="2_ukb7e"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_l14c5"]
+radius = 0.2
+
+[node name="Collectible" type="Area3D" groups=["collectible"]]
+script = ExtResource("1_jxjtc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_l14c5")
+
+[node name="Level" parent="." instance=ExtResource("2_ukb7e")]

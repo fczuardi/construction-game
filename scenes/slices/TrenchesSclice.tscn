@@ -114,6 +114,9 @@ size_flags_vertical = 0
 category_icon = 0
 main_title = "Trenches"
 
+[node name="PauseMenuPanel" parent="HUD/MarginContainer/PauseMenu/MarginContainer" index="0"]
+visible = false
+
 [node name="SliceTitleLabel" parent="HUD/MarginContainer/PauseMenu/MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer" index="0"]
 text = "Trenches"
 

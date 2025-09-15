@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://rr08p58ctntc"]
+
+[ext_resource type="Script" uid="uid://cfodh0ignnuo4" path="res://lib/Collectibles/collectible.gd" id="1_au2oa"]
+[ext_resource type="PackedScene" uid="uid://s76dppyega78" path="res://imports/models/scketchfab/6tmd_modeling/SprayPaint.glb" id="2_au2oa"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_cyorq"]
+radius = 0.2
+
+[node name="Collectible" type="Area3D" groups=["collectible"]]
+script = ExtResource("1_au2oa")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_cyorq")
+
+[node name="SprayPaint" parent="." instance=ExtResource("2_au2oa")]
+transform = Transform3D(1, 0, 0, 0, 0.9448861, 0.3273993, 0, -0.3273993, 0.9448861, 0.54055786, -0.2678514, 0.10753691)

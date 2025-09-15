@@ -1,7 +1,10 @@
-[gd_resource type="AnimationNodeBlendTree" load_steps=21 format=3 uid="uid://b5e4i51t6b1p0"]
+[gd_resource type="AnimationNodeBlendTree" load_steps=22 format=3 uid="uid://b5e4i51t6b1p0"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1pben"]
 animation = &"UpperBody/PointForward"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mggjd"]
+animation = &"Vertical/FallingIdle"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_iqcko"]
 animation = &"WalkScale/SwaggerWalk"
@@ -39,7 +42,7 @@ animation = &"WalkScale/StandingIdleMale"
 animation = &"UpperBody/WalkWhileTextingOnASmartphone"
 
 [sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_33xuw"]
-xfade_time = 0.4
+xfade_time = 0.15
 input_0/name = "Standing"
 input_0/auto_advance = false
 input_0/break_loop_at_end = false
@@ -56,6 +59,10 @@ input_3/name = "Sprinting"
 input_3/auto_advance = false
 input_3/break_loop_at_end = false
 input_3/reset = true
+input_4/name = "Falling"
+input_4/auto_advance = false
+input_4/break_loop_at_end = false
+input_4/reset = true
 
 [sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_xn5mo"]
 xfade_time = 0.2
@@ -158,4 +165,6 @@ nodes/MovementEvents/node = SubResource("AnimationNodeTransition_iqcko")
 nodes/MovementEvents/position = Vector2(-700, 80)
 nodes/UpperBodyBase/node = SubResource("AnimationNodeTransition_5ucwi")
 nodes/UpperBodyBase/position = Vector2(-1340, -680)
-node_connections = [&"output", 0, &"StrideScale", &"MovementBase", 0, &"Animation", &"MovementBase", 1, &"Animation 2", &"MovementBase", 2, &"Animation 3", &"MovementBase", 3, &"Animation 4", &"MovementEnd", 0, &"UpperBody", &"MovementEnd", 1, &"Animation 6", &"StrideScale", 0, &"MovementEnd", &"UpperBody", 0, &"MovementEventTrigger", &"UpperBody", 1, &"UpperBodyEventTrigger", &"MovementEventTrigger", 0, &"MovementBase", &"MovementEventTrigger", 1, &"MovementEvents", &"UpperBodyEvents", 0, &"Animation 9", &"UpperBodyEvents", 1, &"Animation 10", &"UpperBodyEvents", 2, &"Animation 7", &"UpperBodyEventTrigger", 0, &"UpperBodyBase", &"UpperBodyEventTrigger", 1, &"UpperBodyEvents", &"MovementEvents", 0, &"Animation 5", &"MovementEvents", 1, &"Animation 8", &"UpperBodyBase", 0, &"MapState"]
+"nodes/Animation 11/node" = SubResource("AnimationNodeAnimation_mggjd")
+"nodes/Animation 11/position" = Vector2(-1628.644, 586.1199)
+node_connections = [&"output", 0, &"StrideScale", &"MovementBase", 0, &"Animation", &"MovementBase", 1, &"Animation 2", &"MovementBase", 2, &"Animation 3", &"MovementBase", 3, &"Animation 4", &"MovementBase", 4, &"Animation 11", &"MovementEnd", 0, &"UpperBody", &"MovementEnd", 1, &"Animation 6", &"StrideScale", 0, &"MovementEnd", &"UpperBody", 0, &"MovementEventTrigger", &"UpperBody", 1, &"UpperBodyEventTrigger", &"MovementEventTrigger", 0, &"MovementBase", &"MovementEventTrigger", 1, &"MovementEvents", &"UpperBodyEvents", 0, &"Animation 9", &"UpperBodyEvents", 1, &"Animation 10", &"UpperBodyEvents", 2, &"Animation 7", &"UpperBodyEventTrigger", 0, &"UpperBodyBase", &"UpperBodyEventTrigger", 1, &"UpperBodyEvents", &"MovementEvents", 0, &"Animation 5", &"MovementEvents", 1, &"Animation 8", &"UpperBodyBase", 0, &"MapState"]

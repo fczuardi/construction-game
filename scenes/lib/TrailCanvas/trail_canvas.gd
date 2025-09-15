@@ -63,10 +63,17 @@ func _ready():
     # Listen for poses
     if not EventBus.player_runner_pose_updated.is_connected(_on_pose_updated):
         EventBus.player_runner_pose_updated.connect(_on_pose_updated)
+    if not EventBus.global_restart_game.is_connected(reset_to_start):
+        EventBus.global_restart_game.connect(reset_to_start)
 
+func reset_to_start():
+    clear_trail()
+    
 func _exit_tree() -> void:
     if EventBus.player_runner_pose_updated.is_connected(_on_pose_updated):
         EventBus.player_runner_pose_updated.disconnect(_on_pose_updated)
+    if EventBus.global_restart_game.is_connected(reset_to_start):
+        EventBus.global_restart_game.disconnect(reset_to_start)
 
 func _draw_first_dot():
     var stamp_rect: Rect2i = Rect2i(Vector2i.ZERO, _stamp_img.get_size())
@@ -78,12 +85,6 @@ func _draw_first_dot():
     _dirty_since_last_upload = true
 
     return
-
-    # update GPU texture
-    _trail_tex.update(_paper_img)
-
-    # update SubViewport (self)
-    render_target_update_mode = SubViewport.UPDATE_ONCE
 
 func _on_pose_updated(world_pos: Vector3, yaw_radians: float) -> void:
     # --- first player pose update

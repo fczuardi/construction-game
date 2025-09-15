@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cdsqtykisydyo" path="res://demos/PlayerCamerasDemo.tscn" id="5_2lln2"]
 [ext_resource type="PackedScene" uid="uid://ccjlcg6tf5mev" path="res://demos/SunDemo.tscn" id="5_o6pdu"]
 [ext_resource type="PackedScene" uid="uid://bvqjumns0dvc1" path="res://slices/WalkOnEmptyGround.tscn" id="7_htab0"]
-[ext_resource type="PackedScene" uid="uid://c4ngp6i1r246e" path="res://slices/TrenchesSclice.tscn" id="8_8cld1"]
+[ext_resource type="PackedScene" uid="uid://giqxuc0gq0fk" path="res://slices/Queensland.tscn" id="9_lgqbo"]
 
 [sub_resource type="GDScript" id="GDScript_rxmpw"]
 resource_name = "demo_index"
@@ -64,7 +64,7 @@ func _populate_slices() -> void:
             if (i < slice_names.size() and String(slice_names[i]) != \"\") \\
             else slices[i].resource_path.get_file()
         _slice_list.add_item(label, i)
-    _slice_list.select(1)
+    _slice_list.select(2)
 
 func _on_play_demo() -> void:
     if _demo_list.item_count == 0:
@@ -126,8 +126,8 @@ func _resize():
 script = SubResource("GDScript_rxmpw")
 demos = Array[PackedScene]([ExtResource("4_2lln2"), ExtResource("2_o6pdu"), ExtResource("5_2lln2"), ExtResource("1_tqvmb"), ExtResource("2_qugmx"), ExtResource("5_o6pdu")])
 demo_names = Array[StringName]([&"Player Body", &"Player Visuals", &"Player Cameras", &"Player Controls", &"Textured Flat Terrain", &"Sun Orbit"])
-slices = Array[PackedScene]([ExtResource("7_htab0"), ExtResource("8_8cld1")])
-slice_names = Array[StringName]([&"Free Walk", &"Trenches"])
+slices = Array[PackedScene]([ExtResource("7_htab0"), ExtResource("9_lgqbo")])
+slice_names = Array[StringName]([&"Free Walk", &"Courthouse"])
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_u5qyn")

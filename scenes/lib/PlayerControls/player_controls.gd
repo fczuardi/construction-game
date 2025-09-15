@@ -171,3 +171,18 @@ var set_layout_both = func():
 ## Public Methods
 func set_layout(l: Enums.TouchControlsLayout):
     _set_group(l)
+    
+func toggle_input(side: PlayerControls.Side, on: bool) -> void:
+    var btn: Button
+    match side:
+        Side.NORTH:
+            btn = _btn_north
+        Side.SOUTH:
+            btn = _btn_south
+        Side.WEST:
+            btn = _btn_west
+        Side.EAST:
+            btn = _btn_east
+    if ! btn.toggle_mode == true:
+        return
+    btn.set_pressed_no_signal(on)

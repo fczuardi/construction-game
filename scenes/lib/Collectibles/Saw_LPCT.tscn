@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://cs0j021hg26dx"]
+
+[ext_resource type="Script" uid="uid://cfodh0ignnuo4" path="res://lib/Collectibles/collectible.gd" id="1_8pkoi"]
+[ext_resource type="PackedScene" uid="uid://cvkeyhfq3q4mw" path="res://imports/models/LowPolyConstructionTools/fbx/Saw.fbx" id="2_8pkoi"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_l14c5"]
+radius = 0.4
+
+[node name="Collectible" type="Area3D" groups=["collectible"]]
+script = ExtResource("1_8pkoi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_l14c5")
+
+[node name="Saw" parent="." instance=ExtResource("2_8pkoi")]
+transform = Transform3D(1, 0, 0, 0, 0.88047737, -0.4740882, 0, 0.4740882, 0.88047737, 0.23802245, 0, 0)

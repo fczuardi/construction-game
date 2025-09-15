@@ -1,17 +1,42 @@
-## Daily Milestone
+## Next steps
 
-- September 10th
-    - [ ] Trenches on all walls of the Maryborough Courthouse
-    - [ ] Playable slice over this terrain with stumble and fall working
-    - [ ] Extended goal: Wood planks on the door positions
+- collectible dots on map:
+    - group 1: 
+        - [C] level
+        - [C] measure-tape
+        - [C] pencil
+    - group 1 extra: 
+        - [C] coin
+        - [ ] urinal
+    - group 2:
+        - [C] mallet
+        - [C] picket
+        - [C] spray
+    - group 2 extra:
+        - [ ] sandwitch
+        - [ ] toilet paper
+        - [ ] toilet
+- floor teture of dirt with tire marks
+- locked toilets to start
+- game title fade in/out
+- objectives titles:
+    - "number 1 unlocked"
+    - "number 2 unlocked"
 
-## Ongoing
 
-## Low hanging fruits/quick wins
+
 
 ## Known Bugs
 
 ## Done
+- September 11th
+    - [x] pickup items
+        - either coins, trowels or some othe placeholder test item
+- September 10th
+    - [x] Trenches on all walls of the Maryborough Courthouse
+    - [x] Playable slice over this terrain with stumble and fall working
+    - [ ] Extended goal: Wood planks on the door positions
+
 - [x] update README with new used animations
 - [x] refactor player_visuals
 - [x] valas

@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://8a2soht6epmj"]
+
+[ext_resource type="Script" uid="uid://cfodh0ignnuo4" path="res://lib/Collectibles/collectible.gd" id="1_s3ve7"]
+[ext_resource type="PackedScene" uid="uid://bdvtpq3v3j70u" path="res://imports/models/Road to Vostok Assets Vol.1/Crate/BL_Crate.blend" id="2_dv4o2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_s3ve7"]
+size = Vector3(1, 0.4, 0.5)
+
+[node name="Collectible" type="Area3D" groups=["collectible"]]
+script = ExtResource("1_s3ve7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.004760742, 0.0093688965)
+shape = SubResource("BoxShape3D_s3ve7")
+
+[node name="BL_Crate" parent="." instance=ExtResource("2_dv4o2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)

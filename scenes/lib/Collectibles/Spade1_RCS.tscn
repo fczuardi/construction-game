@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bgcqgghyod1m6"]
+
+[ext_resource type="Script" uid="uid://cfodh0ignnuo4" path="res://lib/Collectibles/collectible.gd" id="1_k7r63"]
+[ext_resource type="PackedScene" uid="uid://lolv6c2cfeox" path="res://imports/models/Realistic Construction Site Asset Package/Spade1.blend" id="2_k7r63"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bjpaq"]
+radius = 0.2
+height = 1.6
+
+[node name="Collectible" type="Area3D" groups=["collectible"]]
+script = ExtResource("1_k7r63")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.21595764, 0)
+shape = SubResource("CapsuleShape3D_bjpaq")
+
+[node name="Spade1" parent="." instance=ExtResource("2_k7r63")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3926193, 0)

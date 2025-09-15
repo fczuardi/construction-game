@@ -1,49 +1,164 @@
-[gd_scene load_steps=10 format=3 uid="uid://giqxuc0gq0fk"]
+[gd_scene load_steps=19 format=3 uid="uid://giqxuc0gq0fk"]
 
 [ext_resource type="Script" uid="uid://cq16dqdvi8ncx" path="res://slices/queensland.gd" id="1_glf58"]
 [ext_resource type="Script" uid="uid://bly6ty8fepn6x" path="res://lib/Wiring/wiring.gd" id="2_5p6w5"]
 [ext_resource type="PackedScene" uid="uid://br08vaqh6iywm" path="res://lib/PlayerRunner/PlayerRunner.tscn" id="2_luako"]
-[ext_resource type="Texture2D" uid="uid://dbn38v58mp2ko" path="res://imports/textures/SBS - Photorealistic Texture Pack 3/PTP-Ground_08-128x128.png" id="3_4fwwo"]
+[ext_resource type="Script" uid="uid://dr0dlgpb3oddd" path="res://lib/TrenchStumbleClassifier/trench_stumble_classifier.gd" id="3_2yhap"]
 [ext_resource type="PackedScene" uid="uid://b4s4endyk5m4l" path="res://lib/PlayerVisuals2/player_visuals_2.tscn" id="4_4o0cy"]
+[ext_resource type="Material" uid="uid://db8idpthygrsm" path="res://materials/kenney_prototype_dark_09.tres" id="5_4o0cy"]
+[ext_resource type="Script" uid="uid://cqsox5yy3agv1" path="res://lib/PlayerCameras/player_cameras.gd" id="5_7gcop"]
 [ext_resource type="PackedScene" uid="uid://cq7lqptnqemxp" path="res://lib/PauseMenu/PauseMenu.tscn" id="5_cbo7l"]
 [ext_resource type="PackedScene" uid="uid://rnjcf0y4dsgm" path="res://lib/PlayerControls/PlayerControls.tscn" id="6_4o0cy"]
+[ext_resource type="Texture2D" uid="uid://c3ggid41yoxw5" path="res://imports/textures/Maryborough Courthouse/ground-floor_640x1024.jpg" id="7_7gcop"]
+[ext_resource type="Script" uid="uid://cc6y082cktxod" path="res://lib/Collectibles/pickup_hud.gd" id="8_rsc3p"]
+[ext_resource type="Script" uid="uid://bcbctpyv6m8lg" path="res://lib/Collectibles/item_spawner.gd" id="11_nc38i"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5p6w5"]
-albedo_texture = ExtResource("3_4fwwo")
-uv1_triplanar = true
-uv1_world_triplanar = true
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4o0cy"]
+albedo_texture = ExtResource("7_7gcop")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_7gcop"]
+material = SubResource("StandardMaterial3D_4o0cy")
+size = Vector2(26.25, 42)
+center_offset = Vector3(-0.861, 0, 15.38)
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_mundh"]
+
+[sub_resource type="Sky" id="Sky_rsc3p"]
+sky_material = SubResource("PhysicalSkyMaterial_mundh")
+
+[sub_resource type="Environment" id="Environment_j5f2l"]
+background_mode = 2
+background_energy_multiplier = 2.0
+sky = SubResource("Sky_rsc3p")
+ambient_light_source = 3
+ambient_light_color = Color(0.5, 0.5, 0.5, 1)
+reflected_light_source = 2
 
 [sub_resource type="BoxMesh" id="BoxMesh_luako"]
-size = Vector3(26.25, 1, 42)
+size = Vector3(30.25, 1, 46)
 
 [node name="Queensland" type="Node3D"]
 script = ExtResource("1_glf58")
 
-[node name="Wiring" type="Node" parent="." node_paths=PackedStringArray("hud_container", "controls", "character_body")]
+[node name="Wiring" type="Node" parent="." node_paths=PackedStringArray("hud_container", "controls", "character_body", "character_visuals", "cameras")]
 script = ExtResource("2_5p6w5")
 hud_container = NodePath("../HUD/MarginContainer")
 controls = NodePath("../HUD/MarginContainer/PlayerControls")
 character_body = NodePath("../PlayerRunner")
+character_visuals = NodePath("../PlayerRunner/PlayerVisuals2")
+cameras = NodePath("../PlayerRunner/Cameras")
 
-[node name="PlayerRunner" parent="." instance=ExtResource("2_luako")]
+[node name="TrenchStumbleClassifier" type="Node" parent="." node_paths=PackedStringArray("character_body", "character_visuals", "cameras", "touch_controls")]
+script = ExtResource("3_2yhap")
+character_body = NodePath("../PlayerRunner")
+character_visuals = NodePath("../PlayerRunner/PlayerVisuals2")
+cameras = NodePath("../PlayerRunner/Cameras")
+touch_controls = NodePath("../HUD/MarginContainer/PlayerControls")
+debug_prints = true
+
+[node name="SpawnPoints" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.592, 0)
+script = ExtResource("11_nc38i")
+collectibles_dir = "res://lib/CollectiblesStage1"
+spawn_parent = NodePath(".")
+
+[node name="Point1" type="Marker3D" parent="SpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.039236, 0, 1.821)
+gizmo_extents = 0.5
+
+[node name="Point2" type="Marker3D" parent="SpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.786097, 0, 3.8845987)
+gizmo_extents = 0.5
+
+[node name="Point3" type="Marker3D" parent="SpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.74812, 0, 6.0302286)
+gizmo_extents = 0.5
+
+[node name="Point4" type="Marker3D" parent="SpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.6842947, 0, 8.274003)
+gizmo_extents = 0.5
+
+[node name="Point5" type="Marker3D" parent="SpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5139036, 0, 10.40352)
+gizmo_extents = 0.5
+
+[node name="Point6" type="Marker3D" parent="SpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.306751, 0, 1.821)
+gizmo_extents = 0.5
+
+[node name="Point7" type="Marker3D" parent="SpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.0536118, 0, 3.8845987)
+gizmo_extents = 0.5
+
+[node name="Point8" type="Marker3D" parent="SpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.0156355, 0, 6.0302286)
+gizmo_extents = 0.5
+
+[node name="Point9" type="Marker3D" parent="SpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.95181, 0, 8.274003)
+gizmo_extents = 0.5
+
+[node name="Point10" type="Marker3D" parent="SpawnPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7814188, 0, 10.40352)
+gizmo_extents = 0.5
+
+[node name="PlayerRunner" parent="." node_paths=PackedStringArray("visuals") instance=ExtResource("2_luako")]
+visuals = NodePath("PlayerVisuals2")
 
 [node name="PlayerVisuals2" parent="PlayerRunner" instance=ExtResource("4_4o0cy")]
+walk_enter = 0.07
+jog_enter = 1.9
+jog_exit = 1.6
+sprint_enter = 3.5
+sprint_exit = 3.2
+
+[node name="FPCams" type="Node3D" parent="PlayerRunner/PlayerVisuals2"]
+
+[node name="ClipboardWalkCam" type="Camera3D" parent="PlayerRunner/PlayerVisuals2/FPCams"]
+transform = Transform3D(-1, -8.609462e-08, 1.518081e-08, 0, 0.17364822, 0.9848077, -8.742278e-08, 0.9848077, -0.17364822, 0.062, 1.699, 0.283)
+fov = 50.6
+
+[node name="ClipboardRunCam" type="Camera3D" parent="PlayerRunner/PlayerVisuals2/FPCams"]
+transform = Transform3D(-1, 8.742278e-08, 0, 2.8750433e-08, 0.32886663, 0.94437635, 8.256e-08, 0.94437635, -0.32886663, 0.043, 1.474, 0.291)
+
+[node name="FallCam" type="Camera3D" parent="PlayerRunner/PlayerVisuals2/FPCams"]
+transform = Transform3D(1, 0, 0, 0, 0.14608309, 0.9892723, 0, -0.9892723, 0.14608309, -0.488, 5.29, 3.069)
+
+[node name="Cameras" type="Node3D" parent="PlayerRunner"]
+unique_name_in_owner = true
+script = ExtResource("5_7gcop")
+blend_time = 0.25
+extra_rigs = Array[NodePath]([NodePath("../PlayerVisuals2/FPCams/ClipboardWalkCam"), NodePath("../PlayerVisuals2/FPCams/ClipboardRunCam"), NodePath("../PlayerVisuals2/FPCams/FallCam")])
+wiggle_pos_amp = Vector3(0.02, 0.02, 0)
+
+[node name="OutputCamera" type="Camera3D" parent="PlayerRunner/Cameras"]
+transform = Transform3D(-1, 1.21669e-08, -8.657199e-08, 0, 0.9902681, 0.13917312, 8.742278e-08, 0.13917312, -0.9902681, 0, 2.5, -5)
+current = true
+fov = 70.0
+
+[node name="ShoulderWalkCam" type="Camera3D" parent="PlayerRunner/Cameras"]
+transform = Transform3D(-1, 1.21669e-08, -8.657199e-08, 0, 0.9902681, 0.13917312, 8.742278e-08, 0.13917312, -0.9902681, 0, 2.5, -5)
+
+[node name="ShoulderRunCam" type="Camera3D" parent="PlayerRunner/Cameras"]
+transform = Transform3D(-1, 1.21669e-08, -8.657199e-08, 0, 0.9902681, 0.13917312, 8.742278e-08, 0.13917312, -0.9902681, 0, 1.004, -4)
 
 [node name="Draft" type="Node3D" parent="."]
 
-[node name="Terrain" type="CSGCombiner3D" parent="Draft"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-material_override = SubResource("StandardMaterial3D_5p6w5")
-use_collision = true
-
-[node name="CSGMesh3D" type="CSGMesh3D" parent="Draft/Terrain"]
-mesh = SubResource("BoxMesh_luako")
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Draft"]
-transform = Transform3D(1, 0, 0, 0, -0.59979194, 0.800156, 0, -0.800156, -0.59979194, 0, 9.084686, 0)
+transform = Transform3D(0.78260815, -0.58680815, -0.20779967, 0, -0.33380687, 0.9426415, -0.62251467, -0.73771894, -0.26123998, 2.815, 8.911, 0)
+light_energy = 1.3
+shadow_enabled = true
+directional_shadow_split_1 = 0.02
 
-[node name="Camera3D" type="Camera3D" parent="Draft"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 2.7442455, -4.1946783)
+[node name="Reference texture" type="MeshInstance3D" parent="Draft"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+visible = false
+mesh = SubResource("PlaneMesh_7gcop")
+skeleton = NodePath("../../HUD/GroundFloor")
+metadata/_edit_lock_ = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Draft"]
+environment = SubResource("Environment_j5f2l")
 
 [node name="HUD" type="Control" parent="."]
 layout_mode = 3
@@ -61,6 +176,13 @@ theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 30
 
+[node name="Label" type="Label" parent="HUD/MarginContainer" node_paths=PackedStringArray("label")]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+script = ExtResource("8_rsc3p")
+label = NodePath(".")
+
 [node name="PauseMenu" parent="HUD/MarginContainer" instance=ExtResource("5_cbo7l")]
 layout_mode = 2
 size_flags_vertical = 0
@@ -70,3 +192,190 @@ main_title = "Maryborough Court House"
 [node name="PlayerControls" parent="HUD/MarginContainer" instance=ExtResource("6_4o0cy")]
 layout_mode = 2
 size_flags_vertical = 8
+
+[node name="GroundFloor" type="StaticBody3D" parent="HUD"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.861, 0, 15.38)
+
+[node name="Terrain" type="CSGCombiner3D" parent="HUD/GroundFloor" groups=["trench"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+material_override = ExtResource("5_4o0cy")
+use_collision = true
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="HUD/GroundFloor/Terrain"]
+mesh = SubResource("BoxMesh_luako")
+
+[node name="Subtract" type="CSGCombiner3D" parent="HUD/GroundFloor/Terrain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+visible = false
+operation = 2
+metadata/_edit_lock_ = true
+
+[node name="internalsquare" type="CSGBox3D" parent="HUD/GroundFloor/Terrain/Subtract"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13444924, 0, -6.1656494)
+size = Vector3(0.35, 1, 12.450722)
+metadata/_edit_lock_ = true
+
+[node name="internalsquare3" type="CSGBox3D" parent="HUD/GroundFloor/Terrain/Subtract"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13444924, 0, 8.095206)
+size = Vector3(0.35, 1, 12.333759)
+metadata/_edit_lock_ = true
+
+[node name="internalsquare4" type="CSGBox3D" parent="HUD/GroundFloor/Terrain/Subtract"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.408718, 0, 9.27864)
+size = Vector3(5.314331, 1, 0.35)
+metadata/_edit_lock_ = true
+
+[node name="internalsquare7" type="CSGBox3D" parent="HUD/GroundFloor/Terrain/Subtract"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.408718, 0, 2.0565233)
+size = Vector3(5.314331, 1, 0.35)
+metadata/_edit_lock_ = true
+
+[node name="internalsquare8" type="CSGBox3D" parent="HUD/GroundFloor/Terrain/Subtract"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.408718, 0, -7.003129)
+size = Vector3(5.314331, 1, 0.35)
+metadata/_edit_lock_ = true
+
+[node name="internalsquare9" type="CSGBox3D" parent="HUD/GroundFloor/Terrain/Subtract"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.408718, 0, -12.305299)
+size = Vector3(5.314331, 1, 0.35)
+metadata/_edit_lock_ = true
+
+[node name="internalsquare10" type="CSGBox3D" parent="HUD/GroundFloor/Terrain/Subtract"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.6998405, 0, -12.305299)
+size = Vector3(5.314331, 1, 0.35)
+metadata/_edit_lock_ = true
+
+[node name="internalsquare18" type="CSGBox3D" parent="HUD/GroundFloor/Terrain/Subtract"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.56367105, 0, -12.305299)
+size = Vector3(5.314331, 1, 0.35)
+metadata/_edit_lock_ = true
+
+[node name="internalsquare11" type="CSGBox3D" parent="HUD/GroundFloor/Terrain/Subtract"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.6998405, 0, -7.1755505)
+size = Vector3(5.314331, 1, 0.35)
+metadata/_edit_lock_ = true
+
+[node name="internalsquare12" type="CSGBox3D" parent="HUD/GroundFloor/Terrain/Subtract"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.6998405, 0, -0.01769638)
+size = Vector3(5.314331, 1, 0.35)
+metadata/_edit_lock_ = true
+
+[node name="internalsquare14" type="CSGBox3D" parent="HUD/GroundFloor/Terrain/Subtract"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.6998405, 0, 4.9656267)
+size = Vector3(5.314331, 1, 0.35)
+metadata/_edit_lock_ = true
+
+[node name="internalsquare15" type="CSGBox3D" parent="HUD/GroundFloor/Terrain/Subtract"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.6998405, 0, 9.348783)
+size = Vector3(5.314331, 1, 0.35)
+metadata/_edit_lock_ = true
+
+[node name="internalsquare16" type="CSGBox3D" parent="HUD/GroundFloor/Terrain/Subtract"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.6998405, 0, 14.027978)
+size = Vector3(5.314331, 1, 0.35)
+metadata/_edit_lock_ = true
+
+[node name="internalsquare17" type="CSGBox3D" parent="HUD/GroundFloor/Terrain/Subtract"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.60036856, 0, 14.027978)
+size = Vector3(5.314331, 1, 0.35)
+metadata/_edit_lock_ = true
+
+[node name="internalsquare13" type="CSGBox3D" parent="HUD/GroundFloor/Terrain/Subtract"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4928436, 0, -0.01769638)
+size = Vector3(5.314331, 1, 0.35)
+metadata/_edit_lock_ = true
+
+[node name="internalsquare2" type="CSGBox3D" parent="HUD/GroundFloor/Terrain/Subtract"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9964373, 0, 0.92870045)
+size = Vector3(0.35, 1, 26.639423)
+metadata/_edit_lock_ = true
+
+[node name="internalsquare5" type="CSGBox3D" parent="HUD/GroundFloor/Terrain/Subtract"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.9210587, 0, 0.92870045)
+size = Vector3(0.35, 1, 26.639423)
+metadata/_edit_lock_ = true
+
+[node name="internalsquare6" type="CSGBox3D" parent="HUD/GroundFloor/Terrain/Subtract"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.1222916, 0, 0.92870045)
+size = Vector3(0.35, 1, 26.639423)
+metadata/_edit_lock_ = true
+
+[node name="externalsquare" type="CSGBox3D" parent="HUD/GroundFloor/Terrain/Subtract"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.028955, 0, 15.194978)
+size = Vector3(0.35, 1, 5.8149414)
+metadata/_edit_lock_ = true
+
+[node name="externalsquare4" type="CSGBox3D" parent="HUD/GroundFloor/Terrain/Subtract"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7379704, 0, 16.096954)
+size = Vector3(0.35, 1, 4.0109863)
+metadata/_edit_lock_ = true
+
+[node name="externalsquare2" type="CSGBox3D" parent="HUD/GroundFloor/Terrain/Subtract"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.266445, 0, 17.910934)
+size = Vector3(5.4869237, 1, 0.35)
+metadata/_edit_lock_ = true
+
+[node name="externalsquare3" type="CSGBox3D" parent="HUD/GroundFloor/Terrain/Subtract"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.1425705, 0, 12.508378)
+size = Vector3(3.7346728, 1, 0.35)
+metadata/_edit_lock_ = true
+
+[node name="externalsquare5" type="CSGBox3D" parent="HUD/GroundFloor/Terrain/Subtract"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.579054, 0, 15.194978)
+size = Vector3(0.35, 1, 5.8149414)
+metadata/_edit_lock_ = true
+
+[node name="externalsquare6" type="CSGBox3D" parent="HUD/GroundFloor/Terrain/Subtract"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.3150997, 0, 16.096954)
+size = Vector3(0.35, 1, 4.0109863)
+metadata/_edit_lock_ = true
+
+[node name="externalsquare7" type="CSGBox3D" parent="HUD/GroundFloor/Terrain/Subtract"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.0652905, 0, 17.910934)
+size = Vector3(5.4869237, 1, 0.35)
+metadata/_edit_lock_ = true
+
+[node name="externalsquare8" type="CSGBox3D" parent="HUD/GroundFloor/Terrain/Subtract"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.827118, 0, 12.508378)
+size = Vector3(3.7346728, 1, 0.35)
+metadata/_edit_lock_ = true
+
+[node name="externalsquare9" type="CSGBox3D" parent="HUD/GroundFloor/Terrain/Subtract"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.934078, 0, -13.287617)
+size = Vector3(0.35, 1, 5.8149414)
+metadata/_edit_lock_ = true
+
+[node name="externalsquare10" type="CSGBox3D" parent="HUD/GroundFloor/Terrain/Subtract"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.643093, 0, -14.201165)
+size = Vector3(0.35, 1, 3.8980713)
+metadata/_edit_lock_ = true
+
+[node name="externalsquare11" type="CSGBox3D" parent="HUD/GroundFloor/Terrain/Subtract"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.171568, 0, -15.942284)
+size = Vector3(5.4869237, 1, 0.35)
+metadata/_edit_lock_ = true
+
+[node name="externalsquare12" type="CSGBox3D" parent="HUD/GroundFloor/Terrain/Subtract"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.047693, 0, -10.649307)
+size = Vector3(3.7346728, 1, 0.35)
+metadata/_edit_lock_ = true
+
+[node name="externalsquare13" type="CSGBox3D" parent="HUD/GroundFloor/Terrain/Subtract"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.673931, 0, -13.287617)
+size = Vector3(0.35, 1, 5.8149414)
+metadata/_edit_lock_ = true
+
+[node name="externalsquare14" type="CSGBox3D" parent="HUD/GroundFloor/Terrain/Subtract"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.409977, 0, -14.206292)
+size = Vector3(0.35, 1, 3.8878174)
+metadata/_edit_lock_ = true
+
+[node name="externalsquare15" type="CSGBox3D" parent="HUD/GroundFloor/Terrain/Subtract"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.1601677, 0, -15.942284)
+size = Vector3(5.4869237, 1, 0.35)
+metadata/_edit_lock_ = true
+
+[node name="externalsquare16" type="CSGBox3D" parent="HUD/GroundFloor/Terrain/Subtract"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.921995, 0, -10.649307)
+size = Vector3(3.7346728, 1, 0.35)
+metadata/_edit_lock_ = true

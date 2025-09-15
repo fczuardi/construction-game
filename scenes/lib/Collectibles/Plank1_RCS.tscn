@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://bkc2h63nxnfrw"]
+
+[ext_resource type="Script" uid="uid://cfodh0ignnuo4" path="res://lib/Collectibles/collectible.gd" id="1_pgxkj"]
+[ext_resource type="PackedScene" uid="uid://pyxbdh730ak0" path="res://imports/models/Realistic Construction Site Asset Package/Plank1.blend" id="2_pgxkj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j7jbp"]
+size = Vector3(0.2, 0.2, 3)
+
+[node name="Collectible" type="Area3D" groups=["collectible"]]
+script = ExtResource("1_pgxkj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_j7jbp")
+
+[node name="Plank1" parent="." instance=ExtResource("2_pgxkj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.066, 0)

@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://dp2cirmhvfc5l"]
+
+[ext_resource type="Script" uid="uid://cfodh0ignnuo4" path="res://lib/Collectibles/collectible.gd" id="1_5rc65"]
+[ext_resource type="PackedScene" uid="uid://dsuq44sl3xsil" path="res://imports/models/LowPolyConstructionTools/fbx/Spatula.fbx" id="2_5rc65"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_l14c5"]
+radius = 0.2
+
+[node name="Collectible" type="Area3D" groups=["collectible"]]
+script = ExtResource("1_5rc65")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_l14c5")
+
+[node name="Spatula" parent="." instance=ExtResource("2_5rc65")]
+transform = Transform3D(1, 0, 0, 0, 0.8720693, 0.48938242, 0, -0.48938242, 0.8720693, 0, -0.01871872, 0.017656326)

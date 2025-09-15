@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://3lgtqfm6bae"]
+
+[ext_resource type="Script" uid="uid://cfodh0ignnuo4" path="res://lib/Collectibles/collectible.gd" id="1_6wupx"]
+[ext_resource type="PackedScene" uid="uid://dx2exdj2saq73" path="res://imports/models/Realistic Construction Site Asset Package/CementBag1.blend" id="2_6wupx"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xmy1k"]
+size = Vector3(0.6, 0.3, 0.8)
+
+[node name="Collectible" type="Area3D" groups=["collectible"]]
+script = ExtResource("1_6wupx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00030520558, -0.0013061427, -0.0048461705)
+shape = SubResource("BoxShape3D_xmy1k")
+
+[node name="CementBag1" parent="." instance=ExtResource("2_6wupx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.124, 0)

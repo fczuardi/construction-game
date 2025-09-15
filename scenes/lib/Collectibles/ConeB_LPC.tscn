@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://cyate83na6d6n"]
+
+[ext_resource type="Script" uid="uid://cfodh0ignnuo4" path="res://lib/Collectibles/collectible.gd" id="1_32o3g"]
+[ext_resource type="PackedScene" uid="uid://cua6na6la53on" path="res://imports/models/Low Poly Construction/Cone B.fbx" id="3_eyag0"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_s65mr"]
+radius = 0.4
+
+[node name="Collectible" type="Area3D" groups=["collectible"]]
+script = ExtResource("1_32o3g")
+
+[node name="Cone B" parent="." instance=ExtResource("3_eyag0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.12548828, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_s65mr")

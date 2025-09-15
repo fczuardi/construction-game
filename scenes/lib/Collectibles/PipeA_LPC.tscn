@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://cxix6hcnf0ry1"]
+
+[ext_resource type="Script" uid="uid://cfodh0ignnuo4" path="res://lib/Collectibles/collectible.gd" id="1_tn0iv"]
+[ext_resource type="PackedScene" uid="uid://crxa61g1gut" path="res://imports/models/Low Poly Construction/Pipe A.fbx" id="2_mepwg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j7jbp"]
+size = Vector3(0.2, 0.2, 2.1)
+
+[node name="Collectible" type="Area3D" groups=["collectible"]]
+script = ExtResource("1_tn0iv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_j7jbp")
+
+[node name="Pipe A" parent="." instance=ExtResource("2_mepwg")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)

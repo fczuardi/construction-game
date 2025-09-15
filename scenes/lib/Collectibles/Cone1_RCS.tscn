@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://ccg8k46tacsfw"]
+
+[ext_resource type="Script" uid="uid://cfodh0ignnuo4" path="res://lib/Collectibles/collectible.gd" id="1_dtkwy"]
+[ext_resource type="PackedScene" uid="uid://bsyjyk8qsmvpa" path="res://imports/models/Realistic Construction Site Asset Package/Cone1.blend" id="2_vf7hk"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_l14c5"]
+radius = 0.3
+
+[node name="Collectible" type="Area3D" groups=["collectible"]]
+script = ExtResource("1_dtkwy")
+
+[node name="Cone1" parent="." instance=ExtResource("2_vf7hk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.17858887, 0)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_l14c5")

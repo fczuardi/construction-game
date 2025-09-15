@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://26vjj7uno7k4"]
+
+[ext_resource type="Script" uid="uid://cfodh0ignnuo4" path="res://lib/Collectibles/collectible.gd" id="1_bjpaq"]
+[ext_resource type="PackedScene" uid="uid://bvdcmjocsme0f" path="res://imports/models/LowPolyConstructionTools/fbx/Shovel.fbx" id="2_bjpaq"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bjpaq"]
+radius = 0.2
+height = 1.6
+
+[node name="Collectible" type="Area3D" groups=["collectible"]]
+script = ExtResource("1_bjpaq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.21595764, 0)
+shape = SubResource("CapsuleShape3D_bjpaq")
+
+[node name="Shovel" parent="." instance=ExtResource("2_bjpaq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.21595764, 0)

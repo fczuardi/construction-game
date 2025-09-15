@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://beyf1ogtneww2"]
+
+[ext_resource type="Script" uid="uid://cfodh0ignnuo4" path="res://lib/Collectibles/collectible.gd" id="1_nrl3h"]
+[ext_resource type="PackedScene" uid="uid://bvro3tiqyn8sn" path="res://imports/models/Low Poly Construction/Drill.fbx" id="8_ays35"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_l14c5"]
+radius = 0.2
+
+[node name="Collectible" type="Area3D" groups=["collectible"]]
+script = ExtResource("1_nrl3h")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_l14c5")
+
+[node name="Drill" parent="." instance=ExtResource("8_ays35")]

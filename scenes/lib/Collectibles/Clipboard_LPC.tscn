@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://b6lw67vwi005r"]
+
+[ext_resource type="Script" uid="uid://cfodh0ignnuo4" path="res://lib/Collectibles/collectible.gd" id="1_pq3in"]
+[ext_resource type="PackedScene" uid="uid://bvnl7jg7gwahx" path="res://imports/models/Low Poly Construction/Clipboard.fbx" id="2_pmw3b"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_l14c5"]
+radius = 0.2
+
+[node name="Collectible" type="Area3D" groups=["collectible"]]
+script = ExtResource("1_pq3in")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_l14c5")
+
+[node name="PropPivot" parent="." instance=ExtResource("2_pmw3b")]
+transform = Transform3D(-3.785517e-08, -2.1855692e-08, -1, -0.49999997, 0.8660253, 0, 0.8660253, 0.49999997, -4.371139e-08, 0.001, 0, 0)

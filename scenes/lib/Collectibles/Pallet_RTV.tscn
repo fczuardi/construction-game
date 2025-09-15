@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://qv5snvgewfa8"]
+
+[ext_resource type="Script" uid="uid://cfodh0ignnuo4" path="res://lib/Collectibles/collectible.gd" id="1_soojl"]
+[ext_resource type="PackedScene" uid="uid://cc3bbyflgx5eg" path="res://lib/Collectibles/models/bl_pallet.tscn" id="2_soojl"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xmy1k"]
+size = Vector3(1.2, 0.12, 0.8)
+
+[node name="Collectible" type="Area3D" groups=["collectible"]]
+script = ExtResource("1_soojl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_xmy1k")
+
+[node name="BL_Pallet" parent="." instance=ExtResource("2_soojl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)

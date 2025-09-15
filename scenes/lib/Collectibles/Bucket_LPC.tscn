@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://bnl0k4w7ofqv1"]
+
+[ext_resource type="Script" uid="uid://cfodh0ignnuo4" path="res://lib/Collectibles/collectible.gd" id="1_niu8g"]
+[ext_resource type="PackedScene" uid="uid://bwar45cmjarxd" path="res://imports/models/Low Poly Construction/Bucket.fbx" id="2_p656a"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_l14c5"]
+radius = 0.3
+
+[node name="Collectible" type="Area3D" groups=["collectible"]]
+script = ExtResource("1_niu8g")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_l14c5")
+
+[node name="Bucket" parent="." instance=ExtResource("2_p656a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.066, 0, 0)

@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=4 uid="uid://bhcfvy6choxdd"]
+
+[ext_resource type="Texture2D" uid="uid://c6lecnpq1hth8" path="res://imports/models/Road to Vostok Assets Vol.1/Planks/TX_Planks_1024.png" id="1_po6v0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3b1ij"]
+resource_name = "MT_Plank_J"
+cull_mode = 2
+albedo_texture = ExtResource("1_po6v0")
+roughness = 0.0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_1qki2"]
+_surfaces = [{
+"aabb": AABB(-0.100000024, 9.920953e-10, -1, 0.20000005, 0.029999986, 2),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAACAAEAAwAEAAEABQAAAAIAAwAAAAUABAAGAAIABQACAAYAAwAHAAQAAwAFAAcABwAGAAQABwAFAAYA"),
+"name": "MT_Plank_J",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAAAAAAAAAP7///8AAAAAAAD//wAAAAD//wAAAAD///7///8AAP//AAAAAAAA//8AAP//AAD/////AAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_vckhj"]
+resource_name = "BL_Planks_MS_Plank_J"
+_surfaces = [{
+"aabb": AABB(-0.100000024, 9.920953e-10, -1, 0.20000005, 0.029999986, 2),
+"attribute_data": PackedByteArray("/+//v//s/wf/7/8H/+z/v//v/7//3/8H/+//B//f/7//7/+//+z/B//v/wf/7P+//+//v//f/wf/7/8H/9//v//s/6//7/+//+z/v//v/6//7/+//+z/r//v/6//7P+/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_3b1ij"),
+"name": "MT_Plank_J",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAAAAVNUAAP7///9U1QAAAAD//1TVAAD//wAAVNUAAP//AAD//////v//////AAD+////////////AAD///////8AAFTV//8AAP//VNX///7///9U1f//AAAAAFTV//8AAAAA/78AAAAA////v///AAD///+/AAAAAAAA/78AAP//AAD/////AAAAAP///////wAA//8AAAAAAAD//////v////+/AAAAAP///78AAP7/////v///AAD///+/VFWqqlRVqqpUVaqqVFWqqv9//7//f/+//3//v/9//7+qKqoqqiqqKqoqqiqqKqoqAAD/fwAA/38AAP9/AAD/f/8//7//P/+//z//v/8//7//////////////////////")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_1qki2")
+
+[node name="PlankJ" type="Node3D"]
+
+[node name="MS_Plank_J" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_vckhj")
+skeleton = NodePath("")
+metadata/extras = {
+"s_curve": {}
+}

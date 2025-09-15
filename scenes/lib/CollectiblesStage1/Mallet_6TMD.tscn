@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://deums4crxem71"]
+
+[ext_resource type="Script" uid="uid://cfodh0ignnuo4" path="res://lib/Collectibles/collectible.gd" id="1_w4gfb"]
+[ext_resource type="PackedScene" uid="uid://i5q5y4fd10yk" path="res://imports/models/scketchfab/6tmd_modeling/Mallet.glb" id="2_w4gfb"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_sp6vh"]
+radius = 0.2
+
+[node name="Collectible" type="Area3D" groups=["collectible"]]
+script = ExtResource("1_w4gfb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_sp6vh")
+
+[node name="Mallet" parent="." instance=ExtResource("2_w4gfb")]
+transform = Transform3D(1, 0, 0, 0, 0.34202015, -0.9396926, 0, 0.9396926, 0.34202015, 0.7103305, -0.44013426, -0.20853372)

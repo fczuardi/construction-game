@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://cc3bbyflgx5eg"]
+
+[ext_resource type="PackedScene" uid="uid://c6q5v526k2mh6" path="res://imports/models/Road to Vostok Assets Vol.1/Pallet/BL_Pallet.blend" id="1_ggb1o"]
+
+[node name="BL_Pallet" instance=ExtResource("1_ggb1o")]

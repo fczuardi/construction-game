@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://dit5wwnydd6pe"]
+
+[ext_resource type="Script" uid="uid://cfodh0ignnuo4" path="res://lib/Collectibles/collectible.gd" id="1_ddv1e"]
+[ext_resource type="PackedScene" uid="uid://ftnqkwec5k8s" path="res://imports/models/scketchfab/6tmd_modeling/Picket1.glb" id="2_ddv1e"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_xuxwv"]
+radius = 0.7
+
+[node name="Collectible" type="Area3D" groups=["collectible"]]
+script = ExtResource("1_ddv1e")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_xuxwv")
+
+[node name="Picket1" parent="." instance=ExtResource("2_ddv1e")]
+transform = Transform3D(1, 0, 0, 0, 0.9851093, 0.17192909, 0, -0.17192909, 0.9851093, 0.107, -0.798, -3.122)

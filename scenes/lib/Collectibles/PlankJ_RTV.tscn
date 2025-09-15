@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bh4p37a2y5unk"]
+
+[ext_resource type="Script" uid="uid://cfodh0ignnuo4" path="res://lib/Collectibles/collectible.gd" id="1_s2vmd"]
+[ext_resource type="PackedScene" uid="uid://bhcfvy6choxdd" path="res://lib/Collectibles/models/plank_j.tscn" id="2_0relc"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j7jbp"]
+size = Vector3(0.2, 0.2, 2)
+
+[node name="Collectible" type="Area3D" groups=["collectible"]]
+script = ExtResource("1_s2vmd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_j7jbp")
+
+[node name="PlankJ" parent="." instance=ExtResource("2_0relc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.01, 0)
+
+[editable path="PlankJ"]
