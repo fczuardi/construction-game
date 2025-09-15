@@ -1,7 +1,12 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://db8idpthygrsm"]
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://db8idpthygrsm"]
 
-[ext_resource type="Texture2D" uid="uid://qonmfuetwwf0" path="res://imports/textures/kenney_prototypeTextures/Dark/texture_09.png" id="1_lkb05"]
+[ext_resource type="Texture2D" uid="uid://cuuk70x50hv" path="res://imports/textures/Codezly Basic Texture Pack 1 (free)/512/CodezlyBasicTexturePack1(free)_512_8.png" id="1_2imob"]
+[ext_resource type="Texture2D" uid="uid://bul3c55msvyvq" path="res://imports/textures/Codezly Basic Texture Pack 1 (free)/512/CodezlyBasicTexturePack1(free)_512_8_Roughness.png" id="5_q8bbd"]
 
 [resource]
-albedo_texture = ExtResource("1_lkb05")
-uv1_scale = Vector3(78, 84, 78)
+shading_mode = 2
+albedo_texture = ExtResource("1_2imob")
+metallic_specular = 0.0
+roughness_texture = ExtResource("5_q8bbd")
+heightmap_scale = 0.0
+uv1_scale = Vector3(50, 50, 50)

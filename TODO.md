@@ -1,5 +1,7 @@
 ## Next steps
 
+
+- change helmet with hat
 - collectible dots on map:
     - group 1: 
         - [C] level

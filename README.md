@@ -12,55 +12,65 @@ Copyright Fabricio Campos Zuardi - 2025 - 2025
 
 ## Assets and Licences
 
-- Character and Animations:
-    - ["Pete"](https://www.mixamo.com/#/?page=1&query=pete&type=Character)
-    - Author: [Adobe Mixamo](https://www.mixamo.com)
-    - License: [Adobe Terms of Service](https://www.adobe.com/legal/terms.html#content-files)
-    - Animations:
-        - ["Walking With A Swagger"](https://www.mixamo.com/#/?page=1&query=male+swagger)
-        - ["Male Walking While Texting On A Smartphone"](https://www.mixamo.com/#/?page=1&query=texting+walking+male)
-        - ["Male Weighted Run"](https://www.mixamo.com/#/?page=1&query=weighted)
+### Character and Animations
 
-- Textures:
-    - [Architectural plan of the Public Offices and Court House, Maryborough, circa 1888](https://en.wikipedia.org/wiki/File:Architectural_plan_of_the_Public_Offices_and_Court_House,_Maryborough,_circa_1888.jpg)
+    - ["Pete"](https://www.mixamo.com/#/?page=1&query=pete&type=Character)
+    - ["Walking With A Swagger"](https://www.mixamo.com/#/?page=1&query=male+swagger)
+    - ["Male Walking While Texting On A Smartphone"](https://www.mixamo.com/#/?page=1&query=texting+walking+male)
+    - ["Male Weighted Run"](https://www.mixamo.com/#/?page=1&query=weighted)
+        - Author: [Adobe Mixamo](https://www.mixamo.com)
+        - License: [Adobe Terms of Service](https://www.adobe.com/legal/terms.html#content-files)
+
+
+    - [Winter Hat](https://sketchfab.com/3d-models/winter-hat-637a36cb74204c719883af7feb4b7c28)
+        - Author: [StubbornFunkyDonkey](https://sketchfab.com/stubbornfunkydonkey)
+        - License: [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/)
+
+### Textures
+
+    - Ground Plan from [Architectural plan of the Public Offices and Court House, Maryborough, circa 1888](https://en.wikipedia.org/wiki/File:Architectural_plan_of_the_Public_Offices_and_Court_House,_Maryborough,_circa_1888.jpg)
         - Author: [Francis Drummond Greville Stanley](https://en.wikipedia.org/wiki/Francis_Drummond_Greville_Stanley)
         - Published by: [State Archives of Queensland](https://www.qld.gov.au/recreation/arts/heritage/archives)
         - License: Public Domain
 
-- Fonts:
+    - Dirt from [Codezly's Basic Texture Pack (#1)](https://codezly.itch.io/codezly-basic-pack-1)
+        - Author: [Codezly](https://www.codezly.com)
+        - License: Codezly Free Texture Pack License Agreement
+            - "Use them in any project you want, but don't repackage/resell them, and just provide a link to www.codezly.com as attribution."
+        - PBR Maps Generated with: [Unity-WebGPU-PBR-Maps-Generator](https://github.com/aniketrajnish/Unity-WebGPU-PBR-Maps-Generator)
+            - License: [MIT License](https://github.com/aniketrajnish/Unity-WebGPU-PBR-Maps-Generator/blob/main/LICENSE)
+
+### Fonts
+
     - [Argula Font](https://drj11.itch.io/arugula-font)
         - Author: [David Jones (Cubic Type)](https://about.cubictype.com/)
         - License: [Human Rights Font Licence Version 1.0](./fonts/License.html)
             - a modified version of the [Hippocratic License 2.0](https://spdx.org/licenses/Hippocratic-2.1.html)
+
     - [Noto Emoji](https://fonts.google.com/noto/specimen/Noto+Emoji)
         - Author: Google LLC
         - License: [Open Font License 1.1](https://fonts.google.com/noto/specimen/Noto+Emoji/license)
 
-- Collectibles:
-    - [Construction Tools](https://sketchfab.com/3d-models/construction-tools-09e12ba3f7ee42259b6533581abec86f)
+### Collectibles
+
+    - Level, Pencil from [Construction Tools](https://sketchfab.com/3d-models/construction-tools-09e12ba3f7ee42259b6533581abec86f)
         - Author: [Teen Wolf](https://sketchfab.com/Teen-Wolf)
         - License: [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/)
-        - Items:
-            - level
-            - pencil
-    - [Construction Tools 2 Pack](https://sketchfab.com/3d-models/construction-tools-2-pack-9facdce61fff42578f50c16393be306b)
+
+    - Measuring Tape from [Construction Tools 2 Pack](https://sketchfab.com/3d-models/construction-tools-2-pack-9facdce61fff42578f50c16393be306b)
         - Author: [Teen Wolf](https://sketchfab.com/Teen-Wolf)
         - License: [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/)
-        - Items:
-            - measuring tape
-    - [Heinrich-staking Earthworks-Trimble-S9](https://sketchfab.com/3d-models/heinrich-staking-earthworks-trimble-s9-c5b164a003ff4beca6820214e0c3a0c1)
+
+    - Pickets, Mallet, Spray Paint from [Heinrich-staking Earthworks-Trimble-S9](https://sketchfab.com/3d-models/heinrich-staking-earthworks-trimble-s9-c5b164a003ff4beca6820214e0c3a0c1)
         - Author: [6TMD-Modeling](https://patrickbiani.wixsite.com/6tmd-modeling)
         - License: [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/)
-        - Items:
-            - 4PeinturesOrange
-            - 6PiquetsOranges
-            - Massete
-    - [Realistic 3D Bitcoin Model – Crypto Asset](https://sketchfab.com/3d-models/realistic-3d-bitcoin-model-crypto-asset-d71eff74bd5c4e25890477a4d3ecea73)
+
+    - Bitcoin Coin from [Realistic 3D Bitcoin Model – Crypto Asset](https://sketchfab.com/3d-models/realistic-3d-bitcoin-model-crypto-asset-d71eff74bd5c4e25890477a4d3ecea73)
         - Author: [CryptoArt-Miki](https://sketchfab.com/CryptoArt-Miki)
         - License: [Creative Commons Attribution-NonCommercial 4.0](https://creativecommons.org/licenses/by-nc/4.0/)
 
+### Icons
 
-- Icons:
     - [Remix Icon](https://remixicon.com/)
         - Authors: [Remix Design Studio (Wendy Gao and Jimmy Cheung)](https://github.com/Remix-Design)
         - License: [Apache License 2.0](https://github.com/Remix-Design/remixicon/blob/master/License)
@@ -70,6 +80,17 @@ Copyright Fabricio Campos Zuardi - 2025 - 2025
             - ri-menu-line
             - circle-fill
 
+    - Noun Project:
+        - Level by INA (CC BY 3.0)
+            - https://thenounproject.com/browse/icons/term/level/ 
+        - Pencil by LUTFI GANI AL ACHMAD (CC BY 3.0)
+            - https://thenounproject.com/browse/icons/term/pencil/
+        - measuring tape by Firza Alamsyah (CC BY 3.0)
+            - https://thenounproject.com/browse/icons/term/measuring-tape/
+        - Mallet by M. Oki Orlando  (CC BY 3.0)
+            - https://thenounproject.com/browse/icons/term/mallet/
+        - Tent Stake by Kawalan Icon (CC BY 3.0)
+            - https://thenounproject.com/browse/icons/term/tent-stake/
 
 
 -----
