@@ -1,19 +1,28 @@
-[gd_scene load_steps=10 format=3 uid="uid://cwo6mh160oyym"]
+[gd_scene load_steps=19 format=3 uid="uid://cwo6mh160oyym"]
 
 [ext_resource type="Texture2D" uid="uid://c3ggid41yoxw5" path="res://imports/textures/Maryborough Courthouse/ground-floor_640x1024.jpg" id="1_hui57"]
+[ext_resource type="Script" uid="uid://vf6f0by61bt4" path="res://lib/PlayerVisuals2/stage_map.gd" id="1_meksb"]
 [ext_resource type="Texture2D" uid="uid://cpst1x05ne48g" path="res://imports/icons/noun_project/noun-level-6853002_600px.png" id="2_hui57"]
+[ext_resource type="Script" uid="uid://dcste88fnub5m" path="res://lib/PlayerVisuals2/map_sticker.gd" id="2_s7gsi"]
+[ext_resource type="PackedScene" uid="uid://0a2pm7msnmkk" path="res://lib/CollectiblesStage1/Level_CT1.tscn" id="3_e3g3w"]
 [ext_resource type="Texture2D" uid="uid://brfrhhkrdbfnh" path="res://imports/icons/noun_project/noun-pencil-8001529_600px.png" id="3_s7gsi"]
 [ext_resource type="Texture2D" uid="uid://bmvhnc50emyer" path="res://imports/icons/noun_project/noun-measuring-tape-7819005_600px.png" id="4_wuf5a"]
 [ext_resource type="Texture2D" uid="uid://dg12ptdtupbqs" path="res://imports/icons/noun_project/noun-mallet-4296337_45deg_600px.png" id="5_kucyd"]
+[ext_resource type="PackedScene" uid="uid://dt6o8dv3qsoo7" path="res://lib/CollectiblesStage1/Pencil_CT1.tscn" id="5_meksb"]
 [ext_resource type="Texture2D" uid="uid://xo7l6rmbnoy2" path="res://imports/icons/noun_project/noun-tent-stake-6308587_600.png" id="6_7v2hi"]
+[ext_resource type="FontFile" uid="uid://puw8wtbfcgof" path="res://imports/fonts/Noto_Emoji/NotoEmoji-VariableFont_wght.ttf" id="6_itt7e"]
 [ext_resource type="Texture2D" uid="uid://bpn1q3lpbjijt" path="res://imports/icons/noun_project/noun-spray-paint-7840057_600px.png" id="7_i7jve"]
+[ext_resource type="PackedScene" uid="uid://btok0we1nblsb" path="res://lib/CollectiblesStage1/MeasureTape_CT2.tscn" id="7_itt7e"]
+[ext_resource type="PackedScene" uid="uid://deums4crxem71" path="res://lib/CollectiblesStage1/Mallet_6TMD.tscn" id="9_278qt"]
+[ext_resource type="PackedScene" uid="uid://dit5wwnydd6pe" path="res://lib/CollectiblesStage1/Picket1_6TMD.tscn" id="11_xr4nv"]
+[ext_resource type="PackedScene" uid="uid://d1eue887buodm" path="res://lib/CollectiblesStage1/SprayPaint1_6TMD.tscn" id="13_htatb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aayd2"]
 content_margin_left = 0.0
 content_margin_top = 0.0
 content_margin_right = 0.0
 content_margin_bottom = 0.0
-bg_color = Color(0.8723687, 0.95009345, 0.3360464, 1)
+bg_color = Color(0.95686275, 0.827451, 0.36862746, 1)
 corner_radius_top_left = 55
 corner_radius_bottom_right = 55
 corner_radius_bottom_left = 55
@@ -24,21 +33,21 @@ content_margin_left = 0.0
 content_margin_top = 0.0
 content_margin_right = 0.0
 content_margin_bottom = 0.0
-bg_color = Color(0.33725494, 0.91473746, 0.9490196, 1)
+bg_color = Color(0.95686275, 0.827451, 0.36862746, 1)
 corner_radius_top_left = 55
 corner_radius_bottom_right = 55
 corner_radius_bottom_left = 55
 corner_detail = 5
 
-[node name="Control" type="Control"]
+[node name="Stage1Map" type="Control"]
+custom_minimum_size = Vector2(640, 1024)
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
+offset_right = 640.0
+offset_bottom = 1024.0
 rotation = 3.1415927
 pivot_offset = Vector2(320, 512)
+script = ExtResource("1_meksb")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 visible = false
@@ -50,180 +59,306 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_hui57")
 
-[node name="P1" type="Control" parent="."]
-clip_contents = true
-custom_minimum_size = Vector2(110, 140)
-anchors_preset = 0
-offset_left = 290.0
-offset_top = 161.99994
-offset_right = 400.0
-offset_bottom = 301.99994
-pivot_offset = Vector2(55, 0)
+[node name="MapA" type="Marker2D" parent="."]
 
-[node name="Panel" type="Panel" parent="P1"]
-layout_mode = 0
-offset_left = -55.0
-offset_right = 54.99997
-offset_bottom = 110.0
+[node name="MapB" type="Marker2D" parent="."]
+position = Vector2(640, 0)
+
+[node name="MapC" type="Marker2D" parent="."]
+position = Vector2(0, 1024)
+
+[node name="Stickers" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="LevelCollectible" type="Marker2D" parent="Stickers" groups=["map_icon"]]
+position = Vector2(403.0001, 270.99988)
+script = ExtResource("2_s7gsi")
+kind = ExtResource("3_e3g3w")
+item_id = &"level"
+
+[node name="Panel" type="Panel" parent="Stickers/LevelCollectible"]
+offset_left = -110.161
+offset_top = 0.38011932
+offset_right = -0.16103363
+offset_bottom = 110.38012
 rotation = -0.7853982
 pivot_offset = Vector2(110, 0)
 theme_override_styles/panel = SubResource("StyleBoxFlat_aayd2")
 
-[node name="LevelTextureRect" type="TextureRect" parent="P1"]
-layout_mode = 0
-offset_left = 3.0
-offset_top = 30.0
-offset_right = 103.0
-offset_bottom = 130.0
+[node name="Icon" type="TextureRect" parent="Stickers/LevelCollectible"]
+offset_left = -52.16101
+offset_top = 30.380066
+offset_right = 47.83899
+offset_bottom = 130.38007
 rotation = 3.1415927
 pivot_offset = Vector2(50, 50)
 texture = ExtResource("2_hui57")
 expand_mode = 1
 
-[node name="P2" type="Control" parent="."]
-clip_contents = true
-custom_minimum_size = Vector2(110, 140)
-anchors_preset = 0
-offset_left = 370.00003
-offset_top = 295.0
-offset_right = 480.00003
-offset_bottom = 435.0
-pivot_offset = Vector2(55, 0)
+[node name="Checkmark" type="Label" parent="Stickers/LevelCollectible"]
+visible = false
+custom_minimum_size = Vector2(50, 50)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -25.0
+offset_right = 25.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 3.1415927
+pivot_offset = Vector2(25, 25)
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.95686275, 0.827451, 0.36862746, 1)
+theme_override_fonts/font = ExtResource("6_itt7e")
+theme_override_font_sizes/font_size = 40
+text = "✔︎"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Panel" type="Panel" parent="P2"]
-layout_mode = 0
-offset_left = -55.0
-offset_right = 54.99997
-offset_bottom = 110.0
+[node name="PencilCollectible" type="Marker2D" parent="Stickers" groups=["map_icon"]]
+position = Vector2(488.0001, 404.99994)
+script = ExtResource("2_s7gsi")
+kind = ExtResource("5_meksb")
+item_id = &"pencil"
+
+[node name="Panel" type="Panel" parent="Stickers/PencilCollectible"]
+offset_left = -109.85003
+offset_top = -0.4890213
+offset_right = 0.14994049
+offset_bottom = 109.51098
 rotation = -0.7853982
 pivot_offset = Vector2(110, 0)
 theme_override_styles/panel = SubResource("StyleBoxFlat_aayd2")
 
-[node name="LevelTextureRect" type="TextureRect" parent="P2"]
-layout_mode = 0
-offset_left = 12.0
-offset_top = 38.0
-offset_right = 92.0
-offset_bottom = 118.0
+[node name="Icon" type="TextureRect" parent="Stickers/PencilCollectible"]
+offset_left = -42.850006
+offset_top = 37.510986
+offset_right = 37.149994
+offset_bottom = 117.51099
 rotation = 3.1415927
 pivot_offset = Vector2(40, 40)
 texture = ExtResource("3_s7gsi")
 expand_mode = 1
 
-[node name="P3" type="Control" parent="."]
-clip_contents = true
-custom_minimum_size = Vector2(110, 140)
-anchors_preset = 0
-offset_left = 450.0
-offset_top = 430.0
-offset_right = 560.0
-offset_bottom = 570.0001
-pivot_offset = Vector2(55, 0)
+[node name="Checkmark" type="Label" parent="Stickers/PencilCollectible"]
+visible = false
+custom_minimum_size = Vector2(50, 50)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -25.0
+offset_right = 26.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 3.1415927
+pivot_offset = Vector2(25, 25)
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.95686275, 0.827451, 0.36862746, 1)
+theme_override_fonts/font = ExtResource("6_itt7e")
+theme_override_font_sizes/font_size = 40
+text = "✔︎"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Panel" type="Panel" parent="P3"]
-layout_mode = 0
-offset_left = -55.0
-offset_right = 54.99997
-offset_bottom = 110.0
+[node name="MeasuringTapeCollectible" type="Marker2D" parent="Stickers" groups=["map_icon"]]
+position = Vector2(563.00006, 539.99994)
+script = ExtResource("2_s7gsi")
+kind = ExtResource("7_itt7e")
+item_id = &"measuring_tape"
+
+[node name="Panel" type="Panel" parent="Stickers/MeasuringTapeCollectible"]
+offset_left = -109.70902
+offset_top = -0.27100372
+offset_right = 0.29094696
+offset_bottom = 109.729
 rotation = -0.7853982
 pivot_offset = Vector2(110, 0)
 theme_override_styles/panel = SubResource("StyleBoxFlat_aayd2")
 
-[node name="LevelTextureRect" type="TextureRect" parent="P3"]
-layout_mode = 0
-offset_left = 14.0
-offset_top = 42.0
-offset_right = 94.0
-offset_bottom = 122.0
+[node name="Icon" type="TextureRect" parent="Stickers/MeasuringTapeCollectible"]
+offset_left = -40.709015
+offset_top = 41.729004
+offset_right = 39.290985
+offset_bottom = 121.729004
 rotation = 3.1415927
 pivot_offset = Vector2(40, 40)
 texture = ExtResource("4_wuf5a")
 expand_mode = 1
 
-[node name="P4" type="Control" parent="."]
-clip_contents = true
-custom_minimum_size = Vector2(110, 140)
-anchors_preset = 0
-offset_left = 55.00006
-offset_top = 457.99994
-offset_right = 165.00006
-offset_bottom = 597.99994
-pivot_offset = Vector2(55, 0)
+[node name="Checkmark" type="Label" parent="Stickers/MeasuringTapeCollectible"]
+visible = false
+custom_minimum_size = Vector2(50, 50)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -25.0
+offset_right = 26.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 3.1415927
+pivot_offset = Vector2(25, 25)
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.95686275, 0.827451, 0.36862746, 1)
+theme_override_fonts/font = ExtResource("6_itt7e")
+theme_override_font_sizes/font_size = 40
+text = "✔︎"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Panel" type="Panel" parent="P4"]
-layout_mode = 0
-offset_left = -55.0
-offset_right = 54.99997
-offset_bottom = 110.0
+[node name="MalletCollectible" type="Marker2D" parent="Stickers" groups=["map_icon"]]
+position = Vector2(110.00001, 539.99994)
+script = ExtResource("2_s7gsi")
+kind = ExtResource("9_278qt")
+item_id = &"mallet"
+
+[node name="Panel" type="Panel" parent="Stickers/MalletCollectible"]
+offset_left = -109.99993
+offset_top = 0.9999924
+offset_right = 3.8146973e-05
+offset_bottom = 110.99999
 rotation = -0.7853982
 pivot_offset = Vector2(110, 0)
 theme_override_styles/panel = SubResource("StyleBoxFlat_1bee5")
 
-[node name="MalletTextureRect" type="TextureRect" parent="P4"]
-layout_mode = 0
-offset_right = 80.0
-offset_bottom = 80.0
+[node name="Icon" type="TextureRect" parent="Stickers/MalletCollectible"]
+offset_left = -54.99991
+offset_top = 0.9999695
+offset_right = 25.000092
+offset_bottom = 80.99997
 rotation = 3.1415927
 pivot_offset = Vector2(47, 58)
 texture = ExtResource("5_kucyd")
 expand_mode = 1
 
-[node name="P5" type="Control" parent="."]
-clip_contents = true
-custom_minimum_size = Vector2(110, 140)
-anchors_preset = 0
-offset_left = 135.00003
-offset_top = 591.0
-offset_right = 245.00003
-offset_bottom = 731.0
-pivot_offset = Vector2(55, 0)
+[node name="Checkmark" type="Label" parent="Stickers/MalletCollectible"]
+visible = false
+custom_minimum_size = Vector2(50, 50)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -25.0
+offset_right = 26.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 3.1415927
+pivot_offset = Vector2(25, 25)
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.95686275, 0.827451, 0.36862746, 1)
+theme_override_fonts/font = ExtResource("6_itt7e")
+theme_override_font_sizes/font_size = 40
+text = "✔︎"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Panel" type="Panel" parent="P5"]
-layout_mode = 0
-offset_left = -55.0
-offset_right = 54.99997
-offset_bottom = 110.0
+[node name="PicketCollectible" type="Marker2D" parent="Stickers" groups=["map_icon"]]
+position = Vector2(190.00006, 673)
+script = ExtResource("2_s7gsi")
+kind = ExtResource("11_xr4nv")
+item_id = &"picket"
+
+[node name="Panel" type="Panel" parent="Stickers/PicketCollectible"]
+offset_left = -109.99996
+offset_top = 1.0000229
+offset_bottom = 111.00002
 rotation = -0.7853982
 pivot_offset = Vector2(110, 0)
 theme_override_styles/panel = SubResource("StyleBoxFlat_1bee5")
 
-[node name="PicketTextureRect" type="TextureRect" parent="P5"]
-layout_mode = 0
-offset_left = 14.0
-offset_top = 29.0
-offset_right = 94.0
-offset_bottom = 109.0
+[node name="Icon" type="TextureRect" parent="Stickers/PicketCollectible"]
+offset_left = -40.99994
+offset_top = 30.0
+offset_right = 39.00006
+offset_bottom = 110.0
 rotation = 3.1415927
 pivot_offset = Vector2(40, 40)
 texture = ExtResource("6_7v2hi")
 expand_mode = 1
 
-[node name="P6" type="Control" parent="."]
-clip_contents = true
-custom_minimum_size = Vector2(110, 140)
-anchors_preset = 0
-offset_left = 215.00003
-offset_top = 726.0
-offset_right = 325.00003
-offset_bottom = 866.0001
-pivot_offset = Vector2(55, 0)
+[node name="Checkmark" type="Label" parent="Stickers/PicketCollectible"]
+visible = false
+custom_minimum_size = Vector2(50, 50)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -25.0
+offset_right = 26.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 3.1415927
+pivot_offset = Vector2(25, 25)
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.95686275, 0.827451, 0.36862746, 1)
+theme_override_fonts/font = ExtResource("6_itt7e")
+theme_override_font_sizes/font_size = 40
+text = "✔︎"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Panel" type="Panel" parent="P6"]
-layout_mode = 0
-offset_left = -55.0
-offset_right = 54.99997
-offset_bottom = 110.0
+[node name="SprayPaintCollectible" type="Marker2D" parent="Stickers" groups=["map_icon"]]
+position = Vector2(270.00006, 810)
+script = ExtResource("2_s7gsi")
+kind = ExtResource("13_htatb")
+item_id = &"spray_paint"
+
+[node name="Panel" type="Panel" parent="Stickers/SprayPaintCollectible"]
+offset_left = -109.99999
+offset_top = -0.9999924
+offset_right = -2.2888184e-05
+offset_bottom = 109.00001
 rotation = -0.7853982
 pivot_offset = Vector2(110, 0)
 theme_override_styles/panel = SubResource("StyleBoxFlat_1bee5")
 
-[node name="SprayTextureRect" type="TextureRect" parent="P6"]
-layout_mode = 0
-offset_left = 15.0
-offset_top = 40.0
-offset_right = 95.0
-offset_bottom = 120.0
+[node name="Icon" type="TextureRect" parent="Stickers/SprayPaintCollectible"]
+offset_left = -40.0
+offset_top = 39.0
+offset_right = 40.0
+offset_bottom = 119.0
 rotation = 3.1415927
 pivot_offset = Vector2(40, 40)
 texture = ExtResource("7_i7jve")
 expand_mode = 1
+
+[node name="Checkmark" type="Label" parent="Stickers/SprayPaintCollectible"]
+visible = false
+custom_minimum_size = Vector2(50, 50)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -25.0
+offset_right = 26.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 3.1415927
+pivot_offset = Vector2(25, 25)
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.95686275, 0.827451, 0.36862746, 1)
+theme_override_fonts/font = ExtResource("6_itt7e")
+theme_override_font_sizes/font_size = 40
+text = "✔︎"
+horizontal_alignment = 1
+vertical_alignment = 1

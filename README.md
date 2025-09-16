@@ -110,6 +110,9 @@ Copyright Fabricio Campos Zuardi - 2025 - 2025
 - Godot
 - Blender
 - Gimp
+- Jujutsu VCS
+- Neovim
+- Bluefin Linux
 
 ## Others
 

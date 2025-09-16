@@ -3,7 +3,7 @@
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1pben"]
 animation = &"UpperBody/PointForward"
 use_custom_timeline = true
-timeline_length = 1.5999999999999999
+timeline_length = 1.6
 stretch_time_scale = false
 start_offset = 0.3999999999999986
 loop_mode = 0
@@ -138,7 +138,6 @@ input_2/break_loop_at_end = false
 input_2/reset = false
 
 [resource]
-graph_offset = Vector2(-307.76526, -451.28387)
 nodes/output/position = Vector2(620, -560)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_70bq1")
 nodes/Animation/position = Vector2(-1700, -380)

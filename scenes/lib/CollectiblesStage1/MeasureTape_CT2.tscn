@@ -86,6 +86,7 @@ shadow_mesh = SubResource("ArrayMesh_8dusa")
 [node name="Collectible" type="Area3D" groups=["collectible"]]
 collision_layer = 3
 script = ExtResource("1_jb0wy")
+id = &"measuring_tape"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_l14c5")

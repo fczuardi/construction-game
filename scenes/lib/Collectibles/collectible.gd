@@ -14,6 +14,9 @@ func _ready() -> void:
     _y0 = position.y
     monitoring = true
 
+func set_height(y: float):
+    _y0 = y
+
 func _process(delta: float) -> void:
     rotate_y(deg_to_rad(spin_deg_per_sec) * delta)
     position.y = _y0 + sin(Time.get_ticks_msec() / 1000.0 * bob_speed) * bob_amp
