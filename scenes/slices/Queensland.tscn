@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://giqxuc0gq0fk"]
+[gd_scene load_steps=30 format=3 uid="uid://giqxuc0gq0fk"]
 
 [ext_resource type="Script" uid="uid://cq16dqdvi8ncx" path="res://slices/queensland.gd" id="1_glf58"]
 [ext_resource type="Script" uid="uid://bly6ty8fepn6x" path="res://lib/Wiring/wiring.gd" id="2_5p6w5"]
@@ -19,7 +19,14 @@
 [ext_resource type="PackedScene" uid="uid://dit5wwnydd6pe" path="res://lib/CollectiblesStage1/Picket1_6TMD.tscn" id="10_bf4tx"]
 [ext_resource type="PackedScene" uid="uid://d1eue887buodm" path="res://lib/CollectiblesStage1/SprayPaint1_6TMD.tscn" id="11_21mah"]
 [ext_resource type="Script" uid="uid://bcbctpyv6m8lg" path="res://lib/Collectibles/item_spawner.gd" id="11_nc38i"]
+[ext_resource type="Script" uid="uid://dy6pj3ntp2g64" path="res://lib/CollectiblePointer/collectible_pointer.gd" id="14_4hk5t"]
 [ext_resource type="PackedScene" uid="uid://bd5aj5us85j5a" path="res://lib/Sun/Sun.tscn" id="16_lxpnk"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2w0o7"]
+size = Vector3(0.5, 1, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4hk5t"]
+size = Vector3(0.5, 1, 2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4o0cy"]
 albedo_texture = ExtResource("7_7gcop")
@@ -140,6 +147,30 @@ transform = Transform3D(-1, 8.742278e-08, 0, 2.8750433e-08, 0.32886663, 0.944376
 [node name="FallCam" type="Camera3D" parent="PlayerRunner/PlayerVisuals2/FPCams"]
 transform = Transform3D(1, 0, 0, 0, 0.14608309, 0.9892723, 0, -0.9892723, 0.14608309, -0.488, 5.29, 3.069)
 
+[node name="CollectiblePointer" type="Node3D" parent="PlayerRunner/PlayerVisuals2" node_paths=PackedStringArray("visuals", "runner")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+script = ExtResource("14_4hk5t")
+visuals = NodePath("..")
+runner = NodePath("../..")
+
+[node name="ShapeForward" type="ShapeCast3D" parent="PlayerRunner/PlayerVisuals2/CollectiblePointer"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+shape = SubResource("BoxShape3D_2w0o7")
+target_position = Vector3(0, 0, 2)
+collision_mask = 3
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="ShapeBack" type="ShapeCast3D" parent="PlayerRunner/PlayerVisuals2/CollectiblePointer"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+shape = SubResource("BoxShape3D_4hk5t")
+target_position = Vector3(0, 0, -1)
+collision_mask = 3
+collide_with_areas = true
+collide_with_bodies = false
+
 [node name="Cameras" type="Node3D" parent="PlayerRunner"]
 unique_name_in_owner = true
 script = ExtResource("5_7gcop")
@@ -171,7 +202,7 @@ metadata/_edit_lock_ = true
 environment = SubResource("Environment_j5f2l")
 
 [node name="SunPivot" parent="Draft" instance=ExtResource("16_lxpnk")]
-transform = Transform3D(0.3600692, 0.1558158, -0.9198215, -0.39714777, 0.91775465, -2.8576694e-09, 0.84417045, 0.36530507, 0.39233708, 0, 0, 0)
+transform = Transform3D(0.3600691, 0.1558158, -0.9198215, -0.3971477, 0.91775465, -2.8576694e-09, 0.8441703, 0.36530507, 0.39233708, 0, 0, 0)
 auto_intensity = true
 hour = 8.500001017252604
 east = -66.9

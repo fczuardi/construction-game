@@ -1,4 +1,4 @@
-# Construction Contractor
+# Contractor Hero
 
 An endless runner by Fabricio Zuardi.
 
@@ -18,9 +18,11 @@ Copyright Fabricio Campos Zuardi - 2025 - 2025
     - ["Walking With A Swagger"](https://www.mixamo.com/#/?page=1&query=male+swagger)
     - ["Male Walking While Texting On A Smartphone"](https://www.mixamo.com/#/?page=1&query=texting+walking+male)
     - ["Male Weighted Run"](https://www.mixamo.com/#/?page=1&query=weighted)
+    - ["Pointing Behind With Thumb"](https://www.mixamo.com/#/?page=1&query=point+thumb)
+    - ["Looking Down Then Pointing Forward"](https://www.mixamo.com/#/?page=1&query=point+forward+look)
+    - ["Mid-Air Falling Idle"]("https://www.mixamo.com/#/?page=1&query=mid+air+falling+idle")
         - Author: [Adobe Mixamo](https://www.mixamo.com)
         - License: [Adobe Terms of Service](https://www.adobe.com/legal/terms.html#content-files)
-
 
     - [Winter Hat](https://sketchfab.com/3d-models/winter-hat-637a36cb74204c719883af7feb4b7c28)
         - Author: [StubbornFunkyDonkey](https://sketchfab.com/stubbornfunkydonkey)
@@ -92,6 +94,31 @@ Copyright Fabricio Campos Zuardi - 2025 - 2025
         - Tent Stake by Kawalan Icon (CC BY 3.0)
             - https://thenounproject.com/browse/icons/term/tent-stake/
 
+## Acknoledgements / Playtest
+
+- Juliana
+- Lucas, Marcelo
+- Taboca
+- Thiago, Rafael, Isa, Nelsinho
+- Emilio, Braga
+- Mauricio, Renan, Adriano
+- Casa21, UlisFlavio, Joaozinho, Leal, Lucas, Edil, Hiro
+- Fabbri
+
+## Free Software / Community
+
+- Godot
+- Blender
+- Gimp
+
+## Others
+
+- OpenAI
+- Itch
+
+## Youtube
+
+- JR Construções
 
 -----
 

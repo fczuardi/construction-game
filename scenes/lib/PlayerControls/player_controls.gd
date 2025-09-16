@@ -45,7 +45,7 @@ var controls_enabled: bool = true
 
 func _ready() -> void:
     mouse_filter = Control.MOUSE_FILTER_PASS
-    _set_group(Enums.TouchControlsLayout.RIGHT_SIDE)
+    _set_group(Enums.TouchControlsLayout.BOTH_HANDS)
     set_process_unhandled_input(enable_input_actions)
 
 func _unhandled_input(event: InputEvent) -> void:

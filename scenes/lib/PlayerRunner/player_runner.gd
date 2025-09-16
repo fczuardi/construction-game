@@ -8,11 +8,12 @@ const VERSION := "0.5.1"
 # important for tripping over trenches
 signal collided(collider: Node, normal: Vector3, grounded: bool, speed_mps: float, speed_mode: String)
 
+## collectible pointer listens for this
+signal turn_buffer_changed(remaining_deg: float)
 
 ## DELME: unused signals
 ## TODO: check if anyone is consuming those signal below (we might have overdesigned)
 # signal distance_moved(delta_m: float)
-# signal turn_buffer_changed(remaining_deg: float)
 # 
 # there is a demo using it to display custom speed on screen
 signal speed_changed(new_speed: float, mode: String)
@@ -89,7 +90,7 @@ func _physics_process(delta: float) -> void:
         if step != 0.0:
             _move_dir = _move_dir.rotated(Vector3.UP, deg_to_rad(step)).normalized()
             _remaining_turn_deg -= step
-            # turn_buffer_changed.emit(_remaining_turn_deg)
+            turn_buffer_changed.emit(_remaining_turn_deg)
         var k := _exp_k(delta, speed_blend_time)          # 0..1
         _speed = lerp(_speed, _target_speed, k)           # smooth toward target
         velocity = _move_dir * _speed
@@ -130,7 +131,7 @@ func _exp_k(dt: float, tau: float) -> float:
 # --- Public API -----------------------
 func queue_turn(delta_deg: float) -> void:
     _remaining_turn_deg = clamp(_remaining_turn_deg + delta_deg, -360.0, 360.0)
-    # turn_buffer_changed.emit(_remaining_turn_deg)
+    turn_buffer_changed.emit(_remaining_turn_deg)
 
 func set_speed_mode(mode: String) -> void:
     var key := mode.to_lower()

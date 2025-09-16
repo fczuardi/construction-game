@@ -60,12 +60,13 @@ const MOVEMENT_SPEED: Dictionary[MovementBase, float] = {
 # than the legs depending on the item the player is carrying or the action
 # the player is executing. For example, looking at a map while walking or running.
 
-enum UpperBodyBase { MAP }
+enum UpperBodyBase { IDLE, MAP }
 enum UpperBodyEvent { STRETCH, POINT_FORWARD, POINT_BACKWARDS } 
 
 const UPPER_BODY_BASE_TRANSITION_PATH: StringName = &"parameters/UpperBodyBase/transition_request"
-const UPPER_BODY_BLEND_PATH: StringName = &"parameters/UpperBody/blend_amount"
+const UPPER_BODY_BLEND_PATH: String = "parameters/UpperBody/blend_amount"
 const UPPER_BODY_STATE: Dictionary[UpperBodyBase, String] = {
+    UpperBodyBase.IDLE: "Walking",
     UpperBodyBase.MAP: "Reading",
 }
 
@@ -81,6 +82,7 @@ const MOVEMENT_EVENT: Dictionary[MovementEvent, String] = {
 }
 const UPPER_BODY_EVENT_TRANSITION_PATH: StringName = &"parameters/UpperBodyEvents/transition_request"
 const UPPER_BODY_EVENT_ONESHOT_PATH = "parameters/UpperBodyEventTrigger/request"
+const UPPER_BODY_EVENT_ONESHOT_ACTIVE_PATH = "parameters/UpperBodyEventTrigger/active"
 const UPPER_BODY_EVENT: Dictionary[UpperBodyEvent, String] = {
     UpperBodyEvent.STRETCH: "Stretch",
     UpperBodyEvent.POINT_FORWARD: "PointForward",
@@ -104,6 +106,7 @@ var _last_base: MovementBase = MovementBase.IDLE
 var _last_end: MovementEnd = MovementEnd.MOVE
 var _last_upper_body_base: UpperBodyBase = UpperBodyBase.MAP
 var _last_blend: float = -1.0
+var _previous_blend: float = -1.0
 var _last_stride: float = -1.0
 var _pending_stumble: int = 0  # 0 none, 1 soft, 2 hard
 var _last_facing: float = 0.0
@@ -133,6 +136,7 @@ func reset_to_start() -> void:
     _toggle_upper_body_blend(false)
     _pending_stumble = 0
     animation_tree[MOVEMENT_EVENT_ONESHOT_PATH] = AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT
+    animation_tree[UPPER_BODY_EVENT_ONESHOT_PATH] = AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT
 
 ## Called every physics tick from PlayerRunner
 func update_motion(velocity: Vector3, on_floor: bool) -> void:
@@ -172,6 +176,12 @@ func update_motion(velocity: Vector3, on_floor: bool) -> void:
 func play_stumble(severity: float) -> void:
     _pending_stumble = 2 if (severity >= 0.5) else 1
 
+## Called by CollectiblePointer
+func play_point_forward() -> void:
+    _trigger_upper_body_event(UpperBodyEvent.POINT_FORWARD)
+func play_point_back() -> void:
+    _trigger_upper_body_event(UpperBodyEvent.POINT_BACKWARDS)
+    
 ## Simple toggle for upper-body overlay (map etc.)
 func set_upper_body_enabled(on: bool) -> void:
     _toggle_upper_body_blend(on)
@@ -235,7 +245,7 @@ func _update_upper_body_base(base: UpperBodyBase):
 func _trigger_upper_body_event(event: UpperBodyEvent):
     animation_tree[UPPER_BODY_EVENT_TRANSITION_PATH] = UPPER_BODY_EVENT[event]
     animation_tree[UPPER_BODY_EVENT_ONESHOT_PATH] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
-
+    
 func _classify_with_hysteresis(speed: float, current: MovementBase) -> MovementBase:
     match current:
         MovementBase.IDLE:

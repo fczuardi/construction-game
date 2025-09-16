@@ -7,6 +7,7 @@
 radius = 0.2
 
 [node name="Collectible" type="Area3D" groups=["collectible"]]
+collision_layer = 3
 script = ExtResource("1_sgvnl")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

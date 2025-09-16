@@ -157,6 +157,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 toggle_mode = true
+button_pressed = true
 text = "Both Hands"
 
 [node name="LayoutRightBtn" type="Button" parent="MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer/TouchControlMenuSection/ThumbClusterOptionsContainer"]
@@ -164,7 +165,6 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 toggle_mode = true
-button_pressed = true
 text = "Right Thumb"
 
 [node name="BackToIndex" type="VBoxContainer" parent="MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer"]
