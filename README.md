@@ -10,9 +10,12 @@ MIT License
 Copyright Fabricio Campos Zuardi - 2025 - 2025
 
 
-## Assets and Licences
 
-### Character and Animations
+## Credits & Acknoledgements
+
+### Assets and Licences
+
+#### Character and Animations
 
     - ["Pete"](https://www.mixamo.com/#/?page=1&query=pete&type=Character)
     - ["Walking With A Swagger"](https://www.mixamo.com/#/?page=1&query=male+swagger)
@@ -28,7 +31,7 @@ Copyright Fabricio Campos Zuardi - 2025 - 2025
         - Author: [StubbornFunkyDonkey](https://sketchfab.com/stubbornfunkydonkey)
         - License: [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/)
 
-### Textures
+#### Textures
 
     - Ground Plan from [Architectural plan of the Public Offices and Court House, Maryborough, circa 1888](https://en.wikipedia.org/wiki/File:Architectural_plan_of_the_Public_Offices_and_Court_House,_Maryborough,_circa_1888.jpg)
         - Author: [Francis Drummond Greville Stanley](https://en.wikipedia.org/wiki/Francis_Drummond_Greville_Stanley)
@@ -42,7 +45,7 @@ Copyright Fabricio Campos Zuardi - 2025 - 2025
         - PBR Maps Generated with: [Unity-WebGPU-PBR-Maps-Generator](https://github.com/aniketrajnish/Unity-WebGPU-PBR-Maps-Generator)
             - License: [MIT License](https://github.com/aniketrajnish/Unity-WebGPU-PBR-Maps-Generator/blob/main/LICENSE)
 
-### Fonts
+#### Fonts
 
     - [Argula Font](https://drj11.itch.io/arugula-font)
         - Author: [David Jones (Cubic Type)](https://about.cubictype.com/)
@@ -53,7 +56,7 @@ Copyright Fabricio Campos Zuardi - 2025 - 2025
         - Author: Google LLC
         - License: [Open Font License 1.1](https://fonts.google.com/noto/specimen/Noto+Emoji/license)
 
-### Collectibles
+#### Collectibles
 
     - Level, Pencil from [Construction Tools](https://sketchfab.com/3d-models/construction-tools-09e12ba3f7ee42259b6533581abec86f)
         - Author: [Teen Wolf](https://sketchfab.com/Teen-Wolf)
@@ -67,11 +70,12 @@ Copyright Fabricio Campos Zuardi - 2025 - 2025
         - Author: [6TMD-Modeling](https://patrickbiani.wixsite.com/6tmd-modeling)
         - License: [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/)
 
-    - Bitcoin Coin from [Realistic 3D Bitcoin Model – Crypto Asset](https://sketchfab.com/3d-models/realistic-3d-bitcoin-model-crypto-asset-d71eff74bd5c4e25890477a4d3ecea73)
-        - Author: [CryptoArt-Miki](https://sketchfab.com/CryptoArt-Miki)
-        - License: [Creative Commons Attribution-NonCommercial 4.0](https://creativecommons.org/licenses/by-nc/4.0/)
-
-### Icons
+    - Toilet Paper Roll from [CC0 - Toilet Paper Roll](https://sketchfab.com/3d-models/cc0-toilet-paper-roll-6d5284b842434413a17133f7bf259669)
+        - Authot: [Marcel Plagmann (aka plaggy)](https://plaggy.net/)
+        - Licenses: 
+            - [CC0 1.0 Universal (CC0 1.0) Public Domain Dedication](https://creativecommons.org/publicdomain/zero/1.0/)
+            - [CC-BY-4.0](http://creativecommons.org/licenses/by/4.0/)
+#### Icons
 
     - [Remix Icon](https://remixicon.com/)
         - Authors: [Remix Design Studio (Wendy Gao and Jimmy Cheung)](https://github.com/Remix-Design)
@@ -81,51 +85,81 @@ Copyright Fabricio Campos Zuardi - 2025 - 2025
             - ri-run-line
             - ri-menu-line
             - circle-fill
+            - navigation-fill
 
     - Noun Project:
-        - Level by INA (CC BY 3.0)
-            - https://thenounproject.com/browse/icons/term/level/ 
-        - Pencil by LUTFI GANI AL ACHMAD (CC BY 3.0)
-            - https://thenounproject.com/browse/icons/term/pencil/
-        - measuring tape by Firza Alamsyah (CC BY 3.0)
-            - https://thenounproject.com/browse/icons/term/measuring-tape/
-        - Mallet by M. Oki Orlando  (CC BY 3.0)
-            - https://thenounproject.com/browse/icons/term/mallet/
-        - Tent Stake by Kawalan Icon (CC BY 3.0)
-            - https://thenounproject.com/browse/icons/term/tent-stake/
+        - [Level by INA](https://thenounproject.com/icon/level-6853002/)
+            - Author: [INA](https://thenounproject.com/creator/zullyantisiti78/)
+            - License: [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/)
+        - [Pencil by LUTFI GANI AL ACHMAD](https://thenounproject.com/icon/pencil-8001529/)
+            - Author: [LUTFI GANI AL ACHMAD](https://thenounproject.com/creator/lutfidiarycoc/)
+            - License: [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/)
+        - [measuring tape by Firza Alamsyah](https://thenounproject.com/icon/measuring-tape-7819005/)
+            - Author: [Firza Alamsyah](https://thenounproject.com/creator/crlxsens/)
+            - License: [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/)
+        - [Mallet by M. Oki Orlando](https://thenounproject.com/icon/mallet-4296337/
+            - Author: [M. Oki Orlando](https://thenounproject.com/creator/orvipixel/)
+            - License: [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/)
+        - [Tent Stake by Kawalan Icon](https://thenounproject.com/icon/tent-stake-6308587/)
+            - Author: [Kawalan Icon](https://thenounproject.com/creator/kawalan.studio)
+            - License: [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/)
+        - [Lock by Sita Raisita](https://thenounproject.com/icon/lock-7854371/)
+            - Author: [Sita Raisita](https://thenounproject.com/creator/raisita/)
+            - License: [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/)
+        - [Tissue Paper by Zach Hainsworth](https://thenounproject.com/icon/tissue-paper-6932814/)
+            - Author: [Zach Hainsworth](https://thenounproject.com/creator/hainsworth.zach)
+            - License: [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/)
+        - [Toilet by Wilson Joseph](https://thenounproject.com/icon/toilet-151638/)
+            - Author: [Wilson Joseph](https://www.tuktukdesign.com/)
+            - License: [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/)
 
-## Acknoledgements / Playtest
+#### Scenery / Obstacles
+
+    - Toilets, Pallet from [Low Poly Construction Pack](https://lowpolyassets.itch.io/low-poly-construction-pack)
+        - Author: [LowPolyAssets](https://lowpolyassets.itch.io/)
+        - License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/)
+
+### Supportes / Playtest
 
 - Juliana
-- Lucas, Marcelo
-- Taboca
-- Thiago, Rafael, Isa, Nelsinho
-- Emilio, Braga
+- ([Cafepivara](https://itch.io/c/6345901/cafepivara)) Lucas, Marcelo
+- ([Weplex](https://weplex.com.br/)) Taboca
+- ([IAM Founder](https://iamfounder.com.br/)) Thiago, Rafael, Isa, Nelsinho
+- ([Palma Labs](https://www.linkedin.com/company/palmalabs/)) Emilio
+- ([fullbragger](https://linktr.ee/fullbragger)) Braga
 - Mauricio, Renan, Adriano
-- Casa21, UlisFlavio, Joaozinho, Leal, Lucas, Edil, Hiro
-- Fabbri
+- ([Casa21](https://vinteum.org/)) UlisFlavio, Joaozinho, Leal, Lucas, Edil, Hiro
+- Bruno Fabbri, Rafael Teizen
 
-## Free Software / Community
+### Free Software
 
-- Godot
-- Blender
-- Gimp
-- Jujutsu VCS
-- Neovim
-- Bluefin Linux
+- [Godot](https://godotengine.org/)
+- [Blender](https://www.blender.org/)
+- [Gimp](https://www.gimp.org/)
+- [Jujutsu VCS](https://jj-vcs.github.io/jj/latest/)
+- [Neovim](https://neovim.io/)
+- [Bluefin Linux](https://projectbluefin.io/)
 
-## Others
+### Others
 
-- OpenAI
-- Itch
+- [OpenAI](https://chatgpt.com/)
+- [Itch](https://itch.io/)
 
-## Youtube
+### Youtube
 
-- JR Construções
+- [Euzebio Construtor](https://www.youtube.com/@euzebioconstrutor2815)
+- [JR CONSTRUÇÃO](https://www.youtube.com/c/JRConstru%C3%A7%C3%A3o)
+- [Essential Craftsman](https://www.youtube.com/@essentialcraftsman)
+- [Perkins Builder Brothers](https://www.youtube.com/@PerkinsBuilderBrothers)
 
 -----
 
 #### Not (yet) used / Research
+
+    - Bitcoin Coin from [Realistic 3D Bitcoin Model – Crypto Asset](https://sketchfab.com/3d-models/realistic-3d-bitcoin-model-crypto-asset-d71eff74bd5c4e25890477a4d3ecea73)
+        - Author: [CryptoArt-Miki](https://sketchfab.com/CryptoArt-Miki)
+        - License: [Creative Commons Attribution-NonCommercial 4.0](https://creativecommons.org/licenses/by-nc/4.0/)
+
 - Mixamo:
         - ["Brief Stumble While Jogging"](https://www.mixamo.com/#/?page=1&query=brief+stumble+jog)
         - ["Walk To Tripping And Falling"](https://www.mixamo.com/#/?page=1&query=walk+tripping+falling)

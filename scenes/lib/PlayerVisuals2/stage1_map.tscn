@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cwo6mh160oyym"]
+[gd_scene load_steps=28 format=3 uid="uid://cwo6mh160oyym"]
 
 [ext_resource type="Texture2D" uid="uid://c3ggid41yoxw5" path="res://imports/textures/Maryborough Courthouse/ground-floor_640x1024.jpg" id="1_hui57"]
 [ext_resource type="Script" uid="uid://vf6f0by61bt4" path="res://lib/PlayerVisuals2/stage_map.gd" id="1_meksb"]
@@ -16,19 +16,58 @@
 [ext_resource type="PackedScene" uid="uid://deums4crxem71" path="res://lib/CollectiblesStage1/Mallet_6TMD.tscn" id="9_278qt"]
 [ext_resource type="PackedScene" uid="uid://dit5wwnydd6pe" path="res://lib/CollectiblesStage1/Picket1_6TMD.tscn" id="11_xr4nv"]
 [ext_resource type="PackedScene" uid="uid://d1eue887buodm" path="res://lib/CollectiblesStage1/SprayPaint1_6TMD.tscn" id="13_htatb"]
+[ext_resource type="Texture2D" uid="uid://cbhy6dci7jjh2" path="res://imports/icons/noun_project/noun-tissue-paper-6932814_600px.png" id="17_278qt"]
+[ext_resource type="PackedScene" uid="uid://bex1nfxp6iaov" path="res://lib/CollectiblesStage1/ToiletPaper__MP.tscn" id="17_xr4nv"]
+[ext_resource type="PackedScene" uid="uid://c8h5mes28rf7l" path="res://lib/CollectiblesStage1/BitcoinCoin.tscn" id="19_gq0i6"]
+[ext_resource type="Texture2D" uid="uid://djwsrvccrhdvu" path="res://imports/icons/noun_project/noun-toilet-151638_600px.png" id="19_htatb"]
+[ext_resource type="PackedScene" uid="uid://cqqtctmev3ocb" path="res://lib/GoalStage1/ToiletGoal_LPC.tscn" id="19_wbt6f"]
+[ext_resource type="Texture2D" uid="uid://cx1rv1eii521v" path="res://imports/icons/noun_project/noun-lock-7854371_600px.png" id="20_m5iv8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aayd2"]
 content_margin_left = 0.0
 content_margin_top = 0.0
 content_margin_right = 0.0
 content_margin_bottom = 0.0
-bg_color = Color(0.95686275, 0.827451, 0.36862746, 1)
+bg_color = Color(0.96, 0.83312, 0.3744, 0.74509805)
 corner_radius_top_left = 55
 corner_radius_bottom_right = 55
 corner_radius_bottom_left = 55
 corner_detail = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1bee5"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.96, 0.83312, 0.3744, 0.74509805)
+corner_radius_top_left = 55
+corner_radius_bottom_right = 55
+corner_radius_bottom_left = 55
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xr4nv"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.92, 0.92, 0.828, 0.74509805)
+corner_radius_top_left = 55
+corner_radius_bottom_right = 55
+corner_radius_bottom_left = 55
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gq0i6"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.032899998, 0.2441649, 0.47, 0.74509805)
+corner_radius_top_left = 55
+corner_radius_bottom_right = 55
+corner_radius_bottom_left = 55
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wbt6f"]
 content_margin_left = 0.0
 content_margin_top = 0.0
 content_margin_right = 0.0
@@ -71,7 +110,7 @@ position = Vector2(0, 1024)
 unique_name_in_owner = true
 
 [node name="LevelCollectible" type="Marker2D" parent="Stickers" groups=["map_icon"]]
-position = Vector2(403.0001, 270.99988)
+position = Vector2(413.0001, 270.99988)
 script = ExtResource("2_s7gsi")
 kind = ExtResource("3_e3g3w")
 item_id = &"level"
@@ -120,7 +159,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="PencilCollectible" type="Marker2D" parent="Stickers" groups=["map_icon"]]
-position = Vector2(488.0001, 404.99994)
+position = Vector2(498.0001, 404.99994)
 script = ExtResource("2_s7gsi")
 kind = ExtResource("5_meksb")
 item_id = &"pencil"
@@ -169,7 +208,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="MeasuringTapeCollectible" type="Marker2D" parent="Stickers" groups=["map_icon"]]
-position = Vector2(563.00006, 539.99994)
+position = Vector2(573.00006, 539.99994)
 script = ExtResource("2_s7gsi")
 kind = ExtResource("7_itt7e")
 item_id = &"measuring_tape"
@@ -218,7 +257,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="MalletCollectible" type="Marker2D" parent="Stickers" groups=["map_icon"]]
-position = Vector2(110.00001, 539.99994)
+position = Vector2(64.00001, 539.99994)
 script = ExtResource("2_s7gsi")
 kind = ExtResource("9_278qt")
 item_id = &"mallet"
@@ -267,7 +306,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="PicketCollectible" type="Marker2D" parent="Stickers" groups=["map_icon"]]
-position = Vector2(190.00006, 673)
+position = Vector2(144.00006, 673)
 script = ExtResource("2_s7gsi")
 kind = ExtResource("11_xr4nv")
 item_id = &"picket"
@@ -315,7 +354,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="SprayPaintCollectible" type="Marker2D" parent="Stickers" groups=["map_icon"]]
-position = Vector2(270.00006, 810)
+position = Vector2(224.00006, 810)
 script = ExtResource("2_s7gsi")
 kind = ExtResource("13_htatb")
 item_id = &"spray_paint"
@@ -357,6 +396,158 @@ rotation = 3.1415927
 pivot_offset = Vector2(25, 25)
 size_flags_vertical = 1
 theme_override_colors/font_color = Color(0.95686275, 0.827451, 0.36862746, 1)
+theme_override_fonts/font = ExtResource("6_itt7e")
+theme_override_font_sizes/font_size = 40
+text = "✔︎"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ToiletPaper" type="Marker2D" parent="Stickers" groups=["map_icon"]]
+unique_name_in_owner = true
+position = Vector2(483.00006, 775.99994)
+script = ExtResource("2_s7gsi")
+kind = ExtResource("17_xr4nv")
+item_id = &"toilet_paper"
+
+[node name="HiddenPanel" type="Panel" parent="Stickers/ToiletPaper"]
+visible = false
+offset_left = -109.99996
+offset_top = -1.0000381
+offset_bottom = 108.99996
+rotation = -0.7853982
+pivot_offset = Vector2(110, 0)
+theme_override_styles/panel = SubResource("StyleBoxFlat_xr4nv")
+
+[node name="HiddenIcon" type="TextureRect" parent="Stickers/ToiletPaper"]
+visible = false
+offset_left = -40.0
+offset_top = 39.0
+offset_right = 40.0
+offset_bottom = 119.0
+rotation = 3.1415927
+pivot_offset = Vector2(40, 40)
+texture = ExtResource("17_278qt")
+expand_mode = 1
+
+[node name="Checkmark" type="Label" parent="Stickers/ToiletPaper"]
+visible = false
+custom_minimum_size = Vector2(50, 50)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -25.0
+offset_right = 26.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 3.1415927
+pivot_offset = Vector2(25, 25)
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.92156863, 0.92156863, 0.827451, 1)
+theme_override_fonts/font = ExtResource("6_itt7e")
+theme_override_font_sizes/font_size = 40
+text = "✔︎"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BitcoinCoin" type="Marker2D" parent="Stickers" groups=["map_icon"]]
+unique_name_in_owner = true
+position = Vector2(349.0001, 942)
+script = ExtResource("2_s7gsi")
+kind = ExtResource("19_gq0i6")
+item_id = &"bitcoin_coin"
+
+[node name="Checkmark" type="Label" parent="Stickers/BitcoinCoin"]
+visible = false
+custom_minimum_size = Vector2(50, 50)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -25.0
+offset_right = 26.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 3.1415927
+pivot_offset = Vector2(25, 25)
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.03137255, 0.23921569, 0.46666667, 1)
+theme_override_fonts/font = ExtResource("6_itt7e")
+theme_override_font_sizes/font_size = 40
+text = "✔︎"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Toilet" type="Marker2D" parent="Stickers" groups=["map_icon"]]
+unique_name_in_owner = true
+position = Vector2(349.00006, 778)
+script = ExtResource("2_s7gsi")
+kind = ExtResource("19_wbt6f")
+item_id = &"toilet"
+
+[node name="Panel" type="Panel" parent="Stickers/Toilet"]
+offset_left = -109.99993
+offset_top = -1.0000381
+offset_right = 3.0517578e-05
+offset_bottom = 108.99996
+rotation = -0.7853982
+pivot_offset = Vector2(110, 0)
+theme_override_styles/panel = SubResource("StyleBoxFlat_gq0i6")
+
+[node name="Icon" type="TextureRect" parent="Stickers/Toilet"]
+offset_left = -40.0
+offset_top = 40.0
+offset_right = 40.0
+offset_bottom = 120.0
+rotation = 3.1415927
+pivot_offset = Vector2(40, 40)
+texture = ExtResource("20_m5iv8")
+expand_mode = 1
+
+[node name="HiddenPanel" type="Panel" parent="Stickers/Toilet"]
+visible = false
+offset_left = -109.99996
+offset_top = -1.0000381
+offset_bottom = 108.99996
+rotation = -0.7853982
+pivot_offset = Vector2(110, 0)
+theme_override_styles/panel = SubResource("StyleBoxFlat_wbt6f")
+
+[node name="HiddenIcon" type="TextureRect" parent="Stickers/Toilet"]
+visible = false
+offset_left = -35.0
+offset_top = 40.0
+offset_right = 35.0
+offset_bottom = 110.0
+rotation = 3.1415927
+pivot_offset = Vector2(35, 35)
+texture = ExtResource("19_htatb")
+expand_mode = 1
+
+[node name="Checkmark" type="Label" parent="Stickers/Toilet"]
+visible = false
+custom_minimum_size = Vector2(50, 50)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -25.0
+offset_right = 26.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 3.1415927
+pivot_offset = Vector2(25, 25)
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.9764706, 0.34117648, 0.21960784, 1)
 theme_override_fonts/font = ExtResource("6_itt7e")
 theme_override_font_sizes/font_size = 40
 text = "✔︎"

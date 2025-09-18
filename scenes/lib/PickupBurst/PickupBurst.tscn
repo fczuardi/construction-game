@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1cppi2uly3bv"]
+
+[ext_resource type="Script" uid="uid://eiibjimytoxp" path="res://lib/PickupBurst/pickup_burst.gd" id="1_icaq7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6jv6g"]
+albedo_color = Color(0.92156863, 0.92156863, 0.827451, 1)
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_cu8nm"]
+material = SubResource("StandardMaterial3D_6jv6g")
+size = Vector2(0.03, 0.03)
+
+[node name="CPUParticles3D" type="CPUParticles3D"]
+emitting = false
+amount = 50
+lifetime = 0.8
+one_shot = true
+preprocess = 0.2
+speed_scale = 2.0
+explosiveness = 0.1
+mesh = SubResource("QuadMesh_cu8nm")
+emission_shape = 1
+emission_sphere_radius = 0.2
+direction = Vector3(0, 0.5, 0)
+spread = 90.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 0.3
+initial_velocity_max = 0.3
+radial_accel_min = 0.5
+radial_accel_max = 0.8
+damping_max = 0.6
+script = ExtResource("1_icaq7")

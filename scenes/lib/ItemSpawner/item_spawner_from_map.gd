@@ -72,17 +72,15 @@ func _spawn_from_map() -> void:
         var v := inv_m10 * s.x + inv_m11 * s.y
 
         var world_pos := WA + U3 * u + V3 * v
-        world_pos.y = spawn_height
 
         # 6) Spawn the corresponding scene
-        var inst := kind.instantiate() as Node3D
-        add_child(inst)
-
-        inst.global_position = world_pos
-        if inst.has_method("set_height"):
-            inst.set_height(world_pos.y)
-
-        _spawned_items.push_front(inst)
+        if kind:
+            var inst := kind.instantiate() as Node3D
+            add_child(inst)
+            inst.global_position = world_pos
+            if inst.has_method("set_height"):
+                inst.set_height(spawn_height)
+            _spawned_items.push_front(inst)
 
 func clear_all_items():
     for item in _spawned_items:

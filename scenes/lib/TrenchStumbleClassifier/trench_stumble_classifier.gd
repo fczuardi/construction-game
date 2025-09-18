@@ -13,7 +13,7 @@ extends Node
 
 @export var lateral_min := 0.15
 @export var cooldown_sec := 0.35
-@export var groups := ["trench"]
+@export var groups: Array[StringName] = ["trench"]
 
 # Speed bands (match your visuals / runner)
 @export var jog_enter := 2.2
@@ -27,10 +27,15 @@ func _ready() -> void:
     assert(character_body)
     assert(character_visuals)
     character_body.collided.connect(_on_player_collided)
+    EventBus.fatal_hit_received.connect(_on_fatal_hit)
+
+func _on_fatal_hit(_world_pos):
+    character_visuals.play_stumble(1.0)
 
 func _exit_tree() -> void:
     if character_body and character_body.collided.is_connected(_on_player_collided):
         character_body.collided.disconnect(_on_player_collided)
+    EventBus.fatal_hit_received.disconnect(_on_fatal_hit)
 
 func _on_player_collided(collider: Node, normal: Vector3, grounded: bool, speed_mps: float, speed_mode: String) -> void:
     # Cooldown & basic gates

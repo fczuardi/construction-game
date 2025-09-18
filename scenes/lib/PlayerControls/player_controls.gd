@@ -7,9 +7,9 @@ extends Control
 signal action(side: int, event: int)
 
 enum Side  { NORTH, SOUTH, WEST, EAST }
-enum Event { TOGGLE_OFF, TOGGLE_ON, PRESS }
+enum Event { TOGGLE_OFF, TOGGLE_ON, PRESS, DOWN, UP }
 
-const VERSION := "0.5.0"
+const VERSION := "0.6.0"
 
 # Optional keyboard/gamepad fallback
 @export_category("Keyboard")
@@ -51,27 +51,45 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
     if not enable_input_actions or not controls_enabled or not is_visible_in_tree() or get_tree().paused:
         return
+
+    # DOWN (pressed)
     if event.is_action_pressed(input_north):
-        _handle_kb(Side.NORTH, _btn_north, toggle_north)
+        _handle_kb_down(Side.NORTH, _btn_north, toggle_north)
     if event.is_action_pressed(input_south):
-        _handle_kb(Side.SOUTH, _btn_south, toggle_south)
+        _handle_kb_down(Side.SOUTH, _btn_south, toggle_south)
     if event.is_action_pressed(input_west):
-        _handle_kb(Side.WEST, _btn_west, toggle_west)
+        _handle_kb_down(Side.WEST,  _btn_west,  toggle_west)
     if event.is_action_pressed(input_east):
-        _handle_kb(Side.EAST, _btn_east, toggle_east)
+        _handle_kb_down(Side.EAST,  _btn_east,  toggle_east)
 
-func _handle_kb(side: int, btn: Button, is_toggle: bool) -> void:
+    # UP (released)
+    if event.is_action_released(input_north):
+        _handle_kb_up(Side.NORTH, _btn_north, toggle_north)
+    if event.is_action_released(input_south):
+        _handle_kb_up(Side.SOUTH, _btn_south, toggle_south)
+    if event.is_action_released(input_west):
+        _handle_kb_up(Side.WEST,  _btn_west,  toggle_west)
+    if event.is_action_released(input_east):
+        _handle_kb_up(Side.EAST,  _btn_east,  toggle_east)
+
+# Keyboard helpers
+func _handle_kb_down(side: int, btn: Button, is_toggle: bool) -> void:
     if is_toggle:
-        btn.button_pressed = not btn.button_pressed  # fires toggled → unified signal
+        btn.button_pressed = not btn.button_pressed  # fires toggled -> unified signal
     else:
-        action.emit(side, Event.PRESS)
+        action.emit(side, Event.DOWN)
 
-# Helpers
-func set_enabled(on: bool) -> void:
-    controls_enabled = on
-    for b in [_btn_north, _btn_south, _btn_west, _btn_east]:
-        b.disabled = not on
+func _handle_kb_up(side: int, _btn: Button, is_toggle: bool) -> void:
+    if is_toggle:
+        return  # toggle already handled on press
+    action.emit(side, Event.UP)
 
+## Helpers
+#func set_enabled(on: bool) -> void:
+    #controls_enabled = on
+    #for b in [_btn_north, _btn_south, _btn_west, _btn_east]:
+        #b.disabled = not on
+#
 func _on_toggle_north(on: bool):
     action.emit(Side.NORTH, Event.TOGGLE_ON if on else Event.TOGGLE_OFF)
 func _on_toggle_south(on: bool):
@@ -80,73 +98,88 @@ func _on_toggle_west(on: bool):
     action.emit(Side.WEST, Event.TOGGLE_ON if on else Event.TOGGLE_OFF)
 func _on_toggle_east(on: bool):
     action.emit(Side.EAST, Event.TOGGLE_ON if on else Event.TOGGLE_OFF)
-func _on_press_north():
-    action.emit(Side.NORTH, Event.PRESS)
-func _on_press_south():
-    action.emit(Side.SOUTH, Event.PRESS)
-func _on_press_west():
-    action.emit(Side.WEST, Event.PRESS)
-func _on_press_east():
-    action.emit(Side.EAST, Event.PRESS)
+
+# Enable/disable
+func set_enabled(on: bool) -> void:
+    controls_enabled = on
+    for b in [_btn_north, _btn_south, _btn_west, _btn_east]:
+        b.disabled = not on
+
+# Signals for momentary buttons (now DOWN/UP)
+func _on_down_north(): action.emit(Side.NORTH, Event.DOWN)
+func _on_up_north():   action.emit(Side.NORTH, Event.UP)
+func _on_down_south(): action.emit(Side.SOUTH, Event.DOWN)
+func _on_up_south():   action.emit(Side.SOUTH, Event.UP)
+func _on_down_west():  action.emit(Side.WEST,  Event.DOWN)
+func _on_up_west():    action.emit(Side.WEST,  Event.UP)
+func _on_down_east():  action.emit(Side.EAST,  Event.DOWN)
+func _on_up_east():    action.emit(Side.EAST,  Event.UP)
 
 func _set_connections():
+    # NORTH
     if toggle_north:
         _btn_north.toggled.connect(_on_toggle_north)
     else:
-        _btn_north.button_down.connect(_on_press_north)
+        _btn_north.button_down.connect(_on_down_north)
+        _btn_north.button_up.connect(_on_up_north)
+    # SOUTH
     if toggle_south:
         _btn_south.toggled.connect(_on_toggle_south)
     else:
-        _btn_south.button_down.connect(_on_press_south)
+        _btn_south.button_down.connect(_on_down_south)
+        _btn_south.button_up.connect(_on_up_south)
+    # WEST
     if toggle_west:
         _btn_west.toggled.connect(_on_toggle_west)
     else:
-        _btn_west.button_down.connect(_on_press_west)
+        _btn_west.button_down.connect(_on_down_west)
+        _btn_west.button_up.connect(_on_up_west)
+    # EAST
     if toggle_east:
         _btn_east.toggled.connect(_on_toggle_east)
     else:
-        _btn_east.button_down.connect(_on_press_east)
+        _btn_east.button_down.connect(_on_down_east)
+        _btn_east.button_up.connect(_on_up_east)
 
 func _unset_connections():
-    if !_btn_north or !_btn_south or !_btn_east or !_btn_west:
+    if not (_btn_north and _btn_south and _btn_west and _btn_east):
         return
     if toggle_north:
         _btn_north.toggled.disconnect(_on_toggle_north)
     else:
-        _btn_north.button_down.disconnect(_on_press_north)
+        _btn_north.button_down.disconnect(_on_down_north)
+        _btn_north.button_up.disconnect(_on_up_north)
     if toggle_south:
         _btn_south.toggled.disconnect(_on_toggle_south)
     else:
-        _btn_south.button_down.disconnect(_on_press_south)
+        _btn_south.button_down.disconnect(_on_down_south)
+        _btn_south.button_up.disconnect(_on_up_south)
     if toggle_west:
         _btn_west.toggled.disconnect(_on_toggle_west)
     else:
-        _btn_west.button_down.disconnect(_on_press_west)
+        _btn_west.button_down.disconnect(_on_down_west)
+        _btn_west.button_up.disconnect(_on_up_west)
     if toggle_east:
         _btn_east.toggled.disconnect(_on_toggle_east)
     else:
-        _btn_east.button_down.disconnect(_on_press_east)
+        _btn_east.button_down.disconnect(_on_down_east)
+        _btn_east.button_up.disconnect(_on_up_east)
 
 func _set_group(group: Enums.TouchControlsLayout):
     var groupNode: Control
     match group:
-        Enums.TouchControlsLayout.RIGHT_SIDE:
-            groupNode = right_side
-        Enums.TouchControlsLayout.LEFT_SIDE:
-            groupNode = left_side
-        Enums.TouchControlsLayout.BOTH_HANDS:
-            groupNode = both_hands
+        Enums.TouchControlsLayout.RIGHT_SIDE: groupNode = right_side
+        Enums.TouchControlsLayout.LEFT_SIDE:  groupNode = left_side
+        Enums.TouchControlsLayout.BOTH_HANDS: groupNode = both_hands
     _unset_connections()
     _btn_north = groupNode.find_child("BtnNorth", true)
     _btn_south = groupNode.find_child("BtnSouth", true)
-    _btn_west = groupNode.find_child("BtnWest", true)
-    _btn_east = groupNode.find_child("BtnEast", true)
+    _btn_west  = groupNode.find_child("BtnWest",  true)
+    _btn_east  = groupNode.find_child("BtnEast",  true)
     _set_connections()
 
-    # Make buttons act as touch hit areas without altering your visuals.
     for b in [_btn_north, _btn_south, _btn_west, _btn_east]:
         b.focus_mode = Control.FOCUS_NONE
-    # Apply toggle modes + wire
     _btn_north.toggle_mode = toggle_north
     _btn_south.toggle_mode = toggle_south
     _btn_west.toggle_mode  = toggle_west
@@ -155,6 +188,8 @@ func _set_group(group: Enums.TouchControlsLayout):
     for g in [right_side, left_side, both_hands]:
         g.visible = false
     groupNode.visible = true
+
+
 
 @export_tool_button("Layout Left")
 var set_layout_left = func():
@@ -171,18 +206,9 @@ var set_layout_both = func():
 ## Public Methods
 func set_layout(l: Enums.TouchControlsLayout):
     _set_group(l)
-    
+
 func toggle_input(side: PlayerControls.Side, on: bool) -> void:
-    var btn: Button
-    match side:
-        Side.NORTH:
-            btn = _btn_north
-        Side.SOUTH:
-            btn = _btn_south
-        Side.WEST:
-            btn = _btn_west
-        Side.EAST:
-            btn = _btn_east
-    if ! btn.toggle_mode == true:
+    var btn: Button = [ _btn_north, _btn_south, _btn_west, _btn_east ][side]
+    if not btn or not btn.toggle_mode:
         return
     btn.set_pressed_no_signal(on)

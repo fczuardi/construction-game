@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bex1nfxp6iaov"]
+
+[ext_resource type="Script" uid="uid://cfodh0ignnuo4" path="res://lib/Collectibles/collectible.gd" id="1_wfhng"]
+[ext_resource type="PackedScene" uid="uid://d2qk6bcq8r2hr" path="res://imports/models/scketchfab/cc0_-_toilet_paper_roll/toilet_paper_roll.blend" id="2_o63x7"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_l14c5"]
+radius = 0.2
+
+[node name="Collectible" type="Area3D" groups=["collectible"]]
+collision_layer = 3
+script = ExtResource("1_wfhng")
+id = &"toilet_paper"
+points = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_l14c5")
+
+[node name="toilet_paper_roll" parent="." instance=ExtResource("2_o63x7")]

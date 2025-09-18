@@ -23,7 +23,6 @@ func _ready() -> void:
     layout_left_btn.toggled.connect(_on_switch_left)
     layout_right_btn.toggled.connect(_on_switch_right)
     layout_both_btn.toggled.connect(_on_switch_both)
-    layout_right_btn.disabled = true
 
 # Helpers
 func _check_switch_conditions(toggled_on: bool):

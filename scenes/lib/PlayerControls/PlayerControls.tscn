@@ -411,7 +411,6 @@ layout_mode = 2
 size_flags_horizontal = 8
 
 [node name="RightThumbCluster" type="VBoxContainer" parent="Control/MarginContainer/RightSide"]
-visible = false
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -704,6 +703,7 @@ offset_bottom = 48.0
 grow_vertical = 2
 rotation = 1.5707964
 pivot_offset = Vector2(48, 48)
+focus_mode = 0
 theme_override_styles/normal = SubResource("StyleBoxFlat_sa2o5")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_nkd57")
 theme_override_styles/hover = SubResource("StyleBoxFlat_uqteo")
@@ -733,10 +733,12 @@ vertical_alignment = 1
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 size_flags_horizontal = 2
+focus_mode = 0
 theme_override_styles/normal = SubResource("StyleBoxFlat_l7je5")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_pa2v1")
 theme_override_styles/hover = SubResource("StyleBoxFlat_nct1i")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_c5ybj")
+toggle_mode = true
 
 [node name="TextureRect" type="TextureRect" parent="Control/MarginContainer/BothHands/HBoxContainer/BtnSouth"]
 layout_mode = 0
@@ -753,10 +755,12 @@ expand_mode = 1
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 size_flags_horizontal = 10
+focus_mode = 0
 theme_override_styles/normal = SubResource("StyleBoxFlat_k51pa")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_lthc1")
 theme_override_styles/hover = SubResource("StyleBoxFlat_lktv3")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_ohaa0")
+toggle_mode = true
 
 [node name="TextureRect" type="TextureRect" parent="Control/MarginContainer/BothHands/HBoxContainer/BtnNorth"]
 layout_mode = 0
@@ -773,6 +777,7 @@ expand_mode = 1
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 size_flags_horizontal = 8
+focus_mode = 0
 theme_override_styles/normal = SubResource("StyleBoxFlat_wy8dy")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_o6wf5")
 theme_override_styles/hover = SubResource("StyleBoxFlat_svtts")

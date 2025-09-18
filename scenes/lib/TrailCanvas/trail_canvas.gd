@@ -18,8 +18,15 @@ extends SubViewport
 ## throttle GPU uploads
 @export var upload_every_ms: int = 200 
 
+# Add these exports near the others (optional but useful)
+@export var invert_x: bool = false      # flip if left/right looks mirrored
+@export var invert_z: bool = false       # paper "up" usually means world +Z upward on the image
+@export var map_rotation_deg: float = 0 # fixed alignment offset for the blueprint (NOT player yaw)
+
+
 ## expected nodes
 @onready var trail_layer: TextureRect = %TrailLayer
+@onready var player_direction: Control = %PlayerDirection
 
 
 # ---- stamping buffers
@@ -86,7 +93,9 @@ func _draw_first_dot():
 
     return
 
-func _on_pose_updated(world_pos: Vector3, yaw_radians: float) -> void:
+var _last_yaw: float
+func _on_pose_updated(world_pos: Vector3, _yaw_radians: float) -> void:
+    _last_yaw = - _yaw_radians
     # --- first player pose update
     if not _have_origin:
         _origin_world = world_pos
@@ -95,23 +104,24 @@ func _on_pose_updated(world_pos: Vector3, yaw_radians: float) -> void:
         _have_origin = true
         _accum = 0.0
 
-    # --- from here on, stamp if distance from last mark is bigger than meters_per_dot ---
+    # --- distance check (unchanged) ---
     var step := world_pos.distance_to(_last_mark_world)
     if step <= 0.0001:
-        return                         # no movement
+        return
 
     _accum += step
     if _accum >= meters_per_dot:
         _accum = 0.0
-        _last_mark_world = world_pos   # advance the "last marked" position
-        _stamp_world(world_pos, yaw_radians)
+        _last_mark_world = world_pos
+        _stamp_world(world_pos)   # <- ignore yaw here
         _upload_if_due(false)
 
 
-# --- Convert world → paper px and stamp a dot
-func _stamp_world(world_pos: Vector3, yaw_radians: float) -> void:
-    var p := _world_to_paper_px(world_pos, yaw_radians)
-    var dot_radius_px = _stamp_img.get_size().x / 2
+func _stamp_world(world_pos: Vector3) -> void:
+    var p := _world_to_paper_px(world_pos)
+    player_direction.position = p
+    player_direction.rotation = _last_yaw
+    var dot_radius_px := _stamp_img.get_size().x / 2
 
     var tl_i: Vector2i = Vector2i(int(floor(p.x)) - dot_radius_px, int(floor(p.y)) - dot_radius_px)
     var src: Rect2i = Rect2i(Vector2i.ZERO, _stamp_img.get_size())
@@ -128,18 +138,39 @@ func _stamp_world(world_pos: Vector3, yaw_radians: float) -> void:
     _paper_img.blend_rect(_stamp_img, clipped_src, clipped_dst.position)
     _dirty_since_last_upload = true
 
-# --- World → paper mapping
-func _world_to_paper_px(p_world: Vector3, yaw_radians: float) -> Vector2:
-    # Delta from where the player started this map view
-    var d := p_world - _origin_world               # (dx, dy, dz) in meters
 
-    # Work in XZ plane
-    var v := Vector2(d.x, -d.z)                     # v.y grows when walking +Z
-    # Keep player’s forward as “up” on the paper
-    v = v.rotated(-yaw_radians)
+func _world_to_paper_px(p_world: Vector3) -> Vector2:
+    # Delta from the run start
+    var d := p_world - _origin_world   # meters (dx, dy, dz)
 
-    # Pixels: +X => right, +Z => UP  (hence the minus on Y)
-    return starting_point + Vector2(v.x, -v.y) * meters_to_pixels
+    # Project to XZ plane in a fixed frame (no player yaw)
+    var vx := d.x
+    var vy := d.z
+
+    # Optional fixed alignment for the blueprint (e.g., +15° if your plan isn’t axis-aligned)
+    if map_rotation_deg != 0.0:
+        var ang := deg_to_rad(map_rotation_deg)
+        var cs := cos(ang)
+        var sn := sin(ang)
+        var rx :=  cs * vx - sn * vy
+        var ry :=  sn * vx + cs * vy
+        vx = rx
+        vy = ry
+
+    # Apply axis flips to match your paper orientation
+    if invert_x: vx = -vx
+    if invert_z: vy = -vy   # makes world +Z go "up" on paper
+
+    # Scale to pixels and offset by starting point
+    return starting_point + Vector2(vx, vy) * meters_to_pixels
+
+
+
+
+
+
+
+
 
 # --- Throttle texture uploads to the GPU
 func _upload_if_due(force: bool) -> void:

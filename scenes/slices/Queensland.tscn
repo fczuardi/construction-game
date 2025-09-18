@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://giqxuc0gq0fk"]
+[gd_scene load_steps=40 format=3 uid="uid://giqxuc0gq0fk"]
 
 [ext_resource type="Script" uid="uid://cq16dqdvi8ncx" path="res://slices/queensland.gd" id="1_glf58"]
 [ext_resource type="Script" uid="uid://bly6ty8fepn6x" path="res://lib/Wiring/wiring.gd" id="2_5p6w5"]
@@ -6,15 +6,28 @@
 [ext_resource type="Script" uid="uid://dr0dlgpb3oddd" path="res://lib/TrenchStumbleClassifier/trench_stumble_classifier.gd" id="3_2yhap"]
 [ext_resource type="Script" uid="uid://dco6a3tithqkl" path="res://lib/ItemSpawner/item_spawner_from_map.gd" id="4_2w0o7"]
 [ext_resource type="PackedScene" uid="uid://b4s4endyk5m4l" path="res://lib/PlayerVisuals2/player_visuals_2.tscn" id="4_4o0cy"]
+[ext_resource type="Script" uid="uid://b6dtkp2tvb44j" path="res://lib/autoload/pickup_sfx.gd" id="4_txi86"]
 [ext_resource type="Material" uid="uid://db8idpthygrsm" path="res://materials/kenney_prototype_dark_09.tres" id="5_4o0cy"]
 [ext_resource type="Script" uid="uid://cqsox5yy3agv1" path="res://lib/PlayerCameras/player_cameras.gd" id="5_7gcop"]
 [ext_resource type="PackedScene" uid="uid://cq7lqptnqemxp" path="res://lib/PauseMenu/PauseMenu.tscn" id="5_cbo7l"]
 [ext_resource type="PackedScene" uid="uid://cwo6mh160oyym" path="res://lib/PlayerVisuals2/stage1_map.tscn" id="5_fwyue"]
+[ext_resource type="AudioStream" uid="uid://doycbnmkar3qa" path="res://imports/sfx/UI Soundpack/African2.ogg" id="5_n3sji"]
+[ext_resource type="Script" uid="uid://cwvjntv6rajs2" path="res://lib/autoload/footsteps_sfx.gd" id="5_y7807"]
 [ext_resource type="PackedScene" uid="uid://rnjcf0y4dsgm" path="res://lib/PlayerControls/PlayerControls.tscn" id="6_4o0cy"]
+[ext_resource type="AudioStream" uid="uid://cb4ccjbcugu4y" path="res://imports/sfx/UI Soundpack/African3.ogg" id="6_5fh2d"]
+[ext_resource type="AudioStream" uid="uid://3amghieqoctn" path="res://imports/sfx/Footsteps_Essentials_NOX_SOUND/Footsteps_DirtyGround_Walk/Footsteps_DirtyGround_Walk_01.wav" id="6_glugf"]
 [ext_resource type="Texture2D" uid="uid://c3ggid41yoxw5" path="res://imports/textures/Maryborough Courthouse/ground-floor_640x1024.jpg" id="7_7gcop"]
+[ext_resource type="AudioStream" uid="uid://dhlw12phvbpsc" path="res://imports/sfx/Footsteps_Essentials_NOX_SOUND/Footsteps_DirtyGround_Walk/Footsteps_DirtyGround_Walk_02.wav" id="7_bul2d"]
+[ext_resource type="AudioStream" uid="uid://b50ojlu770ri6" path="res://imports/sfx/Footsteps_Essentials_NOX_SOUND/Footsteps_DirtyGround_Walk/Footsteps_DirtyGround_Walk_03.wav" id="8_lxpnk"]
 [ext_resource type="Script" uid="uid://cc6y082cktxod" path="res://lib/Collectibles/pickup_hud.gd" id="8_rsc3p"]
+[ext_resource type="AudioStream" uid="uid://dytntt0c2kfg0" path="res://imports/sfx/Footsteps_Essentials_NOX_SOUND/Footsteps_DirtyGround_Walk/Footsteps_DirtyGround_Walk_04.wav" id="9_gx55f"]
 [ext_resource type="Script" uid="uid://dy6pj3ntp2g64" path="res://lib/CollectiblePointer/collectible_pointer.gd" id="14_4hk5t"]
 [ext_resource type="PackedScene" uid="uid://bd5aj5us85j5a" path="res://lib/Sun/Sun.tscn" id="16_lxpnk"]
+[ext_resource type="Script" uid="uid://bycpfjmyufy18" path="res://lib/PlayerCameras/camera_cardinal_hysteresis.gd" id="18_gx55f"]
+[ext_resource type="Script" uid="uid://b0qrccenors10" path="res://lib/Killzone/killer_area_3d.gd" id="23_bf4tx"]
+[ext_resource type="Texture2D" uid="uid://sx8qtii0ky3f" path="res://imports/textures/brown_mud_03_1k.blend/textures/brown_mud_03_nor_gl_512.png" id="25_21mah"]
+[ext_resource type="Texture2D" uid="uid://bv7a2j3ainyra" path="res://imports/textures/brown_mud_03_1k.blend/textures/brown_mud_03_ao_1k.png" id="26_5fh2d"]
+[ext_resource type="Texture2D" uid="uid://b12f1610ujfec" path="res://imports/textures/brown_mud_03_1k.blend/textures/brown_mud_03_rough_1k.png" id="28_m3fvh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4o0cy"]
 albedo_texture = ExtResource("7_7gcop")
@@ -31,30 +44,69 @@ size = Vector3(0.6, 1, 0.1)
 size = Vector3(0.6, 1, 2)
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_mundh"]
-rayleigh_coefficient = 0.3
+rayleigh_coefficient = 0.5
 rayleigh_color = Color(0.2664, 0.42515996, 0.72, 1)
-turbidity = 2.52
-sun_disk_scale = 13.4
-ground_color = Color(0.2392157, 0.11211799, 0.050980393, 1)
-energy_multiplier = 4.6
+mie_color = Color(0.56726015, 0.5994909, 0.6671753, 1)
+turbidity = 0.3
+sun_disk_scale = 13.3
+ground_color = Color(0.6617737, 0.30924004, 0.13606565, 1)
+energy_multiplier = 4.0
 
 [sub_resource type="Sky" id="Sky_rsc3p"]
 sky_material = SubResource("PhysicalSkyMaterial_mundh")
 
 [sub_resource type="Environment" id="Environment_j5f2l"]
 background_mode = 2
-background_energy_multiplier = 2.8
+background_energy_multiplier = 2.5
 sky = SubResource("Sky_rsc3p")
 ambient_light_source = 3
-ambient_light_color = Color(1, 1, 1, 1)
-ambient_light_sky_contribution = 0.8
+ambient_light_color = Color(0.7082534, 0.82311773, 1, 1)
+ambient_light_sky_contribution = 0.7
+ambient_light_energy = 2.0
 reflected_light_source = 2
 
 [sub_resource type="BoxMesh" id="BoxMesh_luako"]
 size = Vector3(26.25, 1, 42)
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_21mah"]
+height = 0.5
+radius = 8.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tqxv5"]
+albedo_color = Color(0.52156866, 0.2901961, 0.0627451, 1)
+metallic = 0.3
+metallic_specular = 0.7
+metallic_texture = ExtResource("26_5fh2d")
+roughness = 0.7
+roughness_texture = ExtResource("28_m3fvh")
+normal_enabled = true
+normal_scale = 0.82
+normal_texture = ExtResource("25_21mah")
+uv1_scale = Vector3(1.284, 1.284, 1.284)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_lxpnk"]
+material = SubResource("StandardMaterial3D_tqxv5")
+size = Vector2(10, 10)
+
 [node name="Queensland" type="Node3D"]
 script = ExtResource("1_glf58")
+
+[node name="TrenchStumbleClassifier" type="Node" parent="." node_paths=PackedStringArray("character_body", "character_visuals", "cameras", "touch_controls")]
+script = ExtResource("3_2yhap")
+character_body = NodePath("../PlayerRunner")
+character_visuals = NodePath("../PlayerRunner/PlayerVisuals2")
+cameras = NodePath("../PlayerRunner/Cameras")
+touch_controls = NodePath("../HUD/MarginContainer/PlayerControls")
+
+[node name="PickupSFX" type="Node" parent="."]
+script = ExtResource("4_txi86")
+sounds = Array[AudioStream]([ExtResource("5_n3sji"), ExtResource("6_5fh2d")])
+
+[node name="FootstepsSFX" type="Node" parent="." node_paths=PackedStringArray("player_body")]
+script = ExtResource("5_y7807")
+walk_sounds = Array[AudioStream]([ExtResource("6_glugf"), ExtResource("7_bul2d"), ExtResource("8_lxpnk"), ExtResource("9_gx55f")])
+player_body = NodePath("../PlayerRunner")
+volume = 0.284
 
 [node name="Wiring" type="Node" parent="." node_paths=PackedStringArray("hud_container", "controls", "character_body", "character_visuals", "cameras")]
 script = ExtResource("2_5p6w5")
@@ -63,14 +115,6 @@ controls = NodePath("../HUD/MarginContainer/PlayerControls")
 character_body = NodePath("../PlayerRunner")
 character_visuals = NodePath("../PlayerRunner/PlayerVisuals2")
 cameras = NodePath("../PlayerRunner/Cameras")
-
-[node name="TrenchStumbleClassifier" type="Node" parent="." node_paths=PackedStringArray("character_body", "character_visuals", "cameras", "touch_controls")]
-script = ExtResource("3_2yhap")
-character_body = NodePath("../PlayerRunner")
-character_visuals = NodePath("../PlayerRunner/PlayerVisuals2")
-cameras = NodePath("../PlayerRunner/Cameras")
-touch_controls = NodePath("../HUD/MarginContainer/PlayerControls")
-debug_prints = true
 
 [node name="Reference texture" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
@@ -108,14 +152,17 @@ sprint_exit = 3.2
 [node name="FPCams" type="Node3D" parent="PlayerRunner/PlayerVisuals2"]
 
 [node name="ClipboardWalkCam" type="Camera3D" parent="PlayerRunner/PlayerVisuals2/FPCams"]
-transform = Transform3D(-1, -8.609462e-08, 1.518081e-08, 0, 0.17364822, 0.9848077, -8.742278e-08, 0.9848077, -0.17364822, 0.062, 1.53, 0.283)
+transform = Transform3D(-1, -8.609462e-08, 1.518081e-08, 0, 0.17364822, 0.9848077, -8.742278e-08, 0.9848077, -0.17364822, 0.077, 1.7, 0.283)
 fov = 50.6
 
 [node name="ClipboardRunCam" type="Camera3D" parent="PlayerRunner/PlayerVisuals2/FPCams"]
-transform = Transform3D(-1, 8.742278e-08, 0, 2.8750433e-08, 0.32886663, 0.94437635, 8.256e-08, 0.94437635, -0.32886663, 0.043, 1.474, 0.291)
+transform = Transform3D(-1, 8.742278e-08, 0, 2.8750433e-08, 0.32886663, 0.94437635, 8.256e-08, 0.94437635, -0.32886663, 0.083, 1.638, 0.361)
 
 [node name="FallCam" type="Camera3D" parent="PlayerRunner/PlayerVisuals2/FPCams"]
 transform = Transform3D(1, 0, 0, 0, 0.14608309, 0.9892723, 0, -0.9892723, 0.14608309, -0.488, 5.29, 3.069)
+
+[node name="GoalCam" type="Camera3D" parent="PlayerRunner/PlayerVisuals2/FPCams"]
+transform = Transform3D(1, 0, 0, 0, 0.7408046, 0.67172056, 0, -0.67172056, 0.7408046, 0, 1.94, 0.903)
 
 [node name="CollectiblePointer" type="Node3D" parent="PlayerRunner/PlayerVisuals2" node_paths=PackedStringArray("visuals", "runner")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
@@ -143,21 +190,27 @@ collide_with_bodies = false
 
 [node name="Cameras" type="Node3D" parent="PlayerRunner"]
 unique_name_in_owner = true
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
 script = ExtResource("5_7gcop")
 blend_time = 0.25
-extra_rigs = Array[NodePath]([NodePath("../PlayerVisuals2/FPCams/ClipboardWalkCam"), NodePath("../PlayerVisuals2/FPCams/ClipboardRunCam"), NodePath("../PlayerVisuals2/FPCams/FallCam")])
+extra_rigs = Array[NodePath]([NodePath("../PlayerVisuals2/FPCams/ClipboardWalkCam"), NodePath("../PlayerVisuals2/FPCams/ClipboardRunCam"), NodePath("../PlayerVisuals2/FPCams/FallCam"), NodePath("../PlayerVisuals2/FPCams/GoalCam")])
 wiggle_pos_amp = Vector3(0.02, 0.02, 0)
 
 [node name="OutputCamera" type="Camera3D" parent="PlayerRunner/Cameras"]
-transform = Transform3D(-1, 1.21669e-08, -8.657199e-08, 0, 0.9902681, 0.13917312, 8.742278e-08, 0.13917312, -0.9902681, 0, 2.5, -5)
+transform = Transform3D(-1, 1.2166894e-08, -8.657199e-08, 0, 0.9902681, 0.13917305, 8.742278e-08, 0.13917305, -0.9902681, 0, 2.5, -4.999998)
 current = true
-fov = 70.0
 
-[node name="ShoulderWalkCam" type="Camera3D" parent="PlayerRunner/Cameras"]
-transform = Transform3D(-1, 1.21669e-08, -8.657199e-08, 0, 0.9902681, 0.13917312, 8.742278e-08, 0.13917312, -0.9902681, 0, 2.5, -5)
+[node name="ShoulderPivot" type="Node3D" parent="PlayerRunner/Cameras"]
+script = ExtResource("18_gx55f")
+tween_time = 2.0
+retarget_threshold_deg = 0.0
 
-[node name="ShoulderRunCam" type="Camera3D" parent="PlayerRunner/Cameras"]
-transform = Transform3D(-1, 1.21669e-08, -8.657199e-08, 0, 0.9902681, 0.13917312, 8.742278e-08, 0.13917312, -0.9902681, 0, 1.004, -4)
+[node name="ShoulderWalkCam" type="Camera3D" parent="PlayerRunner/Cameras/ShoulderPivot"]
+transform = Transform3D(-1, 1.2166895e-08, -8.657199e-08, 0, 0.9902681, 0.13917306, 8.742278e-08, 0.13917306, -0.9902681, 0, 2.5, -4.9999986)
+current = true
+
+[node name="ShoulderRunCam" type="Camera3D" parent="PlayerRunner/Cameras/ShoulderPivot"]
+transform = Transform3D(-1, 1.2166892e-08, -8.657199e-08, 0, 0.9902681, 0.13917303, 8.742278e-08, 0.13917303, -0.9902681, 0, 1.004, -3.9999986)
 
 [node name="Draft" type="Node3D" parent="."]
 
@@ -167,7 +220,7 @@ environment = SubResource("Environment_j5f2l")
 [node name="SunPivot" parent="Draft" instance=ExtResource("16_lxpnk")]
 transform = Transform3D(0.3600691, 0.1558158, -0.9198215, -0.3971477, 0.91775465, -2.8576694e-09, 0.8441703, 0.36530507, 0.39233708, 0, 0, 0)
 auto_intensity = true
-hour = 8.500001017252604
+hour = 9.0
 east = -66.9
 season = -23.399992
 
@@ -390,3 +443,32 @@ metadata/_edit_lock_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.921995, 0, -10.649307)
 size = Vector3(3.7346728, 1, 0.35)
 metadata/_edit_lock_ = true
+
+[node name="GoalPit" type="CSGCombiner3D" parent="GroundFloor/Terrain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2461443, 0.6, 11.048694)
+operation = 2
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="GroundFloor/Terrain/GoalPit"]
+transform = Transform3D(0.9659258, 0, 0.25881904, 0, 1, 0, -0.25881904, 0, 0.9659258, 0, 0.4600103, 0)
+radius = 5.0
+sides = 12
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="GroundFloor/Terrain/GoalPit"]
+transform = Transform3D(0.9238795, 0, 0.38268346, 0, 1, 0, -0.38268346, 0, 0.9238795, 0, 0.4600103, 0)
+operation = 2
+radius = 1.0
+sides = 16
+
+[node name="KillerArea3D" type="Area3D" parent="." groups=["lava"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.49831676, 0.085779905, 26.36217)
+collision_layer = 3
+script = ExtResource("23_bf4tx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="KillerArea3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10700035, -0.4322815, 0.08699989)
+shape = SubResource("CylinderShape3D_21mah")
+debug_color = Color(0.9867151, 0, 0.045950208, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="KillerArea3D/CollisionShape3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.034876347, 0)
+mesh = SubResource("PlaneMesh_lxpnk")

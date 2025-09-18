@@ -34,6 +34,9 @@ func _ready() -> void:
         controls.action.connect(_on_controller_input)
     if cameras and controls:
         EventBus.global_restart_game.connect(_on_restart)
+        EventBus.stage_1_ended.connect(_on_goal_reached)
+        print(cameras.current_rig_index())
+        print(cameras.current_rig_name())
 
 ## unwire
 func _exit_tree() -> void:
@@ -49,25 +52,42 @@ func _exit_tree() -> void:
         EventBus.global_restart_game.disconnect(_on_restart)
 
 var _alive = true
+var _finished_level = false
 func _on_player_speed_change(_new_speed: float, mode: String):
-    if mode == "stop" and _alive:
-        print("gameover")
-        cameras.blend_time = 3.0
-        cameras.activate_index(4)
-        _alive = false
-        var game_over_tween: Tween = create_tween()
-        game_over_tween.tween_interval(5.0)
-        game_over_tween.tween_callback(func ():
-            EventBus.global_restart_game.emit()
-        )
+    if mode == "stop":
+#        if _alive and ! _finished_level:
+        if _alive:
+            if !_finished_level:
+                cameras.blend_time = 3.0
+                cameras.activate_index(4)
+            _alive = false
+            var game_over_tween: Tween = create_tween()
+            game_over_tween.tween_interval(5.0)
+            game_over_tween.tween_callback(func ():
+                EventBus.global_restart_game.emit()
+            )
+            print("game over restart")
+
 func _on_restart():
-    print("restart")
     _alive = true
+    _finished_level = false
     cameras.blend_time = 0.25
     cameras.activate_index(0)
     controls.toggle_input(PlayerControls.Side.NORTH, false)
     controls.toggle_input(PlayerControls.Side.SOUTH, false)
 
+func _on_goal_reached():
+    _finished_level = true
+    cameras.activate_index(5)
+    print("STAGE CLEAR")
+    var game_over_tween: Tween = create_tween()
+    game_over_tween.tween_interval(5.0)
+    game_over_tween.tween_callback(func ():
+        EventBus.global_restart_game.emit()
+    )
+    print("HACK stage clear, game over restart")
+    
+    
 func _on_size_changed():
     var s := hud_container.get_viewport_rect().size
     hud_container.set_deferred("size", s)    
@@ -76,15 +96,18 @@ func _on_controls_layout_change(new_layout):
     controls.set_layout(new_layout)
 
 func _on_controller_input(side: int, event: int):
+    #if _finished_level:
+        #return
     # player direction and speed changes
     if character_body:
         match side:
             controls.Side.WEST:
-                character_body.queue_turn(+45)
+                if event == controls.Event.DOWN: character_body.set_turn_axis(+0.5)
+                elif event == controls.Event.UP:  character_body.set_turn_axis(0.0)
             controls.Side.EAST:
-                character_body.queue_turn(-45)
+                if event == controls.Event.DOWN: character_body.set_turn_axis(-0.5)
+                elif event == controls.Event.UP:  character_body.set_turn_axis(0.0)
             controls.Side.NORTH:
-                print("NORTH ", side, event)
                 if event == controls.Event.TOGGLE_ON:
                     character_body.set_speed_mode("jog")
                 else:

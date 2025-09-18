@@ -2,7 +2,7 @@ class_name PlayerRunner
 extends CharacterBody3D
 ## Runner body: falls, queues yaw turns, moves forward with switchable speeds.
 
-const VERSION := "0.5.1"
+const VERSION := "0.6.0"
 
 
 # important for tripping over trenches
@@ -44,12 +44,15 @@ const DEFAULT_TURN_RATE: float = 180.0
 @export var default_speed_mode: String = "walk"
 
 ## Max rotate speed (deg/sec). Higher = snappier.
-@export var turn_rate_deg := DEFAULT_TURN_RATE
-
+@export var turn_rate_deg := DEFAULT_TURN_RATE   # used for BOTH hold and queued turns
+@export var snap_enabled: bool = true
+@export var snap_increment_deg: float = 30.0     # grid step
+@export var snap_dead_zone_deg: float = 4.0      # if already close enough, don't bother
 
 # --- Private --------------------------
 var _move_dir: Vector3
 var _remaining_turn_deg: float  # +left / -right, consumed over time
+var _turn_axis: float = 0.0   # -1..+1 from controls (EAST = -1, WEST = +1)
 
 var _target_speed: float
 var _speed: float
@@ -59,6 +62,10 @@ var _have_last := false
 
 var _last_pos: Vector3
 var _start_xform: Transform3D
+
+var _turn_session_active: bool = false
+var _turn_session_dir: int = 0     # -1 for right, +1 for left (your WEST=+1, EAST=-1)
+
 
 
 # --- Lifecycle -----------------------
@@ -84,15 +91,22 @@ func _physics_process(delta: float) -> void:
             set_speed_mode("stop")
             visuals.update_motion(velocity, is_on_floor())
     else:
-        # consume turn buffer at a capped rate
+        # 1) continuous turn while a button is held
+        if _turn_axis != 0.0:
+            var hold_step: float = turn_rate_deg * _turn_axis * delta
+            _move_dir = _move_dir.rotated(Vector3.UP, deg_to_rad(hold_step)).normalized()
+
+        # 2) then consume any queued discrete turns (45º taps etc.)
         var max_step: float = turn_rate_deg * delta
         var step: float = clamp(_remaining_turn_deg, -max_step, max_step)
         if step != 0.0:
             _move_dir = _move_dir.rotated(Vector3.UP, deg_to_rad(step)).normalized()
             _remaining_turn_deg -= step
             turn_buffer_changed.emit(_remaining_turn_deg)
-        var k := _exp_k(delta, speed_blend_time)          # 0..1
-        _speed = lerp(_speed, _target_speed, k)           # smooth toward target
+
+        # speed blend and movement (unchanged)
+        var k := _exp_k(delta, speed_blend_time)
+        _speed = lerp(_speed, _target_speed, k)
         velocity = _move_dir * _speed
 
     move_and_slide()
@@ -104,7 +118,9 @@ func _physics_process(delta: float) -> void:
         visuals.update_motion(velocity, is_on_floor())
 
     # ... update movement & yaw ...
-    EventBus.player_runner_pose_updated.emit(global_transform.origin, rotation.y)
+    var yaw_rad := atan2(_move_dir.x, _move_dir.z)   # radians
+    # EventBus.player_runner_pose_updated.emit(global_transform.origin, rotation.y, yaw_rad)
+    EventBus.player_runner_pose_updated.emit(global_transform.origin, yaw_rad)
 
     # distance event
     var p := global_position
@@ -127,8 +143,73 @@ func _exp_k(dt: float, tau: float) -> float:
         return 1.0
     return 1.0 - exp(-dt / tau)
 
+func _yaw_from_move_dir_deg() -> float:
+    return rad_to_deg(atan2(_move_dir.x, _move_dir.z))
+
+func _wrap_deg(a: float) -> float:
+    return wrapf(a, -180.0, 180.0)
+
+func _snap_delta_deg() -> float:
+    # How much we need to rotate (in degrees) to reach the closest snap angle
+    if snap_increment_deg <= 0.0:
+        return 0.0
+    var yaw := _yaw_from_move_dir_deg()
+    var nearest : float = round(yaw / snap_increment_deg) * snap_increment_deg
+    var delta := _wrap_deg(nearest - yaw)
+    if abs(delta) <= snap_dead_zone_deg:
+        return 0.0
+    return delta
+
+func snap_to_grid() -> void:
+    if not snap_enabled:
+        return
+    var delta := _snap_delta_deg()
+    if delta != 0.0:
+        # Use your existing queued-turn machinery to consume it smoothly
+        queue_turn(delta)
+
+
+
 
 # --- Public API -----------------------
+func set_turn_axis(v: float) -> void:
+    v = clamp(v, -1.0, 1.0)
+    var was_holding := _turn_axis != 0.0
+    var new_holding := v != 0.0
+
+    # start of hold
+    if (not was_holding) and new_holding:
+        _turn_session_active = true
+        _turn_session_dir = 1 if v > 0.0 else -1   # +1 = left/WEST, -1 = right/EAST
+
+    # end of hold -> snap forward to the next multiple in the held direction
+    if was_holding and (not new_holding) and _turn_session_active:
+        var inc := snap_increment_deg if snap_increment_deg > 0.0 else 45.0
+        var yaw := _yaw_from_move_dir_deg()
+        var target: float
+        if _turn_session_dir > 0:
+            # next higher multiple (left)
+            target = floor(yaw / inc) * inc + inc
+        else:
+            # next lower multiple (right)
+            target = ceil(yaw / inc) * inc - inc
+
+        var delta := _wrap_deg(target - yaw)
+
+        # Safety: ensure we never rotate backwards; if sign mismatches, push one more step forward
+        if sign(delta) != _turn_session_dir and abs(delta) > 0.001:
+            delta = _wrap_deg(delta + _turn_session_dir * inc)
+
+        if abs(delta) > 0.001:
+            queue_turn(delta)
+
+        _turn_session_active = false
+        _turn_session_dir = 0
+
+    _turn_axis = v
+
+
+
 func queue_turn(delta_deg: float) -> void:
     _remaining_turn_deg = clamp(_remaining_turn_deg + delta_deg, -360.0, 360.0)
     turn_buffer_changed.emit(_remaining_turn_deg)

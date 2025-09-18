@@ -1,36 +1,70 @@
 ## Next steps
 
-
-- change helmet with hat
-- collectible dots on map:
-    - group 1: 
-        - [C] level
-        - [C] measure-tape
-        - [C] pencil
-    - group 1 extra: 
-        - [C] coin
-        - [ ] urinal
-    - group 2:
-        - [C] mallet
-        - [C] picket
-        - [C] spray
-    - group 2 extra:
-        - [ ] sandwitch
-        - [ ] toilet paper
-        - [ ] toilet
-- floor teture of dirt with tire marks
-- locked toilets to start
 - game title fade in/out
-- objectives titles:
-    - "number 1 unlocked"
-    - "number 2 unlocked"
+- you died UI
+- stage clear UI
+- [bug] first particle small freeze on html
+
+## Nice-to-have + ideas
+
+- unmapped items
+    - bitcoin coin
 
 
+## Feedbacks:
 
+- "run change the direction"
+    - Isa didnt understood that run was a toggle and that there were 2 different camera angles
 
-## Known Bugs
+- camera should follow player
+    - Marcelo, Tizen, Thiago, Zoide...
+
+- 45deg snaps areunnecessary
+    - Marcelo
+
+- bitcoin coin is too close to the lock icon
+    - Thiago thought that the lock was the Bitcoin coin (that was hard to get)
+
+- small items are hard to get
+    - Tizen made several turns to the same side when not able to catch an item
+    - Zoide thinks if the camera points towards where you are heading it will make it easier to not miss the item
+    
+- map is difficult to read / motion sickness
+    - Isa
+
+- better objectives info / help / visual feedback
+    - Zoide, Thiago
+
+- swipe attempts
+    - Zoide asked if there was a way to control camera
+
+- nice graphics:
+    - Zoide liked
+- Zoide:
+    - "quebrou faz mas grosso", lema de uma industria de tratores
+
+- Zoide notou que a caminhada do demo 1 era mais folgadona
 
 ## Done
+- [x] [bug] check missing right thumb controls
+- [x] [bug] check missing lock icon on android build
+- [x] hidden toilet paper icon  
+- [x] locked toilets to start
+- [x] unlock toilet after 6 points
+- [x] display toilet paper after 6 points
+- [x] better feedback on item collected
+    - [x] visual feedback
+- [x] change helmet with hat
+- [x] collectible dots on map:
+    - group 1: 
+        - [x] level
+        - [x] measure-tape
+        - [x] pencil
+    - group 2:
+        - [x] mallet
+        - [x] picket
+        - [x] spray
+- [x] floor teture of dirt
 - September 11th
     - [x] pickup items
         - either coins, trowels or some othe placeholder test item

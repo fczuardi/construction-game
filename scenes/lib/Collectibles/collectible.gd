@@ -7,6 +7,8 @@ extends Area3D
 @export var bob_amp: float = 0.06
 @export var bob_speed: float = 2.0
 
+var burst_scene := preload("res://lib/PickupBurst/PickupBurst.tscn")
+
 var _y0: float
 
 func _ready() -> void:
@@ -26,4 +28,16 @@ func _on_body_entered(body: Node) -> void:
         return
     set_deferred("monitoring", false)
     EventBus.item_collected.emit(id, points, global_position)
+    _play_pickup_vfx(global_position)
     queue_free()
+
+func _play_pickup_vfx(at: Vector3) -> void:
+    var vfx := burst_scene.instantiate() as CPUParticles3D
+    vfx.global_transform.origin = at
+    
+    get_tree().current_scene.add_child(vfx)   # or another VFX container
+    if vfx.has_method("play_and_free"):
+        vfx.play_and_free()
+    else:
+        vfx.emitting = true
+        get_tree().create_timer(vfx.lifetime + 0.15).timeout.connect(vfx.queue_free)

@@ -351,3 +351,6 @@ var tool_end_fall: Callable = func():
 @export_tool_button("Move")
 var tool_end_move: Callable = func():
     _update_movement_end(MovementEnd.MOVE)
+
+func _step_callback():
+    EventBus.player_visual_footstep_started.emit(MOVEMENT_STATE[_last_base])

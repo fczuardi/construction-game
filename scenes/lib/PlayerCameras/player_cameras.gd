@@ -49,7 +49,11 @@ func _ready() -> void:
     if _rig_nodes.is_empty():
         push_warning("PlayerCameras: no rigs found. Add child Node3D rigs with Camera3D inside.")
         return
-    _snap_to(0)
+    print(_rig_cams)
+    print(_rig_nodes)
+    print(_active)
+    _snap_to(_active)
+    print(current_rig_name())
 
 func _process(delta: float) -> void:
     if _out_cam == null or _rig_nodes.is_empty():
@@ -60,7 +64,7 @@ func _process(delta: float) -> void:
         _wiggle_t += delta
 
     # Live target (rig keeps moving with the player)
-    var tgt_tf := _rig_nodes[_active].global_transform
+    var tgt_tf := _rig_target_tf(_active)
     var tgt_fov := _out_cam.fov
     if _rig_cams[_active] != null:
         tgt_fov = _rig_cams[_active].fov
@@ -105,10 +109,11 @@ func activate_index(i: int) -> void:
     _begin_blend_to(idx)
 
 func activate_name(rig_name: String) -> void:
-    for i in _rig_nodes.size():
+    for i in range(_rig_nodes.size()):   # <-- use range(...)
         if _rig_nodes[i].name == rig_name:
             activate_index(i)
             return
+
 
 @export_tool_button("Next Rig")
 var _next_rig: Callable
@@ -118,7 +123,15 @@ func next_rig() -> void:
         return
     activate_index((_active + 1) % _rig_nodes.size())
 
+@export_tool_button("Refresh Rigs")
+var _refresh_rigs := func():
+    _collect_rigs()
+    if not _rig_nodes.is_empty():
+        _snap_to(clampi(_active, 0, _rig_nodes.size() - 1))
+
 func current_rig_name() -> String:
+    if _rig_nodes.is_empty():
+        return "unset"
     var rig_name = _rig_nodes[_active].name
     if not rig_name:
         return ""
@@ -133,36 +146,67 @@ func _is_run_rig(i: int) -> bool:
     var n := _rig_nodes[i].name.to_lower()
     return n.find("run") != -1
 
-
 func _collect_rigs() -> void:
     _rig_nodes.clear()
     _rig_cams.clear()
 
-    # 1) direct children (world-aligned shoulder rigs)
-    for child in get_children():
-        if child is Node3D and child != _out_cam:
-            _rig_nodes.append(child)
-            var cam: Camera3D = child.get_node_or_null("Camera3D")
-            if cam == null:
-                cam = child.get_node_or_null("SpringArm3D/Camera3D")
+    # 1) find every Camera3D under this node (except OutputCamera) and treat its parent as the rig root
+    var cams: Array[Camera3D] = []
+    _gather_cameras_recursive(self, cams)
+
+    for cam in cams:
+        if cam == _out_cam:
+            continue
+        var rig_root := cam.get_parent()
+        if rig_root is Node3D:
+            _rig_nodes.append(rig_root)
             _rig_cams.append(cam)
 
-    # 2) extra rigs (yaw-follow FP rigs under visuals/yaw pivot)
+    # 2) explicit extra rigs still supported
     for p in extra_rigs:
         var n := get_node_or_null(p)
         if n is Node3D and not _rig_nodes.has(n):
-            _rig_nodes.append(n)
-            var cam2: Camera3D = n.get_node_or_null("Camera3D")
-            if cam2 == null:
-                cam2 = n.get_node_or_null("SpringArm3D/Camera3D")
-            _rig_cams.append(cam2)
+            var cam2 := _find_camera_descendant(n)
+            if cam2 != null and cam2 != _out_cam:
+                _rig_nodes.append(n)
+                _rig_cams.append(cam2)
+
+    if _rig_nodes.is_empty():
+        push_warning("PlayerCameras: no rigs found. Add Camera3D nodes anywhere under me (OutputCamera excluded).")
+
+func _gather_cameras_recursive(n: Node, out: Array[Camera3D]) -> void:
+    if n is Camera3D:
+        out.append(n)
+    for c in n.get_children():
+        _gather_cameras_recursive(c, out)
+
+# Keep this helper for extra_rigs
+func _find_camera_descendant(n: Node) -> Camera3D:
+    if n is Camera3D:
+        return n
+    for c in n.get_children():
+        var found := _find_camera_descendant(c)
+        if found != null:
+            return found
+    return null
+
+
+func _rig_target_tf(i: int) -> Transform3D:
+    if i >= 0 and i < _rig_nodes.size():
+        var cam := _rig_cams[i]
+        if cam != null:
+            return cam.global_transform
+        return _rig_nodes[i].global_transform
+    return Transform3D.IDENTITY
+
 
 
 func _snap_to(i: int) -> void:
     _active = i
     _t = 1.0
 
-    var tf := _rig_nodes[i].global_transform
+    var tf := _rig_target_tf(i)
+
     _from_tf = tf
     _to_tf = tf
 
@@ -184,7 +228,8 @@ func _begin_blend_to(i: int) -> void:
     _from_tf = _out_cam.global_transform
     _from_fov = _out_cam.fov
 
-    _to_tf = _rig_nodes[i].global_transform
+    _to_tf = _rig_target_tf(i)
+
     if _rig_cams[i] != null:
         _to_fov = _rig_cams[i].fov
     else:
