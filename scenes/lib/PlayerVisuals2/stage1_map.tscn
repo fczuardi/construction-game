@@ -455,7 +455,7 @@ vertical_alignment = 1
 
 [node name="BitcoinCoin" type="Marker2D" parent="Stickers" groups=["map_icon"]]
 unique_name_in_owner = true
-position = Vector2(349.0001, 942)
+position = Vector2(349, 14)
 script = ExtResource("2_s7gsi")
 kind = ExtResource("19_gq0i6")
 item_id = &"bitcoin_coin"

@@ -1,14 +1,31 @@
+## Ongoing
+
+- visual feedback about collectibles progress: example 2/6
+
+
 ## Next steps
 
+- audio feedback on "pingela" unlocked
+- audio feedback on turn button press vs click
+- visual + audio feedback on run/map toggles
+- sfx for splashing on the mud
+- different step sfx over pallet bridge
 - game title fade in/out
 - you died UI
 - stage clear UI
+    - see map / share map
+    - time
+    - counters:
+        - steps
+        - turns
+        - stumbles
+        - hidden items:
+            - bitcoin
+            - toilet paper
 - [bug] first particle small freeze on html
 
 ## Nice-to-have + ideas
 
-- unmapped items
-    - bitcoin coin
 
 
 ## Feedbacks:
@@ -46,6 +63,9 @@
 - Zoide notou que a caminhada do demo 1 era mais folgadona
 
 ## Done
+- [x] centered text
+- [x] unmapped items
+    - [x] bitcoin coin
 - [x] [bug] check missing right thumb controls
 - [x] [bug] check missing lock icon on android build
 - [x] hidden toilet paper icon  

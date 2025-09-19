@@ -7,7 +7,8 @@ extends Node
 @export var character_body: PlayerRunner
 @export var character_visuals: PlayerVisuals2
 @export var cameras: PlayerCameras
-
+@export var start_title: FadeTitle
+@export var game_over_credits: FadeTitle
 
 @export var slowmo_scale := 0.25  # 25% speed
 
@@ -37,6 +38,7 @@ func _ready() -> void:
         EventBus.stage_1_ended.connect(_on_goal_reached)
         print(cameras.current_rig_index())
         print(cameras.current_rig_name())
+    _on_restart()
 
 ## unwire
 func _exit_tree() -> void:
@@ -66,6 +68,7 @@ func _on_player_speed_change(_new_speed: float, mode: String):
             game_over_tween.tween_callback(func ():
                 EventBus.global_restart_game.emit()
             )
+            game_over_credits.enter()
             print("game over restart")
 
 func _on_restart():
@@ -75,6 +78,8 @@ func _on_restart():
     cameras.activate_index(0)
     controls.toggle_input(PlayerControls.Side.NORTH, false)
     controls.toggle_input(PlayerControls.Side.SOUTH, false)
+    if start_title:
+        start_title.enter()
 
 func _on_goal_reached():
     _finished_level = true
