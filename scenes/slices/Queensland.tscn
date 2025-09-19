@@ -23,7 +23,7 @@
 [ext_resource type="AudioStream" uid="uid://dytntt0c2kfg0" path="res://imports/sfx/Footsteps_Essentials_NOX_SOUND/Footsteps_DirtyGround_Walk/Footsteps_DirtyGround_Walk_04.wav" id="9_gx55f"]
 [ext_resource type="Script" uid="uid://dy6pj3ntp2g64" path="res://lib/CollectiblePointer/collectible_pointer.gd" id="14_4hk5t"]
 [ext_resource type="PackedScene" uid="uid://bd5aj5us85j5a" path="res://lib/Sun/Sun.tscn" id="16_lxpnk"]
-[ext_resource type="Script" uid="uid://bycpfjmyufy18" path="res://lib/PlayerCameras/camera_cardinal_hysteresis.gd" id="18_gx55f"]
+[ext_resource type="Script" uid="uid://bycpfjmyufy18" path="res://lib/PlayerCameras/camera_yaw_follower.gd" id="18_gx55f"]
 [ext_resource type="Script" uid="uid://b0qrccenors10" path="res://lib/Killzone/killer_area_3d.gd" id="23_bf4tx"]
 [ext_resource type="Texture2D" uid="uid://sx8qtii0ky3f" path="res://imports/textures/brown_mud_03_1k.blend/textures/brown_mud_03_nor_gl_512.png" id="25_21mah"]
 [ext_resource type="Texture2D" uid="uid://bv7a2j3ainyra" path="res://imports/textures/brown_mud_03_1k.blend/textures/brown_mud_03_ao_1k.png" id="26_5fh2d"]
@@ -202,8 +202,6 @@ current = true
 
 [node name="ShoulderPivot" type="Node3D" parent="PlayerRunner/Cameras"]
 script = ExtResource("18_gx55f")
-tween_time = 2.0
-retarget_threshold_deg = 0.0
 
 [node name="ShoulderWalkCam" type="Camera3D" parent="PlayerRunner/Cameras/ShoulderPivot"]
 transform = Transform3D(-1, 1.2166895e-08, -8.657199e-08, 0, 0.9902681, 0.13917306, 8.742278e-08, 0.13917306, -0.9902681, 0, 2.5, -4.9999986)
