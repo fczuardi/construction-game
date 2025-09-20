@@ -1,15 +1,9 @@
 ## Ongoing
 
+- you died UI
 
 ## Next steps
 
-- visual feedback about collectibles progress: example 2/6
-- audio feedback on "pingela" unlocked
-- audio feedback on turn button press vs click
-- visual + audio feedback on run/map toggles
-- sfx for splashing on the mud
-- different step sfx over pallet bridge
-- you died UI
 - stage clear UI
     - see map / share map
     - time
@@ -20,6 +14,11 @@
         - hidden items:
             - bitcoin
             - toilet paper
+- audio feedback on "pingela" unlocked
+- different step sfx over pallet bridge
+- audio feedback on turn button press vs click
+- visual + audio feedback on run/map toggles
+- sfx for splashing on the mud
 - [bug] first particle small freeze on html
 
 ## Nice-to-have + ideas
@@ -61,6 +60,7 @@
 - Zoide notou que a caminhada do demo 1 era mais folgadona
 
 ## Done
+- [x] visual feedback about collectibles progress: example 2/6
 - [x] katamari style last item UI
 - [x] game title fade in/out
 - [x] centered text

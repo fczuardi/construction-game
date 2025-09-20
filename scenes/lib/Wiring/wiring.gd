@@ -8,6 +8,7 @@ extends Node
 @export var character_visuals: PlayerVisuals2
 @export var cameras: PlayerCameras
 @export var start_title: FadeTitle
+@export var game_over_message: FadeTitle
 @export var game_over_credits: FadeTitle
 
 @export var slowmo_scale := 0.25  # 25% speed
@@ -64,11 +65,20 @@ func _on_player_speed_change(_new_speed: float, mode: String):
                 cameras.activate_index(4)
             _alive = false
             var game_over_tween: Tween = create_tween()
-            game_over_tween.tween_interval(5.0)
+            game_over_tween.tween_interval(3.0)
+            game_over_tween.tween_callback(func ():
+                game_over_message.auto_exit_time = 1.0
+                game_over_message.enter()
+            )
+            game_over_tween.tween_interval(3.0)
+            game_over_tween.tween_callback(func ():
+                game_over_credits.auto_exit_time = 1.0
+                game_over_credits.enter()
+            )
+            game_over_tween.tween_interval(3.0)
             game_over_tween.tween_callback(func ():
                 EventBus.global_restart_game.emit()
             )
-            game_over_credits.enter()
             print("game over restart")
 
 func _on_restart():
