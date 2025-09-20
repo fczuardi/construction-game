@@ -78,6 +78,7 @@ func _on_restart():
     cameras.activate_index(0)
     controls.toggle_input(PlayerControls.Side.NORTH, false)
     controls.toggle_input(PlayerControls.Side.SOUTH, false)
+    _on_size_changed()
     if start_title:
         start_title.enter()
 

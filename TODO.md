@@ -1,16 +1,14 @@
 ## Ongoing
 
-- visual feedback about collectibles progress: example 2/6
-
 
 ## Next steps
 
+- visual feedback about collectibles progress: example 2/6
 - audio feedback on "pingela" unlocked
 - audio feedback on turn button press vs click
 - visual + audio feedback on run/map toggles
 - sfx for splashing on the mud
 - different step sfx over pallet bridge
-- game title fade in/out
 - you died UI
 - stage clear UI
     - see map / share map
@@ -63,6 +61,8 @@
 - Zoide notou que a caminhada do demo 1 era mais folgadona
 
 ## Done
+- [x] katamari style last item UI
+- [x] game title fade in/out
 - [x] centered text
 - [x] unmapped items
     - [x] bitcoin coin

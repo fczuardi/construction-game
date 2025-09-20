@@ -49,6 +49,7 @@ shadow_mesh = SubResource("ArrayMesh_ii0k5")
 collision_layer = 3
 script = ExtResource("1_5wjk1")
 id = &"level"
+showcase_scale = 2.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_l14c5")

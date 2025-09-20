@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://giqxuc0gq0fk"]
+[gd_scene load_steps=47 format=3 uid="uid://giqxuc0gq0fk"]
 
 [ext_resource type="Script" uid="uid://cq16dqdvi8ncx" path="res://slices/queensland.gd" id="1_glf58"]
 [ext_resource type="Script" uid="uid://bly6ty8fepn6x" path="res://lib/Wiring/wiring.gd" id="2_5p6w5"]
@@ -29,6 +29,7 @@
 [ext_resource type="FontFile" uid="uid://bgn10o8bm34q6" path="res://imports/fonts/ArgulaRegular/Arugula20250312-Regular.ttf" id="24_n3sji"]
 [ext_resource type="Texture2D" uid="uid://sx8qtii0ky3f" path="res://imports/textures/brown_mud_03_1k.blend/textures/brown_mud_03_nor_gl_512.png" id="25_21mah"]
 [ext_resource type="Texture2D" uid="uid://bv7a2j3ainyra" path="res://imports/textures/brown_mud_03_1k.blend/textures/brown_mud_03_ao_1k.png" id="26_5fh2d"]
+[ext_resource type="Script" uid="uid://cojxx34ue7crs" path="res://lib/ShowcaseHub/showcase_hub.gd" id="26_m3fvh"]
 [ext_resource type="Texture2D" uid="uid://b12f1610ujfec" path="res://imports/textures/brown_mud_03_1k.blend/textures/brown_mud_03_rough_1k.png" id="28_m3fvh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4o0cy"]
@@ -66,6 +67,16 @@ ambient_light_color = Color(0.7082534, 0.82311773, 1, 1)
 ambient_light_sky_contribution = 0.7
 ambient_light_energy = 2.0
 reflected_light_source = 2
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_m3fvh"]
+viewport_path = NodePath("HUD/LastPickup/Control/SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5fh2d"]
+
+[sub_resource type="PlaceholderMesh" id="PlaceholderMesh_m3fvh"]
+aabb = AABB(-1, -1, -1, 2, 2, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_5fh2d"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_luako"]
 size = Vector3(26.25, 1, 42)
@@ -117,8 +128,8 @@ controls = NodePath("../HUD/MarginContainer/PlayerControls")
 character_body = NodePath("../PlayerRunner")
 character_visuals = NodePath("../PlayerRunner/PlayerVisuals2")
 cameras = NodePath("../PlayerRunner/Cameras")
-start_title = NodePath("../HUD/Start Screen")
-game_over_credits = NodePath("../HUD/Game Over Credits")
+start_title = NodePath("../HUD/MarginContainer/Start Screen")
+game_over_credits = NodePath("../HUD/MarginContainer/Game Over Credits")
 
 [node name="ItemSpawnerFromMap" type="Node3D" parent="." node_paths=PackedStringArray("world_A", "world_B", "world_C")]
 script = ExtResource("4_2w0o7")
@@ -242,12 +253,61 @@ theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 30
 
-[node name="Label" type="Label" parent="HUD/MarginContainer" node_paths=PackedStringArray("label")]
+[node name="Start Screen" type="Control" parent="HUD/MarginContainer"]
 layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 0
-script = ExtResource("8_rsc3p")
-label = NodePath(".")
+script = ExtResource("24_5fh2d")
+
+[node name="CenterContainer" type="CenterContainer" parent="HUD/MarginContainer/Start Screen"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 540.0
+grow_horizontal = 2
+
+[node name="GameTitle" type="Label" parent="HUD/MarginContainer/Start Screen/CenterContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("24_n3sji")
+theme_override_font_sizes/font_size = 71
+text = "Contractor
+Hero"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Game Over Credits" type="Control" parent="HUD/MarginContainer"]
+layout_mode = 2
+script = ExtResource("24_5fh2d")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/MarginContainer/Game Over Credits"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="directed by" type="Label" parent="HUD/MarginContainer/Game Over Credits/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("24_n3sji")
+theme_override_font_sizes/font_size = 16
+text = "directed by"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Fabricio Zuardi" type="Label" parent="HUD/MarginContainer/Game Over Credits/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("24_n3sji")
+theme_override_font_sizes/font_size = 20
+text = "Fabricio Campos Zuardi"
+horizontal_alignment = 1
+
+[node name="CopyrightNotice" type="Label" parent="HUD/MarginContainer/Game Over Credits/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("24_n3sji")
+theme_override_font_sizes/font_size = 20
+text = "(cc) Contractor heroes 2025"
+horizontal_alignment = 1
 
 [node name="PauseMenu" parent="HUD/MarginContainer" instance=ExtResource("5_cbo7l")]
 layout_mode = 2
@@ -259,69 +319,66 @@ main_title = "Maryborough Court House"
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="Start Screen" type="Control" parent="HUD"]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("24_5fh2d")
+[node name="LastPickup" type="CanvasLayer" parent="HUD"]
 
-[node name="CenterContainer" type="CenterContainer" parent="HUD/Start Screen"]
-custom_minimum_size = Vector2(540, 540)
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Control" type="Control" parent="HUD/LastPickup"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -200.0
+offset_bottom = 200.0
+grow_horizontal = 0
 
-[node name="GameTitle" type="Label" parent="HUD/Start Screen/CenterContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("24_n3sji")
-theme_override_font_sizes/font_size = 71
-text = "Contractor
-Hero"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Game Over Credits" type="Control" parent="HUD"]
-custom_minimum_size = Vector2(540, 1200)
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("24_5fh2d")
-
-[node name="MarginContainer" type="MarginContainer" parent="HUD/Game Over Credits"]
+[node name="TextureRect" type="TextureRect" parent="HUD/LastPickup/Control"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_bottom = 12
+texture = SubResource("ViewportTexture_m3fvh")
+expand_mode = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HUD/Game Over Credits/MarginContainer"]
-layout_mode = 2
+[node name="SubViewport" type="SubViewport" parent="HUD/LastPickup/Control"]
+transparent_bg = true
+size = Vector2i(256, 256)
 
-[node name="directed by" type="Label" parent="HUD/Game Over Credits/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_fonts/font = ExtResource("24_n3sji")
-theme_override_font_sizes/font_size = 16
-text = "directed by"
-horizontal_alignment = 1
-vertical_alignment = 2
+[node name="Showcase" type="Node3D" parent="HUD/LastPickup/Control/SubViewport" node_paths=PackedStringArray("showcase_spot", "reparent_to", "face_camera") groups=["ShowcaseHub"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9.832167, 0)
+script = ExtResource("26_m3fvh")
+showcase_spot = NodePath("ShowcasedObjectOrigin")
+reparent_to = NodePath(".")
+face_camera = NodePath("ShowcaseCam")
 
-[node name="Fabricio Zuardi" type="Label" parent="HUD/Game Over Credits/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_fonts/font = ExtResource("24_n3sji")
-theme_override_font_sizes/font_size = 20
-text = "Fabricio Campos Zuardi"
-horizontal_alignment = 1
+[node name="ShowcaseCam" type="Camera3D" parent="HUD/LastPickup/Control/SubViewport/Showcase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.98150635, 1.6312714)
+projection = 1
+fov = 37.849285
+size = 0.9
 
-[node name="CopyrightNotice" type="Label" parent="HUD/Game Over Credits/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("24_n3sji")
-theme_override_font_sizes/font_size = 20
-text = "(cc) Contractor heroes 2025"
-horizontal_alignment = 1
+[node name="ShowcasedObjectOrigin" type="Marker3D" parent="HUD/LastPickup/Control/SubViewport/Showcase"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="HUD/LastPickup/Control/SubViewport/Showcase"]
+material_override = SubResource("StandardMaterial3D_5fh2d")
+mesh = SubResource("PlaceholderMesh_m3fvh")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="HUD/LastPickup/Control/SubViewport/Showcase"]
+mesh = SubResource("BoxMesh_5fh2d")
+
+[node name="Label" type="Label" parent="HUD" node_paths=PackedStringArray("label")]
+layout_mode = 0
+offset_left = 453.0
+offset_top = 61.0
+offset_right = 498.0
+offset_bottom = 92.0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 22
+text = "0 / 6"
+script = ExtResource("8_rsc3p")
+label = NodePath(".")
 
 [node name="GroundFloor" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.861, 0, 15.38)

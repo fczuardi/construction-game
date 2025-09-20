@@ -10,6 +10,7 @@ radius = 0.1
 collision_layer = 3
 script = ExtResource("1_cd4o0")
 points = 0
+showcase_scale = 3.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_l14c5")

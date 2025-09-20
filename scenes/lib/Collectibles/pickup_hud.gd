@@ -10,10 +10,12 @@ func _ready() -> void:
 
 func _on_pick(_id: StringName, points: int, _pos: Vector3) -> void:
     total_points += points
-    if label: label.text = str(total_points)
+    if label: 
+        label.text = "%s / 6" % str(total_points)
+
     if total_points >= 6:
         EventBus.goal_unlocked.emit()
     
 func _on_restart():
     total_points = 0
-    label.text = str(total_points)
+    label.text = "%s / 6" % str(total_points)

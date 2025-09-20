@@ -6,6 +6,7 @@ extends Area3D
 @export var spin_deg_per_sec: float = 90.0
 @export var bob_amp: float = 0.06
 @export var bob_speed: float = 2.0
+@export var showcase_scale: float = 5.0
 
 var burst_scene := preload("res://lib/PickupBurst/PickupBurst.tscn")
 
@@ -29,7 +30,15 @@ func _on_body_entered(body: Node) -> void:
     set_deferred("monitoring", false)
     EventBus.item_collected.emit(id, points, global_position)
     _play_pickup_vfx(global_position)
-    queue_free()
+    #queue_free()
+    var hub := get_tree().get_first_node_in_group("ShowcaseHub")  # if you add the hub to this group
+    if hub and "show_item" in hub:
+        hub.show_item(self)
+    else:
+        # fallback if not found
+        queue_free()
+    
+    
 
 func _play_pickup_vfx(at: Vector3) -> void:
     var vfx := burst_scene.instantiate() as CPUParticles3D
