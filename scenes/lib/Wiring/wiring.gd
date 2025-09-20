@@ -8,6 +8,7 @@ extends Node
 @export var character_visuals: PlayerVisuals2
 @export var cameras: PlayerCameras
 @export var start_title: FadeTitle
+@export var first_stage_message: FadeTitle
 @export var game_over_message: FadeTitle
 @export var game_over_credits: FadeTitle
 
@@ -90,7 +91,15 @@ func _on_restart():
     controls.toggle_input(PlayerControls.Side.SOUTH, false)
     _on_size_changed()
     if start_title:
+        start_title.auto_exit_time = 1.0
         start_title.enter()
+        if first_stage_message:
+            var restart_tween: Tween = create_tween()
+            restart_tween.tween_interval(3.0)
+            restart_tween.tween_callback(func ():
+                first_stage_message.auto_exit_time = 1.0
+                first_stage_message.enter()
+            )
 
 func _on_goal_reached():
     _finished_level = true

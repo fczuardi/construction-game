@@ -121,7 +121,7 @@ walk_sounds = Array[AudioStream]([ExtResource("6_glugf"), ExtResource("7_bul2d")
 player_body = NodePath("../PlayerRunner")
 volume = 0.284
 
-[node name="Wiring" type="Node" parent="." node_paths=PackedStringArray("hud_container", "controls", "character_body", "character_visuals", "cameras", "start_title", "game_over_message", "game_over_credits")]
+[node name="Wiring" type="Node" parent="." node_paths=PackedStringArray("hud_container", "controls", "character_body", "character_visuals", "cameras", "start_title", "first_stage_message", "game_over_message", "game_over_credits")]
 script = ExtResource("2_5p6w5")
 hud_container = NodePath("../HUD/MarginContainer")
 controls = NodePath("../HUD/MarginContainer/PlayerControls")
@@ -129,6 +129,7 @@ character_body = NodePath("../PlayerRunner")
 character_visuals = NodePath("../PlayerRunner/PlayerVisuals2")
 cameras = NodePath("../PlayerRunner/Cameras")
 start_title = NodePath("../HUD/MarginContainer/Start Screen")
+first_stage_message = NodePath("../HUD/MarginContainer/1st Stage Message")
 game_over_message = NodePath("../HUD/MarginContainer/Game Over Message")
 game_over_credits = NodePath("../HUD/MarginContainer/Game Over Credits")
 
@@ -271,6 +272,37 @@ theme_override_fonts/font = ExtResource("24_n3sji")
 theme_override_font_sizes/font_size = 71
 text = "Contractor
 Hero"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="1st Stage Message" type="Control" parent="HUD/MarginContainer"]
+layout_mode = 2
+script = ExtResource("24_5fh2d")
+
+[node name="BoxContainer" type="BoxContainer" parent="HUD/MarginContainer/1st Stage Message"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+vertical = true
+
+[node name="Title" type="Label" parent="HUD/MarginContainer/1st Stage Message/BoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_fonts/font = ExtResource("24_n3sji")
+theme_override_font_sizes/font_size = 71
+text = "1st Stage"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Subtitle" type="Label" parent="HUD/MarginContainer/1st Stage Message/BoxContainer"]
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_fonts/font = ExtResource("24_n3sji")
+theme_override_font_sizes/font_size = 18
+text = "Layout"
 horizontal_alignment = 1
 vertical_alignment = 1
 

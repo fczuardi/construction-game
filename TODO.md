@@ -1,6 +1,6 @@
 ## Ongoing
 
-- you died UI
+- stage 2 start
 
 ## Next steps
 
@@ -60,6 +60,8 @@
 - Zoide notou que a caminhada do demo 1 era mais folgadona
 
 ## Done
+- [x] stage 1 message
+- [x] you died UI
 - [x] visual feedback about collectibles progress: example 2/6
 - [x] katamari style last item UI
 - [x] game title fade in/out
