@@ -1,4 +1,104 @@
-Brainstorm /  reasoning
+## Stages
+
+The stages in the game follows the progression of the stages of a building construction,
+from the set out to foundation, to walls raising to second floor to ceeiling, etc
+
+Each stage has a set of items that you need to gather in order to progress to the next stage.
+
+Once the minimal required items is gathered, the portal to the next level is unlocked and you can
+have a pause, this portal is normally the toilet.
+
+
+construction phases to model the game against:
+site clearing, position the building (measured set backs), establish base points (wooden peg on 
+base point, points a, b, c, 3, 4,5 triangle), establish all 4 corners, establish the profile boards,
+mark escavation areas on the ground, excavate the foundation trenches, mark points for column pit 
+excavation / column marks for escavation
+
+profile boards = gabarito
+
+### Stage 1
+
+Title: layout, set-out, planning
+
+Obstacles:
+    Mud pit
+
+Required items:
+    - Level
+    - Pencil
+    - Measuring Tape
+    - Mallet
+    - Stakes / wooden pegs Pickets
+    - Spray Paint
+
+Optional items:
+    - Toilet paper
+
+Extra /hidden items:
+    - Bitcoin coin
+
+#### Stage clear/complete/Inspection 1 passed
+
+### Stage 2
+
+Title: Foundation Prep,  Escavation?, Sapatas, Viga Baldrame,  Foundation board?
+
+Required items:
+    - Shovel / Spade
+    - Pickaxe
+    - Cartwheel
+    - Wood plank
+    - Rebar
+
+Wearables:
+    - Helmet
+    - Sneaker
+
+Optional items:
+    - New Map (when no toilet paper)
+
+Extra /hidden items:
+    - Bitcoin Coin
+
+Obstacles:
+    - Skip
+    - Dinosaur Skeleton
+    - Trowel
+    - Brush
+
+### Stage 3
+
+Required items:
+    - Cement Bag
+    - Concrete Mixer
+    - Rebar
+    - foam
+    - silver tape
+    - tubes
+    
+### Stage 4
+
+Posts? Footing?
+
+Required items:
+    - blocks??
+    - beams
+    - bricks
+
+conduits? power? plumbing?
+
+
+
+## Quotes
+
+"Concrete will always crack"
+    concrete is not about if it's gonna crack, it's about when it's gonna crack
+
+
+
+
+## Old / Brainstorm /  reasoning
 
 THIS DOCUMENT IS A DRAFT, MANY THINGS CAN CHANGE
 

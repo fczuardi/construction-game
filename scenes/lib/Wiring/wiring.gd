@@ -2,24 +2,25 @@ class_name GeneralWiring
 extends Node
 ## Comon connections between different game pieces
 
-@export var hud_container: Control
-@export var controls: PlayerControls
 @export var character_body: PlayerRunner
 @export var character_visuals: PlayerVisuals2
 @export var cameras: PlayerCameras
-@export var start_title: FadeTitle
-@export var first_stage_message: FadeTitle
-@export var game_over_message: FadeTitle
-@export var second_stage_message: FadeTitle
-@export var game_over_credits: FadeTitle
-@export var first_stage_ground: Node3D
 @export var item_spawner: ItemSpawnerFromMap
+@export var countdown: Timer
+@export var first_stage_ground: Node3D
 @export var second_stage_ground: Node3D
+@export var hud_container: Control
+@export var controls: PlayerControls
+@export var start_title: FadeTitle
+@export var game_over_message: FadeTitle
+@export var game_over_credits: FadeTitle
+@export var first_stage_message: FadeTitle
+@export var second_stage_message: FadeTitle
 
 
 @export var slowmo_scale := 0.25  # 25% speed
 
-@export var _current_stage: int = 2
+@export var _current_stage: int = 1
 
 func _unhandled_input(e):
     if e.is_action_pressed("debug_slowmo"):   Engine.time_scale = slowmo_scale
@@ -73,6 +74,7 @@ func _on_player_speed_change(_new_speed: float, mode: String):
                 cameras.blend_time = 3.0
                 cameras.activate_index(4)
             _alive = false
+            countdown.paused = true
             var game_over_tween: Tween = create_tween()
             game_over_tween.tween_interval(3.0)
             game_over_tween.tween_callback(func ():
@@ -101,6 +103,8 @@ func _on_restart():
     cameras.activate_index(0)
     controls.toggle_input(PlayerControls.Side.NORTH, false)
     controls.toggle_input(PlayerControls.Side.SOUTH, false)
+    countdown.start()
+    countdown.paused = false
     _on_size_changed()
     if start_title:
         start_title.auto_exit_time = 1.0
@@ -134,6 +138,7 @@ func _on_restart():
 
 func _on_goal_reached():
     _finished_level = true
+    countdown.paused = true
     cameras.activate_index(5)
     print("STAGE CLEAR")
     var game_over_tween: Tween = create_tween()

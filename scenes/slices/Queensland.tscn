@@ -1,7 +1,8 @@
-[gd_scene load_steps=52 format=3 uid="uid://giqxuc0gq0fk"]
+[gd_scene load_steps=54 format=3 uid="uid://giqxuc0gq0fk"]
 
 [ext_resource type="Script" uid="uid://cq16dqdvi8ncx" path="res://slices/queensland.gd" id="1_glf58"]
 [ext_resource type="Script" uid="uid://bly6ty8fepn6x" path="res://lib/Wiring/wiring.gd" id="2_5p6w5"]
+[ext_resource type="Script" uid="uid://dprbfpy8o8w7m" path="res://lib/Countdown/countdowwn.gd" id="2_cyh5n"]
 [ext_resource type="PackedScene" uid="uid://br08vaqh6iywm" path="res://lib/PlayerRunner/PlayerRunner.tscn" id="2_luako"]
 [ext_resource type="Script" uid="uid://dr0dlgpb3oddd" path="res://lib/TrenchStumbleClassifier/trench_stumble_classifier.gd" id="3_2yhap"]
 [ext_resource type="Script" uid="uid://dco6a3tithqkl" path="res://lib/ItemSpawner/item_spawner_from_map.gd" id="4_2w0o7"]
@@ -62,6 +63,30 @@ ambient_light_sky_contribution = 0.7
 ambient_light_energy = 2.0
 reflected_light_source = 2
 
+[sub_resource type="GDScript" id="GDScript_cyh5n"]
+script/source = "extends Label
+
+@export var countdown: Timer
+
+const UPDATE_FREQUENCY: float = 1.0
+
+var _time_acc: float = 0.0
+
+func _process(delta: float) -> void:
+    _time_acc += delta
+    if _time_acc < UPDATE_FREQUENCY:
+        return
+        
+    _time_acc = 0.0
+    text = _format_time(countdown.time_left)
+
+func _format_time(seconds: float) -> String:
+    var total_seconds := int(round(seconds))
+    var minutes := total_seconds / 60
+    var secs := total_seconds % 60
+    return \"%02d:%02d\" % [minutes, secs]
+"
+
 [sub_resource type="ViewportTexture" id="ViewportTexture_m3fvh"]
 viewport_path = NodePath("HUD/LastPickup/Control/SubViewport")
 
@@ -120,6 +145,11 @@ size = Vector3(0.1, 1.3, 0.1)
 [node name="Queensland" type="Node3D"]
 script = ExtResource("1_glf58")
 
+[node name="Countdown" type="Timer" parent="."]
+wait_time = 180.0
+autostart = true
+script = ExtResource("2_cyh5n")
+
 [node name="TrenchStumbleClassifier" type="Node" parent="." node_paths=PackedStringArray("character_body", "character_visuals", "cameras", "touch_controls")]
 script = ExtResource("3_2yhap")
 character_body = NodePath("../PlayerRunner")
@@ -137,21 +167,22 @@ walk_sounds = Array[AudioStream]([ExtResource("6_glugf"), ExtResource("7_bul2d")
 player_body = NodePath("../PlayerRunner")
 volume = 0.284
 
-[node name="Wiring" type="Node" parent="." node_paths=PackedStringArray("hud_container", "controls", "character_body", "character_visuals", "cameras", "start_title", "first_stage_message", "game_over_message", "second_stage_message", "game_over_credits", "first_stage_ground", "item_spawner", "second_stage_ground")]
+[node name="Wiring" type="Node" parent="." node_paths=PackedStringArray("character_body", "character_visuals", "cameras", "item_spawner", "countdown", "first_stage_ground", "second_stage_ground", "hud_container", "controls", "start_title", "game_over_message", "game_over_credits", "first_stage_message", "second_stage_message")]
 script = ExtResource("2_5p6w5")
-hud_container = NodePath("../HUD/MarginContainer")
-controls = NodePath("../HUD/MarginContainer/PlayerControls")
 character_body = NodePath("../PlayerRunner")
 character_visuals = NodePath("../PlayerRunner/PlayerVisuals2")
 cameras = NodePath("../PlayerRunner/Cameras")
-start_title = NodePath("../HUD/MarginContainer/Start Screen")
-first_stage_message = NodePath("../HUD/MarginContainer/1st Stage Message")
-game_over_message = NodePath("../HUD/MarginContainer/Game Over Message")
-second_stage_message = NodePath("../HUD/MarginContainer/2ndt Stage Message")
-game_over_credits = NodePath("../HUD/MarginContainer/Game Over Credits")
-first_stage_ground = NodePath("../Stage1Ground")
 item_spawner = NodePath("../ItemSpawnerFromMap")
+countdown = NodePath("../Countdown")
+first_stage_ground = NodePath("../Stage1Ground")
 second_stage_ground = NodePath("../Stage2Ground")
+hud_container = NodePath("../HUD/MarginContainer")
+controls = NodePath("../HUD/MarginContainer/PlayerControls")
+start_title = NodePath("../HUD/MarginContainer/Start Screen")
+game_over_message = NodePath("../HUD/MarginContainer/Game Over Message")
+game_over_credits = NodePath("../HUD/MarginContainer/Game Over Credits")
+first_stage_message = NodePath("../HUD/MarginContainer/1st Stage Message")
+second_stage_message = NodePath("../HUD/MarginContainer/2ndt Stage Message")
 
 [node name="PlayerRunner" parent="." node_paths=PackedStringArray("visuals") instance=ExtResource("2_luako")]
 visuals = NodePath("PlayerVisuals2")
@@ -252,7 +283,31 @@ theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 30
 
+[node name="TimerContainer" type="MarginContainer" parent="HUD/MarginContainer"]
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_top = 21
+
+[node name="TimerLabel" type="Label" parent="HUD/MarginContainer/TimerContainer" node_paths=PackedStringArray("countdown")]
+layout_mode = 2
+size_flags_vertical = 0
+text = "03:00"
+horizontal_alignment = 1
+script = SubResource("GDScript_cyh5n")
+countdown = NodePath("../../../../Countdown")
+
+[node name="ProgressLabel" type="Label" parent="HUD/MarginContainer/TimerContainer" node_paths=PackedStringArray("label")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 18
+text = "0 / 6"
+script = ExtResource("8_rsc3p")
+label = NodePath(".")
+
 [node name="Start Screen" type="Control" parent="HUD/MarginContainer"]
+visible = false
 layout_mode = 2
 script = ExtResource("24_5fh2d")
 
@@ -511,19 +566,6 @@ mesh = SubResource("PlaceholderMesh_m3fvh")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="HUD/LastPickup/Control/SubViewport/Showcase"]
 mesh = SubResource("BoxMesh_5fh2d")
-
-[node name="ProgressLabel" type="Label" parent="HUD" node_paths=PackedStringArray("label")]
-layout_mode = 0
-offset_left = 453.0
-offset_top = 61.0
-offset_right = 498.0
-offset_bottom = 92.0
-size_flags_horizontal = 8
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 22
-text = "0 / 6"
-script = ExtResource("8_rsc3p")
-label = NodePath(".")
 
 [node name="Reference texture" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)

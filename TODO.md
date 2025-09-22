@@ -1,5 +1,22 @@
 ## Ongoing
 
+- stage 2 item: new map
+    (only needed if toilet paper missed)
+
+- stage 2 items: (set out, groundwork, trenches)
+    - spade / shovel
+    - wood planks
+    - cartwheel
+    - pickaxe
+    - helmet
+    - skip
+        - nike (sprint)
+- stage 3 items: (foundation, pouring)
+    - cement bag
+    - concrete mixer
+    - gravel
+
+    
 - stage clear pause
   - different messages depending on the collection of paper
     - with = stage clear

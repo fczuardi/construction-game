@@ -156,6 +156,7 @@ Copyright Fabricio Campos Zuardi - 2025 - 2025
 - [Essential Craftsman](https://www.youtube.com/@essentialcraftsman)
 - [Perkins Builder Brothers](https://www.youtube.com/@PerkinsBuilderBrothers)
 - [Build Better Things](https://www.youtube.com/@build-better-things)
+- [How to Build Your Own Home](https://www.youtube.com/@HowToBuildYourOwnHome)
 
 -----
 
