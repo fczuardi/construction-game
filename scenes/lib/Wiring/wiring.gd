@@ -10,9 +10,16 @@ extends Node
 @export var start_title: FadeTitle
 @export var first_stage_message: FadeTitle
 @export var game_over_message: FadeTitle
+@export var second_stage_message: FadeTitle
 @export var game_over_credits: FadeTitle
+@export var first_stage_ground: Node3D
+@export var item_spawner: ItemSpawnerFromMap
+@export var second_stage_ground: Node3D
+
 
 @export var slowmo_scale := 0.25  # 25% speed
+
+@export var _current_stage: int = 1
 
 func _unhandled_input(e):
     if e.is_action_pressed("debug_slowmo"):   Engine.time_scale = slowmo_scale
@@ -40,6 +47,7 @@ func _ready() -> void:
         EventBus.stage_1_ended.connect(_on_goal_reached)
         print(cameras.current_rig_index())
         print(cameras.current_rig_name())
+    item_spawner.map_scene = load("res://lib/maps/stage%s_map.tscn" % str(_current_stage))
     _on_restart()
 
 ## unwire
@@ -80,7 +88,11 @@ func _on_player_speed_change(_new_speed: float, mode: String):
             game_over_tween.tween_callback(func ():
                 EventBus.global_restart_game.emit()
             )
+            item_spawner.map_scene = load("res://lib/maps/stage1_map.tscn")
+            _current_stage = 1
+
             print("game over restart")
+@onready var stage_1_map: StageMap = $"../PlayerRunner/PlayerVisuals2/SubViewportContainer/SubViewport/Points Of Interest/Stage1Map"
 
 func _on_restart():
     _alive = true
@@ -93,12 +105,31 @@ func _on_restart():
     if start_title:
         start_title.auto_exit_time = 1.0
         start_title.enter()
+        var level_message = first_stage_message
+        var level_ground = first_stage_ground
+        var first_stage_map = character_visuals.get_node("./SubViewportContainer/SubViewport/Points Of Interest/Stage1Map")
+        var second_stage_map = character_visuals.get_node("./SubViewportContainer/SubViewport/Points Of Interest/Stage2Map")
+        var stage_map = first_stage_map
+        print(first_stage_map)
+        print(second_stage_map)
+        if _current_stage == 2:
+            level_message = second_stage_message
+            level_ground = second_stage_ground
+            stage_map = second_stage_map
+        for n in [first_stage_ground, second_stage_ground]:
+            n.visible = (n == level_ground)
+            _toggle_collisions(n, (n == level_ground))
+        for m in [first_stage_map, second_stage_map]:
+            m.visible = (m == stage_map)
+            print(m)
+            print(m.visible)
+
         if first_stage_message:
             var restart_tween: Tween = create_tween()
             restart_tween.tween_interval(3.0)
             restart_tween.tween_callback(func ():
-                first_stage_message.auto_exit_time = 1.0
-                first_stage_message.enter()
+                level_message.auto_exit_time = 1.0
+                level_message.enter()
             )
 
 func _on_goal_reached():
@@ -108,6 +139,10 @@ func _on_goal_reached():
     var game_over_tween: Tween = create_tween()
     game_over_tween.tween_interval(5.0)
     game_over_tween.tween_callback(func ():
+        item_spawner.map_scene = load("res://lib/maps/stage2_map.tscn")
+        second_stage_ground.visible = true
+        first_stage_ground.visible = false
+        _current_stage = 2
         EventBus.global_restart_game.emit()
     )
     print("HACK stage clear, game over restart")
@@ -155,3 +190,36 @@ func _on_controller_input(side: int, event: int):
                     else 2 if map_enabled == true and run_enabled == false \
                     else 3 # map_enabled == true and run_enabled == true
             cameras.activate_index(camera_index)
+
+
+
+func _toggle_collisions(root: Node, on: bool) -> void:
+    # prototype terrains s
+    if root is CSGShape3D:
+        root.use_collision = on
+
+    # Handle bodies & areas
+    if root is CollisionObject3D:
+        if on:
+            # restore original mask/layer if we saved them
+            if root.has_meta("orig_layer"): root.collision_layer = int(root.get_meta("orig_layer"))
+            if root.has_meta("orig_mask"):  root.collision_mask  = int(root.get_meta("orig_mask"))
+        else:
+            # save once, then zero them out
+            if not root.has_meta("orig_layer"): root.set_meta("orig_layer", root.collision_layer)
+            if not root.has_meta("orig_mask"):  root.set_meta("orig_mask",  root.collision_mask)
+            root.collision_layer = 0
+            root.collision_mask  = 0
+
+        # Areas: also stop/start monitoring
+        if root is Area3D:
+            root.monitoring  = on
+            root.monitorable = on
+
+    # Also toggle shapes explicitly (nice when you prefer shape-level control)
+    if root is CollisionShape3D:
+        root.disabled = not on
+
+    # Recurse
+    for c in root.get_children():
+        _toggle_collisions(c, on)

@@ -1,0 +1,131 @@
+[gd_scene load_steps=9 format=3 uid="uid://2ux1olvnmbt4"]
+
+[ext_resource type="Script" uid="uid://vf6f0by61bt4" path="res://lib/maps/stage_map.gd" id="1_vfwxv"]
+[ext_resource type="Texture2D" uid="uid://c3ggid41yoxw5" path="res://imports/textures/Maryborough Courthouse/ground-floor_640x1024.jpg" id="2_d0vik"]
+[ext_resource type="Script" uid="uid://dcste88fnub5m" path="res://lib/PlayerVisuals2/map_sticker.gd" id="3_p3aax"]
+[ext_resource type="PackedScene" uid="uid://0a2pm7msnmkk" path="res://lib/CollectiblesStage1/Level_CT1.tscn" id="4_ppd0e"]
+[ext_resource type="Texture2D" uid="uid://cpst1x05ne48g" path="res://imports/icons/noun_project/noun-level-6853002_600px.png" id="5_sxb0r"]
+[ext_resource type="FontFile" uid="uid://puw8wtbfcgof" path="res://imports/fonts/Noto_Emoji/NotoEmoji-VariableFont_wght.ttf" id="6_djye3"]
+[ext_resource type="PackedScene" uid="uid://c8h5mes28rf7l" path="res://lib/CollectiblesStage1/BitcoinCoin.tscn" id="19_2o5ht"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aayd2"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.96, 0.83312, 0.3744, 0.74509805)
+corner_radius_top_left = 55
+corner_radius_bottom_right = 55
+corner_radius_bottom_left = 55
+corner_detail = 5
+
+[node name="Stage1Map" type="Control"]
+custom_minimum_size = Vector2(640, 1024)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 640.0
+offset_bottom = 1024.0
+rotation = 3.1415927
+pivot_offset = Vector2(320, 512)
+script = ExtResource("1_vfwxv")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_d0vik")
+
+[node name="MapA" type="Marker2D" parent="."]
+
+[node name="MapB" type="Marker2D" parent="."]
+position = Vector2(640, 0)
+
+[node name="MapC" type="Marker2D" parent="."]
+position = Vector2(0, 1024)
+
+[node name="Stickers" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="LevelCollectible" type="Marker2D" parent="Stickers" groups=["map_icon"]]
+position = Vector2(413.0001, 270.99988)
+script = ExtResource("3_p3aax")
+kind = ExtResource("4_ppd0e")
+item_id = &"level"
+
+[node name="Panel" type="Panel" parent="Stickers/LevelCollectible"]
+offset_left = -110.161
+offset_top = 0.38011932
+offset_right = -0.16103363
+offset_bottom = 110.38012
+rotation = -0.7853982
+pivot_offset = Vector2(110, 0)
+theme_override_styles/panel = SubResource("StyleBoxFlat_aayd2")
+
+[node name="Icon" type="TextureRect" parent="Stickers/LevelCollectible"]
+offset_left = -52.16101
+offset_top = 30.380066
+offset_right = 47.83899
+offset_bottom = 130.38007
+rotation = 3.1415927
+pivot_offset = Vector2(50, 50)
+texture = ExtResource("5_sxb0r")
+expand_mode = 1
+
+[node name="Checkmark" type="Label" parent="Stickers/LevelCollectible"]
+visible = false
+custom_minimum_size = Vector2(50, 50)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -25.0
+offset_right = 25.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 3.1415927
+pivot_offset = Vector2(25, 25)
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.95686275, 0.827451, 0.36862746, 1)
+theme_override_fonts/font = ExtResource("6_djye3")
+theme_override_font_sizes/font_size = 40
+text = "✔︎"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BitcoinCoin" type="Marker2D" parent="Stickers" groups=["map_icon"]]
+unique_name_in_owner = true
+position = Vector2(349.00006, 564)
+script = ExtResource("3_p3aax")
+kind = ExtResource("19_2o5ht")
+item_id = &"bitcoin_coin"
+
+[node name="Checkmark" type="Label" parent="Stickers/BitcoinCoin"]
+visible = false
+custom_minimum_size = Vector2(50, 50)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -25.0
+offset_right = 26.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 3.1415927
+pivot_offset = Vector2(25, 25)
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.03137255, 0.23921569, 0.46666667, 1)
+theme_override_fonts/font = ExtResource("6_djye3")
+theme_override_font_sizes/font_size = 40
+text = "✔︎"
+horizontal_alignment = 1
+vertical_alignment = 1

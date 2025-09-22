@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://giqxuc0gq0fk"]
+[gd_scene load_steps=52 format=3 uid="uid://giqxuc0gq0fk"]
 
 [ext_resource type="Script" uid="uid://cq16dqdvi8ncx" path="res://slices/queensland.gd" id="1_glf58"]
 [ext_resource type="Script" uid="uid://bly6ty8fepn6x" path="res://lib/Wiring/wiring.gd" id="2_5p6w5"]
@@ -10,7 +10,7 @@
 [ext_resource type="Material" uid="uid://db8idpthygrsm" path="res://materials/kenney_prototype_dark_09.tres" id="5_4o0cy"]
 [ext_resource type="Script" uid="uid://cqsox5yy3agv1" path="res://lib/PlayerCameras/player_cameras.gd" id="5_7gcop"]
 [ext_resource type="PackedScene" uid="uid://cq7lqptnqemxp" path="res://lib/PauseMenu/PauseMenu.tscn" id="5_cbo7l"]
-[ext_resource type="PackedScene" uid="uid://cwo6mh160oyym" path="res://lib/PlayerVisuals2/stage1_map.tscn" id="5_fwyue"]
+[ext_resource type="PackedScene" uid="uid://cwo6mh160oyym" path="res://lib/maps/stage1_map.tscn" id="5_fwyue"]
 [ext_resource type="AudioStream" uid="uid://doycbnmkar3qa" path="res://imports/sfx/UI Soundpack/African2.ogg" id="5_n3sji"]
 [ext_resource type="Script" uid="uid://cwvjntv6rajs2" path="res://lib/autoload/footsteps_sfx.gd" id="5_y7807"]
 [ext_resource type="PackedScene" uid="uid://rnjcf0y4dsgm" path="res://lib/PlayerControls/PlayerControls.tscn" id="6_4o0cy"]
@@ -30,15 +30,9 @@
 [ext_resource type="Texture2D" uid="uid://sx8qtii0ky3f" path="res://imports/textures/brown_mud_03_1k.blend/textures/brown_mud_03_nor_gl_512.png" id="25_21mah"]
 [ext_resource type="Texture2D" uid="uid://bv7a2j3ainyra" path="res://imports/textures/brown_mud_03_1k.blend/textures/brown_mud_03_ao_1k.png" id="26_5fh2d"]
 [ext_resource type="Script" uid="uid://cojxx34ue7crs" path="res://lib/ShowcaseHub/showcase_hub.gd" id="26_m3fvh"]
+[ext_resource type="Texture2D" uid="uid://dkde8qkekm3f6" path="res://imports/textures/Maryborough Courthouse/ground-floor_walls_spray1.png" id="27_tqxv5"]
 [ext_resource type="Texture2D" uid="uid://b12f1610ujfec" path="res://imports/textures/brown_mud_03_1k.blend/textures/brown_mud_03_rough_1k.png" id="28_m3fvh"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4o0cy"]
-albedo_texture = ExtResource("7_7gcop")
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_7gcop"]
-material = SubResource("StandardMaterial3D_4o0cy")
-size = Vector2(26.25, 42)
-center_offset = Vector3(-0.861, 0, 15.38)
+[ext_resource type="PackedScene" uid="uid://ftnqkwec5k8s" path="res://imports/models/scketchfab/6tmd_modeling/Picket1.glb" id="33_062l0"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2w0o7"]
 size = Vector3(0.6, 1, 0.1)
@@ -78,6 +72,15 @@ aabb = AABB(-1, -1, -1, 2, 2, 2)
 
 [sub_resource type="BoxMesh" id="BoxMesh_5fh2d"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_062l0"]
+transparency = 1
+albedo_texture = ExtResource("7_7gcop")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_7gcop"]
+material = SubResource("StandardMaterial3D_062l0")
+size = Vector2(26.25, 42)
+center_offset = Vector3(-0.861, 0, 15.38)
+
 [sub_resource type="BoxMesh" id="BoxMesh_luako"]
 size = Vector3(26.25, 1, 42)
 
@@ -101,6 +104,19 @@ uv1_scale = Vector3(1.284, 1.284, 1.284)
 material = SubResource("StandardMaterial3D_tqxv5")
 size = Vector2(10, 10)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cyh5n"]
+transparency = 1
+albedo_color = Color(1, 0.1833188, 0.22025567, 1)
+albedo_texture = ExtResource("27_tqxv5")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_xsuks"]
+material = SubResource("StandardMaterial3D_cyh5n")
+size = Vector2(26.25, 42)
+center_offset = Vector3(-0.861, 0, 15.38)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cyh5n"]
+size = Vector3(0.1, 1.3, 0.1)
+
 [node name="Queensland" type="Node3D"]
 script = ExtResource("1_glf58")
 
@@ -121,7 +137,7 @@ walk_sounds = Array[AudioStream]([ExtResource("6_glugf"), ExtResource("7_bul2d")
 player_body = NodePath("../PlayerRunner")
 volume = 0.284
 
-[node name="Wiring" type="Node" parent="." node_paths=PackedStringArray("hud_container", "controls", "character_body", "character_visuals", "cameras", "start_title", "first_stage_message", "game_over_message", "game_over_credits")]
+[node name="Wiring" type="Node" parent="." node_paths=PackedStringArray("hud_container", "controls", "character_body", "character_visuals", "cameras", "start_title", "first_stage_message", "game_over_message", "second_stage_message", "game_over_credits", "first_stage_ground", "item_spawner", "second_stage_ground")]
 script = ExtResource("2_5p6w5")
 hud_container = NodePath("../HUD/MarginContainer")
 controls = NodePath("../HUD/MarginContainer/PlayerControls")
@@ -131,30 +147,11 @@ cameras = NodePath("../PlayerRunner/Cameras")
 start_title = NodePath("../HUD/MarginContainer/Start Screen")
 first_stage_message = NodePath("../HUD/MarginContainer/1st Stage Message")
 game_over_message = NodePath("../HUD/MarginContainer/Game Over Message")
+second_stage_message = NodePath("../HUD/MarginContainer/2ndt Stage Message")
 game_over_credits = NodePath("../HUD/MarginContainer/Game Over Credits")
-
-[node name="ItemSpawnerFromMap" type="Node3D" parent="." node_paths=PackedStringArray("world_A", "world_B", "world_C")]
-script = ExtResource("4_2w0o7")
-map_scene = ExtResource("5_fwyue")
-world_A = NodePath("WorldA")
-world_B = NodePath("WorldB")
-world_C = NodePath("WorldC")
-
-[node name="WorldA" type="Marker3D" parent="ItemSpawnerFromMap"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.96, 0, -5.57)
-
-[node name="WorldB" type="Marker3D" parent="ItemSpawnerFromMap"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.31, 0, -5.57)
-
-[node name="WorldC" type="Marker3D" parent="ItemSpawnerFromMap"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.96, 0, 36.43)
-
-[node name="Reference texture" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
-visible = false
-mesh = SubResource("PlaneMesh_7gcop")
-skeleton = NodePath("../GroundFloor")
-metadata/_edit_lock_ = true
+first_stage_ground = NodePath("../Stage1Ground")
+item_spawner = NodePath("../ItemSpawnerFromMap")
+second_stage_ground = NodePath("../Stage2Ground")
 
 [node name="PlayerRunner" parent="." node_paths=PackedStringArray("visuals") instance=ExtResource("2_luako")]
 visuals = NodePath("PlayerVisuals2")
@@ -306,6 +303,100 @@ text = "Layout"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Clear" type="Control" parent="HUD/MarginContainer"]
+visible = false
+layout_mode = 2
+script = ExtResource("24_5fh2d")
+
+[node name="BoxContainer" type="BoxContainer" parent="HUD/MarginContainer/Clear"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+vertical = true
+
+[node name="Title" type="Label" parent="HUD/MarginContainer/Clear/BoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_fonts/font = ExtResource("24_n3sji")
+theme_override_font_sizes/font_size = 71
+text = "1st Stage"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Subtitle" type="Label" parent="HUD/MarginContainer/Clear/BoxContainer"]
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_fonts/font = ExtResource("24_n3sji")
+theme_override_font_sizes/font_size = 18
+text = "Layout"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="2ndt Stage Message" type="Control" parent="HUD/MarginContainer"]
+layout_mode = 2
+script = ExtResource("24_5fh2d")
+
+[node name="BoxContainer" type="BoxContainer" parent="HUD/MarginContainer/2ndt Stage Message"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+vertical = true
+
+[node name="Title" type="Label" parent="HUD/MarginContainer/2ndt Stage Message/BoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_fonts/font = ExtResource("24_n3sji")
+theme_override_font_sizes/font_size = 71
+text = "2nd Stage"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Subtitle" type="Label" parent="HUD/MarginContainer/2ndt Stage Message/BoxContainer"]
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_fonts/font = ExtResource("24_n3sji")
+theme_override_font_sizes/font_size = 18
+text = "Groundwork"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="3rdt Stage Message" type="Control" parent="HUD/MarginContainer"]
+layout_mode = 2
+script = ExtResource("24_5fh2d")
+
+[node name="BoxContainer" type="BoxContainer" parent="HUD/MarginContainer/3rdt Stage Message"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+vertical = true
+
+[node name="Title" type="Label" parent="HUD/MarginContainer/3rdt Stage Message/BoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_fonts/font = ExtResource("24_n3sji")
+theme_override_font_sizes/font_size = 71
+text = "3rd Stage"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Subtitle" type="Label" parent="HUD/MarginContainer/3rdt Stage Message/BoxContainer"]
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_fonts/font = ExtResource("24_n3sji")
+theme_override_font_sizes/font_size = 18
+text = "Foundation"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Game Over Message" type="Control" parent="HUD/MarginContainer"]
 layout_mode = 2
 script = ExtResource("24_5fh2d")
@@ -434,218 +525,637 @@ text = "0 / 6"
 script = ExtResource("8_rsc3p")
 label = NodePath(".")
 
-[node name="GroundFloor" type="StaticBody3D" parent="."]
+[node name="Reference texture" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+visible = false
+mesh = SubResource("PlaneMesh_7gcop")
+skeleton = NodePath("../Stage1Ground/Stage1Floor")
+metadata/_edit_lock_ = true
+
+[node name="ItemSpawnerFromMap" type="Node3D" parent="." node_paths=PackedStringArray("world_A", "world_B", "world_C")]
+script = ExtResource("4_2w0o7")
+map_scene = ExtResource("5_fwyue")
+world_A = NodePath("WorldA")
+world_B = NodePath("WorldB")
+world_C = NodePath("WorldC")
+
+[node name="WorldA" type="Marker3D" parent="ItemSpawnerFromMap"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.96, 0, -5.57)
+
+[node name="WorldB" type="Marker3D" parent="ItemSpawnerFromMap"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.31, 0, -5.57)
+
+[node name="WorldC" type="Marker3D" parent="ItemSpawnerFromMap"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.96, 0, 36.43)
+
+[node name="Stage1Ground" type="Node3D" parent="."]
+visible = false
+
+[node name="Stage1Floor" type="StaticBody3D" parent="Stage1Ground"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.861, 0, 15.38)
 
-[node name="Terrain" type="CSGCombiner3D" parent="GroundFloor" groups=["trench"]]
+[node name="Terrain" type="CSGCombiner3D" parent="Stage1Ground/Stage1Floor" groups=["trench"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 material_override = ExtResource("5_4o0cy")
 use_collision = true
 
-[node name="CSGMesh3D" type="CSGMesh3D" parent="GroundFloor/Terrain"]
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Stage1Ground/Stage1Floor/Terrain"]
 mesh = SubResource("BoxMesh_luako")
 
-[node name="GoalPit" type="CSGCombiner3D" parent="GroundFloor/Terrain"]
+[node name="GoalPit" type="CSGCombiner3D" parent="Stage1Ground/Stage1Floor/Terrain"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2461443, 0.6, 11.048694)
 operation = 2
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="GroundFloor/Terrain/GoalPit"]
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Stage1Ground/Stage1Floor/Terrain/GoalPit"]
 transform = Transform3D(0.9659258, 0, 0.25881904, 0, 1, 0, -0.25881904, 0, 0.9659258, 0, 0.4600103, 0)
 radius = 5.0
 sides = 12
 
-[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="GroundFloor/Terrain/GoalPit"]
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Stage1Ground/Stage1Floor/Terrain/GoalPit"]
 transform = Transform3D(0.9238795, 0, 0.38268346, 0, 1, 0, -0.38268346, 0, 0.9238795, 0, 0.4600103, 0)
 operation = 2
 radius = 1.0
 sides = 16
 
-[node name="Stage3Subtract" type="CSGCombiner3D" parent="GroundFloor/Terrain"]
+[node name="Stage1KillerArea3D" type="Area3D" parent="Stage1Ground" groups=["lava"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.49831676, 0.085779905, 26.36217)
+collision_layer = 3
+script = ExtResource("23_bf4tx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage1Ground/Stage1KillerArea3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10700035, -0.4322815, 0.08699989)
+shape = SubResource("CylinderShape3D_21mah")
+debug_color = Color(0.9867151, 0, 0.045950208, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Stage1Ground/Stage1KillerArea3D/CollisionShape3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.034876347, 0)
+mesh = SubResource("PlaneMesh_lxpnk")
+
+[node name="Stage2Ground" type="Node3D" parent="."]
+
+[node name="Stage2Floor" type="StaticBody3D" parent="Stage2Ground" groups=["stage2"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.861, 0, 15.38)
+
+[node name="Reference texture2" type="MeshInstance3D" parent="Stage2Ground/Stage2Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.861, 0.1, -15.38)
+mesh = SubResource("PlaneMesh_xsuks")
+skeleton = NodePath("../../../Stage1Ground/Stage1Floor")
+
+[node name="Terrain2" type="CSGCombiner3D" parent="Stage2Ground/Stage2Floor" groups=["trench"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+material_override = ExtResource("5_4o0cy")
+use_collision = true
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Stage2Ground/Stage2Floor/Terrain2"]
+mesh = SubResource("BoxMesh_luako")
+
+[node name="Perimeter Pickets" type="Node3D" parent="Stage2Ground/Stage2Floor"]
+
+[node name="Picket23" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.691515, 0, -18.23054)
+
+[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket23" instance=ExtResource("33_062l0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket23"]
+shape = SubResource("BoxShape3D_cyh5n")
+
+[node name="Picket25" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.691515, 0, 20.163288)
+
+[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket25" instance=ExtResource("33_062l0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket25"]
+shape = SubResource("BoxShape3D_cyh5n")
+
+[node name="Picket27" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1463556, 0, -18.23054)
+
+[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket27" instance=ExtResource("33_062l0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket27"]
+shape = SubResource("BoxShape3D_cyh5n")
+
+[node name="Picket28" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1463556, 0, 20.163288)
+
+[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket28" instance=ExtResource("33_062l0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket28"]
+shape = SubResource("BoxShape3D_cyh5n")
+
+[node name="Picket39" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.4360847, 0, -18.23054)
+
+[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket39" instance=ExtResource("33_062l0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket39"]
+shape = SubResource("BoxShape3D_cyh5n")
+
+[node name="Picket40" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.4360847, 0, 20.163288)
+
+[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket40" instance=ExtResource("33_062l0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket40"]
+shape = SubResource("BoxShape3D_cyh5n")
+
+[node name="Picket29" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.115715444, 0, -18.23054)
+
+[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket29" instance=ExtResource("33_062l0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket29"]
+shape = SubResource("BoxShape3D_cyh5n")
+
+[node name="Picket30" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.115715444, 0, 20.163288)
+
+[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket30" instance=ExtResource("33_062l0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket30"]
+shape = SubResource("BoxShape3D_cyh5n")
+
+[node name="Picket31" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0037265, 0, -18.23054)
+
+[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket31" instance=ExtResource("33_062l0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket31"]
+shape = SubResource("BoxShape3D_cyh5n")
+
+[node name="Picket32" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0037265, 0, 20.163288)
+
+[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket32" instance=ExtResource("33_062l0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket32"]
+shape = SubResource("BoxShape3D_cyh5n")
+
+[node name="Picket33" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.648595, 0, -18.23054)
+
+[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket33" instance=ExtResource("33_062l0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket33"]
+shape = SubResource("BoxShape3D_cyh5n")
+
+[node name="Picket34" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.648595, 0, 20.163288)
+
+[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket34" instance=ExtResource("33_062l0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket34"]
+shape = SubResource("BoxShape3D_cyh5n")
+
+[node name="Picket35" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.246317, 0, -18.23054)
+
+[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket35" instance=ExtResource("33_062l0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket35"]
+shape = SubResource("BoxShape3D_cyh5n")
+
+[node name="Picket36" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.246317, 0, 20.163288)
+
+[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket36" instance=ExtResource("33_062l0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket36"]
+shape = SubResource("BoxShape3D_cyh5n")
+
+[node name="Picket37" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.980256, 0, -18.23054)
+
+[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket37" instance=ExtResource("33_062l0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket37"]
+shape = SubResource("BoxShape3D_cyh5n")
+
+[node name="Picket38" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.980256, 0, 20.163288)
+
+[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket38" instance=ExtResource("33_062l0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket38"]
+shape = SubResource("BoxShape3D_cyh5n")
+
+[node name="Picket" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.613689, 0, -16.082115)
+
+[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket" instance=ExtResource("33_062l0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket"]
+shape = SubResource("BoxShape3D_cyh5n")
+
+[node name="Picket2" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.188797, 0, -16.082115)
+
+[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket2" instance=ExtResource("33_062l0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket2"]
+shape = SubResource("BoxShape3D_cyh5n")
+
+[node name="Picket21" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.613689, 0, -12.342872)
+
+[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket21" instance=ExtResource("33_062l0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket21"]
+shape = SubResource("BoxShape3D_cyh5n")
+
+[node name="Picket22" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.188797, 0, -12.342872)
+
+[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket22" instance=ExtResource("33_062l0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket22"]
+shape = SubResource("BoxShape3D_cyh5n")
+
+[node name="Picket3" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.613689, 0, -10.840407)
+
+[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket3" instance=ExtResource("33_062l0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket3"]
+shape = SubResource("BoxShape3D_cyh5n")
+
+[node name="Picket4" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.188797, 0, -10.840407)
+
+[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket4" instance=ExtResource("33_062l0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket4"]
+shape = SubResource("BoxShape3D_cyh5n")
+
+[node name="Picket5" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.613689, 0, -7.262619)
+
+[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket5" instance=ExtResource("33_062l0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket5"]
+shape = SubResource("BoxShape3D_cyh5n")
+
+[node name="Picket6" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.188797, 0, -7.262619)
+
+[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket6" instance=ExtResource("33_062l0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket6"]
+shape = SubResource("BoxShape3D_cyh5n")
+
+[node name="Picket7" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.613689, 0, -0.086854935)
+
+[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket7" instance=ExtResource("33_062l0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket7"]
+shape = SubResource("BoxShape3D_cyh5n")
+
+[node name="Picket8" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.188797, 0, -0.086854935)
+
+[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket8" instance=ExtResource("33_062l0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket8"]
+shape = SubResource("BoxShape3D_cyh5n")
+
+[node name="Picket9" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.613689, 0, 1.9062662)
+
+[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket9" instance=ExtResource("33_062l0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket9"]
+shape = SubResource("BoxShape3D_cyh5n")
+
+[node name="Picket10" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.188797, 0, 1.9062662)
+
+[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket10" instance=ExtResource("33_062l0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket10"]
+shape = SubResource("BoxShape3D_cyh5n")
+
+[node name="Picket11" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.613689, 0, 4.8191595)
+
+[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket11" instance=ExtResource("33_062l0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket11"]
+shape = SubResource("BoxShape3D_cyh5n")
+
+[node name="Picket12" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.188797, 0, 4.8191595)
+
+[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket12" instance=ExtResource("33_062l0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket12"]
+shape = SubResource("BoxShape3D_cyh5n")
+
+[node name="Picket13" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.613689, 0, 9.14788)
+
+[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket13" instance=ExtResource("33_062l0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket13"]
+shape = SubResource("BoxShape3D_cyh5n")
+
+[node name="Picket14" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.188797, 0, 9.14788)
+
+[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket14" instance=ExtResource("33_062l0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket14"]
+shape = SubResource("BoxShape3D_cyh5n")
+
+[node name="Picket15" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.613689, 0, 12.468314)
+
+[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket15" instance=ExtResource("33_062l0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket15"]
+shape = SubResource("BoxShape3D_cyh5n")
+
+[node name="Picket16" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.188797, 0, 12.468314)
+
+[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket16" instance=ExtResource("33_062l0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket16"]
+shape = SubResource("BoxShape3D_cyh5n")
+
+[node name="Picket17" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.613689, 0, 14.049598)
+
+[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket17" instance=ExtResource("33_062l0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket17"]
+shape = SubResource("BoxShape3D_cyh5n")
+
+[node name="Picket18" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.188797, 0, 14.049598)
+
+[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket18" instance=ExtResource("33_062l0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket18"]
+shape = SubResource("BoxShape3D_cyh5n")
+
+[node name="Picket19" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.613689, 0, 18.027256)
+
+[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket19" instance=ExtResource("33_062l0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket19"]
+shape = SubResource("BoxShape3D_cyh5n")
+
+[node name="Picket20" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.188797, 0, 18.027256)
+
+[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket20" instance=ExtResource("33_062l0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket20"]
+shape = SubResource("BoxShape3D_cyh5n")
+
+[node name="Marker3D" type="Marker3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets"]
+
+[node name="Stage3Floor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.861, 0, 15.38)
+visible = false
+
+[node name="Terrain" type="CSGCombiner3D" parent="Stage3Floor" groups=["trench"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+material_override = ExtResource("5_4o0cy")
+use_collision = true
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Stage3Floor/Terrain"]
+mesh = SubResource("BoxMesh_luako")
+
+[node name="GoalPit" type="CSGCombiner3D" parent="Stage3Floor/Terrain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2461443, 0.6, 11.048694)
+operation = 2
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Stage3Floor/Terrain/GoalPit"]
+transform = Transform3D(0.9659258, 0, 0.25881904, 0, 1, 0, -0.25881904, 0, 0.9659258, 0, 0.4600103, 0)
+radius = 5.0
+sides = 12
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Stage3Floor/Terrain/GoalPit"]
+transform = Transform3D(0.9238795, 0, 0.38268346, 0, 1, 0, -0.38268346, 0, 0.9238795, 0, 0.4600103, 0)
+operation = 2
+radius = 1.0
+sides = 16
+
+[node name="Stage3Subtract" type="CSGCombiner3D" parent="Stage3Floor/Terrain"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 visible = false
 operation = 2
 metadata/_edit_lock_ = true
 
-[node name="internalsquare" type="CSGBox3D" parent="GroundFloor/Terrain/Stage3Subtract"]
+[node name="internalsquare" type="CSGBox3D" parent="Stage3Floor/Terrain/Stage3Subtract"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13444924, 0, -6.1656494)
 size = Vector3(0.35, 1, 12.450722)
 metadata/_edit_lock_ = true
 
-[node name="internalsquare3" type="CSGBox3D" parent="GroundFloor/Terrain/Stage3Subtract"]
+[node name="internalsquare3" type="CSGBox3D" parent="Stage3Floor/Terrain/Stage3Subtract"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13444924, 0, 8.095206)
 size = Vector3(0.35, 1, 12.333759)
 metadata/_edit_lock_ = true
 
-[node name="internalsquare4" type="CSGBox3D" parent="GroundFloor/Terrain/Stage3Subtract"]
+[node name="internalsquare4" type="CSGBox3D" parent="Stage3Floor/Terrain/Stage3Subtract"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.408718, 0, 9.27864)
 size = Vector3(5.314331, 1, 0.35)
 metadata/_edit_lock_ = true
 
-[node name="internalsquare7" type="CSGBox3D" parent="GroundFloor/Terrain/Stage3Subtract"]
+[node name="internalsquare7" type="CSGBox3D" parent="Stage3Floor/Terrain/Stage3Subtract"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.408718, 0, 2.0565233)
 size = Vector3(5.314331, 1, 0.35)
 metadata/_edit_lock_ = true
 
-[node name="internalsquare8" type="CSGBox3D" parent="GroundFloor/Terrain/Stage3Subtract"]
+[node name="internalsquare8" type="CSGBox3D" parent="Stage3Floor/Terrain/Stage3Subtract"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.408718, 0, -7.003129)
 size = Vector3(5.314331, 1, 0.35)
 metadata/_edit_lock_ = true
 
-[node name="internalsquare9" type="CSGBox3D" parent="GroundFloor/Terrain/Stage3Subtract"]
+[node name="internalsquare9" type="CSGBox3D" parent="Stage3Floor/Terrain/Stage3Subtract"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.408718, 0, -12.305299)
 size = Vector3(5.314331, 1, 0.35)
 metadata/_edit_lock_ = true
 
-[node name="internalsquare10" type="CSGBox3D" parent="GroundFloor/Terrain/Stage3Subtract"]
+[node name="internalsquare10" type="CSGBox3D" parent="Stage3Floor/Terrain/Stage3Subtract"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.6998405, 0, -12.305299)
 size = Vector3(5.314331, 1, 0.35)
 metadata/_edit_lock_ = true
 
-[node name="internalsquare18" type="CSGBox3D" parent="GroundFloor/Terrain/Stage3Subtract"]
+[node name="internalsquare18" type="CSGBox3D" parent="Stage3Floor/Terrain/Stage3Subtract"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.56367105, 0, -12.305299)
 size = Vector3(5.314331, 1, 0.35)
 metadata/_edit_lock_ = true
 
-[node name="internalsquare11" type="CSGBox3D" parent="GroundFloor/Terrain/Stage3Subtract"]
+[node name="internalsquare11" type="CSGBox3D" parent="Stage3Floor/Terrain/Stage3Subtract"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.6998405, 0, -7.1755505)
 size = Vector3(5.314331, 1, 0.35)
 metadata/_edit_lock_ = true
 
-[node name="internalsquare12" type="CSGBox3D" parent="GroundFloor/Terrain/Stage3Subtract"]
+[node name="internalsquare12" type="CSGBox3D" parent="Stage3Floor/Terrain/Stage3Subtract"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.6998405, 0, -0.01769638)
 size = Vector3(5.314331, 1, 0.35)
 metadata/_edit_lock_ = true
 
-[node name="internalsquare14" type="CSGBox3D" parent="GroundFloor/Terrain/Stage3Subtract"]
+[node name="internalsquare14" type="CSGBox3D" parent="Stage3Floor/Terrain/Stage3Subtract"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.6998405, 0, 4.9656267)
 size = Vector3(5.314331, 1, 0.35)
 metadata/_edit_lock_ = true
 
-[node name="internalsquare15" type="CSGBox3D" parent="GroundFloor/Terrain/Stage3Subtract"]
+[node name="internalsquare15" type="CSGBox3D" parent="Stage3Floor/Terrain/Stage3Subtract"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.6998405, 0, 9.348783)
 size = Vector3(5.314331, 1, 0.35)
 metadata/_edit_lock_ = true
 
-[node name="internalsquare16" type="CSGBox3D" parent="GroundFloor/Terrain/Stage3Subtract"]
+[node name="internalsquare16" type="CSGBox3D" parent="Stage3Floor/Terrain/Stage3Subtract"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.6998405, 0, 14.027978)
 size = Vector3(5.314331, 1, 0.35)
 metadata/_edit_lock_ = true
 
-[node name="internalsquare17" type="CSGBox3D" parent="GroundFloor/Terrain/Stage3Subtract"]
+[node name="internalsquare17" type="CSGBox3D" parent="Stage3Floor/Terrain/Stage3Subtract"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.60036856, 0, 14.027978)
 size = Vector3(5.314331, 1, 0.35)
 metadata/_edit_lock_ = true
 
-[node name="internalsquare13" type="CSGBox3D" parent="GroundFloor/Terrain/Stage3Subtract"]
+[node name="internalsquare13" type="CSGBox3D" parent="Stage3Floor/Terrain/Stage3Subtract"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4928436, 0, -0.01769638)
 size = Vector3(5.314331, 1, 0.35)
 metadata/_edit_lock_ = true
 
-[node name="internalsquare2" type="CSGBox3D" parent="GroundFloor/Terrain/Stage3Subtract"]
+[node name="internalsquare2" type="CSGBox3D" parent="Stage3Floor/Terrain/Stage3Subtract"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9964373, 0, 0.92870045)
 size = Vector3(0.35, 1, 26.639423)
 metadata/_edit_lock_ = true
 
-[node name="internalsquare5" type="CSGBox3D" parent="GroundFloor/Terrain/Stage3Subtract"]
+[node name="internalsquare5" type="CSGBox3D" parent="Stage3Floor/Terrain/Stage3Subtract"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.9210587, 0, 0.92870045)
 size = Vector3(0.35, 1, 26.639423)
 metadata/_edit_lock_ = true
 
-[node name="internalsquare6" type="CSGBox3D" parent="GroundFloor/Terrain/Stage3Subtract"]
+[node name="internalsquare6" type="CSGBox3D" parent="Stage3Floor/Terrain/Stage3Subtract"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.1222916, 0, 0.92870045)
 size = Vector3(0.35, 1, 26.639423)
 metadata/_edit_lock_ = true
 
-[node name="externalsquare" type="CSGBox3D" parent="GroundFloor/Terrain/Stage3Subtract"]
+[node name="externalsquare" type="CSGBox3D" parent="Stage3Floor/Terrain/Stage3Subtract"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.028955, 0, 15.194978)
 size = Vector3(0.35, 1, 5.8149414)
 metadata/_edit_lock_ = true
 
-[node name="externalsquare4" type="CSGBox3D" parent="GroundFloor/Terrain/Stage3Subtract"]
+[node name="externalsquare4" type="CSGBox3D" parent="Stage3Floor/Terrain/Stage3Subtract"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7379704, 0, 16.096954)
 size = Vector3(0.35, 1, 4.0109863)
 metadata/_edit_lock_ = true
 
-[node name="externalsquare2" type="CSGBox3D" parent="GroundFloor/Terrain/Stage3Subtract"]
+[node name="externalsquare2" type="CSGBox3D" parent="Stage3Floor/Terrain/Stage3Subtract"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.266445, 0, 17.910934)
 size = Vector3(5.4869237, 1, 0.35)
 metadata/_edit_lock_ = true
 
-[node name="externalsquare3" type="CSGBox3D" parent="GroundFloor/Terrain/Stage3Subtract"]
+[node name="externalsquare3" type="CSGBox3D" parent="Stage3Floor/Terrain/Stage3Subtract"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.1425705, 0, 12.508378)
 size = Vector3(3.7346728, 1, 0.35)
 metadata/_edit_lock_ = true
 
-[node name="externalsquare5" type="CSGBox3D" parent="GroundFloor/Terrain/Stage3Subtract"]
+[node name="externalsquare5" type="CSGBox3D" parent="Stage3Floor/Terrain/Stage3Subtract"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.579054, 0, 15.194978)
 size = Vector3(0.35, 1, 5.8149414)
 metadata/_edit_lock_ = true
 
-[node name="externalsquare6" type="CSGBox3D" parent="GroundFloor/Terrain/Stage3Subtract"]
+[node name="externalsquare6" type="CSGBox3D" parent="Stage3Floor/Terrain/Stage3Subtract"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.3150997, 0, 16.096954)
 size = Vector3(0.35, 1, 4.0109863)
 metadata/_edit_lock_ = true
 
-[node name="externalsquare7" type="CSGBox3D" parent="GroundFloor/Terrain/Stage3Subtract"]
+[node name="externalsquare7" type="CSGBox3D" parent="Stage3Floor/Terrain/Stage3Subtract"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.0652905, 0, 17.910934)
 size = Vector3(5.4869237, 1, 0.35)
 metadata/_edit_lock_ = true
 
-[node name="externalsquare8" type="CSGBox3D" parent="GroundFloor/Terrain/Stage3Subtract"]
+[node name="externalsquare8" type="CSGBox3D" parent="Stage3Floor/Terrain/Stage3Subtract"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.827118, 0, 12.508378)
 size = Vector3(3.7346728, 1, 0.35)
 metadata/_edit_lock_ = true
 
-[node name="externalsquare9" type="CSGBox3D" parent="GroundFloor/Terrain/Stage3Subtract"]
+[node name="externalsquare9" type="CSGBox3D" parent="Stage3Floor/Terrain/Stage3Subtract"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.934078, 0, -13.287617)
 size = Vector3(0.35, 1, 5.8149414)
 metadata/_edit_lock_ = true
 
-[node name="externalsquare10" type="CSGBox3D" parent="GroundFloor/Terrain/Stage3Subtract"]
+[node name="externalsquare10" type="CSGBox3D" parent="Stage3Floor/Terrain/Stage3Subtract"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.643093, 0, -14.201165)
 size = Vector3(0.35, 1, 3.8980713)
 metadata/_edit_lock_ = true
 
-[node name="externalsquare11" type="CSGBox3D" parent="GroundFloor/Terrain/Stage3Subtract"]
+[node name="externalsquare11" type="CSGBox3D" parent="Stage3Floor/Terrain/Stage3Subtract"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.171568, 0, -15.942284)
 size = Vector3(5.4869237, 1, 0.35)
 metadata/_edit_lock_ = true
 
-[node name="externalsquare12" type="CSGBox3D" parent="GroundFloor/Terrain/Stage3Subtract"]
+[node name="externalsquare12" type="CSGBox3D" parent="Stage3Floor/Terrain/Stage3Subtract"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.047693, 0, -10.649307)
 size = Vector3(3.7346728, 1, 0.35)
 metadata/_edit_lock_ = true
 
-[node name="externalsquare13" type="CSGBox3D" parent="GroundFloor/Terrain/Stage3Subtract"]
+[node name="externalsquare13" type="CSGBox3D" parent="Stage3Floor/Terrain/Stage3Subtract"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.673931, 0, -13.287617)
 size = Vector3(0.35, 1, 5.8149414)
 metadata/_edit_lock_ = true
 
-[node name="externalsquare14" type="CSGBox3D" parent="GroundFloor/Terrain/Stage3Subtract"]
+[node name="externalsquare14" type="CSGBox3D" parent="Stage3Floor/Terrain/Stage3Subtract"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.409977, 0, -14.206292)
 size = Vector3(0.35, 1, 3.8878174)
 metadata/_edit_lock_ = true
 
-[node name="externalsquare15" type="CSGBox3D" parent="GroundFloor/Terrain/Stage3Subtract"]
+[node name="externalsquare15" type="CSGBox3D" parent="Stage3Floor/Terrain/Stage3Subtract"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.1601677, 0, -15.942284)
 size = Vector3(5.4869237, 1, 0.35)
 metadata/_edit_lock_ = true
 
-[node name="externalsquare16" type="CSGBox3D" parent="GroundFloor/Terrain/Stage3Subtract"]
+[node name="externalsquare16" type="CSGBox3D" parent="Stage3Floor/Terrain/Stage3Subtract"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.921995, 0, -10.649307)
 size = Vector3(3.7346728, 1, 0.35)
 metadata/_edit_lock_ = true
 
-[node name="KillerArea3D" type="Area3D" parent="." groups=["lava"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.49831676, 0.085779905, 26.36217)
-collision_layer = 3
-script = ExtResource("23_bf4tx")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="KillerArea3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10700035, -0.4322815, 0.08699989)
-shape = SubResource("CylinderShape3D_21mah")
-debug_color = Color(0.9867151, 0, 0.045950208, 1)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="KillerArea3D/CollisionShape3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.034876347, 0)
-mesh = SubResource("PlaneMesh_lxpnk")
+[editable path="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket/Picket1"]

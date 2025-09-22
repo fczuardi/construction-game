@@ -5,6 +5,8 @@ extends Node3D
 ## It renders motion, play animations.
 
 @export var animation_tree: AnimationTree
+@export var map_mesh: MeshInstance3D
+@export var map_viewport: SubViewport
 
 # --- Tuning 
 @export_group("Speed Bands")
@@ -125,6 +127,10 @@ func _ready() -> void:
     #for p in animation_tree.get_property_list():
         #print(p.name)
 
+func apply_map_texture():
+    var material = StandardMaterial3D.new()
+    material.albedo_texture = map_viewport.get_texture()
+    map_mesh.set_surface_override_material(0, material)
 
 # ---------------- Public API (reactive) ----------------
 
@@ -137,6 +143,7 @@ func reset_to_start() -> void:
     _pending_stumble = 0
     animation_tree[MOVEMENT_EVENT_ONESHOT_PATH] = AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT
     animation_tree[UPPER_BODY_EVENT_ONESHOT_PATH] = AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT
+    apply_map_texture()
 
 ## Called every physics tick from PlayerRunner
 func update_motion(velocity: Vector3, on_floor: bool) -> void:

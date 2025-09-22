@@ -1,7 +1,7 @@
 [gd_scene load_steps=28 format=3 uid="uid://cwo6mh160oyym"]
 
 [ext_resource type="Texture2D" uid="uid://c3ggid41yoxw5" path="res://imports/textures/Maryborough Courthouse/ground-floor_640x1024.jpg" id="1_hui57"]
-[ext_resource type="Script" uid="uid://vf6f0by61bt4" path="res://lib/PlayerVisuals2/stage_map.gd" id="1_meksb"]
+[ext_resource type="Script" uid="uid://vf6f0by61bt4" path="res://lib/maps/stage_map.gd" id="1_meksb"]
 [ext_resource type="Texture2D" uid="uid://cpst1x05ne48g" path="res://imports/icons/noun_project/noun-level-6853002_600px.png" id="2_hui57"]
 [ext_resource type="Script" uid="uid://dcste88fnub5m" path="res://lib/PlayerVisuals2/map_sticker.gd" id="2_s7gsi"]
 [ext_resource type="PackedScene" uid="uid://0a2pm7msnmkk" path="res://lib/CollectiblesStage1/Level_CT1.tscn" id="3_e3g3w"]

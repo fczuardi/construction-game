@@ -119,17 +119,19 @@ Copyright Fabricio Campos Zuardi - 2025 - 2025
         - Author: [LowPolyAssets](https://lowpolyassets.itch.io/)
         - License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/)
 
-### Supportes / Playtest
+### Supportes / Friends / Playtest
 
 - Juliana
 - ([Cafepivara](https://itch.io/c/6345901/cafepivara)) Lucas, Marcelo
 - ([Weplex](https://weplex.com.br/)) Taboca
 - ([IAM Founder](https://iamfounder.com.br/)) Thiago, Rafael, Isa, Nelsinho
+- (Sexta Light) Maristela, Marcelo Prataviera, Andréia
 - ([Palma Labs](https://www.linkedin.com/company/palmalabs/)) Emilio
 - ([fullbragger](https://linktr.ee/fullbragger)) Braga
-- Mauricio, Renan, Adriano
+- (Slowlearners) Mauricio, Renan, Adriano
 - ([Casa21](https://vinteum.org/)) UlisFlavio, Joaozinho, Leal, Lucas, Edil, Hiro
 - Bruno Fabbri, Rafael Teizen
+- Tatuí, Zóide
 
 ### Free Software
 
