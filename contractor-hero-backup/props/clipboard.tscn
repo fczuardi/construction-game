@@ -1,5 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://drdi4jmb1rxo8"]
-
-[ext_resource type="PackedScene" uid="uid://du7o2n62xwck7" path="res://construction_pack/Clipboard.fbx" id="1_uobdm"]
-
-[node name="Clipboard" instance=ExtResource("1_uobdm")]

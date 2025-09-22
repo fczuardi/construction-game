@@ -1,7 +1,0 @@
-[gd_resource type="PhysicalSkyMaterial" format=3 uid="uid://d1lyb8ebcrrfp"]
-
-[resource]
-rayleigh_color = Color(0.2144, 0.320707, 0.67, 1)
-turbidity = 5.0
-sun_disk_scale = 20.0
-ground_color = Color(0.4, 0.229667, 0.108, 1)

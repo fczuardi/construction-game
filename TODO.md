@@ -1,5 +1,10 @@
 ## Ongoing
 
+- stage clear pause
+  - different messages depending on the collection of paper
+    - with = stage clear
+    - without = stage complete
+- stage clear buttons: restart or next stage
 
 ## Next steps
 

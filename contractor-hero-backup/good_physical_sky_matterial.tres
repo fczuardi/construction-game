@@ -1,7 +1,0 @@
-[gd_resource type="PhysicalSkyMaterial" format=3 uid="uid://dlgjymoa6atvb"]
-
-[resource]
-rayleigh_coefficient = 12.05
-mie_coefficient = 0.048
-mie_eccentricity = 0.97
-ground_color = Color(0.37, 0.218485, 0.0333, 1)

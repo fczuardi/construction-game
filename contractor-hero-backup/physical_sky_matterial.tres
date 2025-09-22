@@ -1,6 +1,0 @@
-[gd_resource type="PhysicalSkyMaterial" format=3 uid="uid://by68nv66rwywy"]
-
-[resource]
-sun_disk_scale = 60.0
-ground_color = Color(0.37, 0.218485, 0.0333, 1)
-energy_multiplier = 5.0

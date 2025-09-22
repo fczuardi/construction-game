@@ -24,7 +24,6 @@ EventBus="*res://lib/autoload/event_bus.gd"
 
 window/size/viewport_width=540
 window/size/viewport_height=1200
-window/size/initial_position_type=3
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 window/handheld/orientation=1
