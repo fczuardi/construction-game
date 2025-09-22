@@ -64,6 +64,7 @@
 - Zoide notou que a caminhada do demo 1 era mais folgadona
 
 ## Done
+- [x] stage 2 spray lines
 - [x] stage 2 start
 - [x] stage 1 message
 - [x] you died UI

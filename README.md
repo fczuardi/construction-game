@@ -132,6 +132,8 @@ Copyright Fabricio Campos Zuardi - 2025 - 2025
 - ([Casa21](https://vinteum.org/)) UlisFlavio, Joaozinho, Leal, Lucas, Edil, Hiro
 - Bruno Fabbri, Rafael Teizen
 - Tatuí, Zóide
+- Kenzo, Maria Carolina, João Lucas, Ivan, Antônio, Márcia
+
 
 ### Free Software
 
@@ -153,6 +155,7 @@ Copyright Fabricio Campos Zuardi - 2025 - 2025
 - [JR CONSTRUÇÃO](https://www.youtube.com/c/JRConstru%C3%A7%C3%A3o)
 - [Essential Craftsman](https://www.youtube.com/@essentialcraftsman)
 - [Perkins Builder Brothers](https://www.youtube.com/@PerkinsBuilderBrothers)
+- [Build Better Things](https://www.youtube.com/@build-better-things)
 
 -----
 

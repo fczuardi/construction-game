@@ -19,7 +19,7 @@ extends Node
 
 @export var slowmo_scale := 0.25  # 25% speed
 
-@export var _current_stage: int = 1
+@export var _current_stage: int = 2
 
 func _unhandled_input(e):
     if e.is_action_pressed("debug_slowmo"):   Engine.time_scale = slowmo_scale

@@ -30,8 +30,8 @@
 [ext_resource type="Texture2D" uid="uid://sx8qtii0ky3f" path="res://imports/textures/brown_mud_03_1k.blend/textures/brown_mud_03_nor_gl_512.png" id="25_21mah"]
 [ext_resource type="Texture2D" uid="uid://bv7a2j3ainyra" path="res://imports/textures/brown_mud_03_1k.blend/textures/brown_mud_03_ao_1k.png" id="26_5fh2d"]
 [ext_resource type="Script" uid="uid://cojxx34ue7crs" path="res://lib/ShowcaseHub/showcase_hub.gd" id="26_m3fvh"]
-[ext_resource type="Texture2D" uid="uid://dkde8qkekm3f6" path="res://imports/textures/Maryborough Courthouse/ground-floor_walls_spray1.png" id="27_tqxv5"]
 [ext_resource type="Texture2D" uid="uid://b12f1610ujfec" path="res://imports/textures/brown_mud_03_1k.blend/textures/brown_mud_03_rough_1k.png" id="28_m3fvh"]
+[ext_resource type="Texture2D" uid="uid://bl7sehycex2hp" path="res://imports/textures/Maryborough Courthouse/ground-floor_walls_spray_transparent2.png" id="32_062l0"]
 [ext_resource type="PackedScene" uid="uid://ftnqkwec5k8s" path="res://imports/models/scketchfab/6tmd_modeling/Picket1.glb" id="33_062l0"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2w0o7"]
@@ -106,8 +106,8 @@ size = Vector2(10, 10)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cyh5n"]
 transparency = 1
-albedo_color = Color(1, 0.1833188, 0.22025567, 1)
-albedo_texture = ExtResource("27_tqxv5")
+albedo_color = Color(0.972549, 0.4, 0.14117648, 1)
+albedo_texture = ExtResource("32_062l0")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_xsuks"]
 material = SubResource("StandardMaterial3D_cyh5n")
@@ -597,7 +597,7 @@ mesh = SubResource("PlaneMesh_lxpnk")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.861, 0, 15.38)
 
 [node name="Reference texture2" type="MeshInstance3D" parent="Stage2Ground/Stage2Floor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.861, 0.1, -15.38)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.861, 0.01, -15.38)
 mesh = SubResource("PlaneMesh_xsuks")
 skeleton = NodePath("../../../Stage1Ground/Stage1Floor")
 
