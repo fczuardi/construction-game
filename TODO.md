@@ -1,40 +1,37 @@
+## Current Single Task
+- stage 2 items: (set out, groundwork, trenches)
+    - [ ] wood planks
+    - [ ] cartwheel
+    - [ ] nike (hidden/power-up sprint)
+
 ## Ongoing
 
-- stage 2 item: new map
-    (only needed if toilet paper missed)
+- [ ] stage 2 items: (set out, groundwork, trenches)
+    - [ ] ? pickaxe
+    - [ ] ? drill
+    - [ ] new map (conditioned to no paper on 1st stage)
+    - [ ] helmet (optional/wearable)
 
-- stage 2 items: (set out, groundwork, trenches)
-    - spade / shovel
-    - wood planks
-    - cartwheel
-    - pickaxe
-    - helmet
-    - skip
-        - nike (sprint)
+- [ ] stage 2 obstacles:
+    - [ ] skip
+    - [ ] stakes, make collision shape a cilinder
+
+
+## Backlog
+
+- credits fix:
+    - missing mud texture link
+    - credit color palletes?
+    - sites: 
+        - github.com
+        - tldraw.com
+
 - stage 3 items: (foundation, pouring)
     - cement bag
     - concrete mixer
     - gravel
 
     
-- stage clear pause
-  - different messages depending on the collection of paper
-    - with = stage clear
-    - without = stage complete
-- stage clear buttons: restart or next stage
-
-## Next steps
-
-- stage clear UI
-    - see map / share map
-    - time
-    - counters:
-        - steps
-        - turns
-        - stumbles
-        - hidden items:
-            - bitcoin
-            - toilet paper
 - audio feedback on "pingela" unlocked
 - different step sfx over pallet bridge
 - audio feedback on turn button press vs click
@@ -42,11 +39,24 @@
 - sfx for splashing on the mud
 - [bug] first particle small freeze on html
 
-## Nice-to-have + ideas
-
-
 
 ## Feedbacks:
+
+
+---------------------------------------------------------------------------------------------------
+
+sept 23
+
+- Marcelo:
+    - WASD support
+    - pause menu should have a "Restart" button 
+    - stage 2 pickets should use cilinders for collision shape
+    - display map on death
+    - ability to turn off camera bobby on run as a setting
+
+---------------------------------------------------------------------------------------------------
+
+sept 16
 
 - "run change the direction"
     - Isa didnt understood that run was a toggle and that there were 2 different camera angles
@@ -79,8 +89,22 @@
     - "quebrou faz mas grosso", lema de uma industria de tratores
 
 - Zoide notou que a caminhada do demo 1 era mais folgadona
+--------------------------------------------------------------------------------------------------
+
 
 ## Done
+- [x] pickets adjust
+- [x] spade / shovel
+- [x] stage clear pause
+  - [x] different messages depending on the collection of paper
+    - [x] with = stage clear
+    - [x] without = stage complete
+- [x] stage clear buttons: restart or next stage
+- [x] stage clear UI
+    - [x] see map
+    - [x] time
+    - [x] hidden items:
+    - [x] toilet paper on/off changes the title and background
 - [x] stage 2 spray lines
 - [x] stage 2 start
 - [x] stage 1 message

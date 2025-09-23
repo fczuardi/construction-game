@@ -50,6 +50,7 @@ func _ready() -> void:
         countdown.timeout.connect(_on_timeout)
     EventBus.global_next_stage.connect(_on_next_stage)
     EventBus.global_restart_stage.connect(_on_restart_stage)
+    EventBus.item_collected.connect(_on_item_collected)    
     _on_restart()
 
 ## unwire
@@ -67,6 +68,13 @@ func _exit_tree() -> void:
     if countdown:
         countdown.timeout.disconnect(_on_timeout)
 
+func _on_item_collected(item: Collectible):
+    if item.id == &"sneakers":
+        character_visuals.set_sneakers_enabled(true)
+        if character_visuals.is_run_enabled():
+            character_body.set_speed_mode("run")
+
+    
 var _alive = true
 var _finished_level = false
 
@@ -118,6 +126,7 @@ func _on_restart():
     controls.toggle_input(PlayerControls.Side.SOUTH, false)
     countdown.start()
     countdown.paused = false
+    character_visuals.set_sneakers_enabled(false)
     _on_size_changed()
     item_spawner.map_scene = load("res://lib/maps/stage%s_map.tscn" % str(_current_stage))
     if start_title:
@@ -187,7 +196,10 @@ func _on_controller_input(side: int, event: int):
                 elif event == controls.Event.UP:  character_body.set_turn_axis(0.0)
             controls.Side.NORTH:
                 if event == controls.Event.TOGGLE_ON:
-                    character_body.set_speed_mode("jog")
+                    if character_visuals.is_sneakers_enabled():
+                        character_body.set_speed_mode("run")
+                    else:
+                        character_body.set_speed_mode("jog")
                 else:
                     character_body.set_speed_mode("walk")
     

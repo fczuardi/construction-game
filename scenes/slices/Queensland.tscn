@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://giqxuc0gq0fk"]
+[gd_scene load_steps=56 format=3 uid="uid://giqxuc0gq0fk"]
 
 [ext_resource type="Script" uid="uid://cq16dqdvi8ncx" path="res://slices/queensland.gd" id="1_glf58"]
 [ext_resource type="Script" uid="uid://bly6ty8fepn6x" path="res://lib/Wiring/wiring.gd" id="2_5p6w5"]
@@ -35,7 +35,7 @@
 [ext_resource type="Script" uid="uid://cojxx34ue7crs" path="res://lib/ShowcaseHub/showcase_hub.gd" id="26_m3fvh"]
 [ext_resource type="Texture2D" uid="uid://b12f1610ujfec" path="res://imports/textures/brown_mud_03_1k.blend/textures/brown_mud_03_rough_1k.png" id="28_m3fvh"]
 [ext_resource type="Texture2D" uid="uid://bl7sehycex2hp" path="res://imports/textures/Maryborough Courthouse/ground-floor_walls_spray_transparent2.png" id="32_062l0"]
-[ext_resource type="PackedScene" uid="uid://ftnqkwec5k8s" path="res://imports/models/scketchfab/6tmd_modeling/Picket1.glb" id="33_062l0"]
+[ext_resource type="PackedScene" uid="uid://0doy2wond1wo" path="res://lib/Obstacles/Picket.tscn" id="36_v5wek"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2w0o7"]
 size = Vector3(0.6, 1, 0.1)
@@ -143,9 +143,6 @@ material = SubResource("StandardMaterial3D_cyh5n")
 size = Vector2(26.25, 42)
 center_offset = Vector3(-0.861, 0, 15.38)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_cyh5n"]
-size = Vector3(0.1, 1.3, 0.1)
-
 [node name="Queensland" type="Node3D"]
 script = ExtResource("1_glf58")
 
@@ -186,9 +183,11 @@ game_over_message = NodePath("../HUD/MarginContainer/Game Over Message")
 game_over_credits = NodePath("../HUD/MarginContainer/Game Over Credits")
 first_stage_message = NodePath("../HUD/MarginContainer/1st Stage Message")
 second_stage_message = NodePath("../HUD/MarginContainer/2ndt Stage Message")
+_current_stage = 2
 
 [node name="PlayerRunner" parent="." node_paths=PackedStringArray("visuals") instance=ExtResource("2_luako")]
 visuals = NodePath("PlayerVisuals2")
+metadata/_edit_lock_ = true
 
 [node name="PlayerVisuals2" parent="PlayerRunner" node_paths=PackedStringArray("clear_stage_bg") instance=ExtResource("4_4o0cy")]
 clear_stage_bg = NodePath("../../HUD/MarginContainer/Stage Clear/MarginContainer/VBoxContainer/StageClearBgTexture")
@@ -197,6 +196,7 @@ jog_enter = 1.9
 jog_exit = 1.6
 sprint_enter = 3.5
 sprint_exit = 3.2
+metadata/_edit_lock_ = true
 
 [node name="FPCams" type="Node3D" parent="PlayerRunner/PlayerVisuals2"]
 
@@ -218,6 +218,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 script = ExtResource("14_4hk5t")
 visuals = NodePath("..")
 runner = NodePath("../..")
+metadata/_edit_lock_ = true
 
 [node name="ShapeForward" type="ShapeCast3D" parent="PlayerRunner/PlayerVisuals2/CollectiblePointer"]
 unique_name_in_owner = true
@@ -236,6 +237,7 @@ target_position = Vector3(0, 0, -1)
 collision_mask = 3
 collide_with_areas = true
 collide_with_bodies = false
+metadata/_edit_lock_ = true
 
 [node name="Cameras" type="Node3D" parent="PlayerRunner"]
 unique_name_in_owner = true
@@ -245,20 +247,25 @@ blend_time = 0.25
 extra_rigs = Array[NodePath]([NodePath("../PlayerVisuals2/FPCams/ClipboardWalkCam"), NodePath("../PlayerVisuals2/FPCams/ClipboardRunCam"), NodePath("../PlayerVisuals2/FPCams/FallCam"), NodePath("../PlayerVisuals2/FPCams/GoalCam")])
 wiggle_freq_hz = 1.2
 wiggle_roll_deg = 1.2
+metadata/_edit_lock_ = true
 
 [node name="OutputCamera" type="Camera3D" parent="PlayerRunner/Cameras"]
-transform = Transform3D(-1, 1.2166894e-08, -8.657199e-08, 0, 0.9902681, 0.13917305, 8.742278e-08, 0.13917305, -0.9902681, 0, 2.5, -4.999998)
+transform = Transform3D(-1, 1.2166891e-08, -8.657199e-08, 0, 0.9902681, 0.139173, 8.742278e-08, 0.139173, -0.9902681, 0, 1.004, -3.999998)
 current = true
+metadata/_edit_lock_ = true
 
 [node name="ShoulderPivot" type="Node3D" parent="PlayerRunner/Cameras"]
 script = ExtResource("19_gx55f")
+metadata/_edit_lock_ = true
 
 [node name="ShoulderWalkCam" type="Camera3D" parent="PlayerRunner/Cameras/ShoulderPivot"]
 transform = Transform3D(-1, 1.21668915e-08, -8.657199e-08, 0, 0.9902681, 0.13917302, 8.742278e-08, 0.13917302, -0.9902681, 0, 1.004, -3.9999983)
+metadata/_edit_lock_ = true
 
 [node name="ShoulderRunCam" type="Camera3D" parent="PlayerRunner/Cameras/ShoulderPivot" groups=["run_cam"]]
 transform = Transform3D(-1, 1.2166895e-08, -8.657199e-08, 0, 0.9902681, 0.13917306, 8.742278e-08, 0.13917306, -0.9902681, 0, 2.5, -4.9999986)
 current = true
+metadata/_edit_lock_ = true
 
 [node name="Draft" type="Node3D" parent="."]
 
@@ -655,7 +662,7 @@ Every review means a lot to me. Oh, and I am open to freelance work, I am a cont
 
 I don't consider myself a \"solo-dev\" because I am on top of the shoulders of giants, this work is only possible due to the Free Software movement and Free Culture as a whole.
 
-There are at least [b]53 other amzing humans[/b] that contributed with their time and their art to this game and I am incredibly thankful to every one of the people below:
+There are at least [b]57 other amazing humans[/b] that contributed with their time and their art to this game and I am incredibly thankful to every one of the people below:
 
 [b]Credits & Acknoledgements[/b]
 
@@ -675,6 +682,10 @@ There are at least [b]53 other amzing humans[/b] that contributed with their tim
 
 - [url=https://sketchfab.com/3d-models/winter-hat-637a36cb74204c719883af7feb4b7c28]Winter Hat[/url]
   - Author: [url=https://sketchfab.com/stubbornfunkydonkey]StubbornFunkyDonkey[/url]
+  - License: [url=https://creativecommons.org/licenses/by/4.0/]Creative Commons Attribution 4.0 International[/url]
+
+- [url=https://sketchfab.com/3d-models/zapatilla-asics-gel-nimbus-23-low-poly-1d4a1f38b12543b595566e3f410afab4]Zapatilla Asics Gel-Nimbus 23 (Low Poly)[/url]
+  - Author: [url=https://sketchfab.com/tfernndez]Tomás Fernández Castillo[/url]
   - License: [url=https://creativecommons.org/licenses/by/4.0/]Creative Commons Attribution 4.0 International[/url]
 
 [b]Textures[/b]
@@ -722,6 +733,11 @@ There are at least [b]53 other amzing humans[/b] that contributed with their tim
   [url=https://creativecommons.org/publicdomain/zero/1.0/]CC0 1.0[/url]  
   [url=http://creativecommons.org/licenses/by/4.0/]CC BY 4.0[/url]
 
+- Spade from [url=https://aligned-games.itch.io/realistic-modern-construction-site-asset-package]Realistic Modern Construction Site Asset Package[/url]
+  Author: [url=https://aligned-games.itch.io/]Aligned Games[/url]
+  License: Unknown, paid asset pack
+
+
 [b]Icons[/b]
 
 - [url=https://remixicon.com/]Remix Icon[/url]  
@@ -729,7 +745,7 @@ There are at least [b]53 other amzing humans[/b] that contributed with their tim
   License: [url=https://github.com/Remix-Design/remixicon/blob/master/License]Apache 2.0[/url]  
   Items: treasure-map-line, ri-run-line, ri-menu-line, circle-fill, navigation-fill
 
-- Noun Project:  
+- [b]Noun Project[/b]:  
   [url=https://thenounproject.com/icon/level-6853002/]Level by INA[/url] (CC BY 3.0)  
   [url=https://thenounproject.com/icon/pencil-8001529/]Pencil by LUTFI GANI AL ACHMAD[/url] (CC BY 3.0)  
   [url=https://thenounproject.com/icon/measuring-tape-7819005/]Measuring Tape by Firza Alamsyah[/url] (CC BY 3.0)  
@@ -738,6 +754,8 @@ There are at least [b]53 other amzing humans[/b] that contributed with their tim
   [url=https://thenounproject.com/icon/lock-7854371/]Lock by Sita Raisita[/url] (CC BY 3.0)  
   [url=https://thenounproject.com/icon/tissue-paper-6932814/]Tissue Paper by Zach Hainsworth[/url] (CC BY 3.0)  
   [url=https://thenounproject.com/icon/toilet-151638/]Toilet by Wilson Joseph[/url] (CC BY 3.0)
+  [url=https://thenounproject.com/icon/shovel-7837473/]Shovel by Marco Livolsi[/url] (CC BY 3.0)
+  [url=https://thenounproject.com/icon/running-shoes-7597877/]running shoes by Ayub Irawan[/url] (CC BY 3.0)
 
 [b]Scenery / Obstacles[/b]
 
@@ -856,12 +874,15 @@ world_C = NodePath("WorldC")
 
 [node name="WorldA" type="Marker3D" parent="ItemSpawnerFromMap"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.96, 0, -5.57)
+metadata/_edit_lock_ = true
 
 [node name="WorldB" type="Marker3D" parent="ItemSpawnerFromMap"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.31, 0, -5.57)
+metadata/_edit_lock_ = true
 
 [node name="WorldC" type="Marker3D" parent="ItemSpawnerFromMap"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.96, 0, 36.43)
+metadata/_edit_lock_ = true
 
 [node name="Stage1Ground" type="Node3D" parent="."]
 visible = false
@@ -907,7 +928,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.034876347, 0)
 mesh = SubResource("PlaneMesh_lxpnk")
 
 [node name="Stage2Ground" type="Node3D" parent="."]
-visible = false
 
 [node name="Stage2Floor" type="StaticBody3D" parent="Stage2Ground" groups=["stage2"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.861, 0, 15.38)
@@ -927,347 +947,125 @@ mesh = SubResource("BoxMesh_luako")
 
 [node name="Perimeter Pickets" type="Node3D" parent="Stage2Ground/Stage2Floor"]
 
-[node name="Picket23" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.691515, 0, -18.23054)
+[node name="Height" type="Node3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets"]
 
-[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket23" instance=ExtResource("33_062l0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
+[node name="1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Height" instance=ExtResource("36_v5wek")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.7, 0, -16.145)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket23"]
-shape = SubResource("BoxShape3D_cyh5n")
+[node name="2" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Height" instance=ExtResource("36_v5wek")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.7, 0, -12.32362)
 
-[node name="Picket25" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.691515, 0, 20.163288)
+[node name="3" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Height" instance=ExtResource("36_v5wek")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.7, 0, -10.782133)
 
-[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket25" instance=ExtResource("33_062l0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
+[node name="4" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Height" instance=ExtResource("36_v5wek")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.7, 0, -7.199628)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket25"]
-shape = SubResource("BoxShape3D_cyh5n")
+[node name="5" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Height" instance=ExtResource("36_v5wek")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.7, 0, -0.20772362)
 
-[node name="Picket27" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1463556, 0, -18.23054)
+[node name="6" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Height" instance=ExtResource("36_v5wek")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.7, 0, 1.8254423)
 
-[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket27" instance=ExtResource("33_062l0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
+[node name="7" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Height" instance=ExtResource("36_v5wek")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.7, 0, 4.7556467)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket27"]
-shape = SubResource("BoxShape3D_cyh5n")
+[node name="8" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Height" instance=ExtResource("36_v5wek")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.7, 0, 9.083749)
 
-[node name="Picket28" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1463556, 0, 20.163288)
+[node name="9" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Height" instance=ExtResource("36_v5wek")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.7, 0, 12.29004)
 
-[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket28" instance=ExtResource("33_062l0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
+[node name="10" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Height" instance=ExtResource("36_v5wek")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.7, 0, 13.863576)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket28"]
-shape = SubResource("BoxShape3D_cyh5n")
+[node name="11" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Height" instance=ExtResource("36_v5wek")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.7, 0, 17.556236)
 
-[node name="Picket39" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.4360847, 0, -18.23054)
+[node name="Height\'" type="Node3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Height"]
 
-[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket39" instance=ExtResource("33_062l0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
+[node name="1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Height/Height\'" instance=ExtResource("36_v5wek")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.45, 0, -16.145)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket39"]
-shape = SubResource("BoxShape3D_cyh5n")
+[node name="2" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Height/Height\'" instance=ExtResource("36_v5wek")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.45, 0, -12.32362)
 
-[node name="Picket40" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.4360847, 0, 20.163288)
+[node name="3" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Height/Height\'" instance=ExtResource("36_v5wek")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.45, 0, -10.782133)
 
-[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket40" instance=ExtResource("33_062l0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
+[node name="4" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Height/Height\'" instance=ExtResource("36_v5wek")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.45, 0, -7.199628)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket40"]
-shape = SubResource("BoxShape3D_cyh5n")
+[node name="5" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Height/Height\'" instance=ExtResource("36_v5wek")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.45, 0, -0.20772362)
 
-[node name="Picket29" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.115715444, 0, -18.23054)
+[node name="6" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Height/Height\'" instance=ExtResource("36_v5wek")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.45, 0, 1.8254423)
 
-[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket29" instance=ExtResource("33_062l0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
+[node name="7" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Height/Height\'" instance=ExtResource("36_v5wek")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.45, 0, 4.7556467)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket29"]
-shape = SubResource("BoxShape3D_cyh5n")
+[node name="8" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Height/Height\'" instance=ExtResource("36_v5wek")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.45, 0, 9.083749)
 
-[node name="Picket30" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.115715444, 0, 20.163288)
+[node name="9" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Height/Height\'" instance=ExtResource("36_v5wek")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.45, 0, 12.29004)
 
-[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket30" instance=ExtResource("33_062l0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
+[node name="10" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Height/Height\'" instance=ExtResource("36_v5wek")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.45, 0, 13.863576)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket30"]
-shape = SubResource("BoxShape3D_cyh5n")
+[node name="11" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Height/Height\'" instance=ExtResource("36_v5wek")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.45, 0, 17.556236)
 
-[node name="Picket31" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0037265, 0, -18.23054)
+[node name="Width" type="Node3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets"]
 
-[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket31" instance=ExtResource("33_062l0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
+[node name="A" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Width" instance=ExtResource("36_v5wek")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.440174, 0, -20)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket31"]
-shape = SubResource("BoxShape3D_cyh5n")
+[node name="B" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Width" instance=ExtResource("36_v5wek")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.71, 0, -20)
 
-[node name="Picket32" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0037265, 0, 20.163288)
+[node name="C" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Width" instance=ExtResource("36_v5wek")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.164773, 0, -20)
 
-[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket32" instance=ExtResource("33_062l0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
+[node name="D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Width" instance=ExtResource("36_v5wek")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3014168, 0, -20)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket32"]
-shape = SubResource("BoxShape3D_cyh5n")
+[node name="E" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Width" instance=ExtResource("36_v5wek")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1080358, 0, -20)
 
-[node name="Picket33" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.648595, 0, -18.23054)
+[node name="F" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Width" instance=ExtResource("36_v5wek")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.8121824, 0, -20)
 
-[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket33" instance=ExtResource("33_062l0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
+[node name="G" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Width" instance=ExtResource("36_v5wek")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.4095664, 0, -20)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket33"]
-shape = SubResource("BoxShape3D_cyh5n")
+[node name="H" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Width" instance=ExtResource("36_v5wek")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.099411, 0, -20)
 
-[node name="Picket34" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.648595, 0, 20.163288)
+[node name="A\'" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Width" instance=ExtResource("36_v5wek")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.440174, 0, 20.5)
 
-[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket34" instance=ExtResource("33_062l0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
+[node name="B\'" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Width" instance=ExtResource("36_v5wek")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.71, 0, 20.5)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket34"]
-shape = SubResource("BoxShape3D_cyh5n")
+[node name="C\'" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Width" instance=ExtResource("36_v5wek")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.164773, 0, 20.5)
 
-[node name="Picket35" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.246317, 0, -18.23054)
+[node name="D\'" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Width" instance=ExtResource("36_v5wek")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3014168, 0, 20.5)
 
-[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket35" instance=ExtResource("33_062l0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
+[node name="E\'" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Width" instance=ExtResource("36_v5wek")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1080358, 0, 20.5)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket35"]
-shape = SubResource("BoxShape3D_cyh5n")
+[node name="F\'" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Width" instance=ExtResource("36_v5wek")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.8121824, 0, 20.5)
 
-[node name="Picket36" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.246317, 0, 20.163288)
+[node name="G\'" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Width" instance=ExtResource("36_v5wek")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.4095664, 0, 20.5)
 
-[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket36" instance=ExtResource("33_062l0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket36"]
-shape = SubResource("BoxShape3D_cyh5n")
-
-[node name="Picket37" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.980256, 0, -18.23054)
-
-[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket37" instance=ExtResource("33_062l0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket37"]
-shape = SubResource("BoxShape3D_cyh5n")
-
-[node name="Picket38" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.980256, 0, 20.163288)
-
-[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket38" instance=ExtResource("33_062l0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket38"]
-shape = SubResource("BoxShape3D_cyh5n")
-
-[node name="Picket" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.613689, 0, -16.082115)
-
-[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket" instance=ExtResource("33_062l0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket"]
-shape = SubResource("BoxShape3D_cyh5n")
-
-[node name="Picket2" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.188797, 0, -16.082115)
-
-[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket2" instance=ExtResource("33_062l0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket2"]
-shape = SubResource("BoxShape3D_cyh5n")
-
-[node name="Picket21" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.613689, 0, -12.342872)
-
-[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket21" instance=ExtResource("33_062l0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket21"]
-shape = SubResource("BoxShape3D_cyh5n")
-
-[node name="Picket22" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.188797, 0, -12.342872)
-
-[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket22" instance=ExtResource("33_062l0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket22"]
-shape = SubResource("BoxShape3D_cyh5n")
-
-[node name="Picket3" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.613689, 0, -10.840407)
-
-[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket3" instance=ExtResource("33_062l0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket3"]
-shape = SubResource("BoxShape3D_cyh5n")
-
-[node name="Picket4" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.188797, 0, -10.840407)
-
-[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket4" instance=ExtResource("33_062l0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket4"]
-shape = SubResource("BoxShape3D_cyh5n")
-
-[node name="Picket5" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.613689, 0, -7.262619)
-
-[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket5" instance=ExtResource("33_062l0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket5"]
-shape = SubResource("BoxShape3D_cyh5n")
-
-[node name="Picket6" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.188797, 0, -7.262619)
-
-[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket6" instance=ExtResource("33_062l0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket6"]
-shape = SubResource("BoxShape3D_cyh5n")
-
-[node name="Picket7" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.613689, 0, -0.086854935)
-
-[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket7" instance=ExtResource("33_062l0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket7"]
-shape = SubResource("BoxShape3D_cyh5n")
-
-[node name="Picket8" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.188797, 0, -0.086854935)
-
-[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket8" instance=ExtResource("33_062l0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket8"]
-shape = SubResource("BoxShape3D_cyh5n")
-
-[node name="Picket9" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.613689, 0, 1.9062662)
-
-[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket9" instance=ExtResource("33_062l0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket9"]
-shape = SubResource("BoxShape3D_cyh5n")
-
-[node name="Picket10" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.188797, 0, 1.9062662)
-
-[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket10" instance=ExtResource("33_062l0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket10"]
-shape = SubResource("BoxShape3D_cyh5n")
-
-[node name="Picket11" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.613689, 0, 4.8191595)
-
-[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket11" instance=ExtResource("33_062l0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket11"]
-shape = SubResource("BoxShape3D_cyh5n")
-
-[node name="Picket12" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.188797, 0, 4.8191595)
-
-[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket12" instance=ExtResource("33_062l0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket12"]
-shape = SubResource("BoxShape3D_cyh5n")
-
-[node name="Picket13" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.613689, 0, 9.14788)
-
-[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket13" instance=ExtResource("33_062l0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket13"]
-shape = SubResource("BoxShape3D_cyh5n")
-
-[node name="Picket14" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.188797, 0, 9.14788)
-
-[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket14" instance=ExtResource("33_062l0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket14"]
-shape = SubResource("BoxShape3D_cyh5n")
-
-[node name="Picket15" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.613689, 0, 12.468314)
-
-[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket15" instance=ExtResource("33_062l0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket15"]
-shape = SubResource("BoxShape3D_cyh5n")
-
-[node name="Picket16" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.188797, 0, 12.468314)
-
-[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket16" instance=ExtResource("33_062l0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket16"]
-shape = SubResource("BoxShape3D_cyh5n")
-
-[node name="Picket17" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.613689, 0, 14.049598)
-
-[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket17" instance=ExtResource("33_062l0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket17"]
-shape = SubResource("BoxShape3D_cyh5n")
-
-[node name="Picket18" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.188797, 0, 14.049598)
-
-[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket18" instance=ExtResource("33_062l0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket18"]
-shape = SubResource("BoxShape3D_cyh5n")
-
-[node name="Picket19" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.613689, 0, 18.027256)
-
-[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket19" instance=ExtResource("33_062l0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket19"]
-shape = SubResource("BoxShape3D_cyh5n")
-
-[node name="Picket20" type="StaticBody3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets" groups=["picket"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.188797, 0, 18.027256)
-
-[node name="Picket1" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket20" instance=ExtResource("33_062l0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11900002, 0.07, -3.224)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket20"]
-shape = SubResource("BoxShape3D_cyh5n")
+[node name="H\'" parent="Stage2Ground/Stage2Floor/Perimeter Pickets/Width" instance=ExtResource("36_v5wek")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.099411, 0, 20.5)
 
 [node name="Marker3D" type="Marker3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets"]
 
@@ -1473,5 +1271,3 @@ metadata/_edit_lock_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.921995, 0, -10.649307)
 size = Vector3(3.7346728, 1, 0.35)
 metadata/_edit_lock_ = true
-
-[editable path="Stage2Ground/Stage2Floor/Perimeter Pickets/Picket/Picket1"]

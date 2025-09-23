@@ -31,6 +31,10 @@ Copyright Fabricio Campos Zuardi - 2025 - 2025
         - Author: [StubbornFunkyDonkey](https://sketchfab.com/stubbornfunkydonkey)
         - License: [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/)
 
+    - Sneakers from [Zapatilla Asics Gel-Nimbus 23 (Low Poly)](https://sketchfab.com/3d-models/zapatilla-asics-gel-nimbus-23-low-poly-1d4a1f38b12543b595566e3f410afab4)
+        - Author: [Tomás Fernández Castillo](https://sketchfab.com/tfernndez)
+        - License: [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/) 
+
 #### Textures
 
     - Ground Plan from [Architectural plan of the Public Offices and Court House, Maryborough, circa 1888](https://en.wikipedia.org/wiki/File:Architectural_plan_of_the_Public_Offices_and_Court_House,_Maryborough,_circa_1888.jpg)
@@ -75,6 +79,12 @@ Copyright Fabricio Campos Zuardi - 2025 - 2025
         - Licenses: 
             - [CC0 1.0 Universal (CC0 1.0) Public Domain Dedication](https://creativecommons.org/publicdomain/zero/1.0/)
             - [CC-BY-4.0](http://creativecommons.org/licenses/by/4.0/)
+
+    - Spade from [Realistic Modern Construction Site Asset Package](https://aligned-games.itch.io/realistic-modern-construction-site-asset-package)
+        - Author: [Aligned Games](https://aligned-games.itch.io/)
+        - License: Unknown, paid asset pack
+
+
 #### Icons
 
     - [Remix Icon](https://remixicon.com/)
@@ -111,6 +121,13 @@ Copyright Fabricio Campos Zuardi - 2025 - 2025
             - License: [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/)
         - [Toilet by Wilson Joseph](https://thenounproject.com/icon/toilet-151638/)
             - Author: [Wilson Joseph](https://www.tuktukdesign.com/)
+            - License: [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/)
+        - [Shovel by Marco Livolsi](https://thenounproject.com/icon/shovel-7837473/)
+        - Author: [Marco Livolsi](https://thenounproject.com/creator/marco.livolsi2014)
+            - License: [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/)
+
+        - [running shoes by Ayub Irawan](https://thenounproject.com/icon/running-shoes-7597877/)
+            - Author: [Ayub Irawan](https://thenounproject.com/creator/ayub12/)
             - License: [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/)
 
 #### Scenery / Obstacles

@@ -8,6 +8,8 @@ radius = 0.2
 
 [node name="Collectible" type="Area3D" groups=["collectible"]]
 script = ExtResource("1_nrl3h")
+id = &"drill"
+is_hidden = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_l14c5")

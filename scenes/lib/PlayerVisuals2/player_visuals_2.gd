@@ -115,6 +115,10 @@ var _pending_stumble: int = 0  # 0 none, 1 soft, 2 hard
 var _last_facing: float = 0.0
 var _stride_ref_speed: float = 0.85   # stride=1x at walk, replaced on update_motion with the new reference
 
+@onready var boots: MeshInstance3D = %Ch17_Boots
+@onready var boots_skin_left: BoneAttachment3D = %BootsSkinLeft
+@onready var boots_skin_right: BoneAttachment3D = %BootsSkinRight
+
 func _ready() -> void:
     assert(animation_tree)
     if !animation_tree:
@@ -212,6 +216,16 @@ func is_map_enabled() -> bool:
     var upper_on: bool = animation_tree[UPPER_BODY_BLEND_PATH] >= 0.5
     var map_base: bool = _last_upper_body_base == UpperBodyBase.MAP
     return upper_on && map_base
+
+func set_sneakers_enabled(on: bool):
+    if ! boots:
+        return
+    boots.visible = ! on
+    boots_skin_left.visible = on
+    boots_skin_right.visible =  on
+
+func is_sneakers_enabled() -> bool:
+    return boots_skin_right.visible
             
 func is_run_enabled() -> bool:
     return _last_base == MovementBase.JOG or _last_base == MovementBase.SPRINT

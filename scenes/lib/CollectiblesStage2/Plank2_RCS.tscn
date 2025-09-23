@@ -8,6 +8,9 @@ size = Vector3(0.2, 0.2, 2.4)
 
 [node name="Collectible" type="Area3D" groups=["collectible"]]
 script = ExtResource("1_v5ygs")
+id = &"plank"
+showcase_scale = 0.5
+is_hidden = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_j7jbp")
