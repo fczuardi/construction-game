@@ -17,7 +17,7 @@ func _ready() -> void:
     if not EventBus.item_collected.is_connected(_on_item_collected):
         EventBus.item_collected.connect(_on_item_collected)
 
-func _on_item_collected(_id: StringName, _points: int, world_pos: Vector3) -> void:
+func _on_item_collected(item: Collectible) -> void:
     if sounds.is_empty():
         return
 
@@ -29,7 +29,7 @@ func _on_item_collected(_id: StringName, _points: int, world_pos: Vector3) -> vo
         add_child(p)
         p.bus = bus
         p.stream = stream
-        p.global_position = world_pos
+        p.global_position = item.global_position
         p.max_distance = 25.0
         p.play()
         p.finished.connect(p.queue_free)

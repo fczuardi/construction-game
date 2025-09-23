@@ -41,6 +41,7 @@ func _ready() -> void:
     category_icon = _category_icon
     slice_title_label.text = main_title
     _register_items_visibility()
+    EventBus.stage_completed.connect(_on_stage_clear_toggled)
 
 ## Helpers
 var _visibility_before_hide: Dictionary[NodePath, bool] = {}
@@ -60,6 +61,11 @@ func _untoggle_items_visibility():
         if has_node(node_path):
             get_node(node_path).visible = _visibility_before_hide[node_path]
 
+func _on_stage_clear_toggled(on: bool):
+    hide_panel()
+    pause_menu_button.disabled = on
+    pause_menu_button.visible = ! on
+
 func show_panel():
     pause_menu_panel.visible = true
     pause_menu_panel.modulate.a = 0.0
@@ -72,6 +78,7 @@ func hide_panel():
     tween.finished.connect(func():
         pause_menu_panel.visible = false
     )
+    pause_menu_button.set_pressed_no_signal(false)
 
 func _on_menu_toggled(toggled_on: bool) -> void:
     get_tree().paused = toggled_on

@@ -18,6 +18,7 @@ extends Node
 @export var second_stage_message: FadeTitle
 
 
+
 @export var slowmo_scale := 0.25  # 25% speed
 
 @export var _current_stage: int = 1
@@ -27,7 +28,6 @@ func _unhandled_input(e):
     if e.is_action_released("debug_slowmo"):  Engine.time_scale = 1.0
     if e.is_action_pressed("debug_sprint"):
         character_body.set_speed_mode("run")
-
 
 
 ## wire
@@ -46,9 +46,10 @@ func _ready() -> void:
     if cameras and controls:
         EventBus.global_restart_game.connect(_on_restart)
         EventBus.stage_1_ended.connect(_on_goal_reached)
-        print(cameras.current_rig_index())
-        print(cameras.current_rig_name())
-    item_spawner.map_scene = load("res://lib/maps/stage%s_map.tscn" % str(_current_stage))
+    if countdown:
+        countdown.timeout.connect(_on_timeout)
+    EventBus.global_next_stage.connect(_on_next_stage)
+    EventBus.global_restart_stage.connect(_on_restart_stage)
     _on_restart()
 
 ## unwire
@@ -63,37 +64,49 @@ func _exit_tree() -> void:
         controls.action.disconnect(_on_controller_input)
     if cameras and controls:
         EventBus.global_restart_game.disconnect(_on_restart)
+    if countdown:
+        countdown.timeout.disconnect(_on_timeout)
 
 var _alive = true
 var _finished_level = false
+
+func _on_timeout():
+    character_body.set_speed_mode("stop")
+    _trigger_game_over()
+    
+func _trigger_game_over():
+    if !_finished_level:
+        cameras.blend_time = 3.0
+        cameras.activate_index(4)
+    _alive = false
+    countdown.paused = true
+    var game_over_tween: Tween = create_tween()
+    game_over_tween.tween_interval(3.0)
+    game_over_tween.tween_callback(func ():
+        game_over_message.auto_exit_time = 1.0
+        game_over_message.enter()
+    )
+    game_over_tween.tween_interval(3.0)
+    game_over_tween.tween_callback(func ():
+        game_over_credits.auto_exit_time = 1.0
+        game_over_credits.enter()
+    )
+    game_over_tween.tween_interval(3.0)
+    game_over_tween.tween_callback(func ():
+        EventBus.global_restart_game.emit()
+    )
+    item_spawner.map_scene = load("res://lib/maps/stage1_map.tscn")
+    _current_stage = 1
+
+    print("game over restart")
+
+
 func _on_player_speed_change(_new_speed: float, mode: String):
     if mode == "stop":
 #        if _alive and ! _finished_level:
         if _alive:
-            if !_finished_level:
-                cameras.blend_time = 3.0
-                cameras.activate_index(4)
-            _alive = false
-            countdown.paused = true
-            var game_over_tween: Tween = create_tween()
-            game_over_tween.tween_interval(3.0)
-            game_over_tween.tween_callback(func ():
-                game_over_message.auto_exit_time = 1.0
-                game_over_message.enter()
-            )
-            game_over_tween.tween_interval(3.0)
-            game_over_tween.tween_callback(func ():
-                game_over_credits.auto_exit_time = 1.0
-                game_over_credits.enter()
-            )
-            game_over_tween.tween_interval(3.0)
-            game_over_tween.tween_callback(func ():
-                EventBus.global_restart_game.emit()
-            )
-            item_spawner.map_scene = load("res://lib/maps/stage1_map.tscn")
-            _current_stage = 1
+            _trigger_game_over()
 
-            print("game over restart")
 @onready var stage_1_map: StageMap = $"../PlayerRunner/PlayerVisuals2/SubViewportContainer/SubViewport/Points Of Interest/Stage1Map"
 
 func _on_restart():
@@ -106,16 +119,16 @@ func _on_restart():
     countdown.start()
     countdown.paused = false
     _on_size_changed()
+    item_spawner.map_scene = load("res://lib/maps/stage%s_map.tscn" % str(_current_stage))
     if start_title:
         start_title.auto_exit_time = 1.0
         start_title.enter()
         var level_message = first_stage_message
         var level_ground = first_stage_ground
-        var first_stage_map = character_visuals.get_node("./SubViewportContainer/SubViewport/Points Of Interest/Stage1Map")
-        var second_stage_map = character_visuals.get_node("./SubViewportContainer/SubViewport/Points Of Interest/Stage2Map")
+        var first_stage_map = character_visuals.get_node("./SubViewport/Points Of Interest/Stage1Map")
+        var second_stage_map = character_visuals.get_node("./SubViewport/Points Of Interest/Stage2Map")
         var stage_map = first_stage_map
-        print(first_stage_map)
-        print(second_stage_map)
+
         if _current_stage == 2:
             level_message = second_stage_message
             level_ground = second_stage_ground
@@ -125,8 +138,6 @@ func _on_restart():
             _toggle_collisions(n, (n == level_ground))
         for m in [first_stage_map, second_stage_map]:
             m.visible = (m == stage_map)
-            print(m)
-            print(m.visible)
 
         if first_stage_message:
             var restart_tween: Tween = create_tween()
@@ -136,21 +147,26 @@ func _on_restart():
                 level_message.enter()
             )
 
+func _on_next_stage():
+    _current_stage += 1
+    EventBus.global_restart_game.emit()
+    get_tree().paused = false
+
+func _on_restart_stage():
+    EventBus.global_restart_game.emit()
+    get_tree().paused = false
+    
 func _on_goal_reached():
     _finished_level = true
     countdown.paused = true
     cameras.activate_index(5)
     print("STAGE CLEAR")
     var game_over_tween: Tween = create_tween()
-    game_over_tween.tween_interval(5.0)
-    game_over_tween.tween_callback(func ():
-        item_spawner.map_scene = load("res://lib/maps/stage2_map.tscn")
-        second_stage_ground.visible = true
-        first_stage_ground.visible = false
-        _current_stage = 2
-        EventBus.global_restart_game.emit()
+    game_over_tween.tween_interval(2.0)
+    game_over_tween.tween_callback(func():
+        EventBus.stage_completed.emit(true)
+        get_tree().paused = true
     )
-    print("HACK stage clear, game over restart")
     
     
 func _on_size_changed():
@@ -161,9 +177,6 @@ func _on_controls_layout_change(new_layout):
     controls.set_layout(new_layout)
 
 func _on_controller_input(side: int, event: int):
-    #if _finished_level:
-        #return
-    # player direction and speed changes
     if character_body:
         match side:
             controls.Side.WEST:

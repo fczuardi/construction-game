@@ -7,6 +7,8 @@ extends Area3D
 @export var bob_amp: float = 0.06
 @export var bob_speed: float = 2.0
 @export var showcase_scale: float = 5.0
+@export var is_hidden: bool = false
+@export var is_required: bool = true
 
 var burst_scene := preload("res://lib/PickupBurst/PickupBurst.tscn")
 
@@ -28,7 +30,7 @@ func _on_body_entered(body: Node) -> void:
     if not (body is PlayerRunner):
         return
     set_deferred("monitoring", false)
-    EventBus.item_collected.emit(id, points, global_position)
+    EventBus.item_collected.emit(self)
     _play_pickup_vfx(global_position)
     #queue_free()
     var hub := get_tree().get_first_node_in_group("ShowcaseHub")  # if you add the hub to this group

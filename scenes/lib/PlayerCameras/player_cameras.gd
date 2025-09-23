@@ -143,8 +143,7 @@ func current_rig_index() -> int:
 # --- Internals ---
 
 func _is_run_rig(i: int) -> bool:
-    var n := _rig_nodes[i].name.to_lower()
-    return n.find("run") != -1
+    return _rig_cams[i] != null and _rig_cams[i].is_in_group("run_cam")
 
 func _collect_rigs() -> void:
     _rig_nodes.clear()

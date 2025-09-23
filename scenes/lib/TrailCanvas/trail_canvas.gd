@@ -75,7 +75,10 @@ func _ready():
 
 func reset_to_start():
     clear_trail()
-    
+
+func get_trail_texture() -> Texture2D:
+    return _trail_tex
+   
 func _exit_tree() -> void:
     if EventBus.player_runner_pose_updated.is_connected(_on_pose_updated):
         EventBus.player_runner_pose_updated.disconnect(_on_pose_updated)

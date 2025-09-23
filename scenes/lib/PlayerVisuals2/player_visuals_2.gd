@@ -7,6 +7,7 @@ extends Node3D
 @export var animation_tree: AnimationTree
 @export var map_mesh: MeshInstance3D
 @export var map_viewport: SubViewport
+@export var clear_stage_bg: TextureRect
 
 # --- Tuning 
 @export_group("Speed Bands")
@@ -122,6 +123,7 @@ func _ready() -> void:
     if Engine.is_editor_hint():
          return
     EventBus.global_restart_game.connect(reset_to_start)
+
     _last_facing = rotation.y
     reset_to_start()
     #for p in animation_tree.get_property_list():
@@ -129,8 +131,16 @@ func _ready() -> void:
 
 func apply_map_texture():
     var material = StandardMaterial3D.new()
-    material.albedo_texture = map_viewport.get_texture()
-    map_mesh.set_surface_override_material(0, material)
+    var map_texture = map_viewport.get_texture()
+    material.albedo_texture = map_texture
+    # map_mesh.set_surface_override_material(0, material)
+
+func get_map_texture() -> Texture2D:
+    map_viewport.render_target_update_mode = SubViewport.UPDATE_WHEN_VISIBLE
+#    map_viewport.render_target_clear_mode = SubViewport.CLEAR_MODE_ALWAYS
+    #map_viewport.transparent_bg = false
+    #await RenderingServer.frame_post_draw
+    return map_viewport.get_texture()
 
 # ---------------- Public API (reactive) ----------------
 

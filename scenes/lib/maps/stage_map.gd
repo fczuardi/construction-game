@@ -8,12 +8,12 @@ func _ready() -> void:
     EventBus.global_restart_game.connect(_on_restart)
     EventBus.goal_unlocked.connect(_on_goal_unlocked)
     
-func _on_item_collected(id: StringName, _points: int, _world_pos: Vector3):
+func _on_item_collected(item: Collectible):
     # Iterate MapSticker children under Stickers and flip visibility
     for child in stickers.get_children():
         if child is MapSticker:
             var sticker := child as MapSticker
-            if sticker.item_id == id:
+            if sticker.item_id == item.id:
                 _mark_sticker_collected(sticker)
                 break  # stop at the first match; remove if duplicates are possible
 

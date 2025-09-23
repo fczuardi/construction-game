@@ -19,8 +19,8 @@ func show_item(item: Node3D) -> void:
 
     # Optional: reparent so level unloads don’t affect it
     if reparent_to and item.get_parent() != reparent_to:
-        item.get_parent().remove_child(item)
-        reparent_to.add_child(item)
+        item.get_parent().call_deferred("remove_child", item)
+        reparent_to.call_deferred("add_child", item)
 
     # Put it at the spot (global)
     item.global_transform = showcase_spot.global_transform
@@ -55,7 +55,7 @@ func _disable_collisions_recursive(n: Node) -> void:
         co.collision_layer = 0
         co.collision_mask = 0
         if co is Area3D:
-            (co as Area3D).monitoring = false
-            (co as Area3D).monitorable = false
+            (co as Area3D).set_deferred("monitoring", false)
+            (co as Area3D).set_deferred("monitorable", false)
     for c in n.get_children():
         _disable_collisions_recursive(c)
