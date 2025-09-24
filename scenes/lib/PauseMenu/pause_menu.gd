@@ -32,6 +32,8 @@ var _category_icon: MenuCategoryIcon = MenuCategoryIcon.NONE
 @onready var pause_menu_panel: Panel = %PauseMenuPanel
 @onready var pause_menu_bg_icon: Label = %PauseMenuBgIcon
 @onready var slice_title_label: Label = %SliceTitleLabel
+@onready var quit_game_menu_section: VBoxContainer = %QuitGameMenuSection
+@onready var quit_session_title: Label = %"Quit Session Title"
 
 ## Lifecycle
 func _ready() -> void:
@@ -42,6 +44,9 @@ func _ready() -> void:
     slice_title_label.text = main_title
     _register_items_visibility()
     EventBus.stage_completed.connect(_on_stage_clear_toggled)
+    if OS.get_name() == "Web":
+        quit_session_title.visible = false
+        quit_game_menu_section.visible = false
 
 ## Helpers
 var _visibility_before_hide: Dictionary[NodePath, bool] = {}

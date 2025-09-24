@@ -1,10 +1,13 @@
 ## Current Single Task
+
+- [ ] credits on the pause screen
+
+## Ongoing
+
 - stage 2 items: (set out, groundwork, trenches)
     - [ ] wood planks
     - [ ] cartwheel
     - [ ] nike (hidden/power-up sprint)
-
-## Ongoing
 
 - [ ] stage 2 items: (set out, groundwork, trenches)
     - [ ] ? pickaxe
@@ -40,59 +43,9 @@
 - [bug] first particle small freeze on html
 
 
-## Feedbacks:
-
-
----------------------------------------------------------------------------------------------------
-
-sept 23
-
-- Marcelo:
-    - WASD support
-    - pause menu should have a "Restart" button 
-    - stage 2 pickets should use cilinders for collision shape
-    - display map on death
-    - ability to turn off camera bobby on run as a setting
-
----------------------------------------------------------------------------------------------------
-
-sept 16
-
-- "run change the direction"
-    - Isa didnt understood that run was a toggle and that there were 2 different camera angles
-
-- camera should follow player
-    - Marcelo, Tizen, Thiago, Zoide...
-
-- 45deg snaps areunnecessary
-    - Marcelo
-
-- bitcoin coin is too close to the lock icon
-    - Thiago thought that the lock was the Bitcoin coin (that was hard to get)
-
-- small items are hard to get
-    - Tizen made several turns to the same side when not able to catch an item
-    - Zoide thinks if the camera points towards where you are heading it will make it easier to not miss the item
-    
-- map is difficult to read / motion sickness
-    - Isa
-
-- better objectives info / help / visual feedback
-    - Zoide, Thiago
-
-- swipe attempts
-    - Zoide asked if there was a way to control camera
-
-- nice graphics:
-    - Zoide liked
-- Zoide:
-    - "quebrou faz mas grosso", lema de uma industria de tratores
-
-- Zoide notou que a caminhada do demo 1 era mais folgadona
---------------------------------------------------------------------------------------------------
-
 
 ## Done
+- [x] remove quit button if web
 - [x] pickets adjust
 - [x] spade / shovel
 - [x] stage clear pause
@@ -194,3 +147,57 @@ sept 16
 - Development quality of life    
     - [x] Android apk export environment
     - [x] restart the game after 200 steps
+
+
+
+## Feedbacks:
+
+
+---------------------------------------------------------------------------------------------------
+
+sept 23
+
+- Marcelo:
+    - WASD support
+    - pause menu should have a "Restart" button 
+    - stage 2 pickets should use cilinders for collision shape
+    - display map on death
+    - ability to turn off camera bobby on run as a setting
+
+---------------------------------------------------------------------------------------------------
+
+sept 16
+
+- "run change the direction"
+    - Isa didnt understood that run was a toggle and that there were 2 different camera angles
+
+- camera should follow player
+    - Marcelo, Tizen, Thiago, Zoide...
+
+- 45deg snaps areunnecessary
+    - Marcelo
+
+- bitcoin coin is too close to the lock icon
+    - Thiago thought that the lock was the Bitcoin coin (that was hard to get)
+
+- small items are hard to get
+    - Tizen made several turns to the same side when not able to catch an item
+    - Zoide thinks if the camera points towards where you are heading it will make it easier to not miss the item
+    
+- map is difficult to read / motion sickness
+    - Isa
+
+- better objectives info / help / visual feedback
+    - Zoide, Thiago
+
+- swipe attempts
+    - Zoide asked if there was a way to control camera
+
+- nice graphics:
+    - Zoide liked
+- Zoide:
+    - "quebrou faz mas grosso", lema de uma industria de tratores
+
+- Zoide notou que a caminhada do demo 1 era mais folgadona
+--------------------------------------------------------------------------------------------------
+
