@@ -1,12 +1,19 @@
-[gd_scene load_steps=16 format=3 uid="uid://cq7lqptnqemxp"]
+[gd_scene load_steps=28 format=3 uid="uid://cq7lqptnqemxp"]
 
 [ext_resource type="Script" uid="uid://dnm4eml6s5h78" path="res://lib/PauseMenu/pause_menu.gd" id="1_eslww"]
 [ext_resource type="FontFile" uid="uid://bgn10o8bm34q6" path="res://imports/fonts/ArgulaRegular/Arugula20250312-Regular.ttf" id="1_wve36"]
+[ext_resource type="PackedScene" uid="uid://b37diy1gejp4e" path="res://lib/Credits/credits_container.tscn" id="2_dqwxq"]
 [ext_resource type="Texture2D" uid="uid://qmwe1ss0eryi" path="res://imports/icons/menu-line_240px.png" id="2_eslww"]
+[ext_resource type="Script" uid="uid://dcx7crs23nf4" path="res://addons/markdownlabel/header_formats/h1_format.gd" id="3_dqjkp"]
 [ext_resource type="PackedScene" uid="uid://dckxqiei76mb2" path="res://lib/PauseMenu/QuitGameMenu.tscn" id="3_qqgi3"]
 [ext_resource type="Script" uid="uid://cofosv5dg2lxa" path="res://lib/PauseMenu/touch_controls_menu.gd" id="3_uwrx0"]
+[ext_resource type="Script" uid="uid://d0sin64i4v3op" path="res://addons/markdownlabel/header_formats/h2_format.gd" id="4_qdviu"]
 [ext_resource type="FontFile" uid="uid://puw8wtbfcgof" path="res://imports/fonts/Noto_Emoji/NotoEmoji-VariableFont_wght.ttf" id="4_woidn"]
+[ext_resource type="Script" uid="uid://dlok0dv1tq2bf" path="res://addons/markdownlabel/header_formats/h3_format.gd" id="5_n0kmj"]
+[ext_resource type="Script" uid="uid://bayuh2vafablg" path="res://addons/markdownlabel/header_formats/h4_format.gd" id="6_2ngo1"]
 [ext_resource type="Texture2D" uid="uid://bqltjr4rulvwc" path="res://imports/icons/arrow-left-s-line_240px.png" id="6_834gu"]
+[ext_resource type="Script" uid="uid://dfr1w7u3jgni3" path="res://addons/markdownlabel/header_formats/h5_format.gd" id="7_d5fkd"]
+[ext_resource type="Script" uid="uid://bsi6dexoofpe6" path="res://addons/markdownlabel/header_formats/h6_format.gd" id="8_w32fv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5h556"]
 content_margin_left = 0.0
@@ -20,29 +27,29 @@ corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
 corner_detail = 5
 
-[sub_resource type="GDScript" id="GDScript_uwrx0"]
-resource_name = "back to index scene"
-script/source = "extends Button
+[sub_resource type="Resource" id="Resource_mcyat"]
+resource_local_to_scene = true
+script = ExtResource("3_dqjkp")
 
-var index_scene_path: String = \"res://demos/Index.tscn\" 
+[sub_resource type="Resource" id="Resource_btcha"]
+resource_local_to_scene = true
+script = ExtResource("4_qdviu")
 
-func _ready() -> void:
-    #check if it came from index or make if invisible otherwise
-    # If we weren't launched from Index, hide this overlay in direct (F6) runs
-    var from_index := get_tree().root.has_meta(\"launched_from_index\") \\
-        and bool(get_tree().root.get_meta(\"launched_from_index\"))
-    if not from_index:
-        visible = false
-        return
-    get_tree().root.set_meta(\"launched_from_index\", false)
-    pressed.connect(_go_back)
+[sub_resource type="Resource" id="Resource_kncwo"]
+resource_local_to_scene = true
+script = ExtResource("5_n0kmj")
 
-    
-func _go_back():
-    if index_scene_path != \"\":
-        get_tree().paused = false
-        get_tree().change_scene_to_file(index_scene_path)
-"
+[sub_resource type="Resource" id="Resource_lfhsg"]
+resource_local_to_scene = true
+script = ExtResource("6_2ngo1")
+
+[sub_resource type="Resource" id="Resource_tgru6"]
+resource_local_to_scene = true
+script = ExtResource("7_d5fkd")
+
+[sub_resource type="Resource" id="Resource_47qy8"]
+resource_local_to_scene = true
+script = ExtResource("8_w32fv")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_uwrx0"]
 texture = ExtResource("2_eslww")
@@ -111,48 +118,62 @@ theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 30
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PauseMenuPanel/MarginContainer"]
+[node name="Credits Container" parent="MarginContainer/PauseMenuPanel/MarginContainer" instance=ExtResource("2_dqwxq")]
+unique_name_in_owner = true
+visible = false
 layout_mode = 2
 
-[node name="SliceTitleLabel" type="Label" parent="MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer"]
+[node name="Credits" parent="MarginContainer/PauseMenuPanel/MarginContainer/Credits Container" index="0"]
+h1 = SubResource("Resource_mcyat")
+h2 = SubResource("Resource_btcha")
+h3 = SubResource("Resource_kncwo")
+h4 = SubResource("Resource_lfhsg")
+h5 = SubResource("Resource_tgru6")
+h6 = SubResource("Resource_47qy8")
+
+[node name="MenuSections" type="VBoxContainer" parent="MarginContainer/PauseMenuPanel/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="SliceTitleLabel" type="Label" parent="MarginContainer/PauseMenuPanel/MarginContainer/MenuSections"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_wve36")
 theme_override_font_sizes/font_size = 30
 horizontal_alignment = 1
 
-[node name="TouchControlMenuSection" type="VBoxContainer" parent="MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer"]
+[node name="TouchControlMenuSection" type="VBoxContainer" parent="MarginContainer/PauseMenuPanel/MarginContainer/MenuSections"]
 layout_mode = 2
 script = ExtResource("3_uwrx0")
 
-[node name="margin-top" type="Control" parent="MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer/TouchControlMenuSection"]
+[node name="margin-top" type="Control" parent="MarginContainer/PauseMenuPanel/MarginContainer/MenuSections/TouchControlMenuSection"]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer/TouchControlMenuSection"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PauseMenuPanel/MarginContainer/MenuSections/TouchControlMenuSection"]
 layout_mode = 2
 
-[node name="ControlsLabel" type="Label" parent="MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer/TouchControlMenuSection/HBoxContainer"]
+[node name="ControlsLabel" type="Label" parent="MarginContainer/PauseMenuPanel/MarginContainer/MenuSections/TouchControlMenuSection/HBoxContainer"]
 layout_mode = 2
 text = "Touch Controls"
 
-[node name="CheckButton" type="CheckButton" parent="MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer/TouchControlMenuSection/HBoxContainer"]
+[node name="CheckButton" type="CheckButton" parent="MarginContainer/PauseMenuPanel/MarginContainer/MenuSections/TouchControlMenuSection/HBoxContainer"]
 visible = false
 layout_mode = 2
 button_pressed = true
 
-[node name="ThumbClusterOptionsContainer" type="HBoxContainer" parent="MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer/TouchControlMenuSection"]
+[node name="ThumbClusterOptionsContainer" type="HBoxContainer" parent="MarginContainer/PauseMenuPanel/MarginContainer/MenuSections/TouchControlMenuSection"]
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 
-[node name="LayoutLeftBtn" type="Button" parent="MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer/TouchControlMenuSection/ThumbClusterOptionsContainer"]
+[node name="LayoutLeftBtn" type="Button" parent="MarginContainer/PauseMenuPanel/MarginContainer/MenuSections/TouchControlMenuSection/ThumbClusterOptionsContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 toggle_mode = true
 text = "Left Thumb"
 
-[node name="LayoutBothBtn" type="Button" parent="MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer/TouchControlMenuSection/ThumbClusterOptionsContainer"]
+[node name="LayoutBothBtn" type="Button" parent="MarginContainer/PauseMenuPanel/MarginContainer/MenuSections/TouchControlMenuSection/ThumbClusterOptionsContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -161,32 +182,32 @@ toggle_mode = true
 button_pressed = true
 text = "Both Hands"
 
-[node name="LayoutRightBtn" type="Button" parent="MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer/TouchControlMenuSection/ThumbClusterOptionsContainer"]
+[node name="LayoutRightBtn" type="Button" parent="MarginContainer/PauseMenuPanel/MarginContainer/MenuSections/TouchControlMenuSection/ThumbClusterOptionsContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 toggle_mode = true
 text = "Right Thumb"
 
-[node name="BackToIndex" type="VBoxContainer" parent="MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer"]
+[node name="About Section Title" type="Label" parent="MarginContainer/PauseMenuPanel/MarginContainer/MenuSections"]
 layout_mode = 2
+text = "About"
 
-[node name="Button" type="Button" parent="MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer/BackToIndex"]
-custom_minimum_size = Vector2(0, 80)
+[node name="Credits Btn" type="Button" parent="MarginContainer/PauseMenuPanel/MarginContainer/MenuSections"]
+unique_name_in_owner = true
 layout_mode = 2
-text = "Back To Library Index"
-script = SubResource("GDScript_uwrx0")
+text = "Credits"
 
-[node name="separator2" type="Control" parent="MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer"]
+[node name="separator2" type="Control" parent="MarginContainer/PauseMenuPanel/MarginContainer/MenuSections"]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="Quit Session Title" type="Label" parent="MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer"]
+[node name="Quit Session Title" type="Label" parent="MarginContainer/PauseMenuPanel/MarginContainer/MenuSections"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Quit"
 
-[node name="QuitGameMenuSection" parent="MarginContainer/PauseMenuPanel/MarginContainer/VBoxContainer" instance=ExtResource("3_qqgi3")]
+[node name="QuitGameMenuSection" parent="MarginContainer/PauseMenuPanel/MarginContainer/MenuSections" instance=ExtResource("3_qqgi3")]
 unique_name_in_owner = true
 layout_mode = 2
 
@@ -227,3 +248,5 @@ action_mode = 0
 shortcut = SubResource("Shortcut_u2pij")
 icon_alignment = 1
 expand_icon = true
+
+[editable path="MarginContainer/PauseMenuPanel/MarginContainer/Credits Container"]

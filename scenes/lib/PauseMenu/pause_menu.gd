@@ -34,6 +34,10 @@ var _category_icon: MenuCategoryIcon = MenuCategoryIcon.NONE
 @onready var slice_title_label: Label = %SliceTitleLabel
 @onready var quit_game_menu_section: VBoxContainer = %QuitGameMenuSection
 @onready var quit_session_title: Label = %"Quit Session Title"
+@onready var credits_container: VBoxContainer = %"Credits Container"
+@onready var credits_btn: Button = %"Credits Btn"
+@onready var menu_sections: VBoxContainer = %MenuSections
+@onready var credits_close_btn: Button = credits_container.get_node("%Credits Close Btn")
 
 ## Lifecycle
 func _ready() -> void:
@@ -44,10 +48,23 @@ func _ready() -> void:
     slice_title_label.text = main_title
     _register_items_visibility()
     EventBus.stage_completed.connect(_on_stage_clear_toggled)
+    credits_btn.button_down.connect(_on_credits)
+    credits_close_btn.pressed.connect(_on_credits_close)    
     if OS.get_name() == "Web":
         quit_session_title.visible = false
         quit_game_menu_section.visible = false
 
+
+func _on_credits():
+    credits_container.visible = true
+    menu_sections.visible = false
+
+
+func _on_credits_close():
+    credits_container.visible = false
+    menu_sections.visible = true
+    
+    
 ## Helpers
 var _visibility_before_hide: Dictionary[NodePath, bool] = {}
 
