@@ -12,13 +12,15 @@ extends Control
 @onready var retry_stage_btn: Button = %"Retry Stage Btn"
 @onready var next_stage_btn: Button = %"Next Stage Btn"
 @onready var credits_btn: Button = %"Credits Btn"
-@onready var credits_close_btn: Button = %"Credits Close Btn"
 @onready var credits_container: VBoxContainer = %"Credits Container"
-@onready var credits: RichTextLabel = %Credits
+@onready var credits_close_btn: Button = credits_container.get_node("%Credits Close Btn")
+@onready var credits: RichTextLabel = credits_container.get_node("%Credits")
 @onready var v_box_container: VBoxContainer = %VBoxContainer
 
 func _ready() -> void:
     assert(countdown)
+    assert(credits_close_btn)
+    assert(credits)
     process_mode = Node.PROCESS_MODE_ALWAYS
     visible = false
     credits_container.visible = false

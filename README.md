@@ -21,12 +21,12 @@ Every review means a lot to me. Leave a comment :)
 
 I don't consider myself a "solo-dev" because I am standing in the shoulders of giants, this work is only possible due to ethical people that share their knowledge, the Free Software movement and Free Culture as a whole.
 
-There are **at least 61** other **amazing humans** that contributed with their time and their art to this game and I am incredibly thankful to every one of the people below:
+There are **at least 62** other **amazing humans** that contributed with their time and their art to this game and I am incredibly thankful to every one of the people below:
 
 
 ## Credits & Acknoledgements
 
-### Assets and Licences (23+ authors)
+### Assets and Licences (24+ authors)
 
 #### Character, Animations
 
@@ -76,7 +76,7 @@ There are **at least 61** other **amazing humans** that contributed with their t
 
 #### Scenery / Obstacles
 
-    - Toilets, Pallet from [Low Poly Construction Pack](https://lowpolyassets.itch.io/low-poly-construction-pack)
+    - Clipboard, Toilets, Pallet from [Low Poly Construction Pack](https://lowpolyassets.itch.io/low-poly-construction-pack)
         - Author: [LowPolyAssets](https://lowpolyassets.itch.io/)
         - License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/)
 
@@ -95,10 +95,13 @@ There are **at least 61** other **amazing humans** that contributed with their t
 
 #### Fonts
 
-    - [Argula Font](https://drj11.itch.io/arugula-font)
-        - Author: [David Jones (Cubic Type)](https://about.cubictype.com/)
-        - License: [Human Rights Font Licence Version 1.0](./fonts/License.html)
-            - a modified version of the [Hippocratic License 2.0](https://spdx.org/licenses/Hippocratic-2.1.html)
+    - [Capture It](https://www.dafont.com/capture-it.font)
+        - Author: Koczman Bálint
+        - License: custom license1.txt within zip-file
+            "This font is free to use personal and commercial works too. But you can't sell them direktly."
+    - [Stardos Stencil](https://fonts.google.com/specimen/Stardos+Stencil)
+        - Author: [Vernon Adams](https://fonts.google.com/?query=vernon+adams) 2/2/1967-8/24/2016
+        - License: [SIL Open Font License Version 1.1](https://fonts.google.com/specimen/Big+Shoulders+Stencil/license) 
     - [Noto Emoji](https://fonts.google.com/noto/specimen/Noto+Emoji)
         - Author: Google LLC
         - License: [Open Font License 1.1](https://fonts.google.com/noto/specimen/Noto+Emoji/license)
@@ -109,11 +112,7 @@ There are **at least 61** other **amazing humans** that contributed with their t
         - Authors: [Remix Design Studio (Wendy Gao and Jimmy Cheung)](https://github.com/Remix-Design)
         - License: [Apache License 2.0](https://github.com/Remix-Design/remixicon/blob/master/License)
         - Items:
-            - treasure-map-line
-            - ri-run-line
-            - ri-menu-line
-            - circle-fill
-            - navigation-fill
+            - treasure-map-line, ri-run-line, ri-menu-line, circle-fill, navigation-fill, arrow-right-up-line, arrow-right-down-line, arrow-left-up-line, arrow-left-down-line
     - Noun Project:
         - [Level by INA](https://thenounproject.com/icon/level-6853002/)
             - Author: [INA](https://thenounproject.com/creator/zullyantisiti78/)
@@ -210,10 +209,17 @@ I do special rates for Open Source projects, since they are my preference. If yo
 
 -----
 
-#### Not (yet) used / Research
+#### Not (yet) cleared / not used / Research
 
+- [Argula Font](https://drj11.itch.io/arugula-font)
+    - Author: [David Jones (Cubic Type)](https://about.cubictype.com/)
+    - License: [Human Rights Font Licence Version 1.0](./fonts/License.html)
+        - a modified version of the [Hippocratic License 2.0](https://spdx.org/licenses/Hippocratic-2.1.html)
 - Low Poly Bitcoin (CC-BY 4.0)
     - https://sketchfab.com/3d-models/low-poly-bitcoin-ec0b85df2dde42eda90b571c12a7cd47#download
+- [Big Shoulders Stencil](https://fonts.google.com/specimen/Big+Shoulders+Stencil)
+    - Author: [Big Shoulders Project Authors](https://github.com/xotypeco/big_shoulders)
+    - License: [SIL Open Font License Version 1.1](https://fonts.google.com/specimen/Big+Shoulders+Stencil/license) 
 
 - Mixamo:
 

@@ -1,5 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://b37diy1gejp4e"]
+[gd_scene load_steps=15 format=3 uid="uid://b37diy1gejp4e"]
 
+[ext_resource type="Theme" uid="uid://b5kwc1xhxybmd" path="res://themes/default_theme.tres" id="1_gbblp"]
 [ext_resource type="Script" uid="uid://dbap0gqox0ty1" path="res://addons/markdownlabel/markdownlabel.gd" id="1_hvkmd"]
 [ext_resource type="Script" uid="uid://dcx7crs23nf4" path="res://addons/markdownlabel/header_formats/h1_format.gd" id="2_gbblp"]
 [ext_resource type="Script" uid="uid://d0sin64i4v3op" path="res://addons/markdownlabel/header_formats/h2_format.gd" id="3_u8wgy"]
@@ -33,25 +34,26 @@ resource_local_to_scene = true
 script = ExtResource("7_ohqty")
 
 [node name="Credits Container" type="VBoxContainer"]
+custom_minimum_size = Vector2(300, 300)
 
 [node name="Credits" type="RichTextLabel" parent="."]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/normal_font_size = 12
+theme = ExtResource("1_gbblp")
 bbcode_enabled = true
-text = "[font_size=27]Contractor Hero[/font_size]
+text = "[font_size=36]Contractor Hero[/font_size]
 
 An endless runner by Fabricio Zuardi.
 
     [i]\"Death Stranding meets Subway Surfer.\"[/i]
 
-[font_size=20]License[/font_size]
+[font_size=27]License[/font_size]
 
 MIT License
 Copyright Fabricio Campos Zuardi - 2025
 
-[font_size=20]Intro / About the Creator[/font_size]
+[font_size=27]Intro / About the Creator[/font_size]
 
 I am a software developer/amateur art director interested in sharing my work with others online, and trying to make indie games for a living, if you enjoyed this demo, or just want to get in contact please leave a feedback at Itch.io by following the link below:
 
@@ -59,18 +61,18 @@ I am a software developer/amateur art director interested in sharing my work wit
 
 Every review means a lot to me. Leave a comment :)
 
-[font_size=17]\"Solo\" Open Source Game Dev[/font_size]
+[font_size=22]\"Solo\" Open Source Game Dev[/font_size]
 
 I don't consider myself a \"solo-dev\" because I am standing in the shoulders of giants, this work is only possible due to ethical people that share their knowledge, the Free Software movement and Free Culture as a whole.
 
-There are [b]at least 61[/b] other [b]amazing humans[/b] that contributed with their time and their art to this game and I am incredibly thankful to every one of the people below:
+There are [b]at least 62[/b] other [b]amazing humans[/b] that contributed with their time and their art to this game and I am incredibly thankful to every one of the people below:
 
 
-[font_size=20]Credits & Acknoledgements[/font_size]
+[font_size=27]Credits & Acknoledgements[/font_size]
 
-[font_size=17]Assets and Licences (23+ authors)[/font_size]
+[font_size=22]Assets and Licences (24+ authors)[/font_size]
 
-[font_size=13]Character, Animations[/font_size]
+[font_size=18]Character, Animations[/font_size]
 
     - [url=https://www.mixamo.com/#/?page=1&query=pete&type=Character]\"Pete\"[/url]
     - [url=https://www.mixamo.com/#/?page=1&query=male+swagger]\"Walking With A Swagger\"[/url]
@@ -84,7 +86,7 @@ There are [b]at least 61[/b] other [b]amazing humans[/b] that contributed with t
         - Author: [url=https://www.mixamo.com]Adobe Mixamo[/url]
         - License: [url=https://www.adobe.com/legal/terms.html#content-files]Adobe Terms of Service[/url]
 
-[font_size=13]Clothing [/font_size]
+[font_size=18]Clothing [/font_size]
 
     - [url=https://sketchfab.com/3d-models/winter-hat-637a36cb74204c719883af7feb4b7c28]Winter Hat[/url]
         - Author: [url=https://sketchfab.com/stubbornfunkydonkey]StubbornFunkyDonkey[/url]
@@ -93,7 +95,7 @@ There are [b]at least 61[/b] other [b]amazing humans[/b] that contributed with t
         - Author: [url=https://sketchfab.com/tfernndez]Tomás Fernández Castillo[/url]
         - License: [url=https://creativecommons.org/licenses/by/4.0/]Creative Commons Attribution 4.0 International[/url] 
 
-[font_size=13]Collectibles[/font_size]
+[font_size=18]Collectibles[/font_size]
 
     - Level, Pencil from [url=https://sketchfab.com/3d-models/construction-tools-09e12ba3f7ee42259b6533581abec86f]Construction Tools[/url]
         - Author: [url=https://sketchfab.com/Teen-Wolf]Teen Wolf[/url]
@@ -116,13 +118,13 @@ There are [b]at least 61[/b] other [b]amazing humans[/b] that contributed with t
         - Author: [url=https://aligned-games.itch.io/]Aligned Games[/url]
         - License: Unknown, paid asset pack
 
-[font_size=13]Scenery / Obstacles[/font_size]
+[font_size=18]Scenery / Obstacles[/font_size]
 
-    - Toilets, Pallet from [url=https://lowpolyassets.itch.io/low-poly-construction-pack]Low Poly Construction Pack[/url]
+    - Clipboard, Toilets, Pallet from [url=https://lowpolyassets.itch.io/low-poly-construction-pack]Low Poly Construction Pack[/url]
         - Author: [url=https://lowpolyassets.itch.io/]LowPolyAssets[/url]
         - License: [url=https://creativecommons.org/publicdomain/zero/1.0/]CC0 1.0 Universal[/url]
 
-[font_size=13]Textures[/font_size]
+[font_size=18]Textures[/font_size]
 
     - Ground Plan from [url=https://en.wikipedia.org/wiki/File:Architectural_plan_of_the_Public_Offices_and_Court_House,_Maryborough,_circa_1888.jpg]Architectural plan of the Public Offices and Court House, Maryborough, circa 1888[/url]
         - Author: [url=https://en.wikipedia.org/wiki/Francis_Drummond_Greville_Stanley]Francis Drummond Greville Stanley[/url]
@@ -135,27 +137,26 @@ There are [b]at least 61[/b] other [b]amazing humans[/b] that contributed with t
         - PBR Maps Generated with: [url=https://github.com/aniketrajnish/Unity-WebGPU-PBR-Maps-Generator]Unity-WebGPU-PBR-Maps-Generator[/url]
             - License: [url=https://github.com/aniketrajnish/Unity-WebGPU-PBR-Maps-Generator/blob/main/LICENSE]MIT License[/url]
 
-[font_size=13]Fonts[/font_size]
+[font_size=18]Fonts[/font_size]
 
-    - [url=https://drj11.itch.io/arugula-font]Argula Font[/url]
-        - Author: [url=https://about.cubictype.com/]David Jones (Cubic Type)[/url]
-        - License: [url=./fonts/License.html]Human Rights Font Licence Version 1.0[/url]
-            - a modified version of the [url=https://spdx.org/licenses/Hippocratic-2.1.html]Hippocratic License 2.0[/url]
+    - [url=https://www.dafont.com/capture-it.font]Capture It[/url]
+        - Author: Koczman Bálint
+        - License: custom license1.txt within zip-file
+            \"This font is free to use personal and commercial works too. But you can't sell them direktly.\"
+    - [url=https://fonts.google.com/specimen/Stardos+Stencil]Stardos Stencil[/url]
+        - Author: [url=https://fonts.google.com/?query=vernon+adams]Vernon Adams[/url] 2/2/1967-8/24/2016
+        - License: [url=https://fonts.google.com/specimen/Big+Shoulders+Stencil/license]SIL Open Font License Version 1.1[/url] 
     - [url=https://fonts.google.com/noto/specimen/Noto+Emoji]Noto Emoji[/url]
         - Author: Google LLC
         - License: [url=https://fonts.google.com/noto/specimen/Noto+Emoji/license]Open Font License 1.1[/url]
 
-[font_size=13]Icons[/font_size]
+[font_size=18]Icons[/font_size]
 
     - [url=https://remixicon.com/]Remix Icon[/url]
         - Authors: [url=https://github.com/Remix-Design]Remix Design Studio (Wendy Gao and Jimmy Cheung)[/url]
         - License: [url=https://github.com/Remix-Design/remixicon/blob/master/License]Apache License 2.0[/url]
         - Items:
-            - treasure-map-line
-            - ri-run-line
-            - ri-menu-line
-            - circle-fill
-            - navigation-fill
+            - treasure-map-line, ri-run-line, ri-menu-line, circle-fill, navigation-fill, arrow-right-up-line, arrow-right-down-line, arrow-left-up-line, arrow-left-down-line
     - Noun Project:
         - [url=https://thenounproject.com/icon/level-6853002/]Level by INA[/url]
             - Author: [url=https://thenounproject.com/creator/zullyantisiti78/]INA[/url]
@@ -188,7 +189,7 @@ There are [b]at least 61[/b] other [b]amazing humans[/b] that contributed with t
             - Author: [url=https://thenounproject.com/creator/ayub12/]Ayub Irawan[/url]
             - License: [url=http://creativecommons.org/licenses/by/3.0/]CC BY 3.0[/url]
 
-[font_size=17]Friends / Playtest (32+ supporters)[/font_size]
+[font_size=22]Friends / Playtest (32+ supporters)[/font_size]
 
 [ul]Juliana
 ([url=https://itch.io/c/6345901/cafepivara]Cafepivara[/url]) Lucas, Marcelo
@@ -206,7 +207,7 @@ Kenzo, Maria Carolina, João Lucas, Ivan, Antônio, Márcia
 Onovolab
 [/ul]
 
-[font_size=17]Free Software / Freedom Tech[/font_size]
+[font_size=22]Free Software / Freedom Tech[/font_size]
 
 [ul][url=https://godotengine.org/]Godot[/url] (MIT)
 [ul]Addons: 
@@ -220,13 +221,13 @@ Onovolab
 [url=https://projectbluefin.io/]Bluefin Linux[/url] (Apache 2.0)
 [/ul]
 
-[font_size=17]Free Culture[/font_size]
+[font_size=22]Free Culture[/font_size]
 
 [ul][url=https://creativecommons.org/]Creative Commons[/url]
 [url=https://en.wikipedia.org/wiki/Main_Page]Wikipedia[/url]
 [/ul]
 
-[font_size=17]Others[/font_size]
+[font_size=22]Others[/font_size]
 
 [ul][url=https://chatgpt.com/]OpenAI[/url]
 [url=https://itch.io/]Itch[/url]
@@ -236,7 +237,7 @@ Onovolab
 [url=https://thenounproject.com/]The Noun Project[/url]
 [/ul]
 
-[font_size=17]Youtube (6+ content creators)[/font_size]
+[font_size=22]Youtube (6+ content creators)[/font_size]
 
 [ul][url=https://www.youtube.com/@euzebioconstrutor2815]Euzebio Construtor[/url]
 [url=https://www.youtube.com/c/JRConstru%C3%A7%C3%A3o]JR CONSTRUÇÃO[/url]
@@ -246,7 +247,7 @@ Onovolab
 [url=https://www.youtube.com/@HowToBuildYourOwnHome]How to Build Your Own Home[/url]
 [/ul]
 
-[font_size=20]Open to work[/font_size]
+[font_size=27]Open to work[/font_size]
 
 I am also open to freelance work. I am, in fact, a contractor myself (although a knowledge worker, not a GC in the construction field).
 
@@ -281,12 +282,12 @@ Every review means a lot to me. Leave a comment :)
 
 I don't consider myself a \"solo-dev\" because I am standing in the shoulders of giants, this work is only possible due to ethical people that share their knowledge, the Free Software movement and Free Culture as a whole.
 
-There are **at least 61** other **amazing humans** that contributed with their time and their art to this game and I am incredibly thankful to every one of the people below:
+There are **at least 62** other **amazing humans** that contributed with their time and their art to this game and I am incredibly thankful to every one of the people below:
 
 
 ## Credits & Acknoledgements
 
-### Assets and Licences (23+ authors)
+### Assets and Licences (24+ authors)
 
 #### Character, Animations
 
@@ -336,7 +337,7 @@ There are **at least 61** other **amazing humans** that contributed with their t
 
 #### Scenery / Obstacles
 
-    - Toilets, Pallet from [Low Poly Construction Pack](https://lowpolyassets.itch.io/low-poly-construction-pack)
+    - Clipboard, Toilets, Pallet from [Low Poly Construction Pack](https://lowpolyassets.itch.io/low-poly-construction-pack)
         - Author: [LowPolyAssets](https://lowpolyassets.itch.io/)
         - License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/)
 
@@ -355,10 +356,13 @@ There are **at least 61** other **amazing humans** that contributed with their t
 
 #### Fonts
 
-    - [Argula Font](https://drj11.itch.io/arugula-font)
-        - Author: [David Jones (Cubic Type)](https://about.cubictype.com/)
-        - License: [Human Rights Font Licence Version 1.0](./fonts/License.html)
-            - a modified version of the [Hippocratic License 2.0](https://spdx.org/licenses/Hippocratic-2.1.html)
+    - [Capture It](https://www.dafont.com/capture-it.font)
+        - Author: Koczman Bálint
+        - License: custom license1.txt within zip-file
+            \"This font is free to use personal and commercial works too. But you can't sell them direktly.\"
+    - [Stardos Stencil](https://fonts.google.com/specimen/Stardos+Stencil)
+        - Author: [Vernon Adams](https://fonts.google.com/?query=vernon+adams) 2/2/1967-8/24/2016
+        - License: [SIL Open Font License Version 1.1](https://fonts.google.com/specimen/Big+Shoulders+Stencil/license) 
     - [Noto Emoji](https://fonts.google.com/noto/specimen/Noto+Emoji)
         - Author: Google LLC
         - License: [Open Font License 1.1](https://fonts.google.com/noto/specimen/Noto+Emoji/license)
@@ -369,11 +373,7 @@ There are **at least 61** other **amazing humans** that contributed with their t
         - Authors: [Remix Design Studio (Wendy Gao and Jimmy Cheung)](https://github.com/Remix-Design)
         - License: [Apache License 2.0](https://github.com/Remix-Design/remixicon/blob/master/License)
         - Items:
-            - treasure-map-line
-            - ri-run-line
-            - ri-menu-line
-            - circle-fill
-            - navigation-fill
+            - treasure-map-line, ri-run-line, ri-menu-line, circle-fill, navigation-fill, arrow-right-up-line, arrow-right-down-line, arrow-left-up-line, arrow-left-down-line
     - Noun Project:
         - [Level by INA](https://thenounproject.com/icon/level-6853002/)
             - Author: [INA](https://thenounproject.com/creator/zullyantisiti78/)
@@ -481,4 +481,5 @@ metadata/_custom_type_script = "uid://dbap0gqox0ty1"
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
+theme = ExtResource("1_gbblp")
 text = "Back"

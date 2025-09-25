@@ -1,18 +1,17 @@
-## Current Single Task
+## Current Task
 
-- [ ] credits on the pause screen
+- [ ] forward probe and slide on obstacle hits
 
 ## Ongoing
 
+- [ ] new map (conditioned to no paper on 1st stage)
+- [ ] cartwheel
 - stage 2 items: (set out, groundwork, trenches)
     - [ ] wood planks
-    - [ ] cartwheel
-    - [ ] nike (hidden/power-up sprint)
 
 - [ ] stage 2 items: (set out, groundwork, trenches)
     - [ ] ? pickaxe
     - [ ] ? drill
-    - [ ] new map (conditioned to no paper on 1st stage)
     - [ ] helmet (optional/wearable)
 
 - [ ] stage 2 obstacles:
@@ -44,7 +43,26 @@
 
 
 
+## In progress
+- contact authors one by one and let them know that I am using their art:
+    - Itch
+        - [x] toilet, pallet (low poly construction pack)
+        - [x] argula font
+        - [ ] spade (paid asset pack)
+        - [ ] dirt texture (codezly pack)
+    - sketchfab
+        - [ ] bitcoin coin (if I continue using it, this is NC and there might be a CC-BY that is better)
+    - [ ] remix icon
+    - [ ] court ground plan (queensland gov, family of the architect)
+    - [x] toilet paper
+    - [x] winter hat
+    - [x] sneakers
+    - [x] construction tools 1 and 2 (level, pencil, measuring tape)
+    - [x] pickets, mallet, spray paint
+
 ## Done
+- [x] nike (hidden/power-up sprint)
+- [x] credits on the pause screen
 - [x] remove quit button if web
 - [x] pickets adjust
 - [x] spade / shovel

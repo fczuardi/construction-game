@@ -1,0 +1,20 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://b5kwc1xhxybmd"]
+
+[ext_resource type="FontFile" uid="uid://noy2omcbvknr" path="res://imports/fonts/Stardos_Stencil/StardosStencil-Bold.ttf" id="1_mlkpy"]
+[ext_resource type="FontFile" uid="uid://dxmk4ckc2ynuv" path="res://imports/fonts/stencil/yes_capture_it/Capture it.ttf" id="2_het5a"]
+[ext_resource type="FontFile" uid="uid://cssuq6mf8kw5o" path="res://imports/fonts/Stardos_Stencil/StardosStencil-Regular.ttf" id="2_lkf7m"]
+
+[resource]
+Button/font_sizes/font_size = 25
+Button/fonts/font = ExtResource("2_het5a")
+RichTextLabel/font_sizes/bold_font_size = 13
+RichTextLabel/font_sizes/normal_font_size = 16
+SmallLabel/base_type = &"Label"
+SmallLabel/font_sizes/font_size = 18
+SmallLabel/fonts/font = ExtResource("2_lkf7m")
+SubtitleLabel/base_type = &"Label"
+SubtitleLabel/font_sizes/font_size = 28
+SubtitleLabel/fonts/font = ExtResource("1_mlkpy")
+TitleLabel/base_type = &"Label"
+TitleLabel/font_sizes/font_size = 69
+TitleLabel/fonts/font = ExtResource("2_het5a")
