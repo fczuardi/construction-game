@@ -43,6 +43,8 @@ var _category_icon: MenuCategoryIcon = MenuCategoryIcon.NONE
 func _ready() -> void:
     process_mode = Node.PROCESS_MODE_ALWAYS
     pause_menu_panel.visible = false
+    credits_container.visible = false
+    menu_sections.visible = true
     pause_menu_button.toggled.connect(_on_menu_toggled)
     category_icon = _category_icon
     slice_title_label.text = main_title

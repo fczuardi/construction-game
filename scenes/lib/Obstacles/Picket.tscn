@@ -7,6 +7,7 @@ radius = 0.05
 height = 0.9
 
 [node name="Picket" type="StaticBody3D" groups=["picket"]]
+collision_layer = 3
 
 [node name="Picket1" parent="." instance=ExtResource("1_jfjoc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.119, 0.07, -3.212)

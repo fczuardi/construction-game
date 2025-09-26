@@ -4,144 +4,217 @@ extends CharacterBody3D
 
 const VERSION := "0.6.0"
 
-
-# important for tripping over trenches
+# --- Signals --------------------------
 signal collided(collider: Node, normal: Vector3, grounded: bool, speed_mps: float, speed_mode: String)
-
-## collectible pointer listens for this
 signal turn_buffer_changed(remaining_deg: float)
-
-## DELME: unused signals
-## TODO: check if anyone is consuming those signal below (we might have overdesigned)
-# signal distance_moved(delta_m: float)
-# 
-# there is a demo using it to display custom speed on screen
 signal speed_changed(new_speed: float, mode: String)
-
+signal fell()
 
 # --- Defaults ------------------------
 const DEFAULT_SPEED_STOP: float = 0.0
 const DEFAULT_SPEED_WALK: float = 0.85
-const DEFAULT_SPEED_JOG: float  = 2.4
-const DEFAULT_SPEED_RUN: float  = 5.0
-const DEFAULT_TURN_RATE: float = 180.0
-
+const DEFAULT_SPEED_JOG:  float = 2.4
+const DEFAULT_SPEED_RUN:  float = 5.0
+const DEFAULT_TURN_RATE:  float = 180.0
 
 # --- Exports -------------------------
 @export var visuals: PlayerVisuals2
+@export var speed_blend_time: float = 0.4
 
-@export var speed_blend_time: float = 0.4  # seconds to reach ~63% toward the target; ~95% in ~3*tau
-
-## Named speed modes (mode -> meters/second)
 @export var speed_modes: Dictionary[String, float] = {
     "stop": DEFAULT_SPEED_STOP,
     "walk": DEFAULT_SPEED_WALK,
     "jog":  DEFAULT_SPEED_JOG,
     "run":  DEFAULT_SPEED_RUN,
 }
-
-## Default mode to use on reset/startup (must exist in speed_modes)
 @export var default_speed_mode: String = "walk"
 
-## Max rotate speed (deg/sec). Higher = snappier.
-@export var turn_rate_deg := DEFAULT_TURN_RATE   # used for BOTH hold and queued turns
+@export var turn_rate_deg := DEFAULT_TURN_RATE
 @export var snap_enabled: bool = true
-@export var snap_increment_deg: float = 30.0     # grid step
-@export var snap_dead_zone_deg: float = 4.0      # if already close enough, don't bother
+@export var snap_increment_deg: float = 30.0
+@export var snap_dead_zone_deg: float = 4.0
 
-# --- Private --------------------------
+# --- Wall probe (logic-only) ----------
+@export var wall_probe_length: float = 0.3          # forward cast distance
+@export var wall_normal_min_horiz: float = 0.2      # min horizontal magnitude to count as wall
+@export var wall_probe_layer_index: int = 2         # walls layer
+@onready var _wall_probe: ShapeCast3D = get_node_or_null("WallProbe")
+
+# --- Falling KO settings --------------
+@export var fall_coyote_ms: int = 120
+@export var fall_speed_trigger: float = -1.2
+@export var fall_drop_trigger: float = 0.75
+
+var _off_floor_since_ms: int = -1
+var _fall_start_y: float = 0.0
+
+# --- Private state --------------------
 var _move_dir: Vector3
-var _remaining_turn_deg: float  # +left / -right, consumed over time
-var _turn_axis: float = 0.0   # -1..+1 from controls (EAST = -1, WEST = +1)
+var _remaining_turn_deg: float
+var _turn_axis: float = 0.0
 
 var _target_speed: float
 var _speed: float
-var _speed_mode: String = "custom"  # "walk" | "run" | "custom"
+var _speed_mode: String = "custom"
 
-var _have_last := false
-
-var _last_pos: Vector3
 var _start_xform: Transform3D
+var _last_pos: Vector3
 
 var _turn_session_active: bool = false
-var _turn_session_dir: int = 0     # -1 for right, +1 for left (your WEST=+1, EAST=-1)
+var _turn_session_dir: int = 0     # -1 right/EAST, +1 left/WEST
 
-
-
-# --- Lifecycle -----------------------
+# --- Setup ----------------------------
 func _ready() -> void:
     assert(visuals)
+    assert(_wall_probe)
     if !visuals:
         return
+
     _start_xform = global_transform
     reset_to_start()
     EventBus.global_restart_game.connect(reset_to_start)
 
+    # CharacterBody3D tuning
+    safe_margin = 0.02
+    max_slides = 8
+    floor_snap_length = 0.5
 
+    # Probe setup (mask only walls)
+    _wall_probe.enabled = true
+    _wall_probe.collision_mask = 0
+    _wall_probe.set_collision_mask_value(wall_probe_layer_index, true)
+    _wall_probe.exclude_parent = true
+    _aim_wall_probe(_move_dir)  # initialize direction
+
+# --- Tick -----------------------------
 func _physics_process(delta: float) -> void:
-    var pos := global_transform.origin
-    if not _have_last:
-        _last_pos = pos
-        _have_last = true
+    var pos0 := global_position
 
-    # gravity / falling
+    # A) Air vs ground
     if not is_on_floor():
-        velocity += get_gravity() * delta
-        if velocity.y < -1.0:
-            set_speed_mode("stop")
-            visuals.update_motion(velocity, is_on_floor())
+        _update_fall_state(delta)
     else:
-        # 1) continuous turn while a button is held
-        if _turn_axis != 0.0:
-            var hold_step: float = turn_rate_deg * _turn_axis * delta
-            _move_dir = _move_dir.rotated(Vector3.UP, deg_to_rad(hold_step)).normalized()
+        _off_floor_since_ms = -1
+        _update_turning(delta)
+        _blend_speed(delta)
+        _apply_horizontal_velocity()
 
-        # 2) then consume any queued discrete turns (45º taps etc.)
-        var max_step: float = turn_rate_deg * delta
-        var step: float = clamp(_remaining_turn_deg, -max_step, max_step)
-        if step != 0.0:
-            _move_dir = _move_dir.rotated(Vector3.UP, deg_to_rad(step)).normalized()
-            _remaining_turn_deg -= step
-            turn_buffer_changed.emit(_remaining_turn_deg)
-
-        # speed blend and movement (unchanged)
-        var k := _exp_k(delta, speed_blend_time)
-        _speed = lerp(_speed, _target_speed, k)
-        velocity = _move_dir * _speed
-
+    # B) Integrate
     move_and_slide()
 
-    # update visuals directly
-    if visuals.is_not_moving():
-        set_speed_mode("stop")
+    # C) Wall snap via probe (horizontal-only logic)
+    _aim_wall_probe(_move_dir)
+    var wall_n := _probe_best_wall_normal()
+    if wall_n != Vector3.ZERO:
+        _snap_parallel_to_wall(wall_n)
     else:
-        visuals.update_motion(velocity, is_on_floor())
+        _follow_actual_motion(pos0)
 
-    # ... update movement & yaw ...
-    var yaw_rad := atan2(_move_dir.x, _move_dir.z)   # radians
-    # EventBus.player_runner_pose_updated.emit(global_transform.origin, rotation.y, yaw_rad)
-    EventBus.player_runner_pose_updated.emit(global_transform.origin, yaw_rad)
+    # D) Visuals & events
+    visuals.update_motion(velocity, is_on_floor())
+    EventBus.player_runner_pose_updated.emit(global_transform.origin, atan2(_move_dir.x, _move_dir.z))
 
-    # distance event
-    var p := global_position
-    var dlen := p.distance_to(_last_pos)
-    if dlen > 0.0:
-        # TODO uncomment when someone starts using this
-        # distance_moved.emit(dlen)
-        _last_pos = p
+    var d2 := global_position.distance_to(_last_pos)
+    if d2 > 0.0:
+        _last_pos = global_position
 
-    # raw collision events
-    for i in range(get_slide_collision_count()):
+    var sc := get_slide_collision_count()
+    for i in range(sc):
         var c := get_slide_collision(i)
         if c:
             collided.emit(c.get_collider(), c.get_normal(), is_on_floor(), _speed, _speed_mode)
-            # TODO uncomment when someone starts using this
-            # obstacle_bumped.emit(c.get_collider(), c.get_normal())
 
+# --- Phase helpers ---------------------
+func _update_fall_state(delta: float) -> void:
+    if _off_floor_since_ms < 0:
+        _off_floor_since_ms = Time.get_ticks_msec()
+        _fall_start_y = global_position.y
+
+    velocity += get_gravity() * delta
+
+    var airtime := Time.get_ticks_msec() - _off_floor_since_ms
+    var drop := _fall_start_y - global_position.y
+    if airtime >= fall_coyote_ms and (velocity.y <= fall_speed_trigger or drop >= fall_drop_trigger):
+        set_speed_mode("stop")
+        fell.emit()
+
+func _update_turning(delta: float) -> void:
+    if _turn_axis != 0.0:
+        var hold_step: float = turn_rate_deg * _turn_axis * delta
+        _move_dir = _move_dir.rotated(Vector3.UP, deg_to_rad(hold_step)).normalized()
+
+    var max_step: float = turn_rate_deg * delta
+    var step: float = clamp(_remaining_turn_deg, -max_step, max_step)
+    if step != 0.0:
+        _move_dir = _move_dir.rotated(Vector3.UP, deg_to_rad(step)).normalized()
+        _remaining_turn_deg -= step
+        turn_buffer_changed.emit(_remaining_turn_deg)
+
+func _blend_speed(delta: float) -> void:
+    var k := _exp_k(delta, speed_blend_time)
+    _speed = lerp(_speed, _target_speed, k)
+
+func _apply_horizontal_velocity() -> void:
+    var horiz := _move_dir * _speed
+    velocity.x = horiz.x
+    velocity.z = horiz.z
+    velocity.y = 0.0
+
+# --- Probe + snap ----------------------
+func _aim_wall_probe(dir: Vector3) -> void:
+    if not _wall_probe or dir.length() <= 0.001:
+        return
+    _wall_probe.rotation.y = atan2(dir.x, dir.z)            # face travel dir
+    _wall_probe.target_position = Vector3.BACK * wall_probe_length  # cast along local +Z
+    _wall_probe.force_shapecast_update()
+
+func _probe_best_wall_normal() -> Vector3:
+    if not _wall_probe or not _wall_probe.is_colliding():
+        return Vector3.ZERO
+
+    var move2 := _xz(_move_dir)
+    if move2.length() <= 0.001:
+        move2 = Vector3.FORWARD
+
+    var best_n := Vector3.ZERO
+    var best_dot := 1.0
+    var hits := _wall_probe.get_collision_count()
+    for i in range(hits):
+        var n := _wall_probe.get_collision_normal(i)
+        var n2 := _xz(n)
+        var n2_len := n2.length()
+        if n2_len < wall_normal_min_horiz:
+            continue
+        n2 /= n2_len
+
+        var d := move2.dot(n2)       # smaller = more head-on
+        if d < best_dot:
+            best_dot = d
+            best_n = n2
+    return best_n
+
+func _snap_parallel_to_wall(wall_n_xz: Vector3) -> void:
+    print('snap to wall')
+    var tangent := Vector3.UP.cross(wall_n_xz).normalized()    # along the wall
+    if tangent.dot(_xz(_move_dir)) < 0.0:
+        tangent = -tangent
+    _move_dir = tangent
+    velocity.x = _move_dir.x * _speed
+    velocity.z = _move_dir.z * _speed
+
+func _follow_actual_motion(pos0: Vector3) -> void:
+    var motion := global_position - pos0
+    if motion.length() > 0.001:
+        _move_dir = _xz(motion).normalized()
+
+# --- Math utils ------------------------
 func _exp_k(dt: float, tau: float) -> float:
-    if tau <= 0.0: 
+    if tau <= 0.0:
         return 1.0
     return 1.0 - exp(-dt / tau)
+
+func _xz(v: Vector3) -> Vector3:
+    return Vector3(v.x, 0.0, v.z)
 
 func _yaw_from_move_dir_deg() -> float:
     return rad_to_deg(atan2(_move_dir.x, _move_dir.z))
@@ -150,7 +223,6 @@ func _wrap_deg(a: float) -> float:
     return wrapf(a, -180.0, 180.0)
 
 func _snap_delta_deg() -> float:
-    # How much we need to rotate (in degrees) to reach the closest snap angle
     if snap_increment_deg <= 0.0:
         return 0.0
     var yaw := _yaw_from_move_dir_deg()
@@ -165,41 +237,30 @@ func snap_to_grid() -> void:
         return
     var delta := _snap_delta_deg()
     if delta != 0.0:
-        # Use your existing queued-turn machinery to consume it smoothly
         queue_turn(delta)
 
-
-
-
-# --- Public API -----------------------
+# --- Public API ------------------------
 func set_turn_axis(v: float) -> void:
     v = clamp(v, -1.0, 1.0)
     var was_holding := _turn_axis != 0.0
     var new_holding := v != 0.0
 
-    # start of hold
     if (not was_holding) and new_holding:
         _turn_session_active = true
-        _turn_session_dir = 1 if v > 0.0 else -1   # +1 = left/WEST, -1 = right/EAST
+        _turn_session_dir = 1 if v > 0.0 else -1
 
-    # end of hold -> snap forward to the next multiple in the held direction
     if was_holding and (not new_holding) and _turn_session_active:
         var inc := snap_increment_deg if snap_increment_deg > 0.0 else 45.0
         var yaw := _yaw_from_move_dir_deg()
         var target: float
         if _turn_session_dir > 0:
-            # next higher multiple (left)
-            target = floor(yaw / inc) * inc + inc
+            target = floor(yaw / inc) * inc + inc   # next higher multiple (left)
         else:
-            # next lower multiple (right)
-            target = ceil(yaw / inc) * inc - inc
+            target = ceil(yaw / inc) * inc - inc    # next lower multiple (right)
 
         var delta := _wrap_deg(target - yaw)
-
-        # Safety: ensure we never rotate backwards; if sign mismatches, push one more step forward
         if sign(delta) != _turn_session_dir and abs(delta) > 0.001:
             delta = _wrap_deg(delta + _turn_session_dir * inc)
-
         if abs(delta) > 0.001:
             queue_turn(delta)
 
@@ -207,8 +268,6 @@ func set_turn_axis(v: float) -> void:
         _turn_session_dir = 0
 
     _turn_axis = v
-
-
 
 func queue_turn(delta_deg: float) -> void:
     _remaining_turn_deg = clamp(_remaining_turn_deg + delta_deg, -360.0, 360.0)
@@ -219,7 +278,7 @@ func set_speed_mode(mode: String) -> void:
     if speed_modes.has(key):
         _target_speed = max(float(speed_modes[key]), 0.0)
         _speed_mode = key
-        speed_changed.emit(_target_speed, _speed_mode)  # emit the new target for HUD etc.
+        speed_changed.emit(_target_speed, _speed_mode)
     else:
         push_warning("PlayerRunner: unknown speed mode '%s'." % mode)
 

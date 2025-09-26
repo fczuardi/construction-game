@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://2ux1olvnmbt4"]
+[gd_scene load_steps=11 format=3 uid="uid://2ux1olvnmbt4"]
 
 [ext_resource type="Script" uid="uid://vf6f0by61bt4" path="res://lib/maps/stage_map.gd" id="1_vfwxv"]
 [ext_resource type="Texture2D" uid="uid://c3ggid41yoxw5" path="res://imports/textures/Maryborough Courthouse/ground-floor_640x1024.jpg" id="2_d0vik"]
@@ -6,9 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bgcqgghyod1m6" path="res://lib/CollectiblesStage2/Spade1_RCS.tscn" id="4_maoqs"]
 [ext_resource type="Texture2D" uid="uid://bkb8u71km3upw" path="res://imports/icons/noun_project/noun-shovel-7837473_600px.png" id="5_rwyaa"]
 [ext_resource type="FontFile" uid="uid://puw8wtbfcgof" path="res://imports/fonts/Noto_Emoji/NotoEmoji-VariableFont_wght.ttf" id="6_djye3"]
-[ext_resource type="PackedScene" uid="uid://beyf1ogtneww2" path="res://lib/CollectiblesStage2/Drill_LPC.tscn" id="7_1abtr"]
 [ext_resource type="Texture2D" uid="uid://ct1apmle6kbxh" path="res://imports/icons/noun_project/noun-running-shoes-7597877_600px.png" id="7_maoqs"]
-[ext_resource type="PackedScene" uid="uid://d0md6rv8muuf7" path="res://lib/CollectiblesStage2/Plank2_RCS.tscn" id="8_gd8af"]
 [ext_resource type="PackedScene" uid="uid://dhwkfohh06l7" path="res://lib/CollectiblesStage2/Sneakers_TFC.tscn" id="9_gd8af"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aayd2"]
@@ -90,104 +88,6 @@ texture = ExtResource("5_rwyaa")
 expand_mode = 1
 
 [node name="Checkmark" type="Label" parent="Stickers/SpadeCollectible"]
-visible = false
-custom_minimum_size = Vector2(50, 50)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -25.0
-offset_top = -25.0
-offset_right = 25.0
-offset_bottom = 25.0
-grow_horizontal = 2
-grow_vertical = 2
-rotation = 3.1415927
-pivot_offset = Vector2(25, 25)
-size_flags_vertical = 1
-theme_override_colors/font_color = Color(0.95686275, 0.827451, 0.36862746, 1)
-theme_override_fonts/font = ExtResource("6_djye3")
-theme_override_font_sizes/font_size = 40
-text = "✔︎"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="SpadeCollectible2" type="Marker2D" parent="Stickers" groups=["map_icon"]]
-position = Vector2(238.00003, 143)
-script = ExtResource("3_p3aax")
-kind = ExtResource("7_1abtr")
-item_id = &"drill"
-
-[node name="Panel" type="Panel" parent="Stickers/SpadeCollectible2"]
-offset_left = -110.161
-offset_top = 0.38011932
-offset_right = -0.16103363
-offset_bottom = 110.38012
-rotation = -0.7853982
-pivot_offset = Vector2(110, 0)
-theme_override_styles/panel = SubResource("StyleBoxFlat_aayd2")
-
-[node name="Icon" type="TextureRect" parent="Stickers/SpadeCollectible2"]
-offset_left = -48.161
-offset_top = 30.38
-offset_right = 56.839
-offset_bottom = 135.38
-rotation = 3.1415927
-pivot_offset = Vector2(50, 50)
-texture = ExtResource("5_rwyaa")
-expand_mode = 1
-
-[node name="Checkmark" type="Label" parent="Stickers/SpadeCollectible2"]
-visible = false
-custom_minimum_size = Vector2(50, 50)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -25.0
-offset_top = -25.0
-offset_right = 25.0
-offset_bottom = 25.0
-grow_horizontal = 2
-grow_vertical = 2
-rotation = 3.1415927
-pivot_offset = Vector2(25, 25)
-size_flags_vertical = 1
-theme_override_colors/font_color = Color(0.95686275, 0.827451, 0.36862746, 1)
-theme_override_fonts/font = ExtResource("6_djye3")
-theme_override_font_sizes/font_size = 40
-text = "✔︎"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="SpadeCollectible3" type="Marker2D" parent="Stickers" groups=["map_icon"]]
-position = Vector2(305.00003, 283)
-script = ExtResource("3_p3aax")
-kind = ExtResource("8_gd8af")
-item_id = &"plank"
-
-[node name="Panel" type="Panel" parent="Stickers/SpadeCollectible3"]
-offset_left = -110.161
-offset_top = 0.38011932
-offset_right = -0.16103363
-offset_bottom = 110.38012
-rotation = -0.7853982
-pivot_offset = Vector2(110, 0)
-theme_override_styles/panel = SubResource("StyleBoxFlat_aayd2")
-
-[node name="Icon" type="TextureRect" parent="Stickers/SpadeCollectible3"]
-offset_left = -48.161
-offset_top = 30.38
-offset_right = 56.839
-offset_bottom = 135.38
-rotation = 3.1415927
-pivot_offset = Vector2(50, 50)
-texture = ExtResource("5_rwyaa")
-expand_mode = 1
-
-[node name="Checkmark" type="Label" parent="Stickers/SpadeCollectible3"]
 visible = false
 custom_minimum_size = Vector2(50, 50)
 anchors_preset = 8

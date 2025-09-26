@@ -2,8 +2,6 @@
 
 An endless runner by Fabricio Zuardi.
 
-    _"Death Stranding meets Subway Surfer."_
-
 ## License
 
 MIT License

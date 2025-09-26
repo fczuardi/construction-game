@@ -7,10 +7,11 @@
 [resource]
 Button/font_sizes/font_size = 25
 Button/fonts/font = ExtResource("2_het5a")
-RichTextLabel/font_sizes/bold_font_size = 13
+MarkdownLabel/base_type = &"RichTextLabel"
+RichTextLabel/font_sizes/bold_font_size = 15
 RichTextLabel/font_sizes/normal_font_size = 13
 SmallLabel/base_type = &"Label"
-SmallLabel/font_sizes/font_size = 18
+SmallLabel/font_sizes/font_size = 22
 SmallLabel/fonts/font = ExtResource("2_lkf7m")
 SubtitleLabel/base_type = &"Label"
 SubtitleLabel/font_sizes/font_size = 28

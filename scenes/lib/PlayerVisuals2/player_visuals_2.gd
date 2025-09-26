@@ -13,11 +13,11 @@ extends Node3D
 @export_group("Speed Bands")
 @export var zero_speed_eps: float = 0.07
 @export var walk_enter: float = 0.70
-@export var walk_exit:  float = 0.50
+@export var walk_exit:  float = 0.10
 @export var jog_enter:  float = 2.2
 @export var jog_exit:   float = 1.8
-@export var sprint_enter: float = 4.40
-@export var sprint_exit:  float = 4.10
+@export var sprint_enter: float = 4.60
+@export var sprint_exit:  float = 4.20
 
 # ## Movement (lower body, legs, hips, spine)
 #
@@ -109,7 +109,6 @@ var _last_base: MovementBase = MovementBase.IDLE
 var _last_end: MovementEnd = MovementEnd.MOVE
 var _last_upper_body_base: UpperBodyBase = UpperBodyBase.MAP
 var _last_blend: float = -1.0
-var _previous_blend: float = -1.0
 var _last_stride: float = -1.0
 var _pending_stumble: int = 0  # 0 none, 1 soft, 2 hard
 var _last_facing: float = 0.0
@@ -118,6 +117,15 @@ var _stride_ref_speed: float = 0.85   # stride=1x at walk, replaced on update_mo
 @onready var boots: MeshInstance3D = %Ch17_Boots
 @onready var boots_skin_left: BoneAttachment3D = %BootsSkinLeft
 @onready var boots_skin_right: BoneAttachment3D = %BootsSkinRight
+
+@export var anim_fall_coyote_ms: int = 120     # grace after leaving floor
+@export var anim_fall_down_speed: float = -0.6 # require this downward speed OR grace to expire
+
+@export_group("Visual Stability")
+@export var speed_smooth_tau: float = 0.12
+var _smoothed_speed: float = 0.0
+var _anim_off_floor_since_ms: int = -1
+var _anim_air_frames: int = 0
 
 func _ready() -> void:
     assert(animation_tree)
@@ -150,7 +158,66 @@ func get_map_texture() -> Texture2D:
 
 var _last_velocity: Vector3
 
+## Called every physics tick from PlayerRunner
+func update_motion(velocity: Vector3, on_floor: bool) -> void:
+    if !animation_tree or Engine.is_editor_hint():
+        return
+
+    _last_velocity = velocity
+    var raw_speed := velocity.length()
+
+    # Keep facing stable when almost stopped
+    if raw_speed > zero_speed_eps:
+        _last_facing = atan2(velocity.x, velocity.z)
+    rotation.y = _last_facing
+
+    # ---- Visual coyote time for fall (tolerate tiny step-offs) ----
+    var now := Time.get_ticks_msec()
+    if on_floor:
+        _anim_off_floor_since_ms = -1
+        _anim_air_frames = 0
+    else:
+        if _anim_off_floor_since_ms < 0:
+            _anim_off_floor_since_ms = now
+        _anim_air_frames += 1
+
+    var grace_active := (not on_floor) and (_anim_off_floor_since_ms >= 0) and ((now - _anim_off_floor_since_ms) < anim_fall_coyote_ms)
+    var falling_fast := velocity.y <= anim_fall_down_speed
+
+    # ---- Visual speed smoothing + debounce around walk/idle thresholds ----
+    var dt := 1.0 / float(Engine.get_physics_ticks_per_second())
+    var k := 1.0 if speed_smooth_tau <= 0.0 else (1.0 - exp(-dt / speed_smooth_tau))
+    _smoothed_speed = lerp(_smoothed_speed, raw_speed, k)
+
+    # 1) Base locomotion with hysteresis (using smoothed speed) + fall override
+    var base := _classify_with_hysteresis(_smoothed_speed, _last_base)
+
+    # fall override (either dropping fast or grace expired + at least 2 frames airborne)
+    var show_fall := (not on_floor) and (falling_fast or (not grace_active and _anim_air_frames >= 2))
+    if show_fall:
+        base = MovementBase.FALL
+
+    _update_movement_base(base)
+
+    # 2) Stride playback scaling (use smoothed speed for visual stability)
+    var stride := 1.0
+    if _stride_ref_speed > 0.0:
+        var ref :float = max(_stride_ref_speed, 0.001)
+        stride = clamp(_smoothed_speed / ref, stride_scale_min, stride_scale_max)
+    _set_stride(stride)
+
+    # 3) Fire pending one-shots once
+    if _pending_stumble == 2:
+        _fire_hard_stumble()
+        _pending_stumble = 0
+    elif _pending_stumble == 1:
+        _trigger_movement_event(MovementEvent.STUMBLE)
+        _pending_stumble = 0
+
 func reset_to_start() -> void:
+    print("reset to start")
+    _smoothed_speed = 0.0
+
     _update_movement_base(MovementBase.WALK)
     _update_movement_end(MovementEnd.MOVE)
     _toggle_upper_body_blend(false)
@@ -159,39 +226,6 @@ func reset_to_start() -> void:
     animation_tree[UPPER_BODY_EVENT_ONESHOT_PATH] = AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT
     apply_map_texture()
 
-## Called every physics tick from PlayerRunner
-func update_motion(velocity: Vector3, on_floor: bool) -> void:
-    if !animation_tree:
-        return
-    if Engine.is_editor_hint():
-         return
-    _last_velocity = velocity
-    var speed := velocity.length()
-
-    # Keep facing stable when almost stopped
-    if speed > zero_speed_eps:
-        _last_facing = atan2(velocity.x, velocity.z)
-    rotation.y = _last_facing
-
-    # 1) Base locomotion selection with hysteresis
-    var base := _classify_with_hysteresis(speed, _last_base)
-    if (! on_floor and velocity.y < 0.2):
-        base = MovementBase.FALL
-    _update_movement_base(base)
-
-    # 2) Stride playback scaling (optional but nice)
-    var stride := 1.0
-    if _stride_ref_speed > 0.0:
-        stride = clamp(speed / _stride_ref_speed, stride_scale_min, stride_scale_max)
-    _set_stride(stride)
-    
-    # 3) Fire pending one-shots once
-    if _pending_stumble == 2:
-        _fire_hard_stumble()
-        _pending_stumble = 0
-    elif _pending_stumble == 1:
-        _trigger_movement_event(MovementEvent.STUMBLE)
-        _pending_stumble = 0
 
 ## Called by TrenchStumbleClassifier
 func play_stumble(severity: float) -> void:
@@ -256,6 +290,7 @@ func _update_movement_end(end: MovementEnd):
 func _update_movement_base(base: MovementBase):
     if base == _last_base:
         return
+    print(MOVEMENT_STATE[_last_base], " to ", MOVEMENT_STATE[base], _smoothed_speed)
     var state_name := MOVEMENT_STATE[base]
     animation_tree[MOVEMENT_BASE_TRANSITION_PATH] = state_name
     _stride_ref_speed = MOVEMENT_SPEED[base]

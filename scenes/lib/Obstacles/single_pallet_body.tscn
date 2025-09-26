@@ -1,0 +1,80 @@
+[gd_scene load_steps=10 format=3 uid="uid://l27r8xlkbo1g"]
+
+[ext_resource type="PackedScene" uid="uid://1rxwjo66rwm2" path="res://imports/models/Low Poly Construction/Pallet.fbx" id="1_oy61h"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_3sulc"]
+left_to_right = 0.0
+size = Vector3(0.749, 0.12, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_3sulc"]
+top_radius = 0.65
+bottom_radius = 1.85
+height = 0.13
+
+[sub_resource type="BoxMesh" id="BoxMesh_3sulc"]
+size = Vector3(1.1, 0.13, 1.05)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_gpa5m"]
+points = PackedVector3Array(-0.55, -0.065, -0.525, -0.55, 0.065, -0.525, 0.55, -0.065, -0.525, -0.55, -0.065, 0.525, -0.55, 0.065, 0.525, 0.55, 0.065, -0.525, 0.55, -0.065, 0.525, 0.55, 0.065, 0.525)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_3sulc"]
+points = PackedVector3Array(0.3745, -0.06, 0.5, -0.3745, 0.060000006, 0.5, -0.3745, -0.06, 0.5, 0.3745, -0.06, -0.5, -0.3745, 0.060000006, -0.5, -0.3745, -0.06, -0.5)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_1a1gf"]
+points = PackedVector3Array(0.3745, -0.06, 0.5, -0.3745, 0.060000006, 0.5, -0.3745, -0.06, 0.5, 0.3745, -0.06, -0.5, -0.3745, 0.060000006, -0.5, -0.3745, -0.06, -0.5)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_a43eb"]
+points = PackedVector3Array(0.3745, -0.06, 0.5, -0.3745, 0.060000006, 0.5, -0.3745, -0.06, 0.5, 0.3745, -0.06, -0.5, -0.3745, 0.060000006, -0.5, -0.3745, -0.06, -0.5)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_yd5nc"]
+points = PackedVector3Array(0.3745, -0.06, 0.5, -0.3745, 0.060000006, 0.5, -0.3745, -0.06, 0.5, 0.3745, -0.06, -0.5, -0.3745, 0.060000006, -0.5, -0.3745, -0.06, -0.5)
+
+[node name="SinglePalletBody" type="StaticBody3D"]
+
+[node name="RampColliders" type="Node3D" parent="."]
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RampColliders"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9189911, 0, 0)
+mesh = SubResource("PrismMesh_3sulc")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="RampColliders"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.9267197, 0, 0)
+mesh = SubResource("PrismMesh_3sulc")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="RampColliders"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.020317137, 0, -0.8996811)
+mesh = SubResource("PrismMesh_3sulc")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="RampColliders"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.020317137, 0, 0.8970566)
+mesh = SubResource("PrismMesh_3sulc")
+
+[node name="Pallet" parent="." instance=ExtResource("1_oy61h")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Pallet"]
+visible = false
+mesh = SubResource("CylinderMesh_3sulc")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Pallet"]
+visible = false
+mesh = SubResource("BoxMesh_3sulc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_gpa5m")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9189911, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_3sulc")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.9267197, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_1a1gf")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.020317137, 0, -0.8996811)
+shape = SubResource("ConvexPolygonShape3D_a43eb")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.020317137, 0, 0.8970566)
+shape = SubResource("ConvexPolygonShape3D_yd5nc")

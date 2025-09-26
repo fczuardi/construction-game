@@ -41,12 +41,11 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("1_gbblp")
+theme_type_variation = &"MarkdownLabel"
 bbcode_enabled = true
 text = "[font_size=29]Contractor Hero[/font_size]
 
 An endless runner by Fabricio Zuardi.
-
-    [i]\"Death Stranding meets Subway Surfer.\"[/i]
 
 [font_size=22]License[/font_size]
 
@@ -262,8 +261,6 @@ script = ExtResource("1_hvkmd")
 markdown_text = "# Contractor Hero
 
 An endless runner by Fabricio Zuardi.
-
-    _\"Death Stranding meets Subway Surfer.\"_
 
 ## License
 

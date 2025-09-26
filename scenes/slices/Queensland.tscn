@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://giqxuc0gq0fk"]
+[gd_scene load_steps=59 format=3 uid="uid://giqxuc0gq0fk"]
 
 [ext_resource type="Script" uid="uid://cq16dqdvi8ncx" path="res://slices/queensland.gd" id="1_glf58"]
 [ext_resource type="Script" uid="uid://bly6ty8fepn6x" path="res://lib/Wiring/wiring.gd" id="2_5p6w5"]
@@ -38,6 +38,7 @@
 [ext_resource type="Texture2D" uid="uid://b12f1610ujfec" path="res://imports/textures/brown_mud_03_1k.blend/textures/brown_mud_03_rough_1k.png" id="28_m3fvh"]
 [ext_resource type="Texture2D" uid="uid://bl7sehycex2hp" path="res://imports/textures/Maryborough Courthouse/ground-floor_walls_spray_transparent2.png" id="32_062l0"]
 [ext_resource type="PackedScene" uid="uid://0doy2wond1wo" path="res://lib/Obstacles/Picket.tscn" id="36_v5wek"]
+[ext_resource type="PackedScene" uid="uid://bf827fv7m3tmq" path="res://lib/Obstacles/plank_pile_obstacle.tscn" id="39_0vd2w"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2w0o7"]
 size = Vector3(0.6, 1, 0.1)
@@ -190,11 +191,6 @@ metadata/_edit_lock_ = true
 
 [node name="PlayerVisuals2" parent="PlayerRunner" node_paths=PackedStringArray("clear_stage_bg") instance=ExtResource("4_4o0cy")]
 clear_stage_bg = NodePath("../../HUD/MarginContainer/Stage Clear/MarginContainer/VBoxContainer/StageClearBgTexture")
-walk_enter = 0.07
-jog_enter = 1.9
-jog_exit = 1.6
-sprint_enter = 3.5
-sprint_exit = 3.2
 
 [node name="FPCams" type="Node3D" parent="PlayerRunner/PlayerVisuals2"]
 
@@ -209,7 +205,7 @@ transform = Transform3D(-1, 8.742278e-08, 0, 2.8750433e-08, 0.32886663, 0.944376
 transform = Transform3D(1, 0, 0, 0, 0.14608309, 0.9892723, 0, -0.9892723, 0.14608309, -0.488, 5.29, 3.069)
 
 [node name="GoalCam" type="Camera3D" parent="PlayerRunner/PlayerVisuals2/FPCams"]
-transform = Transform3D(1, 0, 0, 0, 0.7408046, 0.67172056, 0, -0.67172056, 0.7408046, 0, 1.747, 0.785)
+transform = Transform3D(1, 0, 0, 0, 0.7408046, 0.67172056, 0, -0.67172056, 0.7408046, 0, 1.747, 0.706)
 
 [node name="CollectiblePointer" type="Node3D" parent="PlayerRunner/PlayerVisuals2" node_paths=PackedStringArray("visuals", "runner")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
@@ -699,7 +695,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.96, 0, 36.43)
 metadata/_edit_lock_ = true
 
 [node name="Stage1Ground" type="Node3D" parent="."]
-visible = false
 
 [node name="Stage1Floor" type="StaticBody3D" parent="Stage1Ground"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.861, 0, 15.38)
@@ -742,6 +737,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.034876347, 0)
 mesh = SubResource("PlaneMesh_lxpnk")
 
 [node name="Stage2Ground" type="Node3D" parent="."]
+visible = false
 
 [node name="Stage2Floor" type="StaticBody3D" parent="Stage2Ground" groups=["stage2"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.861, 0, 15.38)
@@ -882,6 +878,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.4095664, 0, 20.5)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.099411, 0, 20.5)
 
 [node name="Marker3D" type="Marker3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets"]
+
+[node name="LargeObstacles" type="Node3D" parent="Stage2Ground/Stage2Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.807251)
+
+[node name="PlankPileObstacle" parent="Stage2Ground/Stage2Floor/LargeObstacles" instance=ExtResource("39_0vd2w")]
 
 [node name="Stage3Floor" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.861, 0, 15.38)
