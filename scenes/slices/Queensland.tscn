@@ -488,8 +488,8 @@ horizontal_alignment = 1
 
 [node name="CopyrightNotice" type="Label" parent="HUD/MarginContainer/Game Over Credits/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("21_5a3uq")
-theme_override_font_sizes/font_size = 20
+theme = ExtResource("21_5d7xt")
+theme_type_variation = &"SmallLabel"
 text = "(cc) Contractor heroes 2025"
 horizontal_alignment = 1
 
@@ -504,6 +504,7 @@ layout_mode = 2
 size_flags_vertical = 8
 
 [node name="Stage Clear" type="Control" parent="HUD/MarginContainer" node_paths=PackedStringArray("player_visuals", "countdown", "stage_clear_bg_texture")]
+visible = false
 layout_mode = 2
 script = ExtResource("24_xsuks")
 player_visuals = NodePath("../../../PlayerRunner/PlayerVisuals2")

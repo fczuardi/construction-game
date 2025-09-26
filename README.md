@@ -30,120 +30,120 @@ There are **at least 62** other **amazing humans** that contributed with their t
 
 #### Character, Animations
 
-    - ["Pete"](https://www.mixamo.com/#/?page=1&query=pete&type=Character)
-    - ["Walking With A Swagger"](https://www.mixamo.com/#/?page=1&query=male+swagger)
-    - ["Male Walking While Texting On A Smartphone"](https://www.mixamo.com/#/?page=1&query=texting+walking+male)
-    - ["Male Weighted Run"](https://www.mixamo.com/#/?page=1&query=weighted)
-    - ["Pointing Behind With Thumb"](https://www.mixamo.com/#/?page=1&query=point+thumb)
-    - ["Looking Down Then Pointing Forward"](https://www.mixamo.com/#/?page=1&query=point+forward+look)
-    - ["Brief Stumble While Jogging"](https://www.mixamo.com/#/?page=1&query=brief+stumble+jog)
-    - ["Walk To Tripping And Falling"](https://www.mixamo.com/#/?page=1&query=walk+tripping+falling)
-    - ["Mid-Air Falling Idle"]("https://www.mixamo.com/#/?page=1&query=mid+air+falling+idle")
-        - Author: [Adobe Mixamo](https://www.mixamo.com)
-        - License: [Adobe Terms of Service](https://www.adobe.com/legal/terms.html#content-files)
+  - ["Pete"](https://www.mixamo.com/#/?page=1&query=pete&type=Character)
+  - ["Walking With A Swagger"](https://www.mixamo.com/#/?page=1&query=male+swagger)
+  - ["Male Walking While Texting On A Smartphone"](https://www.mixamo.com/#/?page=1&query=texting+walking+male)
+  - ["Male Weighted Run"](https://www.mixamo.com/#/?page=1&query=weighted)
+  - ["Pointing Behind With Thumb"](https://www.mixamo.com/#/?page=1&query=point+thumb)
+  - ["Looking Down Then Pointing Forward"](https://www.mixamo.com/#/?page=1&query=point+forward+look)
+  - ["Brief Stumble While Jogging"](https://www.mixamo.com/#/?page=1&query=brief+stumble+jog)
+  - ["Walk To Tripping And Falling"](https://www.mixamo.com/#/?page=1&query=walk+tripping+falling)
+  - ["Mid-Air Falling Idle"]("https://www.mixamo.com/#/?page=1&query=mid+air+falling+idle")
+      - Author: [Adobe Mixamo](https://www.mixamo.com)
+      - License: [Adobe Terms of Service](https://www.adobe.com/legal/terms.html#content-files)
 
 #### Clothing 
 
-    - [Winter Hat](https://sketchfab.com/3d-models/winter-hat-637a36cb74204c719883af7feb4b7c28)
-        - Author: [StubbornFunkyDonkey](https://sketchfab.com/stubbornfunkydonkey)
-        - License: [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/)
-    - Sneakers from [Zapatilla Asics Gel-Nimbus 23 (Low Poly)](https://sketchfab.com/3d-models/zapatilla-asics-gel-nimbus-23-low-poly-1d4a1f38b12543b595566e3f410afab4)
-        - Author: [Tomás Fernández Castillo](https://sketchfab.com/tfernndez)
-        - License: [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/) 
+  - [Winter Hat](https://sketchfab.com/3d-models/winter-hat-637a36cb74204c719883af7feb4b7c28)
+      - Author: [StubbornFunkyDonkey](https://sketchfab.com/stubbornfunkydonkey)
+      - License: [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/)
+  - Sneakers from [Zapatilla Asics Gel-Nimbus 23 (Low Poly)](https://sketchfab.com/3d-models/zapatilla-asics-gel-nimbus-23-low-poly-1d4a1f38b12543b595566e3f410afab4)
+      - Author: [Tomás Fernández Castillo](https://sketchfab.com/tfernndez)
+      - License: [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/) 
 
-#### Collectibles
+## Collectibles
 
-    - Level, Pencil from [Construction Tools](https://sketchfab.com/3d-models/construction-tools-09e12ba3f7ee42259b6533581abec86f)
-        - Author: [Teen Wolf](https://sketchfab.com/Teen-Wolf)
-        - License: [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/)
-    - Measuring Tape from [Construction Tools 2 Pack](https://sketchfab.com/3d-models/construction-tools-2-pack-9facdce61fff42578f50c16393be306b)
-        - Author: [Teen Wolf](https://sketchfab.com/Teen-Wolf)
-        - License: [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/)
-    - Pickets, Mallet, Spray Paint from [Heinrich-staking Earthworks-Trimble-S9](https://sketchfab.com/3d-models/heinrich-staking-earthworks-trimble-s9-c5b164a003ff4beca6820214e0c3a0c1)
-        - Author: [6TMD-Modeling](https://patrickbiani.wixsite.com/6tmd-modeling)
-        - License: [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/)
-    - Toilet Paper Roll from [CC0 - Toilet Paper Roll](https://sketchfab.com/3d-models/cc0-toilet-paper-roll-6d5284b842434413a17133f7bf259669)
-        - Authot: [Marcel Plagmann (aka plaggy)](https://plaggy.net/)
-        - Licenses: 
-            - [CC0 1.0 Universal (CC0 1.0) Public Domain Dedication](https://creativecommons.org/publicdomain/zero/1.0/)
-            - [CC-BY-4.0](http://creativecommons.org/licenses/by/4.0/)
-    - Bitcoin Coin from [Realistic 3D Bitcoin Model – Crypto Asset](https://sketchfab.com/3d-models/realistic-3d-bitcoin-model-crypto-asset-d71eff74bd5c4e25890477a4d3ecea73)
-        - Author: [CryptoArt-Miki](https://sketchfab.com/CryptoArt-Miki)
-        - License: [Creative Commons Attribution-NonCommercial 4.0](https://creativecommons.org/licenses/by-nc/4.0/)
-    - Spade from [Realistic Modern Construction Site Asset Package](https://aligned-games.itch.io/realistic-modern-construction-site-asset-package)
-        - Author: [Aligned Games](https://aligned-games.itch.io/)
-        - License: Unknown, paid asset pack
+  - Level, Pencil from [Construction Tools](https://sketchfab.com/3d-models/construction-tools-09e12ba3f7ee42259b6533581abec86f)
+      - Author: [Teen Wolf](https://sketchfab.com/Teen-Wolf)
+      - License: [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/)
+  - Measuring Tape from [Construction Tools 2 Pack](https://sketchfab.com/3d-models/construction-tools-2-pack-9facdce61fff42578f50c16393be306b)
+      - Author: [Teen Wolf](https://sketchfab.com/Teen-Wolf)
+      - License: [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/)
+  - Pickets, Mallet, Spray Paint from [Heinrich-staking Earthworks-Trimble-S9](https://sketchfab.com/3d-models/heinrich-staking-earthworks-trimble-s9-c5b164a003ff4beca6820214e0c3a0c1)
+      - Author: [6TMD-Modeling](https://patrickbiani.wixsite.com/6tmd-modeling)
+      - License: [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/)
+  - Toilet Paper Roll from [CC0 - Toilet Paper Roll](https://sketchfab.com/3d-models/cc0-toilet-paper-roll-6d5284b842434413a17133f7bf259669)
+      - Authot: [Marcel Plagmann (aka plaggy)](https://plaggy.net/)
+      - Licenses: 
+          - [CC0 1.0 Universal (CC0 1.0) Public Domain Dedication](https://creativecommons.org/publicdomain/zero/1.0/)
+          - [CC-BY-4.0](http://creativecommons.org/licenses/by/4.0/)
+  - Bitcoin Coin from [Realistic 3D Bitcoin Model – Crypto Asset](https://sketchfab.com/3d-models/realistic-3d-bitcoin-model-crypto-asset-d71eff74bd5c4e25890477a4d3ecea73)
+      - Author: [CryptoArt-Miki](https://sketchfab.com/CryptoArt-Miki)
+      - License: [Creative Commons Attribution-NonCommercial 4.0](https://creativecommons.org/licenses/by-nc/4.0/)
+  - Spade from [Realistic Modern Construction Site Asset Package](https://aligned-games.itch.io/realistic-modern-construction-site-asset-package)
+      - Author: [Aligned Games](https://aligned-games.itch.io/)
+      - License: Unknown, paid asset pack
 
 #### Scenery / Obstacles
 
-    - Clipboard, Toilets, Pallet from [Low Poly Construction Pack](https://lowpolyassets.itch.io/low-poly-construction-pack)
-        - Author: [LowPolyAssets](https://lowpolyassets.itch.io/)
-        - License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/)
+  - Clipboard, Toilets, Pallet from [Low Poly Construction Pack](https://lowpolyassets.itch.io/low-poly-construction-pack)
+      - Author: [LowPolyAssets](https://lowpolyassets.itch.io/)
+      - License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/)
 
-#### Textures
+## Textures
 
-    - Ground Plan from [Architectural plan of the Public Offices and Court House, Maryborough, circa 1888](https://en.wikipedia.org/wiki/File:Architectural_plan_of_the_Public_Offices_and_Court_House,_Maryborough,_circa_1888.jpg)
-        - Author: [Francis Drummond Greville Stanley](https://en.wikipedia.org/wiki/Francis_Drummond_Greville_Stanley)
-        - Published by: [State Archives of Queensland](https://www.qld.gov.au/recreation/arts/heritage/archives)
-        - License: Public Domain
-    - Dirt from [Codezly's Basic Texture Pack (#1)](https://codezly.itch.io/codezly-basic-pack-1)
-        - Author: [Codezly](https://www.codezly.com)
-        - License: Codezly Free Texture Pack License Agreement
-            - "Use them in any project you want, but don't repackage/resell them, and just provide a link to www.codezly.com as attribution."
-        - PBR Maps Generated with: [Unity-WebGPU-PBR-Maps-Generator](https://github.com/aniketrajnish/Unity-WebGPU-PBR-Maps-Generator)
-            - License: [MIT License](https://github.com/aniketrajnish/Unity-WebGPU-PBR-Maps-Generator/blob/main/LICENSE)
+  - Ground Plan from [Architectural plan of the Public Offices and Court House, Maryborough, circa 1888](https://en.wikipedia.org/wiki/File:Architectural_plan_of_the_Public_Offices_and_Court_House,_Maryborough,_circa_1888.jpg)
+      - Author: [Francis Drummond Greville Stanley](https://en.wikipedia.org/wiki/Francis_Drummond_Greville_Stanley)
+      - Published by: [State Archives of Queensland](https://www.qld.gov.au/recreation/arts/heritage/archives)
+      - License: Public Domain
+  - Dirt from [Codezly's Basic Texture Pack (#1)](https://codezly.itch.io/codezly-basic-pack-1)
+      - Author: [Codezly](https://www.codezly.com)
+      - License: Codezly Free Texture Pack License Agreement
+          - "Use them in any project you want, but don't repackage/resell them, and just provide a link to www.codezly.com as attribution."
+      - PBR Maps Generated with: [Unity-WebGPU-PBR-Maps-Generator](https://github.com/aniketrajnish/Unity-WebGPU-PBR-Maps-Generator)
+          - License: [MIT License](https://github.com/aniketrajnish/Unity-WebGPU-PBR-Maps-Generator/blob/main/LICENSE)
 
 #### Fonts
 
-    - [Capture It](https://www.dafont.com/capture-it.font)
-        - Author: Koczman Bálint
-        - License: custom license1.txt within zip-file
-            "This font is free to use personal and commercial works too. But you can't sell them direktly."
-    - [Stardos Stencil](https://fonts.google.com/specimen/Stardos+Stencil)
-        - Author: [Vernon Adams](https://fonts.google.com/?query=vernon+adams) 2/2/1967-8/24/2016
-        - License: [SIL Open Font License Version 1.1](https://fonts.google.com/specimen/Big+Shoulders+Stencil/license) 
-    - [Noto Emoji](https://fonts.google.com/noto/specimen/Noto+Emoji)
-        - Author: Google LLC
-        - License: [Open Font License 1.1](https://fonts.google.com/noto/specimen/Noto+Emoji/license)
+  - [Capture It](https://www.dafont.com/capture-it.font)
+      - Author: Koczman Bálint
+      - License: custom license1.txt within zip-file
+          "This font is free to use personal and commercial works too. But you can't sell them direktly."
+  - [Stardos Stencil](https://fonts.google.com/specimen/Stardos+Stencil)
+      - Author: [Vernon Adams](https://fonts.google.com/?query=vernon+adams), (* 2/2/1967 – † 8/24/2016)
+      - License: [SIL Open Font License Version 1.1](https://fonts.google.com/specimen/Big+Shoulders+Stencil/license) 
+  - [Noto Emoji](https://fonts.google.com/noto/specimen/Noto+Emoji)
+      - Author: Google LLC
+      - License: [Open Font License 1.1](https://fonts.google.com/noto/specimen/Noto+Emoji/license)
 
 #### Icons
 
-    - [Remix Icon](https://remixicon.com/)
-        - Authors: [Remix Design Studio (Wendy Gao and Jimmy Cheung)](https://github.com/Remix-Design)
-        - License: [Apache License 2.0](https://github.com/Remix-Design/remixicon/blob/master/License)
-        - Items:
-            - treasure-map-line, ri-run-line, ri-menu-line, circle-fill, navigation-fill, arrow-right-up-line, arrow-right-down-line, arrow-left-up-line, arrow-left-down-line
-    - Noun Project:
-        - [Level by INA](https://thenounproject.com/icon/level-6853002/)
-            - Author: [INA](https://thenounproject.com/creator/zullyantisiti78/)
-            - License: [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/)
-        - [Pencil by LUTFI GANI AL ACHMAD](https://thenounproject.com/icon/pencil-8001529/)
-            - Author: [LUTFI GANI AL ACHMAD](https://thenounproject.com/creator/lutfidiarycoc/)
-            - License: [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/)
-        - [measuring tape by Firza Alamsyah](https://thenounproject.com/icon/measuring-tape-7819005/)
-            - Author: [Firza Alamsyah](https://thenounproject.com/creator/crlxsens/)
-            - License: [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/)
-        - [Mallet by M. Oki Orlando](https://thenounproject.com/icon/mallet-4296337/)
-            - Author: [M. Oki Orlando](https://thenounproject.com/creator/orvipixel/)
-            - License: [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/)
-        - [Tent Stake by Kawalan Icon](https://thenounproject.com/icon/tent-stake-6308587/)
-            - Author: [Kawalan Icon](https://thenounproject.com/creator/kawalan.studio)
-            - License: [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/)
-        - [Lock by Sita Raisita](https://thenounproject.com/icon/lock-7854371/)
-            - Author: [Sita Raisita](https://thenounproject.com/creator/raisita/)
-            - License: [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/)
-        - [Tissue Paper by Zach Hainsworth](https://thenounproject.com/icon/tissue-paper-6932814/)
-            - Author: [Zach Hainsworth](https://thenounproject.com/creator/hainsworth.zach)
-            - License: [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/)
-        - [Toilet by Wilson Joseph](https://thenounproject.com/icon/toilet-151638/)
-            - Author: [Wilson Joseph](https://www.tuktukdesign.com/)
-            - License: [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/)
-        - [Shovel by Marco Livolsi](https://thenounproject.com/icon/shovel-7837473/)
-            - Author: [Marco Livolsi](https://thenounproject.com/creator/marco.livolsi2014)
-                - License: [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/)
-        - [running shoes by Ayub Irawan](https://thenounproject.com/icon/running-shoes-7597877/)
-            - Author: [Ayub Irawan](https://thenounproject.com/creator/ayub12/)
-            - License: [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/)
+  - [Remix Icon](https://remixicon.com/)
+      - Authors: [Remix Design Studio (Wendy Gao and Jimmy Cheung)](https://github.com/Remix-Design)
+      - License: [Apache License 2.0](https://github.com/Remix-Design/remixicon/blob/master/License)
+      - Items:
+          - treasure-map-line, ri-run-line, ri-menu-line, circle-fill, navigation-fill, arrow-right-up-line, arrow-right-down-line, arrow-left-up-line, arrow-left-down-line
+  - Noun Project:
+      - [Level by INA](https://thenounproject.com/icon/level-6853002/)
+          - Author: [INA](https://thenounproject.com/creator/zullyantisiti78/)
+          - License: [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/)
+      - [Pencil by LUTFI GANI AL ACHMAD](https://thenounproject.com/icon/pencil-8001529/)
+          - Author: [LUTFI GANI AL ACHMAD](https://thenounproject.com/creator/lutfidiarycoc/)
+          - License: [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/)
+      - [measuring tape by Firza Alamsyah](https://thenounproject.com/icon/measuring-tape-7819005/)
+          - Author: [Firza Alamsyah](https://thenounproject.com/creator/crlxsens/)
+          - License: [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/)
+      - [Mallet by M. Oki Orlando](https://thenounproject.com/icon/mallet-4296337/)
+          - Author: [M. Oki Orlando](https://thenounproject.com/creator/orvipixel/)
+          - License: [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/)
+      - [Tent Stake by Kawalan Icon](https://thenounproject.com/icon/tent-stake-6308587/)
+          - Author: [Kawalan Icon](https://thenounproject.com/creator/kawalan.studio)
+          - License: [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/)
+      - [Lock by Sita Raisita](https://thenounproject.com/icon/lock-7854371/)
+          - Author: [Sita Raisita](https://thenounproject.com/creator/raisita/)
+          - License: [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/)
+      - [Tissue Paper by Zach Hainsworth](https://thenounproject.com/icon/tissue-paper-6932814/)
+          - Author: [Zach Hainsworth](https://thenounproject.com/creator/hainsworth.zach)
+          - License: [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/)
+      - [Toilet by Wilson Joseph](https://thenounproject.com/icon/toilet-151638/)
+          - Author: [Wilson Joseph](https://www.tuktukdesign.com/)
+          - License: [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/)
+      - [Shovel by Marco Livolsi](https://thenounproject.com/icon/shovel-7837473/)
+          - Author: [Marco Livolsi](https://thenounproject.com/creator/marco.livolsi2014)
+              - License: [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/)
+      - [running shoes by Ayub Irawan](https://thenounproject.com/icon/running-shoes-7597877/)
+          - Author: [Ayub Irawan](https://thenounproject.com/creator/ayub12/)
+          - License: [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/)
 
 ### Friends / Playtest (32+ supporters)
 
