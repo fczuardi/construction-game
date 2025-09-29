@@ -28,7 +28,14 @@ func _unhandled_input(e):
     if e.is_action_released("debug_slowmo"):  Engine.time_scale = 1.0
     if e.is_action_pressed("debug_sprint"):
         character_body.set_speed_mode("run")
+    if e.is_action_pressed("debug_half_map"):
+        character_visuals.toggle_full_paper(false)
+    if e.is_action_released("debug_half_map"):
+        character_visuals.toggle_full_paper(true)
 
+
+var  _stage_1_full_map: bool = true
+var  _stage_2_full_map: bool = false
 
 ## wire
 func _ready() -> void:
@@ -73,6 +80,8 @@ func _on_item_collected(item: Collectible):
         character_visuals.set_sneakers_enabled(true)
         if character_visuals.is_run_enabled():
             character_body.set_speed_mode("run")
+    if item.id == &"toilet_paper":
+        _stage_2_full_map = true
 
     
 var _alive = true
@@ -105,7 +114,8 @@ func _trigger_game_over():
     )
     item_spawner.map_scene = load("res://lib/maps/stage1_map.tscn")
     _current_stage = 1
-
+    _stage_1_full_map = true
+    _stage_2_full_map = false
     print("game over restart")
 
 
@@ -134,14 +144,18 @@ func _on_restart():
         start_title.enter()
         var level_message = first_stage_message
         var level_ground = first_stage_ground
-        var first_stage_map = character_visuals.get_node("./SubViewport/Points Of Interest/Stage1Map")
-        var second_stage_map = character_visuals.get_node("./SubViewport/Points Of Interest/Stage2Map")
+        var first_stage_map = character_visuals.get_node("./SubViewport/TearableMap/FullMapSize/Points Of Interest/Stage1Map")
+        var second_stage_map = character_visuals.get_node("./SubViewport/TearableMap/FullMapSize/Points Of Interest/Stage2Map")
         var stage_map = first_stage_map
 
+        if _current_stage == 1:
+            character_visuals.toggle_full_paper(_stage_1_full_map)
         if _current_stage == 2:
             level_message = second_stage_message
             level_ground = second_stage_ground
             stage_map = second_stage_map
+            character_visuals.toggle_full_paper(_stage_2_full_map)
+
         for n in [first_stage_ground, second_stage_ground]:
             n.visible = (n == level_ground)
             _toggle_collisions(n, (n == level_ground))

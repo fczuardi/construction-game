@@ -6,6 +6,7 @@ extends Node3D
 
 @export var animation_tree: AnimationTree
 @export var map_mesh: MeshInstance3D
+@export var clipboard_prop: Node3D
 @export var map_viewport: SubViewport
 @export var clear_stage_bg: TextureRect
 
@@ -18,6 +19,7 @@ extends Node3D
 @export var jog_exit:   float = 1.8
 @export var sprint_enter: float = 4.60
 @export var sprint_exit:  float = 4.20
+
 
 # ## Movement (lower body, legs, hips, spine)
 #
@@ -127,8 +129,39 @@ var _smoothed_speed: float = 0.0
 var _anim_off_floor_since_ms: int = -1
 var _anim_air_frames: int = 0
 
+
+@onready var full_paper_clipboard = clipboard_prop.get_node("./FullPaper")
+@onready var teared_map: Control = map_viewport.get_node("./TearableMap")
+@onready var full_map: Control = map_viewport.get_node("./TearableMap/FullMapSize")
+var _full_map_toggled: bool
+func toggle_full_paper(on:bool):
+    _full_map_toggled = on
+    if ! full_paper_clipboard:
+        return
+    if on:
+        print("FULL Paper")
+        full_map.position.y = 0.0
+        full_paper_clipboard.visible = true
+        teared_map.set_anchors_preset(Control.PRESET_FULL_RECT)
+        teared_map.size.x = 640.0
+        teared_map.size.y = 1024.0
+        teared_map.position.y = 0.0
+    else:
+        print("Half Paper")
+        full_paper_clipboard.visible = false
+        full_map.position.y = -512.0
+        teared_map.set_anchors_preset(Control.PRESET_BOTTOM_WIDE)
+        teared_map.size.x = 640.0
+        teared_map.size.y = 512.0
+        teared_map.position.y = 512.0
+    apply_map_texture()
+
+
 func _ready() -> void:
     assert(animation_tree)
+    assert(full_paper_clipboard)
+    assert(full_map)
+    assert(teared_map)
     if !animation_tree:
         return
     animation_tree.active = true
@@ -145,11 +178,13 @@ func apply_map_texture():
     var material = StandardMaterial3D.new()
     var map_texture = map_viewport.get_texture()
     material.albedo_texture = map_texture
-    # map_mesh.set_surface_override_material(0, material)
+    map_viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
+    map_viewport.render_target_clear_mode = SubViewport.CLEAR_MODE_ONCE
+    #map_mesh.set_surface_override_material(0, material)
 
 func get_map_texture() -> Texture2D:
     map_viewport.render_target_update_mode = SubViewport.UPDATE_WHEN_VISIBLE
-#    map_viewport.render_target_clear_mode = SubViewport.CLEAR_MODE_ALWAYS
+    #map_viewport.render_target_clear_mode = SubViewport.CLEAR_MODE_ALWAYS
     #map_viewport.transparent_bg = false
     #await RenderingServer.frame_post_draw
     return map_viewport.get_texture()
@@ -224,6 +259,7 @@ func reset_to_start() -> void:
     _pending_stumble = 0
     animation_tree[MOVEMENT_EVENT_ONESHOT_PATH] = AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT
     animation_tree[UPPER_BODY_EVENT_ONESHOT_PATH] = AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT
+    toggle_full_paper(_full_map_toggled)    
     apply_map_texture()
 
 

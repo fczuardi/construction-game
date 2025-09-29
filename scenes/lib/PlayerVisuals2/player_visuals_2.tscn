@@ -25,8 +25,10 @@ viewport_path = NodePath("SubViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v4xeo"]
 resource_local_to_scene = true
+transparency = 1
 albedo_texture = SubResource("ViewportTexture_xkicv")
 uv1_scale = Vector3(1, 1, 0)
+uv1_offset = Vector3(0, -512, 0)
 
 [sub_resource type="Animation" id="Animation_nb2ow"]
 resource_name = "FallingIdle"
@@ -338,11 +340,12 @@ _data = {
 &"FallingIdle": SubResource("Animation_nb2ow")
 }
 
-[node name="PlayerVisuals2" node_paths=PackedStringArray("animation_tree", "map_mesh", "map_viewport") instance=ExtResource("1_e4w6r")]
+[node name="PlayerVisuals2" node_paths=PackedStringArray("animation_tree", "map_mesh", "clipboard_prop", "map_viewport") instance=ExtResource("1_e4w6r")]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
 script = ExtResource("2_5gua6")
 animation_tree = NodePath("AnimationTree")
 map_mesh = NodePath("Armature/Skeleton3D/ClipboardGrip/Clipboard/ClipboardProp/PaperPivot/Paper")
+clipboard_prop = NodePath("Armature/Skeleton3D/ClipboardGrip/Clipboard/ClipboardProp")
 map_viewport = NodePath("SubViewport")
 stride_scale_min = 0.8
 stride_scale_max = 1.35
@@ -350,20 +353,20 @@ tool_velocity = Vector3(0, 0, 0.6)
 tool_stumble_severity = 0.95
 
 [node name="Skeleton3D" parent="Armature" index="0"]
-bones/0/position = Vector3(0.050451003, 0.91935813, 0.009965112)
-bones/0/rotation = Quaternion(0.016451363, 0.008543717, 0.01517587, 0.99971306)
-bones/1/rotation = Quaternion(-0.022641508, -0.009149762, -0.0024126496, 0.9996989)
-bones/2/rotation = Quaternion(0.032257307, -0.019608263, -0.003760139, 0.9992802)
-bones/3/rotation = Quaternion(0.0017128086, 0.003682144, -0.0032189225, 0.99998665)
-bones/4/rotation = Quaternion(0.04832371, 0.0053516366, -0.0009039292, 0.9988171)
-bones/5/rotation = Quaternion(0.009585453, 0.005309813, -0.0013176395, 0.9999391)
-bones/7/rotation = Quaternion(-0.5977541, -0.37638664, 0.6159428, -0.34876612)
-bones/8/rotation = Quaternion(0.4008801, 0.09231771, 0.12080512, 0.9034261)
-bones/9/rotation = Quaternion(0.056547582, -0.0011265596, 0.7817867, 0.62097573)
-bones/10/rotation = Quaternion(0.036876023, -0.1425298, 0.060482994, 0.9872524)
-bones/11/rotation = Quaternion(0.092850424, 0.054140687, 0.10888186, 0.9882269)
-bones/12/rotation = Quaternion(0.038672946, -0.0010443653, -0.0265676, 0.99889815)
-bones/13/rotation = Quaternion(-0.103469275, -0.0071284054, 0.124618575, 0.98676926)
+bones/0/position = Vector3(-0.017320067, 0.9269858, 0.0413766)
+bones/0/rotation = Quaternion(-0.018882697, 0.010778105, -0.0034122695, 0.99975777)
+bones/1/rotation = Quaternion(-0.01753605, 0.013656482, 0.0034667514, 0.99974704)
+bones/2/rotation = Quaternion(0.04241956, 0.028355753, 0.008669304, 0.99865985)
+bones/3/rotation = Quaternion(0.027548857, -0.005056205, 0.00039381016, 0.9996077)
+bones/4/rotation = Quaternion(0.047355566, 0.0075686593, 0.0006749486, 0.9988493)
+bones/5/rotation = Quaternion(0.008626459, 0.0076472443, 0.00018080187, 0.99993354)
+bones/7/rotation = Quaternion(-0.5937797, -0.38431486, 0.60801303, -0.3606215)
+bones/8/rotation = Quaternion(0.38819313, 0.16087887, 0.087329276, 0.9032153)
+bones/9/rotation = Quaternion(0.060503248, -0.0009881282, 0.83647394, 0.5446556)
+bones/10/rotation = Quaternion(-0.045982156, -0.074084856, -0.03228975, 0.9956679)
+bones/11/rotation = Quaternion(0.070394136, 0.097661555, 0.11274223, 0.9863043)
+bones/12/rotation = Quaternion(0.032068998, 0.047652528, -0.02635803, 0.99800104)
+bones/13/rotation = Quaternion(-0.08447154, 0.037478447, 0.11681711, 0.9888447)
 bones/15/rotation = Quaternion(-0.0078987265, -0.0003445383, 0.015569802, 0.99984753)
 bones/16/rotation = Quaternion(0.7822328, -0.0018309951, -0.09671102, 0.61543113)
 bones/17/rotation = Quaternion(0.7822341, 0.0033392087, -0.09468461, 0.61573833)
@@ -376,13 +379,13 @@ bones/25/rotation = Quaternion(0.7657645, -0.0002677059, -0.097339265, 0.6357121
 bones/27/rotation = Quaternion(0.2807885, -0.012176419, 0.05981018, 0.9578269)
 bones/28/rotation = Quaternion(0.6957612, -0.00014666002, -0.089772046, 0.71264106)
 bones/29/rotation = Quaternion(0.69632804, 0.0022795307, -0.08519023, 0.7126463)
-bones/31/rotation = Quaternion(0.6874305, -0.2979497, 0.54878765, 0.37080655)
-bones/32/rotation = Quaternion(0.42594594, -0.0785922, -0.065888576, 0.8989172)
-bones/33/rotation = Quaternion(0.060317494, 0.0009481424, -0.8263196, 0.5599616)
-bones/34/rotation = Quaternion(0.009811837, -0.053112514, 0.07156307, 0.99597275)
-bones/35/rotation = Quaternion(0.09627016, -0.050766088, -0.17029318, 0.97936463)
-bones/36/rotation = Quaternion(0.02413474, -0.010273331, 0.065809466, 0.9974874)
-bones/37/rotation = Quaternion(-0.10724205, -0.0055394005, -0.020031381, 0.99401575)
+bones/31/rotation = Quaternion(0.67806035, -0.30246392, 0.5672845, 0.35628355)
+bones/32/rotation = Quaternion(0.40590936, -0.122701466, -0.025790121, 0.9052717)
+bones/33/rotation = Quaternion(0.06204774, 0.00088560965, -0.8500232, 0.5230775)
+bones/34/rotation = Quaternion(-0.006809799, 0.041222572, 0.07078365, 0.99661636)
+bones/35/rotation = Quaternion(0.09698181, 0.0009200163, -0.18373975, 0.9781786)
+bones/36/rotation = Quaternion(0.0011901093, 0.035140045, 0.04932738, 0.99816364)
+bones/37/rotation = Quaternion(-0.14702596, 0.022003334, -0.04202086, 0.9879947)
 bones/39/rotation = Quaternion(-0.03998735, 0.0016744632, -0.029844683, 0.998753)
 bones/40/rotation = Quaternion(0.8082842, 0.0021606507, 0.07402741, 0.58411646)
 bones/41/rotation = Quaternion(0.7169354, -0.0022782004, 0.06671088, 0.6939367)
@@ -395,21 +398,21 @@ bones/49/rotation = Quaternion(0.76791257, 0.0018515084, 0.07232553, 0.6364558)
 bones/51/rotation = Quaternion(0.25605783, 0.014010538, -0.09089937, 0.9622763)
 bones/52/rotation = Quaternion(0.74366915, 0.0015832244, 0.070680246, 0.6647993)
 bones/53/rotation = Quaternion(0.7436696, -0.003214671, 0.06911678, 0.6649572)
-bones/55/rotation = Quaternion(0.098218955, 0.04467834, 0.9939757, 0.019215042)
-bones/56/rotation = Quaternion(-0.22211556, -0.00052588846, -0.008201636, 0.9749857)
-bones/57/rotation = Quaternion(0.6456163, 0.07846736, 0.028435757, 0.75908756)
-bones/58/rotation = Quaternion(0.3327095, -0.045681838, 0.031692464, 0.9413891)
-bones/60/rotation = Quaternion(0.0023692364, 0.25802684, 0.9655595, 0.03333875)
-bones/61/rotation = Quaternion(-0.19323346, -0.0049896142, 0.008335017, 0.9811048)
-bones/62/rotation = Quaternion(0.5291026, 0.05239755, -0.06475589, 0.8444593)
-bones/63/rotation = Quaternion(0.38365766, 0.08162828, -0.023869716, 0.91955096)
+bones/55/rotation = Quaternion(0.033613335, 0.24800748, 0.96782917, -0.025867313)
+bones/56/rotation = Quaternion(-0.3674865, -0.002091218, -0.0120301675, 0.9299487)
+bones/57/rotation = Quaternion(0.5073591, -0.064062655, 0.061446294, 0.8571506)
+bones/58/rotation = Quaternion(0.32030344, -0.04620522, 0.031006481, 0.94567937)
+bones/60/rotation = Quaternion(-0.051059958, 0.0025925701, 0.9985345, -0.017748777)
+bones/61/rotation = Quaternion(-0.21566202, 0.005614769, 0.010165469, 0.9763991)
+bones/62/rotation = Quaternion(0.63163424, -0.02988492, -0.0571912, 0.77257633)
+bones/63/rotation = Quaternion(0.36228606, 0.080761366, -0.024084173, 0.9282492)
 
 [node name="Ch17_Boots" parent="Armature/Skeleton3D" index="1"]
 unique_name_in_owner = true
 
 [node name="BootsSkinLeft" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="2"]
 unique_name_in_owner = true
-transform = Transform3D(-0.9935344, 0.111912765, -0.02008895, -0.07618069, -0.5240439, 0.84827733, 0.084407456, 0.8443174, 0.5291798, 0.10068311, 0.103548914, -0.10476138)
+transform = Transform3D(-0.9632651, 0.24337496, 0.11369987, -0.07459128, -0.64895356, 0.7571673, 0.2580594, 0.72085434, 0.6432685, 0.09073077, 0.14569724, 0.17325823)
 visible = false
 bone_name = "mixamorig1_LeftFoot"
 bone_idx = 57
@@ -421,7 +424,7 @@ transform = Transform3D(2.1855696e-08, 3.7855173e-08, -1, 0.8660254, -0.50000006
 
 [node name="BootsSkinRight" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="3"]
 unique_name_in_owner = true
-transform = Transform3D(-0.98815465, -0.1533787, 0.008047745, 0.059960246, -0.33699083, 0.93960005, -0.1414005, 0.9289373, 0.34220195, -0.05456048, 0.119340986, 0.2444797)
+transform = Transform3D(-0.99469227, -0.10019157, 0.024247412, 0.076361, -0.55816513, 0.82620865, -0.06924549, 0.8236691, 0.56285095, -0.06217286, 0.11032829, -0.075456664)
 visible = false
 bone_name = "mixamorig1_RightFoot"
 bone_idx = 62
@@ -442,7 +445,7 @@ visible = false
 layers = 2
 
 [node name="HelmetSkin" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.9998892, -0.011495324, -0.009451005, 0.009706492, 0.9851637, -0.17134297, 0.011280427, 0.1712323, 0.9851661, 0.037635006, 1.5169988, 0.054399204)
+transform = Transform3D(0.99186206, 0.0026171608, 0.12729165, 0.02020455, 0.9838839, -0.17766368, -0.12570518, 0.17878975, 0.975824, -0.017298818, 1.5235851, 0.06766118)
 bone_name = "mixamorig1_Head"
 bone_idx = 5
 metadata/extras = {
@@ -453,7 +456,7 @@ metadata/extras = {
 transform = Transform3D(0.10991466, 0.004282158, 0.00065707986, -0.004273929, 0.10990879, -0.0013381958, -0.0007086293, 0.0013116273, 0.1099899, 0, 0.16, 0.02)
 
 [node name="ClipboardGrip" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="11"]
-transform = Transform3D(-0.057097122, -0.76356953, 0.64319575, -0.9719014, -0.10484809, -0.21074645, 0.22835743, -0.63715625, -0.73612833, 0.1586786, 1.2446212, 0.3365807)
+transform = Transform3D(0.13433138, -0.8602111, 0.4919265, -0.98325527, -0.1773972, -0.041707445, 0.12314354, -0.4780869, -0.8696372, 0.12822953, 1.2487351, 0.29972264)
 bone_name = "mixamorig1_LeftHandIndex2"
 bone_idx = 16
 
@@ -463,8 +466,8 @@ transform = Transform3D(-0.06151645, -0.9478457, 0.31273684, 0.73171324, 0.17027
 [node name="ClipboardProp" parent="Armature/Skeleton3D/ClipboardGrip/Clipboard" index="0" instance=ExtResource("3_0usm5")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.08, 0, -0.1)
 
-[node name="PaperPivot" type="Node3D" parent="Armature/Skeleton3D/ClipboardGrip/Clipboard/ClipboardProp" index="1"]
-transform = Transform3D(-4.371139e-08, 1, 4.371139e-08, 0, -4.371139e-08, 1, 1, 4.371139e-08, 1.9106855e-15, 0.05, 0.004, 0)
+[node name="PaperPivot" type="Node3D" parent="Armature/Skeleton3D/ClipboardGrip/Clipboard/ClipboardProp" index="3"]
+transform = Transform3D(-5.5879354e-08, 1, -2.9802322e-08, 1.8626451e-09, 2.9802322e-08, 1, 1.0000002, 4.4703484e-08, 9.313226e-10, 0.049999833, 0.0039998293, -1.4901161e-08)
 
 [node name="Paper" type="MeshInstance3D" parent="Armature/Skeleton3D/ClipboardGrip/Clipboard/ClipboardProp/PaperPivot" index="0"]
 transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 0, 0, 0)
@@ -511,6 +514,7 @@ parameters/UpperBodyBase/transition_request = ""
 parameters/UpperBodyBase/current_index = 1
 
 [node name="SubViewport" type="SubViewport" parent="." index="3"]
+transparent_bg = true
 handle_input_locally = false
 size = Vector2i(640, 1024)
 render_target_clear_mode = 1
@@ -518,27 +522,45 @@ render_target_update_mode = 0
 script = ExtResource("8_xyx1a")
 dot_stamp = ExtResource("9_nb2ow")
 
-[node name="GroundPlan" parent="SubViewport" index="0" instance=ExtResource("10_aayd2")]
+[node name="TearableMap" type="Control" parent="SubViewport" index="0"]
+clip_contents = true
+custom_minimum_size = Vector2(0, 512)
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="FullMapSize" type="Control" parent="SubViewport/TearableMap" index="0"]
+anchors_preset = 0
+offset_top = -512.0
+offset_right = 640.0
+offset_bottom = 512.0
+
+[node name="GroundPlan" parent="SubViewport/TearableMap/FullMapSize" index="0" instance=ExtResource("10_aayd2")]
 custom_minimum_size = Vector2(0, 0)
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 1.0
-offset_right = 1.0
+offset_right = 0.0
 offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TrailLayer" type="TextureRect" parent="SubViewport" index="1"]
+[node name="TrailLayer" type="TextureRect" parent="SubViewport/TearableMap/FullMapSize" index="1"]
 unique_name_in_owner = true
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Points Of Interest" type="Control" parent="SubViewport" index="2"]
-layout_mode = 3
+[node name="Points Of Interest" type="Control" parent="SubViewport/TearableMap/FullMapSize" index="2"]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -547,22 +569,21 @@ grow_vertical = 2
 rotation = 3.1415927
 pivot_offset = Vector2(320, 512)
 
-[node name="Stage1Map" parent="SubViewport/Points Of Interest" index="0" instance=ExtResource("13_nb2ow")]
+[node name="Stage1Map" parent="SubViewport/TearableMap/FullMapSize/Points Of Interest" index="0" instance=ExtResource("13_nb2ow")]
 unique_name_in_owner = true
 layout_mode = 0
 
-[node name="Stage2Map" parent="SubViewport/Points Of Interest" index="1" instance=ExtResource("14_xkicv")]
+[node name="Stage2Map" parent="SubViewport/TearableMap/FullMapSize/Points Of Interest" index="1" instance=ExtResource("14_xkicv")]
 unique_name_in_owner = true
 layout_mode = 0
 
-[node name="PlayerDirection" type="Control" parent="SubViewport" index="3"]
+[node name="PlayerDirection" type="Control" parent="SubViewport/TearableMap/FullMapSize" index="3"]
 unique_name_in_owner = true
-layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="TextureRect" type="TextureRect" parent="SubViewport/PlayerDirection" index="0"]
+[node name="TextureRect" type="TextureRect" parent="SubViewport/TearableMap/FullMapSize/PlayerDirection" index="0"]
 modulate = Color(0, 0, 0, 1)
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 0
@@ -574,3 +595,8 @@ rotation = -2.3561945
 pivot_offset = Vector2(30, 30)
 texture = ExtResource("14_aayd2")
 expand_mode = 1
+
+[node name="TearedPaper" type="Control" parent="SubViewport/TearableMap/FullMapSize" index="4"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0

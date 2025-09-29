@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://giqxuc0gq0fk"]
+[gd_scene load_steps=60 format=3 uid="uid://giqxuc0gq0fk"]
 
 [ext_resource type="Script" uid="uid://cq16dqdvi8ncx" path="res://slices/queensland.gd" id="1_glf58"]
 [ext_resource type="Script" uid="uid://bly6ty8fepn6x" path="res://lib/Wiring/wiring.gd" id="2_5p6w5"]
@@ -39,6 +39,7 @@
 [ext_resource type="Texture2D" uid="uid://bl7sehycex2hp" path="res://imports/textures/Maryborough Courthouse/ground-floor_walls_spray_transparent2.png" id="32_062l0"]
 [ext_resource type="PackedScene" uid="uid://0doy2wond1wo" path="res://lib/Obstacles/Picket.tscn" id="36_v5wek"]
 [ext_resource type="PackedScene" uid="uid://bf827fv7m3tmq" path="res://lib/Obstacles/plank_pile_obstacle.tscn" id="39_0vd2w"]
+[ext_resource type="PackedScene" uid="uid://df7epx1106jxx" path="res://lib/Obstacles/SkipObstacle.tscn" id="40_3sulc"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2w0o7"]
 size = Vector3(0.6, 1, 0.1)
@@ -185,6 +186,25 @@ game_over_credits = NodePath("../HUD/MarginContainer/Game Over Credits")
 first_stage_message = NodePath("../HUD/MarginContainer/1st Stage Message")
 second_stage_message = NodePath("../HUD/MarginContainer/2ndt Stage Message")
 
+[node name="ItemSpawnerFromMap" type="Node3D" parent="." node_paths=PackedStringArray("world_A", "world_B", "world_C")]
+script = ExtResource("4_2w0o7")
+map_scene = ExtResource("5_fwyue")
+world_A = NodePath("WorldA")
+world_B = NodePath("WorldB")
+world_C = NodePath("WorldC")
+
+[node name="WorldA" type="Marker3D" parent="ItemSpawnerFromMap"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.96, 0, -5.57)
+metadata/_edit_lock_ = true
+
+[node name="WorldB" type="Marker3D" parent="ItemSpawnerFromMap"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.31, 0, -5.57)
+metadata/_edit_lock_ = true
+
+[node name="WorldC" type="Marker3D" parent="ItemSpawnerFromMap"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.96, 0, 36.43)
+metadata/_edit_lock_ = true
+
 [node name="PlayerRunner" parent="." node_paths=PackedStringArray("visuals") instance=ExtResource("2_luako")]
 visuals = NodePath("PlayerVisuals2")
 metadata/_edit_lock_ = true
@@ -199,7 +219,7 @@ transform = Transform3D(-1, -8.609462e-08, 1.518081e-08, 0, 0.17364822, 0.984807
 fov = 50.6
 
 [node name="ClipboardRunCam" type="Camera3D" parent="PlayerRunner/PlayerVisuals2/FPCams" groups=["run_cam"]]
-transform = Transform3D(-1, 8.742278e-08, 0, 2.8750433e-08, 0.32886663, 0.94437635, 8.256e-08, 0.94437635, -0.32886663, 0.025, 2.145, 0.155)
+transform = Transform3D(-1, 8.742278e-08, 0, 2.8750433e-08, 0.32886663, 0.94437635, 8.256e-08, 0.94437635, -0.32886663, 0.025, 1.942, 0.305)
 
 [node name="FallCam" type="Camera3D" parent="PlayerRunner/PlayerVisuals2/FPCams"]
 transform = Transform3D(1, 0, 0, 0, 0.14608309, 0.9892723, 0, -0.9892723, 0.14608309, -0.488, 5.29, 3.069)
@@ -675,26 +695,8 @@ mesh = SubResource("PlaneMesh_7gcop")
 skeleton = NodePath("../Stage1Ground/Stage1Floor")
 metadata/_edit_lock_ = true
 
-[node name="ItemSpawnerFromMap" type="Node3D" parent="." node_paths=PackedStringArray("world_A", "world_B", "world_C")]
-script = ExtResource("4_2w0o7")
-map_scene = ExtResource("5_fwyue")
-world_A = NodePath("WorldA")
-world_B = NodePath("WorldB")
-world_C = NodePath("WorldC")
-
-[node name="WorldA" type="Marker3D" parent="ItemSpawnerFromMap"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.96, 0, -5.57)
-metadata/_edit_lock_ = true
-
-[node name="WorldB" type="Marker3D" parent="ItemSpawnerFromMap"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.31, 0, -5.57)
-metadata/_edit_lock_ = true
-
-[node name="WorldC" type="Marker3D" parent="ItemSpawnerFromMap"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.96, 0, 36.43)
-metadata/_edit_lock_ = true
-
 [node name="Stage1Ground" type="Node3D" parent="."]
+visible = false
 
 [node name="Stage1Floor" type="StaticBody3D" parent="Stage1Ground"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.861, 0, 15.38)
@@ -737,7 +739,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.034876347, 0)
 mesh = SubResource("PlaneMesh_lxpnk")
 
 [node name="Stage2Ground" type="Node3D" parent="."]
-visible = false
 
 [node name="Stage2Floor" type="StaticBody3D" parent="Stage2Ground" groups=["stage2"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.861, 0, 15.38)
@@ -880,9 +881,31 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.099411, 0, 20.5)
 [node name="Marker3D" type="Marker3D" parent="Stage2Ground/Stage2Floor/Perimeter Pickets"]
 
 [node name="LargeObstacles" type="Node3D" parent="Stage2Ground/Stage2Floor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.807251)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.312, 0, -2.688)
 
 [node name="PlankPileObstacle" parent="Stage2Ground/Stage2Floor/LargeObstacles" instance=ExtResource("39_0vd2w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.285878, 0, -6.365328)
+
+[node name="PlankPileObstacle2" parent="Stage2Ground/Stage2Floor/LargeObstacles" instance=ExtResource("39_0vd2w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.600118, 0, -6.365328)
+
+[node name="PlankPileObstacle3" parent="Stage2Ground/Stage2Floor/LargeObstacles" instance=ExtResource("39_0vd2w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.607085, 0, -6.365327)
+
+[node name="PlankPileObstacle4" parent="Stage2Ground/Stage2Floor/LargeObstacles" instance=ExtResource("39_0vd2w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.285878, 0, 12.326597)
+
+[node name="PlankPileObstacle5" parent="Stage2Ground/Stage2Floor/LargeObstacles" instance=ExtResource("39_0vd2w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.600118, 0, 12.326597)
+
+[node name="PlankPileObstacle6" parent="Stage2Ground/Stage2Floor/LargeObstacles" instance=ExtResource("39_0vd2w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.607085, 0, 12.326598)
+
+[node name="SkipObstacle" parent="Stage2Ground/Stage2Floor/LargeObstacles" instance=ExtResource("40_3sulc")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0.7204915, -5.6295004)
+
+[node name="SkipObstacle2" parent="Stage2Ground/Stage2Floor/LargeObstacles" instance=ExtResource("40_3sulc")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -0.99909496, 0.7204915, 12.571091)
 
 [node name="Stage3Floor" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.861, 0, 15.38)

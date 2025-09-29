@@ -1,6 +1,8 @@
 ## Current Task
 
-- [ ] forward probe and slide on obstacle hits
+- stage 2 obstacles:
+    - plank pile
+    - skip
 
 ## Ongoing
 
@@ -61,6 +63,7 @@
     - [x] pickets, mallet, spray paint
 
 ## Done
+- [x] forward probe and slide on obstacle hits
 - [x] nike (hidden/power-up sprint)
 - [x] credits on the pause screen
 - [x] remove quit button if web

@@ -14,11 +14,11 @@ showcase_scale = 3.0
 is_hidden = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7608032, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.039405823, 0)
 shape = SubResource("SphereShape3D_l14c5")
 
 [node name="sneaker" parent="." instance=ExtResource("3_0tqfo")]
-transform = Transform3D(0.93998814, 0.3236639, -0.107999355, -0.32556817, 0.94551855, 0, 0.10211539, 0.035161152, 0.99415094, -0.050593495, -0.7026007, 0.37942994)
+transform = Transform3D(0.93998814, 0.3236639, -0.107999355, -0.32556817, 0.94551855, 0, 0.10211539, 0.035161152, 0.99415094, -0.050593495, 0.018796682, 0.37942994)
 
 [node name="sneaker2" parent="." instance=ExtResource("3_0tqfo")]
-transform = Transform3D(0.9401119, 0.3235413, -0.10728793, -0.32541963, 0.9455697, 0, -0.101448216, -0.0349136, -0.994228, -0.050593495, -0.7026007, -0.3588971)
+transform = Transform3D(0.9401119, 0.3235413, -0.10728793, -0.32541963, 0.9455697, 0, -0.101448216, -0.0349136, -0.994228, -0.050593495, 0.018796682, -0.3588971)
