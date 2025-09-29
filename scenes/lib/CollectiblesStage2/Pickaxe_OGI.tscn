@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dt8ldedmrq0ks"]
+
+[ext_resource type="Script" uid="uid://cfodh0ignnuo4" path="res://lib/Collectibles/collectible.gd" id="1_swv6e"]
+[ext_resource type="PackedScene" uid="uid://b2tn7iq7b8f63" path="res://imports/models/scketchfab/pickaxe/pickaxe.blend" id="2_e0qws"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_xuxwv"]
+radius = 0.7
+
+[node name="Collectible" type="Area3D" groups=["collectible"]]
+collision_layer = 3
+script = ExtResource("1_swv6e")
+id = &"pickaxe"
+showcase_scale = 1.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_xuxwv")
+
+[node name="pickaxe" parent="." instance=ExtResource("2_e0qws")]
+transform = Transform3D(1, 0, 0, 0, 0.9640954, 0.26555613, 0, -0.26555613, 0.9640954, 0, -0.5642302, 0.1421349)

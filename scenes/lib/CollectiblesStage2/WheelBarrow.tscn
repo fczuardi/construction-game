@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://f5gd4cqdjtgc"]
+
+[ext_resource type="Script" uid="uid://cfodh0ignnuo4" path="res://lib/Collectibles/collectible.gd" id="1_bv3cn"]
+[ext_resource type="PackedScene" uid="uid://5oiohegx6smw" path="res://imports/models/Low Poly Construction/Wheelbarrow.fbx" id="2_wawr0"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_xuxwv"]
+radius = 0.7
+
+[node name="Collectible" type="Area3D" groups=["collectible"]]
+collision_layer = 3
+script = ExtResource("1_bv3cn")
+id = &"wheelbarrow"
+showcase_scale = 0.8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_xuxwv")
+
+[node name="Wheelbarrow" parent="." instance=ExtResource("2_wawr0")]
+transform = Transform3D(1, 0, 0, 0, 0.9153677, -0.40261886, 0, 0.40261886, 0.9153677, 0, -0.19275326, 0.1140582)

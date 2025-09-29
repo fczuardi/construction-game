@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dyejkqxxxqs75"]
+
+[ext_resource type="Script" uid="uid://cfodh0ignnuo4" path="res://lib/Collectibles/collectible.gd" id="1_go82x"]
+[ext_resource type="PackedScene" uid="uid://cbesf38w0xce3" path="res://imports/models/Low Poly Construction/Nails.fbx" id="2_a0r37"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_l14c5"]
+radius = 0.2
+
+[node name="Collectible" type="Area3D" groups=["collectible"]]
+transform = Transform3D(-0.006562349, -0.27059463, 0.962671, 0, 0.9626917, 0.27060044, -0.9999785, 0.0017757745, -0.006317519, 0, 0, 0)
+collision_layer = 3
+script = ExtResource("1_go82x")
+id = &"nails"
+showcase_scale = 6.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_l14c5")
+
+[node name="Nails" parent="." instance=ExtResource("2_a0r37")]
+transform = Transform3D(1, 0, 0, 0, 0.7223761, -0.6915005, 0, 0.6915005, 0.7223761, 0, 0, 0)

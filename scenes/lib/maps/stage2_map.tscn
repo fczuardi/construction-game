@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://2ux1olvnmbt4"]
+[gd_scene load_steps=25 format=3 uid="uid://2ux1olvnmbt4"]
 
 [ext_resource type="Script" uid="uid://vf6f0by61bt4" path="res://lib/maps/stage_map.gd" id="1_vfwxv"]
 [ext_resource type="Texture2D" uid="uid://c3ggid41yoxw5" path="res://imports/textures/Maryborough Courthouse/ground-floor_640x1024.jpg" id="2_d0vik"]
@@ -10,10 +10,18 @@
 [ext_resource type="FontFile" uid="uid://puw8wtbfcgof" path="res://imports/fonts/Noto_Emoji/NotoEmoji-VariableFont_wght.ttf" id="6_djye3"]
 [ext_resource type="Texture2D" uid="uid://ct1apmle6kbxh" path="res://imports/icons/noun_project/noun-running-shoes-7597877_600px.png" id="7_maoqs"]
 [ext_resource type="PackedScene" uid="uid://c8h5mes28rf7l" path="res://lib/CollectiblesStage1/BitcoinCoin.tscn" id="9_1abtr"]
+[ext_resource type="PackedScene" uid="uid://f5gd4cqdjtgc" path="res://lib/CollectiblesStage2/WheelBarrow.tscn" id="9_8rluq"]
 [ext_resource type="PackedScene" uid="uid://dhwkfohh06l7" path="res://lib/CollectiblesStage2/Sneakers_TFC.tscn" id="9_gd8af"]
+[ext_resource type="Texture2D" uid="uid://drvbruv61cxx1" path="res://imports/icons/noun_project/noun-wheelbarrow-7743195_600px.png" id="10_m1ku4"]
 [ext_resource type="PackedScene" uid="uid://cu4jh3teslfmh" path="res://lib/CollectiblesStage2/Helmet_mixamo.tscn" id="11_m0ve4"]
 [ext_resource type="Texture2D" uid="uid://bcux0vns6gcf4" path="res://imports/icons/noun_project/noun-hard-hat-7432282_600px.png" id="12_4d1kp"]
 [ext_resource type="PackedScene" uid="uid://oucx7yhsdav3" path="res://lib/CollectiblesStage2/BitcoinCoin2.tscn" id="12_8asxa"]
+[ext_resource type="PackedScene" uid="uid://dyejkqxxxqs75" path="res://lib/CollectiblesStage2/Nails_LPC.tscn" id="13_4rcvy"]
+[ext_resource type="Texture2D" uid="uid://b0o4kudjpixtv" path="res://imports/icons/noun_project/noun-nails-6823480_600px.png" id="14_53tlf"]
+[ext_resource type="Texture2D" uid="uid://com243rv7bsa6" path="res://imports/icons/noun_project/noun-pickaxe-7169380_600px.png" id="15_53tlf"]
+[ext_resource type="PackedScene" uid="uid://bvplv03qwhh8s" path="res://lib/CollectiblesStage2/Hammer_CT1.tscn" id="15_m6k2f"]
+[ext_resource type="PackedScene" uid="uid://dt8ldedmrq0ks" path="res://lib/CollectiblesStage2/Pickaxe_OGI.tscn" id="15_vfwxv"]
+[ext_resource type="Texture2D" uid="uid://chfcboyyhq3e0" path="res://imports/icons/noun_project/noun-hammer-7970471_600px.png" id="16_pkrsj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rwyaa"]
 content_margin_left = 0.0
@@ -69,7 +77,7 @@ position = Vector2(0, 1024)
 unique_name_in_owner = true
 
 [node name="Clipboard" type="Marker2D" parent="Stickers" groups=["map_icon"]]
-position = Vector2(536.0001, 889.99994)
+position = Vector2(260.00006, 602)
 script = ExtResource("3_p3aax")
 kind = ExtResource("4_dkdjb")
 item_id = &"clipboard"
@@ -167,13 +175,13 @@ text = "✔︎"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SpadeCollectible6" type="Marker2D" parent="Stickers" groups=["map_icon"]]
+[node name="WheelBarrowCollectible" type="Marker2D" parent="Stickers" groups=["map_icon"]]
 position = Vector2(109, 163)
 script = ExtResource("3_p3aax")
-kind = ExtResource("4_maoqs")
-item_id = &"spade6"
+kind = ExtResource("9_8rluq")
+item_id = &"wheelbarrow"
 
-[node name="Panel" type="Panel" parent="Stickers/SpadeCollectible6"]
+[node name="Panel" type="Panel" parent="Stickers/WheelBarrowCollectible"]
 offset_left = -110.161
 offset_top = 0.38011932
 offset_right = -0.16103363
@@ -182,17 +190,17 @@ rotation = -0.7853982
 pivot_offset = Vector2(110, 0)
 theme_override_styles/panel = SubResource("StyleBoxFlat_aayd2")
 
-[node name="Icon" type="TextureRect" parent="Stickers/SpadeCollectible6"]
-offset_left = -48.161
-offset_top = 30.38
-offset_right = 56.839
-offset_bottom = 135.38
-rotation = 3.1415927
-pivot_offset = Vector2(50, 50)
-texture = ExtResource("5_rwyaa")
+[node name="Icon" type="TextureRect" parent="Stickers/WheelBarrowCollectible"]
+offset_left = -50.0
+offset_top = 22.0
+offset_right = 54.0
+offset_bottom = 126.0
+rotation = -2.703515
+pivot_offset = Vector2(52, 52)
+texture = ExtResource("10_m1ku4")
 expand_mode = 1
 
-[node name="Checkmark" type="Label" parent="Stickers/SpadeCollectible6"]
+[node name="Checkmark" type="Label" parent="Stickers/WheelBarrowCollectible"]
 visible = false
 custom_minimum_size = Vector2(50, 50)
 anchors_preset = 8
@@ -265,13 +273,13 @@ text = "✔︎"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SpadeCollectible2" type="Marker2D" parent="Stickers" groups=["map_icon"]]
-position = Vector2(252.00008, 739)
+[node name="NailsCollectible" type="Marker2D" parent="Stickers" groups=["map_icon"]]
+position = Vector2(538.00006, 359.99994)
 script = ExtResource("3_p3aax")
-kind = ExtResource("4_maoqs")
-item_id = &"spade2"
+kind = ExtResource("13_4rcvy")
+item_id = &"nails"
 
-[node name="Panel" type="Panel" parent="Stickers/SpadeCollectible2"]
+[node name="Panel" type="Panel" parent="Stickers/NailsCollectible"]
 offset_left = -110.161
 offset_top = 0.38011932
 offset_right = -0.16103363
@@ -280,17 +288,66 @@ rotation = -0.7853982
 pivot_offset = Vector2(110, 0)
 theme_override_styles/panel = SubResource("StyleBoxFlat_aayd2")
 
-[node name="Icon" type="TextureRect" parent="Stickers/SpadeCollectible2"]
-offset_left = -48.161
-offset_top = 30.38
-offset_right = 56.839
-offset_bottom = 135.38
+[node name="Icon" type="TextureRect" parent="Stickers/NailsCollectible"]
+offset_left = -40.0
+offset_top = 34.0
+offset_right = 40.0
+offset_bottom = 114.0
 rotation = 3.1415927
-pivot_offset = Vector2(50, 50)
-texture = ExtResource("5_rwyaa")
+pivot_offset = Vector2(40, 40)
+texture = ExtResource("14_53tlf")
 expand_mode = 1
 
-[node name="Checkmark" type="Label" parent="Stickers/SpadeCollectible2"]
+[node name="Checkmark" type="Label" parent="Stickers/NailsCollectible"]
+visible = false
+custom_minimum_size = Vector2(50, 50)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -25.0
+offset_right = 25.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 3.1415927
+pivot_offset = Vector2(25, 25)
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.95686275, 0.827451, 0.36862746, 1)
+theme_override_fonts/font = ExtResource("6_djye3")
+theme_override_font_sizes/font_size = 40
+text = "✔︎"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Pickaxe Collectible" type="Marker2D" parent="Stickers" groups=["map_icon"]]
+position = Vector2(570.00006, 889)
+script = ExtResource("3_p3aax")
+kind = ExtResource("15_vfwxv")
+item_id = &"pickaxe"
+
+[node name="Panel" type="Panel" parent="Stickers/Pickaxe Collectible"]
+offset_left = -110.161
+offset_top = 0.38011932
+offset_right = -0.16103363
+offset_bottom = 110.38012
+rotation = -0.7853982
+pivot_offset = Vector2(110, 0)
+theme_override_styles/panel = SubResource("StyleBoxFlat_aayd2")
+
+[node name="Icon" type="TextureRect" parent="Stickers/Pickaxe Collectible"]
+offset_left = -50.0
+offset_top = 20.218
+offset_right = 50.0
+offset_bottom = 120.21799
+rotation = 3.1415927
+pivot_offset = Vector2(50, 50)
+texture = ExtResource("15_53tlf")
+expand_mode = 1
+
+[node name="Checkmark" type="Label" parent="Stickers/Pickaxe Collectible"]
 visible = false
 custom_minimum_size = Vector2(50, 50)
 anchors_preset = 8
@@ -315,7 +372,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="HelmetCollectible" type="Marker2D" parent="Stickers" groups=["map_icon"]]
-position = Vector2(429.00003, 326)
+position = Vector2(258.00003, 326)
 script = ExtResource("3_p3aax")
 kind = ExtResource("11_m0ve4")
 item_id = &"helmet"
@@ -363,13 +420,13 @@ text = "✔︎"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SpadeCollectible5" type="Marker2D" parent="Stickers" groups=["map_icon"]]
-position = Vector2(567.00006, 644.99994)
+[node name="HammerCollectible" type="Marker2D" parent="Stickers" groups=["map_icon"]]
+position = Vector2(127.00004, 499.99997)
 script = ExtResource("3_p3aax")
-kind = ExtResource("4_maoqs")
-item_id = &"spade5"
+kind = ExtResource("15_m6k2f")
+item_id = &"hammer"
 
-[node name="Panel" type="Panel" parent="Stickers/SpadeCollectible5"]
+[node name="Panel" type="Panel" parent="Stickers/HammerCollectible"]
 offset_left = -110.161
 offset_top = 0.38011932
 offset_right = -0.16103363
@@ -378,17 +435,17 @@ rotation = -0.7853982
 pivot_offset = Vector2(110, 0)
 theme_override_styles/panel = SubResource("StyleBoxFlat_aayd2")
 
-[node name="Icon" type="TextureRect" parent="Stickers/SpadeCollectible5"]
+[node name="Icon" type="TextureRect" parent="Stickers/HammerCollectible"]
 offset_left = -48.161
 offset_top = 30.38
 offset_right = 56.839
 offset_bottom = 135.38
 rotation = 3.1415927
 pivot_offset = Vector2(50, 50)
-texture = ExtResource("5_rwyaa")
+texture = ExtResource("16_pkrsj")
 expand_mode = 1
 
-[node name="Checkmark" type="Label" parent="Stickers/SpadeCollectible5"]
+[node name="Checkmark" type="Label" parent="Stickers/HammerCollectible"]
 visible = false
 custom_minimum_size = Vector2(50, 50)
 anchors_preset = 8

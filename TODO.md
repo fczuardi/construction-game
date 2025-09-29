@@ -1,37 +1,15 @@
 ## Current Task
 
-stage 2 required items:
-- [x] spade
-- [ ] helmet
-- [ ] cartwheel
-- [ ] pickaxe
-- [ ] hammer
-- [ ] nails
-
 stage 2 optional items:
 - [ ] toilet paper
 - [x] extra clipboard
 - [x] sneakers
-
-stage 2 hidden items:
-- [x] bitcoin_coin
-- [x] bitcoin_coin2
 
 
 ## Ongoing
 
 - stage 2 obstacles:
 - stage 2 items: (set out, groundwork, trenches)
-    - [ ] wood planks
-
-- [ ] stage 2 items: (set out, groundwork, trenches)
-    - [ ] ? pickaxe
-    - [ ] ? drill
-    - [ ] helmet (optional/wearable)
-
-- [ ] stage 2 obstacles:
-    - [ ] skip
-    - [ ] stakes, make collision shape a cilinder
 
 
 ## Backlog
@@ -76,6 +54,19 @@ stage 2 hidden items:
     - [x] pickets, mallet, spray paint
 
 ## Done
+stage 2 required items:
+- [x] spade
+- [x] helmet
+- [x] cartwheel
+- [x] pickaxe
+- [x] hammer
+- [x] nails
+stage 2 hidden items:
+- [x] bitcoin_coin
+- [x] bitcoin_coin2
+- [x] stage 2 obstacles:
+    - [x] skip
+    - [x] stakes, make collision shape a cilinder
 - [x] new map (conditioned to no paper on 1st stage)
 - [x] plank pile
 - [x] skip

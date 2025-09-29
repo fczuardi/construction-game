@@ -19,12 +19,12 @@ Every review means a lot to me. Leave a comment :)
 
 I don't consider myself a "solo-dev" because I am standing in the shoulders of giants, this work is only possible due to ethical people that share their knowledge, the Free Software movement and Free Culture as a whole.
 
-There are **at least 62** other **amazing humans** that contributed with their time and their art to this game and I am incredibly thankful to every one of the people below:
+There are **at least 77** other **amazing humans** that contributed with their time and their art to this game and I am incredibly thankful to every one of the people below:
 
 
 ## Credits & Acknoledgements
 
-### Assets and Licences (24+ authors)
+### Assets and Licences (31+ authors)
 
 #### Character, Animations
 
@@ -51,7 +51,7 @@ There are **at least 62** other **amazing humans** that contributed with their t
 
 ## Collectibles
 
-  - Level, Pencil from [Construction Tools](https://sketchfab.com/3d-models/construction-tools-09e12ba3f7ee42259b6533581abec86f)
+  - Level, Pencil, Hammer from [Construction Tools](https://sketchfab.com/3d-models/construction-tools-09e12ba3f7ee42259b6533581abec86f)
       - Author: [Teen Wolf](https://sketchfab.com/Teen-Wolf)
       - License: [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/)
   - Measuring Tape from [Construction Tools 2 Pack](https://sketchfab.com/3d-models/construction-tools-2-pack-9facdce61fff42578f50c16393be306b)
@@ -61,7 +61,7 @@ There are **at least 62** other **amazing humans** that contributed with their t
       - Author: [6TMD-Modeling](https://patrickbiani.wixsite.com/6tmd-modeling)
       - License: [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/)
   - Toilet Paper Roll from [CC0 - Toilet Paper Roll](https://sketchfab.com/3d-models/cc0-toilet-paper-roll-6d5284b842434413a17133f7bf259669)
-      - Authot: [Marcel Plagmann (aka plaggy)](https://plaggy.net/)
+      - Author: [Marcel Plagmann (aka plaggy)](https://plaggy.net/)
       - Licenses: 
           - [CC0 1.0 Universal (CC0 1.0) Public Domain Dedication](https://creativecommons.org/publicdomain/zero/1.0/)
           - [CC-BY-4.0](http://creativecommons.org/licenses/by/4.0/)
@@ -71,6 +71,10 @@ There are **at least 62** other **amazing humans** that contributed with their t
   - Spade from [Realistic Modern Construction Site Asset Package](https://aligned-games.itch.io/realistic-modern-construction-site-asset-package)
       - Author: [Aligned Games](https://aligned-games.itch.io/)
       - License: Unknown, paid asset pack
+  - Pickaxe from ["Pickaxe"](https://sketchfab.com/3d-models/pickaxe-f0fce043973f45ffa2fb9a3a37f0498f)
+    - Author: [Ole Gunnar Isager](https://sketchfab.com/FrenchBaguette) 
+    - License: [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/)
+
 
 #### Scenery / Obstacles
 
@@ -145,8 +149,19 @@ There are **at least 62** other **amazing humans** that contributed with their t
       - [Hard Hat by Stocke_Icon](https://thenounproject.com/icon/hard-hat-7432282/)
           - Author: [Stocke_Icon](https://thenounproject.com/creator/Stocke_Icon/)
           - License: [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/)
+      - [Wheelbarrow by Fourup Corporate](https://thenounproject.com/icon/wheelbarrow-7743195/)
+          - Author: [Fourup Corporate](https://thenounproject.com/creator/fourup/)
+          - License: [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/)
+      - [Hammer by Alum Design](https://thenounproject.com/icon/hammer-7970471/)
+          - Author: [Alum Design](https://thenounproject.com/creator/dony.triwidodo)
+          - License: [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/)
+      - [nails by blue](https://thenounproject.com/icon/nails-6823480/)
+          - Author: [blue](https://thenounproject.com/creator/diamondblue553/)
+          - License: [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/)
+      - [Pickaxe by Marco Livolsi](https://thenounproject.com/icon/pickaxe-7169380/)
+        - Author: [Marco Livolsi](https://thenounproject.com/creator/marco.livolsi2014)
 
-### Friends / Playtest (32+ supporters)
+### Friends / Playtest (34+ supporters)
 
 - Juliana
 - ([Cafepivara](https://itch.io/c/6345901/cafepivara)) Lucas, Marcelo
@@ -156,7 +171,7 @@ There are **at least 62** other **amazing humans** that contributed with their t
 - ([Palma Labs](https://www.linkedin.com/company/palmalabs/)) Emilio
 - ([fullbragger](https://linktr.ee/fullbragger)) Braga
 - (Slowlearners) Mauricio, Renan, Adriano
-- ([Casa21](https://vinteum.org/)) UlisFlavio, Joaozinho, Leal, Lucas, Edil, Hiro
+- ([Casa21](https://vinteum.org/)) UlisFlavio, Joaozinho, Leal, Lucas, Edil, Hiro, Joao Noctus, Davidson
 - Bruno Fabbri, Rafael Teizen
 - Tatuí, Zóide
 - Kenzo, Maria Carolina, João Lucas, Ivan, Antônio, Márcia
@@ -214,8 +229,9 @@ I do special rates for Open Source projects, since they are my preference. If yo
 
 - [Argula Font](https://drj11.itch.io/arugula-font)
     - Author: [David Jones (Cubic Type)](https://about.cubictype.com/)
-    - License: [Human Rights Font Licence Version 1.0](./fonts/License.html)
-        - a modified version of the [Hippocratic License 2.0](https://spdx.org/licenses/Hippocratic-2.1.html)
+    - License:
+      - Embedding rights granted by email after purchase. Consult the author before forking this game.
+        - originally available under: [Human Rights Font Licence Version 1.0](./fonts/License.html) (doesn't allow embedding)
 - Low Poly Bitcoin (CC-BY 4.0)
     - https://sketchfab.com/3d-models/low-poly-bitcoin-ec0b85df2dde42eda90b571c12a7cd47#download
 - [Big Shoulders Stencil](https://fonts.google.com/specimen/Big+Shoulders+Stencil)

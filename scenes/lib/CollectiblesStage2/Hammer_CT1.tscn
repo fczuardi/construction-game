@@ -47,6 +47,8 @@ shadow_mesh = SubResource("ArrayMesh_e2y53")
 
 [node name="Collectible" type="Area3D" groups=["collectible"]]
 script = ExtResource("1_po6gw")
+id = &"hammer"
+showcase_scale = 3.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_l14c5")
