@@ -19,6 +19,7 @@ extends Node3D
 @export var jog_exit:   float = 1.8
 @export var sprint_enter: float = 4.60
 @export var sprint_exit:  float = 4.20
+@onready var helmet_skin: BoneAttachment3D = %HelmetSkin
 
 
 # ## Movement (lower body, legs, hips, spine)
@@ -154,12 +155,17 @@ func toggle_full_paper(on:bool):
         teared_map.position.y = 512.0
     apply_map_texture()
 
+func set_hat_skin(hat_name: StringName):
+    for hat in helmet_skin.get_children():
+        print(hat.name, " ", hat_name)
+        hat.visible = hat.name == hat_name
 
 func _ready() -> void:
     assert(animation_tree)
     assert(full_paper_clipboard)
     assert(full_map)
     assert(teared_map)
+    assert(helmet_skin)
     if !animation_tree:
         return
     animation_tree.active = true

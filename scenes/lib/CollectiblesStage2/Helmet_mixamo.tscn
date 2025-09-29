@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cu4jh3teslfmh"]
+
+[ext_resource type="Script" uid="uid://cfodh0ignnuo4" path="res://lib/Collectibles/collectible.gd" id="1_bwcyr"]
+[ext_resource type="PackedScene" uid="uid://butf6kqvn272p" path="res://lib/Collectibles/models/helmet.tscn" id="2_bwcyr"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_tycjo"]
+radius = 0.2
+
+[node name="Collectible" type="Area3D" groups=["collectible"]]
+script = ExtResource("1_bwcyr")
+id = &"helmet"
+showcase_scale = 3.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_tycjo")
+
+[node name="helmet" parent="." instance=ExtResource("2_bwcyr")]
+transform = Transform3D(0.99767256, 0.06653233, 0.014937298, -0.0681529, 0.98001146, 0.18690315, -0.0022036233, -0.18748619, 0.9822648, -0.114, -1.669, 0.324)
+visible = true

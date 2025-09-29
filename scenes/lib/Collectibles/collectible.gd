@@ -13,18 +13,22 @@ extends Area3D
 var burst_scene := preload("res://lib/PickupBurst/PickupBurst.tscn")
 
 var _y0: float
+var _y_discount: float
 
 func _ready() -> void:
     body_entered.connect(_on_body_entered)
     _y0 = position.y
+    _y_discount = 0.8 if is_hidden else 0.0
     monitoring = true
 
 func set_height(y: float):
     _y0 = y
+    print("after set_height:", _y0, " item:", id)
 
 func _process(delta: float) -> void:
     rotate_y(deg_to_rad(spin_deg_per_sec) * delta)
-    position.y = _y0 + sin(Time.get_ticks_msec() / 1000.0 * bob_speed) * bob_amp
+    var y = _y0 - _y_discount if monitoring else _y0
+    position.y = y + sin(Time.get_ticks_msec() / 1000.0 * bob_speed) * bob_amp
 
 func _on_body_entered(body: Node) -> void:
     if not (body is PlayerRunner):

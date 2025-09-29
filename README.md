@@ -142,6 +142,9 @@ There are **at least 62** other **amazing humans** that contributed with their t
       - [running shoes by Ayub Irawan](https://thenounproject.com/icon/running-shoes-7597877/)
           - Author: [Ayub Irawan](https://thenounproject.com/creator/ayub12/)
           - License: [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/)
+      - [Hard Hat by Stocke_Icon](https://thenounproject.com/icon/hard-hat-7432282/)
+          - Author: [Stocke_Icon](https://thenounproject.com/creator/Stocke_Icon/)
+          - License: [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/)
 
 ### Friends / Playtest (32+ supporters)
 

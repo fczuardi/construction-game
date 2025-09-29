@@ -80,8 +80,7 @@ func _spawn_from_map() -> void:
             add_child(inst)
             inst.global_position = world_pos
             if inst.has_method("set_height"):
-                var height_discount = 0.8 if inst.is_hidden else 0.0
-                inst.set_height(spawn_height - height_discount)
+                inst.set_height(spawn_height)
             _spawned_items.push_front(inst)
 
 func clear_all_items():

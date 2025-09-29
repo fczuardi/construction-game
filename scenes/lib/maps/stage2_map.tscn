@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://2ux1olvnmbt4"]
+[gd_scene load_steps=17 format=3 uid="uid://2ux1olvnmbt4"]
 
 [ext_resource type="Script" uid="uid://vf6f0by61bt4" path="res://lib/maps/stage_map.gd" id="1_vfwxv"]
 [ext_resource type="Texture2D" uid="uid://c3ggid41yoxw5" path="res://imports/textures/Maryborough Courthouse/ground-floor_640x1024.jpg" id="2_d0vik"]
@@ -11,6 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://ct1apmle6kbxh" path="res://imports/icons/noun_project/noun-running-shoes-7597877_600px.png" id="7_maoqs"]
 [ext_resource type="PackedScene" uid="uid://c8h5mes28rf7l" path="res://lib/CollectiblesStage1/BitcoinCoin.tscn" id="9_1abtr"]
 [ext_resource type="PackedScene" uid="uid://dhwkfohh06l7" path="res://lib/CollectiblesStage2/Sneakers_TFC.tscn" id="9_gd8af"]
+[ext_resource type="PackedScene" uid="uid://cu4jh3teslfmh" path="res://lib/CollectiblesStage2/Helmet_mixamo.tscn" id="11_m0ve4"]
+[ext_resource type="Texture2D" uid="uid://bcux0vns6gcf4" path="res://imports/icons/noun_project/noun-hard-hat-7432282_600px.png" id="12_4d1kp"]
 [ext_resource type="PackedScene" uid="uid://oucx7yhsdav3" path="res://lib/CollectiblesStage2/BitcoinCoin2.tscn" id="12_8asxa"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rwyaa"]
@@ -312,13 +314,13 @@ text = "✔︎"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SpadeCollectible3" type="Marker2D" parent="Stickers" groups=["map_icon"]]
+[node name="HelmetCollectible" type="Marker2D" parent="Stickers" groups=["map_icon"]]
 position = Vector2(429.00003, 326)
 script = ExtResource("3_p3aax")
-kind = ExtResource("4_maoqs")
-item_id = &"spade3"
+kind = ExtResource("11_m0ve4")
+item_id = &"helmet"
 
-[node name="Panel" type="Panel" parent="Stickers/SpadeCollectible3"]
+[node name="Panel" type="Panel" parent="Stickers/HelmetCollectible"]
 offset_left = -110.161
 offset_top = 0.38011932
 offset_right = -0.16103363
@@ -327,17 +329,17 @@ rotation = -0.7853982
 pivot_offset = Vector2(110, 0)
 theme_override_styles/panel = SubResource("StyleBoxFlat_aayd2")
 
-[node name="Icon" type="TextureRect" parent="Stickers/SpadeCollectible3"]
+[node name="Icon" type="TextureRect" parent="Stickers/HelmetCollectible"]
 offset_left = -48.161
 offset_top = 30.38
 offset_right = 56.839
 offset_bottom = 135.38
 rotation = 3.1415927
 pivot_offset = Vector2(50, 50)
-texture = ExtResource("5_rwyaa")
+texture = ExtResource("12_4d1kp")
 expand_mode = 1
 
-[node name="Checkmark" type="Label" parent="Stickers/SpadeCollectible3"]
+[node name="Checkmark" type="Label" parent="Stickers/HelmetCollectible"]
 visible = false
 custom_minimum_size = Vector2(50, 50)
 anchors_preset = 8

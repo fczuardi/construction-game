@@ -80,6 +80,8 @@ func _on_item_collected(item: Collectible):
             character_body.set_speed_mode("run")
     if item.id == &"clipboard":
         character_visuals.toggle_full_paper(true)
+    if item.id == &"helmet":
+        character_visuals.set_hat_skin("helmet")
     
 var _alive = true
 var _finished_level = false
@@ -150,6 +152,8 @@ func _on_restart():
 
         if _current_stage == 1:
             character_visuals.toggle_full_paper(_stage_1_full_map)
+            character_visuals.set_hat_skin("winter_hat")
+
         if _current_stage == 2:
             level_message = second_stage_message
             level_ground = second_stage_ground

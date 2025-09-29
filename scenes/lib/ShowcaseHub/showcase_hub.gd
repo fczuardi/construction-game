@@ -29,6 +29,7 @@ func show_item(item: Node3D) -> void:
     if item.showcase_scale > 0.0:
         item.scale = Vector3.ONE * item.showcase_scale
 
+
     # Optional: Y-face the camera (keeps item’s up)
     if face_camera:
         var item_pos := item.global_transform.origin
@@ -48,6 +49,10 @@ func show_item(item: Node3D) -> void:
         if item and is_instance_valid(item):
             item.queue_free()
     )
+    #if item.is_hidden:
+        #print("IS HIDDEN, UNDO HEIGHT DISCOUNT", item.global_transform.origin.y)
+        #item.global_transform.origin.y += 0.8
+        #print("IS HIDDEN, UNDO HEIGHT DISCOUNT", item.global_transform.origin.y)
 
 func _disable_collisions_recursive(n: Node) -> void:
     if n is CollisionObject3D:

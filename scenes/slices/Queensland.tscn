@@ -1109,3 +1109,4 @@ game_over_message = NodePath("../HUD/MarginContainer/Game Over Message")
 game_over_credits = NodePath("../HUD/MarginContainer/Game Over Credits")
 first_stage_message = NodePath("../HUD/MarginContainer/1st Stage Message")
 second_stage_message = NodePath("../HUD/MarginContainer/2ndt Stage Message")
+_current_stage = 2
