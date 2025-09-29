@@ -17,8 +17,6 @@ extends Node
 @export var first_stage_message: FadeTitle
 @export var second_stage_message: FadeTitle
 
-
-
 @export var slowmo_scale := 0.25  # 25% speed
 
 @export var _current_stage: int = 1
@@ -35,7 +33,6 @@ func _unhandled_input(e):
 
 
 var  _stage_1_full_map: bool = true
-var  _stage_2_full_map: bool = false
 
 ## wire
 func _ready() -> void:
@@ -74,15 +71,15 @@ func _exit_tree() -> void:
         EventBus.global_restart_game.disconnect(_on_restart)
     if countdown:
         countdown.timeout.disconnect(_on_timeout)
+    EventBus.global_next_stage.disconnect(_on_next_stage)
 
 func _on_item_collected(item: Collectible):
     if item.id == &"sneakers":
         character_visuals.set_sneakers_enabled(true)
         if character_visuals.is_run_enabled():
             character_body.set_speed_mode("run")
-    if item.id == &"toilet_paper":
-        _stage_2_full_map = true
-
+    if item.id == &"clipboard":
+        character_visuals.toggle_full_paper(true)
     
 var _alive = true
 var _finished_level = false
@@ -115,7 +112,6 @@ func _trigger_game_over():
     item_spawner.map_scene = load("res://lib/maps/stage1_map.tscn")
     _current_stage = 1
     _stage_1_full_map = true
-    _stage_2_full_map = false
     print("game over restart")
 
 
@@ -128,6 +124,7 @@ func _on_player_speed_change(_new_speed: float, mode: String):
 @onready var stage_1_map: StageMap = $"../PlayerRunner/PlayerVisuals2/SubViewportContainer/SubViewport/Points Of Interest/Stage1Map"
 
 func _on_restart():
+    #print_debug("_on_restart")
     _alive = true
     _finished_level = false
     cameras.blend_time = 0.25
@@ -139,6 +136,9 @@ func _on_restart():
     character_visuals.set_sneakers_enabled(false)
     _on_size_changed()
     item_spawner.map_scene = load("res://lib/maps/stage%s_map.tscn" % str(_current_stage))
+    #print_debug(item_spawner.map_scene)
+    #print("emit stage started", _current_stage)
+    EventBus.global_stage_started.emit(_current_stage)
     if start_title:
         start_title.auto_exit_time = 1.0
         start_title.enter()
@@ -154,7 +154,6 @@ func _on_restart():
             level_message = second_stage_message
             level_ground = second_stage_ground
             stage_map = second_stage_map
-            character_visuals.toggle_full_paper(_stage_2_full_map)
 
         for n in [first_stage_ground, second_stage_ground]:
             n.visible = (n == level_ground)
@@ -170,10 +169,13 @@ func _on_restart():
                 level_message.enter()
             )
 
-func _on_next_stage():
+func _on_next_stage(full_map, _bitcoins_collected):
     _current_stage += 1
-    EventBus.global_restart_game.emit()
+    #print_debug("_on_next_stage ", _current_stage)
     get_tree().paused = false
+    EventBus.global_stage_started.emit(_current_stage)
+    EventBus.global_restart_game.emit()
+    character_visuals.toggle_full_paper(full_map)
 
 func _on_restart_stage():
     EventBus.global_restart_game.emit()

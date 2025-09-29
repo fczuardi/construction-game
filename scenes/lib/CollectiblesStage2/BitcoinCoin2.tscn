@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://oucx7yhsdav3"]
+
+[ext_resource type="Script" uid="uid://cfodh0ignnuo4" path="res://lib/Collectibles/collectible.gd" id="1_ok5wv"]
+[ext_resource type="PackedScene" uid="uid://bu3fbs2ovn3kf" path="res://imports/models/realistic_3d_bitcoin_model__crypto_asset/scene.gltf" id="2_4mn4j"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_l14c5"]
+radius = 0.1
+
+[node name="Collectible" type="Area3D" groups=["collectible"]]
+script = ExtResource("1_ok5wv")
+id = &"bitcoin_coin2"
+points = 0
+showcase_scale = 3.0
+is_hidden = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_l14c5")
+
+[node name="Coin" parent="." instance=ExtResource("2_4mn4j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)

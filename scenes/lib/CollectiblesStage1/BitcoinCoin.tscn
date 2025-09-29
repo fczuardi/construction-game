@@ -8,6 +8,7 @@ radius = 0.1
 
 [node name="Collectible" type="Area3D" groups=["collectible"]]
 script = ExtResource("1_cd4o0")
+id = &"bitcoin_coin"
 points = 0
 showcase_scale = 3.0
 is_hidden = true

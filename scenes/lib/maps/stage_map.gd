@@ -1,12 +1,27 @@
 class_name StageMap
 extends Control
 
-@onready var stickers: Node2D = %Stickers
+@export var maps: Array[Control]
 
 func _ready() -> void:
+    #print_debug("_ready")
+    EventBus.global_stage_started.connect(_on_stage_started)
     EventBus.item_collected.connect(_on_item_collected)
     EventBus.global_restart_game.connect(_on_restart)
     EventBus.goal_unlocked.connect(_on_goal_unlocked)
+    EventBus.global_next_stage.connect(_on_next_stage)
+    
+func _exit_tree() -> void:
+    EventBus.global_next_stage.disconnect(_on_next_stage)
+    EventBus.item_collected.disconnect(_on_item_collected)
+    EventBus.global_restart_game.disconnect(_on_restart)
+    EventBus.goal_unlocked.disconnect(_on_goal_unlocked)
+
+var stickers: Node2D
+func _on_stage_started(stage: int):
+    #print_debug("_on_stage_started")
+    stickers = maps[stage - 1].get_node("%Stickers")
+    assert(stickers)
     
 func _on_item_collected(item: Collectible):
     # Iterate MapSticker children under Stickers and flip visibility
@@ -41,6 +56,13 @@ func _on_goal_unlocked():
         if child is MapSticker:
             var sticker := child as MapSticker
             _display_optional_stickers(sticker, true)
+            
+var _last_stage_paper_collected: bool
+var _last_stage_coins_collected: int
+func _on_next_stage(full_map, bitcoins_collected):
+    print_debug("next stage:", full_map, ", ", bitcoins_collected)
+    _last_stage_coins_collected = bitcoins_collected
+    _last_stage_paper_collected = full_map
     
 func _display_optional_stickers(sticker: MapSticker, _is_visible: bool = true):
     var panel := sticker.get_node_or_null("Panel")
@@ -61,8 +83,15 @@ func _display_optional_stickers(sticker: MapSticker, _is_visible: bool = true):
             (i as CanvasItem).visible = _is_visible
 
 func _on_restart():
+    print_debug("_on_restart, ",_last_stage_coins_collected, " ", _last_stage_paper_collected)
     for child in stickers.get_children():
         if child is MapSticker:
             var sticker := child as MapSticker
             _mark_sticker_collected(sticker, false)
-            _display_optional_stickers(sticker, false)
+            var display_optional_sticker := false
+            if sticker.item_id == &"clipboard":
+                display_optional_sticker = (not _last_stage_paper_collected)
+            if sticker.item_id == &"sneakers":
+                display_optional_sticker = (_last_stage_coins_collected > 0)
+            print(sticker.item_id, " ", display_optional_sticker)
+            _display_optional_stickers(sticker, display_optional_sticker)

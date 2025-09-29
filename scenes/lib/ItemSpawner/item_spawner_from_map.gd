@@ -19,10 +19,11 @@ var _spawned_items: Array[Node3D] = []
 
 func _ready() -> void:
     assert(map_scene and world_A and world_B and world_C)
-    EventBus.global_restart_game.connect(_on_restart)
+    EventBus.global_stage_started.connect(_on_stage_start)
     _spawn_from_map()
 
 func _spawn_from_map() -> void:
+    #print("_spawn_from_map", map_scene)
     # 1) Instantiate the map scene in memory (we don't need to add it to the tree).
     var map_root := map_scene.instantiate() as Control
     assert(map_root)
@@ -89,6 +90,6 @@ func clear_all_items():
             item.queue_free()
     _spawned_items = []
     
-func _on_restart():
+func _on_stage_start(_stage: int):
     clear_all_items()
     _spawn_from_map()

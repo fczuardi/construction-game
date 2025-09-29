@@ -139,7 +139,6 @@ func toggle_full_paper(on:bool):
     if ! full_paper_clipboard:
         return
     if on:
-        print("FULL Paper")
         full_map.position.y = 0.0
         full_paper_clipboard.visible = true
         teared_map.set_anchors_preset(Control.PRESET_FULL_RECT)
@@ -147,7 +146,6 @@ func toggle_full_paper(on:bool):
         teared_map.size.y = 1024.0
         teared_map.position.y = 0.0
     else:
-        print("Half Paper")
         full_paper_clipboard.visible = false
         full_map.position.y = -512.0
         teared_map.set_anchors_preset(Control.PRESET_BOTTOM_WIDE)
@@ -250,7 +248,7 @@ func update_motion(velocity: Vector3, on_floor: bool) -> void:
         _pending_stumble = 0
 
 func reset_to_start() -> void:
-    print("reset to start")
+    #print_debug("reset to start")
     _smoothed_speed = 0.0
 
     _update_movement_base(MovementBase.WALK)
@@ -326,7 +324,7 @@ func _update_movement_end(end: MovementEnd):
 func _update_movement_base(base: MovementBase):
     if base == _last_base:
         return
-    print(MOVEMENT_STATE[_last_base], " to ", MOVEMENT_STATE[base], _smoothed_speed)
+    #print(MOVEMENT_STATE[_last_base], " to ", MOVEMENT_STATE[base], _smoothed_speed)
     var state_name := MOVEMENT_STATE[base]
     animation_tree[MOVEMENT_BASE_TRANSITION_PATH] = state_name
     _stride_ref_speed = MOVEMENT_SPEED[base]

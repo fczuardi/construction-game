@@ -194,7 +194,7 @@ func _probe_best_wall_normal() -> Vector3:
     return best_n
 
 func _snap_parallel_to_wall(wall_n_xz: Vector3) -> void:
-    print('snap to wall')
+    #print('snap to wall')
     var tangent := Vector3.UP.cross(wall_n_xz).normalized()    # along the wall
     if tangent.dot(_xz(_move_dir)) < 0.0:
         tangent = -tangent

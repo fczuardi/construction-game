@@ -169,23 +169,6 @@ walk_sounds = Array[AudioStream]([ExtResource("6_glugf"), ExtResource("7_bul2d")
 player_body = NodePath("../PlayerRunner")
 volume = 0.284
 
-[node name="Wiring" type="Node" parent="." node_paths=PackedStringArray("character_body", "character_visuals", "cameras", "item_spawner", "countdown", "first_stage_ground", "second_stage_ground", "hud_container", "controls", "start_title", "game_over_message", "game_over_credits", "first_stage_message", "second_stage_message")]
-script = ExtResource("2_5p6w5")
-character_body = NodePath("../PlayerRunner")
-character_visuals = NodePath("../PlayerRunner/PlayerVisuals2")
-cameras = NodePath("../PlayerRunner/Cameras")
-item_spawner = NodePath("../ItemSpawnerFromMap")
-countdown = NodePath("../Countdown")
-first_stage_ground = NodePath("../Stage1Ground")
-second_stage_ground = NodePath("../Stage2Ground")
-hud_container = NodePath("../HUD/MarginContainer")
-controls = NodePath("../HUD/MarginContainer/PlayerControls")
-start_title = NodePath("../HUD/MarginContainer/Start Screen")
-game_over_message = NodePath("../HUD/MarginContainer/Game Over Message")
-game_over_credits = NodePath("../HUD/MarginContainer/Game Over Credits")
-first_stage_message = NodePath("../HUD/MarginContainer/1st Stage Message")
-second_stage_message = NodePath("../HUD/MarginContainer/2ndt Stage Message")
-
 [node name="ItemSpawnerFromMap" type="Node3D" parent="." node_paths=PackedStringArray("world_A", "world_B", "world_C")]
 script = ExtResource("4_2w0o7")
 map_scene = ExtResource("5_fwyue")
@@ -1109,3 +1092,20 @@ metadata/_edit_lock_ = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.921995, 0, -10.649307)
 size = Vector3(3.7346728, 1, 0.35)
 metadata/_edit_lock_ = true
+
+[node name="Wiring" type="Node" parent="." node_paths=PackedStringArray("character_body", "character_visuals", "cameras", "item_spawner", "countdown", "first_stage_ground", "second_stage_ground", "hud_container", "controls", "start_title", "game_over_message", "game_over_credits", "first_stage_message", "second_stage_message")]
+script = ExtResource("2_5p6w5")
+character_body = NodePath("../PlayerRunner")
+character_visuals = NodePath("../PlayerRunner/PlayerVisuals2")
+cameras = NodePath("../PlayerRunner/Cameras")
+item_spawner = NodePath("../ItemSpawnerFromMap")
+countdown = NodePath("../Countdown")
+first_stage_ground = NodePath("../Stage1Ground")
+second_stage_ground = NodePath("../Stage2Ground")
+hud_container = NodePath("../HUD/MarginContainer")
+controls = NodePath("../HUD/MarginContainer/PlayerControls")
+start_title = NodePath("../HUD/MarginContainer/Start Screen")
+game_over_message = NodePath("../HUD/MarginContainer/Game Over Message")
+game_over_credits = NodePath("../HUD/MarginContainer/Game Over Credits")
+first_stage_message = NodePath("../HUD/MarginContainer/1st Stage Message")
+second_stage_message = NodePath("../HUD/MarginContainer/2ndt Stage Message")

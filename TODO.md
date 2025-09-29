@@ -1,13 +1,26 @@
 ## Current Task
 
-- stage 2 obstacles:
-    - plank pile
-    - skip
+stage 2 required items:
+- [x] spade
+- [ ] helmet
+- [ ] cartwheel
+- [ ] pickaxe
+- [ ] hammer
+- [ ] nails
+
+stage 2 optional items:
+- [ ] toilet paper
+- [x] extra clipboard
+- [x] sneakers
+
+stage 2 hidden items:
+- [x] bitcoin_coin
+- [x] bitcoin_coin2
+
 
 ## Ongoing
 
-- [ ] new map (conditioned to no paper on 1st stage)
-- [ ] cartwheel
+- stage 2 obstacles:
 - stage 2 items: (set out, groundwork, trenches)
     - [ ] wood planks
 
@@ -63,6 +76,9 @@
     - [x] pickets, mallet, spray paint
 
 ## Done
+- [x] new map (conditioned to no paper on 1st stage)
+- [x] plank pile
+- [x] skip
 - [x] forward probe and slide on obstacle hits
 - [x] nike (hidden/power-up sprint)
 - [x] credits on the pause screen

@@ -17,6 +17,11 @@ extends Control
 @onready var credits: RichTextLabel = credits_container.get_node("%Credits")
 @onready var v_box_container: VBoxContainer = %VBoxContainer
 
+var total_objects: int
+var hidden_objects: int
+var was_paper_collected: bool
+var bitcoins_collected: int
+
 func _ready() -> void:
     assert(countdown)
     assert(credits_close_btn)
@@ -33,12 +38,10 @@ func _ready() -> void:
     credits_close_btn.pressed.connect(_on_credits_close)
     _on_restart()
 
-var total_objects: int
-var hidden_objects: int
-var was_paper_collected: bool
 func _on_restart():
     total_objects = 0
     hidden_objects = 0
+    bitcoins_collected = 0
     was_paper_collected = false
     
 func _on_retry():
@@ -47,9 +50,11 @@ func _on_retry():
     EventBus.global_restart_stage.emit()
 
 func _on_continue():
-    print("continue pressed")
+    print("continue pressed ", bitcoins_collected)
+    var stage_coins: int = 0 + bitcoins_collected
+    var stage_paper_status:bool = was_paper_collected
+    EventBus.global_next_stage.emit(stage_paper_status, stage_coins)
     EventBus.stage_completed.emit(false)
-    EventBus.global_next_stage.emit()
 
 func _on_credits():
     credits_container.visible = true
@@ -61,11 +66,15 @@ func _on_credits_close():
     v_box_container.visible = true
 
 func _on_item_collected(item: Collectible):
+    print("item collected:", item.id)
     total_objects += 1
     if item.is_hidden:
         hidden_objects += 1
     if item.id == &"toilet_paper":
         was_paper_collected = true
+    if item.id == &"bitcoin_coin":
+        bitcoins_collected += 1
+        print("coin!", bitcoins_collected)
 
 func _get_summary() -> String:
     var elapsed_time:float =  countdown.timer.wait_time - countdown.timer.time_left

@@ -49,11 +49,7 @@ func _ready() -> void:
     if _rig_nodes.is_empty():
         push_warning("PlayerCameras: no rigs found. Add child Node3D rigs with Camera3D inside.")
         return
-    print(_rig_cams)
-    print(_rig_nodes)
-    print(_active)
     _snap_to(_active)
-    print(current_rig_name())
 
 func _process(delta: float) -> void:
     if _out_cam == null or _rig_nodes.is_empty():
@@ -122,12 +118,6 @@ func next_rig() -> void:
     if _rig_nodes.is_empty():
         return
     activate_index((_active + 1) % _rig_nodes.size())
-
-@export_tool_button("Refresh Rigs")
-var _refresh_rigs := func():
-    _collect_rigs()
-    if not _rig_nodes.is_empty():
-        _snap_to(clampi(_active, 0, _rig_nodes.size() - 1))
 
 func current_rig_name() -> String:
     if _rig_nodes.is_empty():
