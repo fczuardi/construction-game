@@ -45,12 +45,10 @@ func _on_restart():
     was_paper_collected = false
     
 func _on_retry():
-    print("try again pressed")
     EventBus.stage_completed.emit(false)
     EventBus.global_restart_stage.emit()
 
 func _on_continue():
-    print("continue pressed ", bitcoins_collected)
     var stage_coins: int = 0 + bitcoins_collected
     var stage_paper_status:bool = was_paper_collected
     EventBus.global_next_stage.emit(stage_paper_status, stage_coins)
@@ -66,7 +64,6 @@ func _on_credits_close():
     v_box_container.visible = true
 
 func _on_item_collected(item: Collectible):
-    print("item collected:", item.id)
     total_objects += 1
     if item.is_hidden:
         hidden_objects += 1
@@ -74,7 +71,6 @@ func _on_item_collected(item: Collectible):
         was_paper_collected = true
     if item.id == &"bitcoin_coin":
         bitcoins_collected += 1
-        print("coin!", bitcoins_collected)
 
 func _get_summary() -> String:
     var elapsed_time:float =  countdown.timer.wait_time - countdown.timer.time_left

@@ -23,7 +23,6 @@ func _ready() -> void:
 
 func set_height(y: float):
     _y0 = y
-    print("after set_height:", _y0, " item:", id)
 
 func _process(delta: float) -> void:
     rotate_y(deg_to_rad(spin_deg_per_sec) * delta)

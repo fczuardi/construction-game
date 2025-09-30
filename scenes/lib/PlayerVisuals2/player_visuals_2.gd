@@ -157,7 +157,6 @@ func toggle_full_paper(on:bool):
 
 func set_hat_skin(hat_name: StringName):
     for hat in helmet_skin.get_children():
-        print(hat.name, " ", hat_name)
         hat.visible = hat.name == hat_name
 
 func _ready() -> void:
@@ -254,7 +253,6 @@ func update_motion(velocity: Vector3, on_floor: bool) -> void:
         _pending_stumble = 0
 
 func reset_to_start() -> void:
-    #print_debug("reset to start")
     _smoothed_speed = 0.0
 
     _update_movement_base(MovementBase.WALK)

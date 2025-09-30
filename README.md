@@ -19,12 +19,12 @@ Every review means a lot to me. Leave a comment :)
 
 I don't consider myself a "solo-dev" because I am standing in the shoulders of giants, this work is only possible due to ethical people that share their knowledge, the Free Software movement and Free Culture as a whole.
 
-There are **at least 77** other **amazing humans** that contributed with their time and their art to this game and I am incredibly thankful to every one of the people below:
+There are **at least 73** other **amazing humans** that contributed with their time and their art to this game and I am incredibly thankful to every one of the people below:
 
 
 ## Credits & Acknoledgements
 
-### Assets and Licences (31+ authors)
+### Assets and Licences (32+ authors)
 
 #### Character, Animations
 
@@ -78,7 +78,7 @@ There are **at least 77** other **amazing humans** that contributed with their t
 
 #### Scenery / Obstacles
 
-  - Clipboard, Toilets, Pallet from [Low Poly Construction Pack](https://lowpolyassets.itch.io/low-poly-construction-pack)
+  - Clipboard, Toilets, Pallet, WheelBarrow, Crane from [Low Poly Construction Pack](https://lowpolyassets.itch.io/low-poly-construction-pack)
       - Author: [LowPolyAssets](https://lowpolyassets.itch.io/)
       - License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/)
 
@@ -94,6 +94,9 @@ There are **at least 77** other **amazing humans** that contributed with their t
           - "Use them in any project you want, but don't repackage/resell them, and just provide a link to www.codezly.com as attribution."
       - PBR Maps Generated with: [Unity-WebGPU-PBR-Maps-Generator](https://github.com/aniketrajnish/Unity-WebGPU-PBR-Maps-Generator)
           - License: [MIT License](https://github.com/aniketrajnish/Unity-WebGPU-PBR-Maps-Generator/blob/main/LICENSE)
+  - Mud from [Brown Mud 03](https://polyhaven.com/a/brown_mud_03)
+    - Author: [Rob Tuytel](https://polyhaven.com/all?a=Rob%20Tuytel)
+    - License: [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/)
 
 #### Fonts
 
@@ -161,12 +164,12 @@ There are **at least 77** other **amazing humans** that contributed with their t
       - [Pickaxe by Marco Livolsi](https://thenounproject.com/icon/pickaxe-7169380/)
         - Author: [Marco Livolsi](https://thenounproject.com/creator/marco.livolsi2014)
 
-### Friends / Playtest (34+ supporters)
+### Friends / Playtest (35+ supporters)
 
 - Juliana
 - ([Cafepivara](https://itch.io/c/6345901/cafepivara)) Lucas, Marcelo
 - ([Weplex](https://weplex.com.br/)) Taboca
-- ([IAM Founder](https://iamfounder.com.br/)) Thiago, Rafael, Isa, Nelsinho
+- ([IAM Founder](https://iamfounder.com.br/)) Thiago, Isa, Nelsinho
 - (Sexta Light) Maristela, Marcelo Prataviera, Andréia
 - ([Palma Labs](https://www.linkedin.com/company/palmalabs/)) Emilio
 - ([fullbragger](https://linktr.ee/fullbragger)) Braga

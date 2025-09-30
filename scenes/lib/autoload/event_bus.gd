@@ -3,7 +3,7 @@ extends Node
 signal touch_control_layout_changed(new_layout: Enums.TouchControlsLayout)
 signal player_runner_pose_updated(world_pos: Vector3, yaw_radians: float)
 signal player_visual_footstep_started(movement_base: String)
-signal global_stage_started(stage: int)
+signal global_stage_started(stage: int, full_map: bool)
 signal global_restart_game()
 signal global_restart_stage()
 signal global_next_stage(full_map: bool, coins_collected: int)

@@ -1,4 +1,4 @@
-class_name ToiletGoal2
+class_name ToiletGoal
 extends Node3D
 
 
@@ -26,14 +26,11 @@ func _on_goal_achieved(body: Node3D):
 
 func _open_toilet(is_open: bool):
     var open_toilet_collision: CollisionShape3D = open_toilet.get_node_or_null("CollisionShape3D")
-    var locked_toilet_collision: CollisionShape3D = locked_toilet.get_node_or_null("CollisionShape3D")
-    var pallet_bridge_collision: CollisionShape3D = pallet_bridge.get_node_or_null("CollisionShape3D")
+    #var locked_toilet_collision: CollisionShape3D = locked_toilet.get_node_or_null("CollisionShape3D")
     goal_area.monitoring = is_open
     open_toilet.visible = is_open
-    pallet_bridge.visible = is_open
     locked_toilet.visible = ! is_open
     open_toilet_collision.disabled = ! is_open
-    pallet_bridge_collision.disabled = ! is_open
-    locked_toilet_collision.disabled = is_open
+    #locked_toilet_collision.disabled = is_open
     
     

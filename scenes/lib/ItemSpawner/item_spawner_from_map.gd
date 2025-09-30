@@ -20,10 +20,9 @@ var _spawned_items: Array[Node3D] = []
 func _ready() -> void:
     assert(map_scene and world_A and world_B and world_C)
     EventBus.global_stage_started.connect(_on_stage_start)
-    _spawn_from_map()
+    _spawn_from_map(true)
 
-func _spawn_from_map() -> void:
-    #print("_spawn_from_map", map_scene)
+func _spawn_from_map(full_map: bool) -> void:
     # 1) Instantiate the map scene in memory (we don't need to add it to the tree).
     var map_root := map_scene.instantiate() as Control
     assert(map_root)
@@ -64,6 +63,11 @@ func _spawn_from_map() -> void:
         if not node2.is_in_group("map_icon"):
             continue
 
+        if node2.item_id == &"clipboard" and full_map:
+            continue
+        if node2.item_id == &"toilet_paper" and !full_map:
+            continue
+
         # Determine "kind"
         var kind: PackedScene = node2.kind
 
@@ -89,6 +93,6 @@ func clear_all_items():
             item.queue_free()
     _spawned_items = []
     
-func _on_stage_start(_stage: int):
+func _on_stage_start(_stage: int, full_map: bool):
     clear_all_items()
-    _spawn_from_map()
+    _spawn_from_map(full_map)

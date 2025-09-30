@@ -1,39 +1,27 @@
 ## Current Task
 
-stage 2 optional items:
-- [ ] toilet paper
-- [x] extra clipboard
-- [x] sneakers
-
+- [ ] launch marketing
 
 ## Ongoing
-
-- stage 2 obstacles:
-- stage 2 items: (set out, groundwork, trenches)
 
 
 ## Backlog
 
 - credits fix:
-    - missing mud texture link
     - credit color palletes?
-    - sites: 
-        - github.com
-        - tldraw.com
 
 - stage 3 items: (foundation, pouring)
     - cement bag
     - concrete mixer
     - gravel
 
-    
+polish/later
 - audio feedback on "pingela" unlocked
 - different step sfx over pallet bridge
 - audio feedback on turn button press vs click
 - visual + audio feedback on run/map toggles
 - sfx for splashing on the mud
 - [bug] first particle small freeze on html
-
 
 
 ## In progress
@@ -54,6 +42,13 @@ stage 2 optional items:
     - [x] pickets, mallet, spray paint
 
 ## Done
+stage 2 optional items:
+- [x] toilet paper
+- [x] extra clipboard
+- [x] sneakers
+- [x] github.com
+- [x] tldraw.com
+- [x] missing mud texture link
 stage 2 required items:
 - [x] spade
 - [x] helmet

@@ -9,7 +9,6 @@ radius = 0.2
 [node name="Collectible" type="Area3D" groups=["collectible"]]
 script = ExtResource("1_pq3in")
 id = &"clipboard"
-is_hidden = true
 is_required = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

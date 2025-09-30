@@ -1,0 +1,132 @@
+[gd_scene load_steps=10 format=3 uid="uid://dvir5ofxu7fpw"]
+
+[ext_resource type="Script" uid="uid://vf6f0by61bt4" path="res://lib/maps/stage_map.gd" id="1_kov6x"]
+[ext_resource type="Texture2D" uid="uid://c3ggid41yoxw5" path="res://imports/textures/Maryborough Courthouse/ground-floor_640x1024.jpg" id="2_iujhb"]
+[ext_resource type="Script" uid="uid://dcste88fnub5m" path="res://lib/PlayerVisuals2/map_sticker.gd" id="3_c8d5d"]
+[ext_resource type="FontFile" uid="uid://puw8wtbfcgof" path="res://imports/fonts/Noto_Emoji/NotoEmoji-VariableFont_wght.ttf" id="6_sljch"]
+[ext_resource type="PackedScene" uid="uid://ct6ufgxy14cvg" path="res://lib/GoalStage2/ToiletGoal_LPC.tscn" id="25_mu3sy"]
+[ext_resource type="Texture2D" uid="uid://cx1rv1eii521v" path="res://imports/icons/noun_project/noun-lock-7854371_600px.png" id="26_ftckk"]
+[ext_resource type="Texture2D" uid="uid://djwsrvccrhdvu" path="res://imports/icons/noun_project/noun-toilet-151638_600px.png" id="27_fg7ob"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lygb2"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.91764706, 0.20784314, 0.27450982, 1)
+corner_radius_top_left = 55
+corner_radius_bottom_right = 55
+corner_radius_bottom_left = 55
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mxih2"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.95686275, 0.827451, 0.36862746, 1)
+corner_radius_top_left = 55
+corner_radius_bottom_right = 55
+corner_radius_bottom_left = 55
+corner_detail = 5
+
+[node name="Stage1Map" type="Control"]
+custom_minimum_size = Vector2(640, 1024)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 640.0
+offset_bottom = 1024.0
+rotation = 3.1415927
+pivot_offset = Vector2(320, 512)
+script = ExtResource("1_kov6x")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_iujhb")
+
+[node name="MapA" type="Marker2D" parent="."]
+
+[node name="MapB" type="Marker2D" parent="."]
+position = Vector2(640, 0)
+
+[node name="MapC" type="Marker2D" parent="."]
+position = Vector2(0, 1024)
+
+[node name="Stickers" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Toilet" type="Marker2D" parent="Stickers" groups=["map_icon"]]
+unique_name_in_owner = true
+position = Vector2(278, 52.000008)
+script = ExtResource("3_c8d5d")
+kind = ExtResource("25_mu3sy")
+item_id = &"toilet"
+
+[node name="Panel" type="Panel" parent="Stickers/Toilet"]
+offset_left = -109.99993
+offset_top = -1.0000381
+offset_right = 3.0517578e-05
+offset_bottom = 108.99996
+rotation = -0.7853982
+pivot_offset = Vector2(110, 0)
+theme_override_styles/panel = SubResource("StyleBoxFlat_lygb2")
+
+[node name="Icon" type="TextureRect" parent="Stickers/Toilet"]
+offset_left = -40.0
+offset_top = 40.0
+offset_right = 40.0
+offset_bottom = 120.0
+rotation = 3.1415927
+pivot_offset = Vector2(40, 40)
+texture = ExtResource("26_ftckk")
+expand_mode = 1
+
+[node name="HiddenPanel" type="Panel" parent="Stickers/Toilet"]
+visible = false
+offset_left = -109.99996
+offset_top = -1.0000381
+offset_bottom = 108.99996
+rotation = -0.7853982
+pivot_offset = Vector2(110, 0)
+theme_override_styles/panel = SubResource("StyleBoxFlat_mxih2")
+
+[node name="HiddenIcon" type="TextureRect" parent="Stickers/Toilet"]
+visible = false
+offset_left = -35.0
+offset_top = 40.0
+offset_right = 35.0
+offset_bottom = 110.0
+rotation = 3.1415927
+pivot_offset = Vector2(35, 35)
+texture = ExtResource("27_fg7ob")
+expand_mode = 1
+
+[node name="Checkmark" type="Label" parent="Stickers/Toilet"]
+visible = false
+custom_minimum_size = Vector2(50, 50)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -25.0
+offset_right = 26.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 3.1415927
+pivot_offset = Vector2(25, 25)
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.9764706, 0.34117648, 0.21960784, 1)
+theme_override_fonts/font = ExtResource("6_sljch")
+theme_override_font_sizes/font_size = 40
+text = "✔︎"
+horizontal_alignment = 1
+vertical_alignment = 1

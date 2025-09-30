@@ -9,6 +9,7 @@ extends Node
 @export var countdown: Timer
 @export var first_stage_ground: Node3D
 @export var second_stage_ground: Node3D
+@export var third_stage_ground: Node3D
 @export var hud_container: Control
 @export var controls: PlayerControls
 @export var start_title: FadeTitle
@@ -16,6 +17,9 @@ extends Node
 @export var game_over_credits: FadeTitle
 @export var first_stage_message: FadeTitle
 @export var second_stage_message: FadeTitle
+@export var third_stage_message: FadeTitle
+@export var thank_you_message: FadeTitle
+@export var pause_menu: PauseMenu
 
 @export var slowmo_scale := 0.25  # 25% speed
 
@@ -32,7 +36,7 @@ func _unhandled_input(e):
         character_visuals.toggle_full_paper(true)
 
 
-var  _stage_1_full_map: bool = true
+var _full_paper: bool = true
 
 ## wire
 func _ready() -> void:
@@ -73,6 +77,7 @@ func _exit_tree() -> void:
         countdown.timeout.disconnect(_on_timeout)
     EventBus.global_next_stage.disconnect(_on_next_stage)
 
+
 func _on_item_collected(item: Collectible):
     if item.id == &"sneakers":
         character_visuals.set_sneakers_enabled(true)
@@ -96,6 +101,9 @@ func _trigger_game_over():
         cameras.activate_index(4)
     _alive = false
     countdown.paused = true
+    item_spawner.map_scene = load("res://lib/maps/stage1_map.tscn")
+    _current_stage = 1
+    _full_paper = true
     var game_over_tween: Tween = create_tween()
     game_over_tween.tween_interval(3.0)
     game_over_tween.tween_callback(func ():
@@ -111,10 +119,6 @@ func _trigger_game_over():
     game_over_tween.tween_callback(func ():
         EventBus.global_restart_game.emit()
     )
-    item_spawner.map_scene = load("res://lib/maps/stage1_map.tscn")
-    _current_stage = 1
-    _stage_1_full_map = true
-    print("game over restart")
 
 
 func _on_player_speed_change(_new_speed: float, mode: String):
@@ -126,21 +130,16 @@ func _on_player_speed_change(_new_speed: float, mode: String):
 @onready var stage_1_map: StageMap = $"../PlayerRunner/PlayerVisuals2/SubViewportContainer/SubViewport/Points Of Interest/Stage1Map"
 
 func _on_restart():
-    #print_debug("_on_restart")
     _alive = true
     _finished_level = false
     cameras.blend_time = 0.25
     cameras.activate_index(0)
     controls.toggle_input(PlayerControls.Side.NORTH, false)
     controls.toggle_input(PlayerControls.Side.SOUTH, false)
-    countdown.start()
-    countdown.paused = false
     character_visuals.set_sneakers_enabled(false)
     _on_size_changed()
     item_spawner.map_scene = load("res://lib/maps/stage%s_map.tscn" % str(_current_stage))
-    #print_debug(item_spawner.map_scene)
-    #print("emit stage started", _current_stage)
-    EventBus.global_stage_started.emit(_current_stage)
+    EventBus.global_stage_started.emit(_current_stage, _full_paper)
     if start_title:
         start_title.auto_exit_time = 1.0
         start_title.enter()
@@ -148,36 +147,60 @@ func _on_restart():
         var level_ground = first_stage_ground
         var first_stage_map = character_visuals.get_node("./SubViewport/TearableMap/FullMapSize/Points Of Interest/Stage1Map")
         var second_stage_map = character_visuals.get_node("./SubViewport/TearableMap/FullMapSize/Points Of Interest/Stage2Map")
+        var third_stage_map = character_visuals.get_node("./SubViewport/TearableMap/FullMapSize/Points Of Interest/Stage3Map")
         var stage_map = first_stage_map
 
+        character_visuals.set_hat_skin("winter_hat")
         if _current_stage == 1:
-            character_visuals.toggle_full_paper(_stage_1_full_map)
-            character_visuals.set_hat_skin("winter_hat")
+            character_visuals.toggle_full_paper(_full_paper)
+            countdown.wait_time = 120.0
 
         if _current_stage == 2:
             level_message = second_stage_message
             level_ground = second_stage_ground
             stage_map = second_stage_map
+            countdown.wait_time = 70.0
 
-        for n in [first_stage_ground, second_stage_ground]:
+        if _current_stage == 3:
+            level_message = third_stage_message
+            level_ground = third_stage_ground
+            stage_map = third_stage_map
+            countdown.wait_time = 60.0
+
+        countdown.start()
+        countdown.paused = false
+
+        for n in [first_stage_ground, second_stage_ground, third_stage_ground]:
             n.visible = (n == level_ground)
             _toggle_collisions(n, (n == level_ground))
-        for m in [first_stage_map, second_stage_map]:
+        for m in [first_stage_map, second_stage_map, third_stage_map]:
             m.visible = (m == stage_map)
 
-        if first_stage_message:
+        if level_message:
             var restart_tween: Tween = create_tween()
             restart_tween.tween_interval(3.0)
             restart_tween.tween_callback(func ():
                 level_message.auto_exit_time = 1.0
                 level_message.enter()
             )
+            if _current_stage == 3:
+                restart_tween.tween_interval(5.0)
+                restart_tween.tween_callback(func ():
+                    thank_you_message.auto_exit_time = 30.0
+                    pause_menu.visible = false
+                    thank_you_message.enter()
+                )
+                restart_tween.tween_interval(32.0)
+                restart_tween.tween_callback(func ():
+                    pause_menu.visible = true
+                )
+                
 
 func _on_next_stage(full_map, _bitcoins_collected):
     _current_stage += 1
-    #print_debug("_on_next_stage ", _current_stage)
+    _full_paper = full_map
     get_tree().paused = false
-    EventBus.global_stage_started.emit(_current_stage)
+    EventBus.global_stage_started.emit(_current_stage, _full_paper)
     EventBus.global_restart_game.emit()
     character_visuals.toggle_full_paper(full_map)
 
@@ -189,7 +212,6 @@ func _on_goal_reached():
     _finished_level = true
     countdown.paused = true
     cameras.activate_index(5)
-    print("STAGE CLEAR")
     var game_over_tween: Tween = create_tween()
     game_over_tween.tween_interval(2.0)
     game_over_tween.tween_callback(func():
